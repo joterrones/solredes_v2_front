@@ -1,0 +1,20 @@
+<h1 mat-dialog-title>Asignar Usuarios</h1>
+<div mat-dialog-content class="contenedor">
+
+    <table mat-table [dataSource]="tabla" matSort class="mat-elevation-z8">
+        <ng-container matColumnDef="check">
+            <th mat-header-cell *matHeaderCellDef> Asignar </th>
+            <td mat-cell *matCellDef="let element">
+                <mat-checkbox [(ngModel)]="element.b_flag" (click)="guardar(element)"></mat-checkbox> 
+            </td>
+        </ng-container>
+        <ng-container matColumnDef="c_usuario">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Usuario </th>
+            <td mat-cell *matCellDef="let element"> {{element.c_username}} </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <ng-template let-row matRowDef cdkVirtualFor [matRowDefColumns]="displayedColumns">
+            <tr mat-row></tr>
+        </ng-template>
+    </table>
+</div>

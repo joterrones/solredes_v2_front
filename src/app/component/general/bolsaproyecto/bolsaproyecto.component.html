@@ -1,0 +1,191 @@
+<app-menu>
+  <div class="contenedorBody">
+    <h2> ADMINISTRACIÓN DE BOLSA DE PROYECTOS</h2>
+    <mat-accordion>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Filtros y Exportación de Datos
+          </mat-panel-title>
+          <mat-panel-description>
+            Pulsar para desplegar las opciones
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <div class="contenedorfiltro">
+          <mat-form-field>
+            <mat-select placeholder="Departamentos">
+              <mat-option value="0" (click)="selectDepartamento(0)">
+                -TODOS-
+              </mat-option>
+              <mat-option value="-100" (click)="selectDepartamento(-100)">
+                -SIN ASIGNAR-
+              </mat-option>
+              <mat-option *ngFor="let item of departamentos" [value]="item.n_idgen_departamento"
+                (click)="selectDepartamento(item.n_idgen_departamento)">
+                {{item.c_nombre}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-select placeholder="Provincias">
+              <mat-option value="0" (click)="selectProvincia(0)">
+                -TODOS-
+              </mat-option>
+              <mat-option *ngFor="let item of provincias" [value]="item.n_idgen_provincia"
+                (click)="selectProvincia(item.n_idgen_provincia)">
+                {{item.c_nombre}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-select placeholder="Distritos" (click)="selectDistrito(0)">
+              <mat-option value="0" (click)="selectDistrito(0)">
+                -TODOS-
+              </mat-option>
+              <mat-option *ngFor="let item of distritos" [value]="item.n_idgen_distrito"
+                (click)="selectDistrito(item.n_idgen_distrito)">
+                {{item.c_nombre}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-select placeholder="Año de Programación" (click)="selectAnnio(0)">
+              <mat-option value="0" (click)="selectAnnio(0)">
+                -TODOS-
+              </mat-option>
+              <mat-option *ngFor="let item of annios" [value]="item.n_annio" (click)="selectAnnio(item.n_annio)">
+                {{item.n_annio}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <mat-card-actions>
+          <button mat-button color="primary" (click)="get();">FILTRAR</button>
+        </mat-card-actions>
+      </mat-expansion-panel>
+    </mat-accordion>
+    <br />
+    <mat-toolbar color="accent">
+      <span>LISTA DE PROYECTOS</span>
+      <span class="example-spacer"></span>
+      <app-exportbolsaproyecto [iddepartamento]="iddepartamento" [idprovincia]="idprovincia" [iddistrito]="iddistrito"
+        [annio]="annio" [idbolsaproyecto]="0">
+      </app-exportbolsaproyecto>
+    </mat-toolbar>
+
+    <mat-card>
+      <mat-form-field>
+        <input matInput placeholder="Buscar" [(ngModel)]="textfilter" (keyup)="applyFilter($event.target.value)">
+        <mat-icon matSuffix>search</mat-icon>
+      </mat-form-field>
+      <table mat-table [dataSource]="tabla" matSort class="mat-elevation-z8">
+        <ng-container matColumnDef="editar">
+          <th mat-header-cell *matHeaderCellDef> <button mat-icon-button color="accent" (click)="openDialog(null)">
+              <mat-icon aria-label="Example icon-button with a heart icon">add</mat-icon>
+            </button> </th>
+          <td mat-cell *matCellDef="let element">
+            <button mat-icon-button color="accent" (click)="openDialog(element)">
+              <mat-icon aria-label="Example icon-button with a heart icon">edit</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="num">
+          <th mat-header-cell *matHeaderCellDef color="error"> N° </th>
+          <td mat-cell *matCellDef="let element"> {{element.num}} </td>
+        </ng-container>
+        <ng-container matColumnDef="c_nombre">
+          <th mat-header-cell *matHeaderCellDef color="error"> Nombre </th>
+          <td mat-cell *matCellDef="let element"> {{element.c_nombreproyecto}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="c_cui">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> CUI </th>
+          <td mat-cell *matCellDef="let element"> {{element.c_cui  }} </td>
+        </ng-container>
+        <ng-container matColumnDef="n_numerominem">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Cod. MINEM </th>
+          <td mat-cell *matCellDef="let element"> {{element.n_numerominem  }} </td>
+        </ng-container>
+        <ng-container matColumnDef="n_annioprograma">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Año Programa </th>
+          <td mat-cell *matCellDef="let element"> {{element.n_annioprograma  }} </td>
+        </ng-container>
+        <ng-container matColumnDef="c_areaasignada">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Responsable </th>
+          <td mat-cell *matCellDef="let element"> {{element.c_areaasignada}} </td>
+        </ng-container>
+        <ng-container matColumnDef="c_estado">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Estado </th>
+          <td mat-cell *matCellDef="let element"> {{element.c_estado}} </td>
+        </ng-container>
+
+        <!--<ng-container matColumnDef="proyecto">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Crear en HSP </th>
+          <td mat-cell *matCellDef="let element">
+            <button mat-icon-button color="accent" (click)="crearproyecto(element)" *ngIf="!element.b_existe">
+              <mat-icon aria-label="Example icon-button with a heart icon">next_plan</mat-icon>
+            </button>
+            <button mat-icon-button color="accent" disabled="true" (click)="crearproyecto(element)"
+              *ngIf="element.b_existe">
+              <mat-icon aria-label="Example icon-button with a heart icon">next_plan</mat-icon>
+            </button>
+          </td>
+        </ng-container>-->
+        <!-- Button Eliminar -->
+        <!--<ng-container matColumnDef="eliminar">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Eliminar </th>
+          <td mat-cell *matCellDef="let element">
+            <button mat-icon-button color="error" (click)="delete(element)">
+              <mat-icon aria-label="Example icon-button with a heart icon">delete</mat-icon>
+            </button>
+          </td>
+        </ng-container>-->
+
+        <ng-container matColumnDef="config">
+          <th mat-header-cell *matHeaderCellDef color="error"> Opciones </th>
+          <td mat-cell *matCellDef="let element">
+            <div class="conf">
+
+              <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+                <mat-icon>more_vert</mat-icon>
+              </button>
+              <mat-menu #menu="matMenu">
+
+                <button mat-menu-item color="accent" (click)="crearproyecto(element)" *ngIf="!element.b_existe">
+                  <mat-icon aria-label="Example icon-button with a heart icon">next_plan</mat-icon>
+                  <span>Crear en HSP</span>
+                </button>
+                <button mat-menu-item color="accent" disabled="true" (click)="crearproyecto(element)"
+                  *ngIf="element.b_existe">
+                  <mat-icon aria-label="Example icon-button with a heart icon">next_plan</mat-icon>
+                  <span>Crear en HSP</span>
+                </button>
+                <button mat-menu-item color="error" (click)="delete(element)">
+                  <mat-icon aria-label="Example icon-button with a heart icon">delete</mat-icon>
+                  <span>Eliminar</span>
+                </button>
+
+                <button mat-menu-item color="error" (click)="generaralldatabolsadetalle_x_id(element)">
+                  <mat-icon aria-label="Example icon-button with a heart icon">local_mall</mat-icon>
+                  <span>Reporte Bolsa</span>
+                </button>
+
+              </mat-menu>
+
+            </div>
+          </td>
+        </ng-container>
+
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <ng-template let-row matRowDef cdkVirtualFor [matRowDefColumns]="displayedColumns">
+          <tr mat-row></tr>
+
+        </ng-template>
+
+      </table>
+
+      <mat-paginator [pageSizeOptions]="pagin" showFirstLastButtons></mat-paginator>
+    </mat-card>
+  </div>
+</app-menu>

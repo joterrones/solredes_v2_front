@@ -1,0 +1,71 @@
+.contenedorChart{
+    width: 100%; 
+    margin-top: 55px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap:wrap
+  }
+
+  .elementoChart{
+    flex-grow: 1;
+    margin: 0.5%;
+    height: 100%;
+    width: 600px;
+  }
+
+  .contenedorfiltro {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    flex-wrap: wrap;
+  }
+
+  .contenedorBody {
+    margin: 1%;
+  }
+  table {
+    width: 100%;
+  }
+  .mat-column-editar {
+    width: 2%;
+  }
+  .mat-column-c_nombre {
+    width: 40%;
+  }
+  .mat-column-c_codigocui {
+    width: 14%;
+    margin-left: 20px;
+  }
+  .mat-column-c_codigomem {
+    width: 14%;
+  }
+  .mat-column-n_nrousuarios {
+    width: 14%;
+  }
+  .mat-column-n_nroviviendas {
+    width: 14%;
+  }
+  .mat-column-c_fase {
+    width: 20%;
+  }
+  .mat-column-confi {
+    width: 5%;
+  }
+  .mat-column-orden {
+    width: 10%;
+  }
+  .orden{
+    width: 50px;
+    margin-left: 10px;
+  }
+
+  [hidden] {
+    display: none !important;
+  }
+  
+  .example-spacer {
+    flex: 1 1 auto;
+  }
+  
+  

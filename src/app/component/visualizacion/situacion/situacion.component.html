@@ -1,0 +1,70 @@
+SITUACIÓN ACTUAL DEL PROYECTO: {{proyecto.c_nombreproyecto}}
+<br>
+<mat-card [hidden]="!b_edit">
+    
+    <div class="contenedor">
+        <mat-form-field>
+            <input matInput placeholder="Situación Actual" name="c_situacionactual" #c_situacionactual="ngModel"
+                [(ngModel)]="situacion.c_situacionactual" required />
+            <mat-hint class="error" *ngIf="!situacion.c_situacionactual">Es requerido</mat-hint>
+        </mat-form-field>
+        <mat-form-field style="width: 500px;">
+            <input matInput placeholder="Comentario" name="c_comentario" #c_comentario="ngModel"
+                [(ngModel)]="situacion.c_comentario" required />
+            <mat-hint class="error" *ngIf="!situacion.c_comentario">Es requerido</mat-hint>
+        </mat-form-field>
+    </div>
+    <div mat-dialog-actions>
+        <button mat-button cdkFocusInitial (click)="guardar()">
+            <span>Guardar</span>
+        </button>
+        <button mat-button cdkFocusInitial (click)="cancelar()">
+            <span>Cancelar</span>
+        </button>
+    </div>
+</mat-card>
+<br/>
+<table mat-table [dataSource]="tabla" matSort class="mat-elevation-z8">
+
+    <ng-container matColumnDef="edit">
+        <th mat-header-cell *matHeaderCellDef> <button mat-icon-button color="accent" (click)="edit(null)">
+            <mat-icon aria-label="Example icon-button with a heart icon">add</mat-icon>
+          </button> </th>
+        <td mat-cell *matCellDef="let element">
+          <button mat-icon-button color="accent" (click)="edit(element)">
+            <mat-icon aria-label="Example icon-button with a heart icon">edit</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+    <ng-container matColumnDef="c_situacion">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Situación </th>
+        <td mat-cell *matCellDef="let element"> {{element.c_situacionactual}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="c_comentario">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Comentario </th>
+        <td mat-cell *matCellDef="let element"> {{element.c_comentario  }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="c_usuario">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Usuario </th>
+        <td mat-cell *matCellDef="let element"> {{element.c_usuario}} </td>
+    </ng-container>
+    <ng-container matColumnDef="d_fecha">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha de Actualizacion </th>
+        <td mat-cell *matCellDef="let element"> {{element.d_fecha}} </td>
+    </ng-container>
+    <ng-container matColumnDef="eliminar">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Eliminar </th>
+        <td mat-cell *matCellDef="let element">
+          <button mat-icon-button color="error" (click)="eliminar(element)">
+            <mat-icon aria-label="Example icon-button with a heart icon">delete</mat-icon>
+
+          </button>
+        </td>
+      </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <ng-template let-row matRowDef cdkVirtualFor [matRowDefColumns]="displayedColumns">
+        <tr mat-row></tr>
+    </ng-template>
+</table>

@@ -1,0 +1,48 @@
+<app-menu>
+  <div class="contenedorBody">
+    <h2> GESTOR DE CONFIGURACIONES</h2>
+
+    <mat-horizontal-stepper [linear]="false" #stepper>
+      <mat-step>
+        <ng-template matStepLabel>Fase</ng-template>
+        <app-fase></app-fase>
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </mat-step>
+      <mat-step>
+        <ng-template matStepLabel>Actividad</ng-template>
+        <app-actividad></app-actividad>
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </mat-step>
+      <mat-step>
+        <ng-template matStepLabel>Tarea</ng-template>
+        <app-tarea></app-tarea>
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </mat-step>
+      <mat-step>
+        <ng-template matStepLabel>Plantillas de Tareas</ng-template>
+        <app-tipoproyecto></app-tipoproyecto>
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </mat-step>
+      <mat-step>
+        <ng-template matStepLabel>Calendario</ng-template>
+        <app-diaferiado></app-diaferiado>
+        <div>
+          <button mat-button matStepperPrevious color="accent">Back</button>
+          <button mat-button (click)="stepper.reset()">Reset</button>
+        </div>
+      </mat-step>
+    </mat-horizontal-stepper>
+  </div>
+</app-menu>

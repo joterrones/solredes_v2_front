@@ -1,0 +1,22 @@
+mat-form-field {
+    width: 250px;
+  }
+  .contenedor{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    flex-wrap:wrap;
+   
+  }
+  table{
+    width: 100%;
+  }
+  .mat-column-valoratributo {
+    width: 50%;
+  }
+  
+  
+  .mat-column-subir {
+    width: 20%;
+  }
+  

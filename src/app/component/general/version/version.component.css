@@ -1,0 +1,21 @@
+table{
+    width: 100%;
+}
+
+.mat-column-eliminar{
+    width: 10%;
+}
+
+.mat-column-editar{
+    width: 10%;
+}
+
+.mat-column-n_version{
+    width: 10%;
+}
+.mat-column-conf{
+    width: 10%;
+}
+.contenedorBody {
+    margin: 1%;
+  }

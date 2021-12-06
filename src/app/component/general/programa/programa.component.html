@@ -1,0 +1,87 @@
+<div class="contenedorBody">
+    <h2> PROGAMA VALORIZADO</h2>
+
+    <mat-card *ngIf="programas.length==0">
+        <h4>Copiar Versión</h4>
+        <mat-form-field>
+            <mat-select placeholder="Versiones">
+                <mat-option *ngFor="let version of versiones" [value]="version.n_idgen_version"
+                    (click)='selectVersionCopy(version.n_idgen_version)'>
+                    {{version.c_descripcion}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <div mat-dialog-actions>
+            <button mat-button cdkFocusInitial (click)="copiar()">
+              <mat-icon color="accent">content_copy</mat-icon>
+              <span>Copiar</span>
+            </button>
+          </div>
+    </mat-card>
+    <br />
+
+    <mat-card>
+        <mat-form-field>
+            <input matInput placeholder="Buscar" [(ngModel)]="textfilter" (keyup)="applyFilter($event.target.value)">
+            <mat-icon matSuffix>search</mat-icon>
+        </mat-form-field>
+        <table mat-table [dataSource]="tabla" matSort class="mat-elevation-z8">
+            <ng-container matColumnDef="editar">
+                <th mat-header-cell *matHeaderCellDef> <button mat-icon-button color="accent" (click)="addRow()">
+                        <mat-icon aria-label="Example icon-button with a heart icon">add</mat-icon>
+                    </button> </th>
+                <td mat-cell *matCellDef="let element">
+                    <button mat-icon-button color="accent" (click)="saveprograma(element)">
+                        <mat-icon aria-label="Example icon-button with a heart icon">save</mat-icon>
+                    </button>
+                </td>
+            </ng-container>
+            <ng-container matColumnDef="n_orden">
+                <th mat-header-cell *matHeaderCellDef color="error"> Orden </th>
+                <td mat-cell *matCellDef="let element">
+                    <mat-form-field>
+                        <input matInput placeholder="" [(ngModel)]="element.n_orden" />
+                    </mat-form-field>
+                </td>
+            </ng-container>
+            <ng-container matColumnDef="n_mes">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Mes </th>
+                <td mat-cell *matCellDef="let element">
+                    <mat-form-field>
+                        <input matInput placeholder="" [(ngModel)]="element.n_mes" />
+                    </mat-form-field>
+                </td>
+            </ng-container>
+            <ng-container matColumnDef="n_anio">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Año </th>
+                <td mat-cell *matCellDef="let element">
+                    <mat-form-field>
+                        <input matInput placeholder="" [(ngModel)]="element.n_anio" />
+                    </mat-form-field>
+                </td>
+            </ng-container>
+            <ng-container matColumnDef="n_monto">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Monto </th>
+                <td mat-cell *matCellDef="let element">
+                    <mat-form-field>
+                        <input matInput placeholder="" [(ngModel)]="element.n_monto" />
+                    </mat-form-field>
+                </td>
+            </ng-container>
+            <!-- Button Eliminar -->
+            <ng-container matColumnDef="eliminar">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Eliminar </th>
+                <td mat-cell *matCellDef="let element">
+                    <button mat-icon-button color="error" (click)="delete(element)" >
+                        <mat-icon aria-label="Example icon-button with a heart icon">delete</mat-icon>
+                    </button>
+                </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <ng-template let-row matRowDef cdkVirtualFor [matRowDefColumns]="displayedColumns">
+                <tr mat-row></tr>
+            </ng-template>
+        </table>
+        <mat-paginator [pageSizeOptions]="pagin" showFirstLastButtons></mat-paginator>
+    </mat-card>
+</div>

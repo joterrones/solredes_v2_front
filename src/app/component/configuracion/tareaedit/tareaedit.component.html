@@ -1,0 +1,65 @@
+<h2 mat-dialog-title>Edición {{tarea.c_descripcion}}</h2>
+<form class="example-container" #newForm="ngForm" (ngSubmit)="guardar(newForm)">
+    <div mat-dialog-content class="contenedor">
+        
+        <mat-form-field>
+            <mat-select placeholder="Actividad" [(value)]="tarea.n_idgen_actividad" required>
+                <mat-option *ngFor="let actividad of actividades" [value]="actividad.n_idgen_actividad">
+                    {{actividad.c_descripcion}}
+                </mat-option>
+            </mat-select>
+            <mat-hint class="error" *ngIf="tarea.n_idgen_actividad==0">Es requerido</mat-hint>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-select placeholder="Predecesora" [(value)]="tarea.n_idgen_predecesora">
+                <mat-option *ngFor="let item of tareas" [value]="item.n_idgen_tarea">
+                    {{item.c_descripcion}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput placeholder="Valor" name="c_valor" #c_valor="ngModel"
+                [(ngModel)]="tarea.c_valor" required />
+            <mat-hint class="error" *ngIf="!tarea.c_valor">Es requerido</mat-hint>
+        </mat-form-field>
+
+        <mat-form-field>
+            <input matInput placeholder="Descripción" name="c_descripcion" #c_descripcion="ngModel"
+                [(ngModel)]="tarea.c_descripcion" required />
+            <mat-hint class="error" *ngIf="!tarea.c_descripcion">Es requerido</mat-hint>
+        </mat-form-field>
+        
+
+
+
+        <mat-form-field>
+            <input type="text" (keypress)="numberOnly($event)" matInput placeholder="Duración (días)" name="n_duracion"
+                #n_duracion="ngModel" [(ngModel)]="tarea.n_duracion" minlength="1" required />
+        </mat-form-field>
+       
+        <mat-form-field>
+            <mat-select placeholder="Aplica Días Feriados" [(value)]="n_id_aplica" required>
+                <mat-option *ngFor="let feriado of feriados" [value]="feriado.n_id_aplica">
+                    {{feriado.c_valor}}
+                </mat-option>
+            </mat-select>
+            <mat-hint class="error" *ngIf="tarea.n_idgen_actividad==0">Es requerido</mat-hint>
+        </mat-form-field>
+
+             
+        <mat-form-field>
+            <mat-select placeholder="Es Hito de Control" [(value)]="n_hitocontrol" required>
+                <mat-option *ngFor="let feriado of feriados" [value]="feriado.n_id_aplica">
+                    {{feriado.c_valor}}
+                </mat-option>
+            </mat-select>
+            <mat-hint class="error" *ngIf="tarea.n_idgen_actividad==0">Es requerido</mat-hint>
+        </mat-form-field>
+    </div>
+    <div mat-dialog-actions>
+        <button mat-button type="submit" cdkFocusInitial [disabled]="!newForm.form.valid || tarea.n_idgen_actividad==0">
+            <mat-icon>save</mat-icon>
+            <span>Guardar</span>
+        </button>
+    </div>
+</form>

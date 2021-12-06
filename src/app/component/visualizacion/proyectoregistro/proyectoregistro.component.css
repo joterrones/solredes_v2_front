@@ -1,0 +1,19 @@
+.contenedor{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    flex-wrap:wrap;
+  }
+  table{
+    width: 100%;
+  }
+
+  .mat-column-botones {
+    width: 15%;
+  }
+  .mat-column-tarea {
+    width: 70%;
+  }
+  .mat-column-fechafin {
+    width: 15%;
+  }

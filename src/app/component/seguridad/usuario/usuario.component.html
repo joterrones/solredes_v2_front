@@ -1,0 +1,116 @@
+<app-menu>
+  <div class="contenedorBody">
+    <h2> ADMINISTRACIÓN DE USUARIOS</h2>
+    <mat-accordion>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header class="back-expansion">
+          <mat-panel-title>
+            <mat-icon matSuffix>filter_list</mat-icon> Filtros
+          </mat-panel-title>
+          <mat-panel-description>
+            Filtrado de datos en la lista
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <div class="contenedor">
+
+          <mat-form-field>
+            <mat-select placeholder="Roles">
+              <mat-option value="0" (click)='selectRole(0)'>
+                -TODOS-
+              </mat-option>
+              <mat-option *ngFor="let rol of roles" [value]="rol.n_idseg_role" (click)='selectRole(rol.n_idseg_role)'>
+                {{rol.c_role}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-select placeholder="Entidades">
+              <mat-option value="0" (click)='selectEntidad(0)'>
+                -TODOS-
+              </mat-option>
+              <mat-option *ngFor="let entidad of entidades" [value]="entidad.n_idgen_entidad"
+                (click)='selectEntidad(entidad.n_idgen_entidad)'>
+                {{entidad.c_name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+      </mat-expansion-panel>
+    </mat-accordion>
+    <br />
+    <mat-card>
+      <mat-form-field>
+        <input matInput placeholder="Buscar" [(ngModel)]="textfilter" (keyup)="applyFilter($event.target.value)">
+        <mat-icon matSuffix>search</mat-icon>
+      </mat-form-field>
+      <table mat-table [dataSource]="tablaUsuarios" matSort class="mat-elevation-z8">
+        <ng-container matColumnDef="editar">
+          <th mat-header-cell *matHeaderCellDef> <button mat-icon-button color="accent" (click)="openDialog(null)">
+              <mat-icon aria-label="Example icon-button with a heart icon">add</mat-icon>
+            </button> </th>
+          <td mat-cell *matCellDef="let element">
+            <button mat-icon-button color="accent" (click)="openDialog(element)">
+              <mat-icon aria-label="Example icon-button with a heart icon">edit</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="username">
+          <th mat-header-cell *matHeaderCellDef color="error"> Usuario </th>
+          <td mat-cell *matCellDef="let element"> {{element.c_username}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="c_nombre">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </th>
+          <td mat-cell *matCellDef="let element"> {{element.c_name  }} </td>
+        </ng-container>
+        <ng-container matColumnDef="c_dni">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> DNI </th>
+          <td mat-cell *matCellDef="let element"> {{element.c_documentid}} </td>
+        </ng-container>
+        <ng-container matColumnDef="c_telefono">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Teléfono </th>
+          <td mat-cell *matCellDef="let element"> {{element.c_phone}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="c_role">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Rol </th>
+          <td mat-cell *matCellDef="let element"> {{element.c_role}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="c_entidad">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Entidad </th>
+          <td mat-cell *matCellDef="let element"> {{element.c_entidad}} </td>
+        </ng-container>
+
+        <!-- Button Resetear -->
+        <ng-container matColumnDef="resetear">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Clave</th>
+          <td mat-cell *matCellDef="let element">
+            <button mat-icon-button (click)="openDialogClave(element)" color="accent">
+              <mat-icon aria-label="Example icon-button with a heart icon">settings</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+        <!-- Button Eliminar -->
+        <ng-container matColumnDef="eliminar">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Eliminar </th>
+          <td mat-cell *matCellDef="let element">
+            <button mat-icon-button color="error" (click)="eliminar(element)">
+              <mat-icon aria-label="Example icon-button with a heart icon">delete</mat-icon>
+
+            </button>
+          </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <ng-template let-row matRowDef cdkVirtualFor [matRowDefColumns]="displayedColumns">
+          <tr mat-row></tr>
+
+        </ng-template>
+
+      </table>
+
+      <mat-paginator [pageSizeOptions]="pagin" showFirstLastButtons></mat-paginator>
+    </mat-card>
+  </div>
+</app-menu>

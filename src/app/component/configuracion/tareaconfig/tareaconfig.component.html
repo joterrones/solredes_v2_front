@@ -1,0 +1,93 @@
+<div class="contenedorBody">
+  <h2> LISTA DE DATOS ADICIONALES</h2>
+
+  <div [hidden]="flag">
+  <mat-card class="example-card" >
+    <mat-card-header>
+      <div mat-card-avatar class="example-header-image"></div>
+      <mat-card-title>Dato Nuevo</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <form class="example-container" #newForm="ngForm" (ngSubmit)="guardar(newForm)">
+        <div mat-dialog-content class="contenedor">
+            <mat-form-field>
+                <input matInput placeholder="Dato" name="c_dato" #c_dato="ngModel" [(ngModel)]="datoadicional.c_dato"
+                    required />
+                <mat-hint class="error" *ngIf="!datoadicional.c_dato">Es requerido</mat-hint>
+            </mat-form-field>
+            <mat-form-field>
+              <input matInput placeholder="Unidad de Medida" name="c_unidad" #c_unidad="ngModel" [(ngModel)]="datoadicional.c_unidad"
+                  required />
+              <mat-hint class="error" *ngIf="!datoadicional.c_unidad">Es requerido</mat-hint>
+          </mat-form-field>
+            <mat-form-field>
+                <mat-select placeholder="Tipo de Dato" [(value)]="datoadicional.c_tipodato">
+                  <mat-option value="text">
+                    Texto
+                  </mat-option>
+                  <mat-option value="number">
+                    Número con Decimales
+                  </mat-option>
+                  <mat-option value="file">
+                    Archivo
+                  </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div mat-dialog-actions>
+            <button mat-button type="submit" cdkFocusInitial [disabled]="!newForm.form.valid || datoadicional.c_tipodato==''">
+                <mat-icon>save</mat-icon>
+                <span>Guardar</span>
+            </button>
+            <button mat-button type="button" (click)="cancel()">
+              <mat-icon>cancel</mat-icon>
+              <span>Cancelar</span>
+          </button>
+        </div>
+    </form>
+    </mat-card-content>
+ 
+  </mat-card>
+</div>
+  <br />
+  <mat-card>
+    <mat-form-field>
+      <input matInput placeholder="Buscar" [(ngModel)]="textfilter" (keyup)="applyFilter($event.target.value)">
+      <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
+    <table mat-table [dataSource]="tabla" matSort class="mat-elevation-z8">
+      <ng-container matColumnDef="add">
+        <th mat-header-cell *matHeaderCellDef>
+          <button mat-icon-button color="primary" (click)="edit(null)">
+            <mat-icon aria-label="Example icon-button with a heart icon">add</mat-icon>
+          </button>
+        </th>
+        <td mat-cell *matCellDef="let element">
+          <button mat-icon-button color="primary" (click)="edit(element)">
+            <mat-icon aria-label="Example icon-button with a heart icon">edit</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="c_dato">
+        <th mat-header-cell *matHeaderCellDef color="error"> Dato </th>
+        <td mat-cell *matCellDef="let element"> {{element.c_dato}} </td>
+      </ng-container>
+      <ng-container matColumnDef="c_tipodato">
+        <th mat-header-cell *matHeaderCellDef color="error"> Tipo </th>
+        <td mat-cell *matCellDef="let element"> {{element.c_tipodato}} </td>
+      </ng-container>
+       <ng-container matColumnDef="unidad">
+        <th mat-header-cell *matHeaderCellDef color="error"> Unidad Medida </th>
+        <td mat-cell *matCellDef="let element"> {{element.c_unidad}} </td>
+      </ng-container>
+
+      
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <ng-template let-row matRowDef cdkVirtualFor [matRowDefColumns]="displayedColumns">
+        <tr mat-row></tr>
+      </ng-template>
+    </table>
+    <mat-paginator [pageSizeOptions]="pagin" showFirstLastButtons></mat-paginator>
+  </mat-card>
+
+</div>

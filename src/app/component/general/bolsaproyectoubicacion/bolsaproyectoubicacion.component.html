@@ -1,0 +1,73 @@
+<div class="contenedorBody" [hidden]="bolsaproyecto.n_idgen_bolsaproyecto==0">
+  <div class="contenedor">
+
+    <mat-form-field>
+      <mat-select placeholder="Departamentos">
+        <mat-option value="0" (click)='selectDepartamento(0)'>
+          -TODOS-
+        </mat-option>
+        <mat-option *ngFor="let departamento of departamentos" [value]="departamento.n_idgen_departamento"
+          (click)='selectDepartamento(departamento.n_idgen_departamento)'>
+          {{departamento.c_nombre}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-select placeholder="Provincia">
+        <mat-option value="0" (click)='selectProvincia(0)'>
+          -TODOS-
+        </mat-option>
+        <mat-option *ngFor="let provincia of provincias" [value]="provincia.n_idgen_provincia"
+          (click)='selectProvincia(provincia.n_idgen_provincia)'>
+          {{provincia.c_nombre}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field style="display: none;">
+      <mat-select placeholder="Distrito">
+        <mat-option value="0" (click)='selectDistrito(0)'>
+          -TODOS-
+        </mat-option>
+        <mat-option *ngFor="let distrito of distritos" [value]="distrito.n_idgen_distrito"
+          (click)='selectDistrito(distrito.n_idgen_distrito)'>
+          {{distrito.c_nombre}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <h4 *ngIf="numdist < 2">Departamentos: {{ubigeo1}} Provincias: {{ubigeo2}} Distritos: {{ubigeo3}}</h4>
+  <h4 *ngIf="numdist > 1">Departamentos: {{ubigeo1}} Provincias: {{ubigeo2}} Distritos: VARIOS</h4>
+  <mat-form-field>
+    <input matInput placeholder="Buscar" [(ngModel)]="textfilter" (keyup)="applyFilter($event.target.value)">
+    <mat-icon matSuffix>search</mat-icon>
+  </mat-form-field>
+  
+  <table mat-table [dataSource]="tabla" matSort class="mat-elevation-z8">
+    <ng-container matColumnDef="check">
+      <th mat-header-cell *matHeaderCellDef>
+        <!--<mat-checkbox></mat-checkbox>-->
+      </th>
+      <td mat-cell *matCellDef="let element">
+        <mat-checkbox (click)="guardarcheck(element)" [(ngModel)]="element.b_asignado"></mat-checkbox>
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="c_departamento">
+      <th mat-header-cell *matHeaderCellDef color="error"> Departamento </th>
+      <td mat-cell *matCellDef="let element"> {{element.c_departamento}} </td>
+    </ng-container>
+    <ng-container matColumnDef="c_provincia">
+      <th mat-header-cell *matHeaderCellDef color="error"> Provincia </th>
+      <td mat-cell *matCellDef="let element"> {{element.c_provincia}} </td>
+    </ng-container>
+    <ng-container matColumnDef="c_distrito">
+      <th mat-header-cell *matHeaderCellDef color="error"> Distrito </th>
+      <td mat-cell *matCellDef="let element"> {{element.c_distrito}} </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <ng-template let-row matRowDef cdkVirtualFor [matRowDefColumns]="displayedColumns">
+      <tr mat-row></tr>
+    </ng-template>
+  </table>
+  <mat-paginator [pageSizeOptions]="pagin" showFirstLastButtons></mat-paginator>
+</div>
+<p [hidden]="bolsaproyecto.n_idgen_bolsaproyecto>0">Debe pulsar el botón guardar antes</p>

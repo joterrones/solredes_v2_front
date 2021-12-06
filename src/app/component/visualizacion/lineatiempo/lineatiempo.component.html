@@ -1,0 +1,121 @@
+<app-menu>
+    <div class="contenedorBody">
+        <h2> LINEA DE TIEMPO</h2>
+        <mat-horizontal-stepper [linear]="false" #stepper>
+            <mat-step *ngFor="let fase of fases">
+                <ng-template matStepLabel>{{fase.c_nombre}}</ng-template>
+                <b><label>Cantidad de Proyectos: {{fase.detalles.length}}</label></b>
+                <br>
+                <br>
+                <div *ngIf="fase.detalles.length>0">
+                    <mat-accordion>
+                        <div *ngFor="let detalle of fase.detalles">
+
+                            <mat-expansion-panel>
+                                <mat-expansion-panel-header>
+                                    <mat-panel-title>
+                                        <mat-icon *ngIf="detalle.n_diaatrasados>0" color="error">trending_down
+                                        </mat-icon>
+                                        <mat-icon *ngIf="detalle.n_diaatrasados<=0" color="accent">trending_up
+                                        </mat-icon> {{detalle.c_nombreproyecto}}
+                                        / Código CUI: {{detalle.c_codigocui}}
+                                        / Código MINEM: {{detalle.c_codigomem}}
+                                    </mat-panel-title>
+                                    <mat-panel-description>
+
+                                    </mat-panel-description>
+                                </mat-expansion-panel-header>
+                                <div class="contenedor">
+                                    <div class="contenedor" *ngIf="fase.c_nombre!='CIERRE'">
+                                        <p>
+                                            <mat-icon>alarm</mat-icon> Fecha de Firma de Contrato: <strong>
+                                                {{detalle.c_fechafirma}}</strong>
+                                        </p>
+                                        <p>
+                                            <mat-icon>snooze</mat-icon> Plazo: <strong>
+                                                {{detalle.c_plazo}}</strong>
+                                        </p>
+                                        <p>
+                                            <mat-icon>alarm</mat-icon> Fecha de Inicio: <strong>
+                                                {{detalle.c_fechainicio}}</strong>
+                                        </p>
+                                        <p>
+                                            <mat-icon>alarm</mat-icon> Fecha de Fin: <strong>
+                                                {{detalle.d_fechafin}}</strong>
+                                        </p>
+                                        <p>
+                                            <mat-icon>snooze</mat-icon> Ampliaciones: <strong>
+                                                {{detalle.c_ampliaciones}}</strong>
+                                        </p>
+                                        <p>
+                                            <mat-icon>alarm</mat-icon> Fecha de Fin Ampliado: <strong>
+                                                {{detalle.d_fechafinampliado}}</strong>
+                                        </p>
+                                    </div>
+
+
+                                    <div class="contenedor" *ngIf="fase.c_nombre=='CIERRE'">
+                                        <!--<p>
+                                            <mat-icon>alarm</mat-icon> Fecha de vencimiento de la Fase: <strong>
+                                                {{detalle.d_fecha}}</strong>
+                                        </p>-->
+                                        <p *ngIf="detalle.n_diaatrasados>0">
+                                            <mat-icon color="error">snooze</mat-icon> Días de retrazo: <strong>
+                                                {{detalle.n_diaatrasados}}</strong>
+                                        </p>
+
+                                        <p>
+                                            <mat-icon color="accent">shopping_bag</mat-icon> Monto de Invesión Total:
+                                            <strong>{{detalle.n_montoinversiontotal| currency: 'S/. ' }}</strong>
+                                        </p>
+                                        <p>
+                                            <mat-icon color="primary">text_snippet</mat-icon> Monto de Perfil y
+                                            Definitivo:
+                                            <strong>{{detalle.n_perfildefinitivo| currency: 'S/. ' }}</strong>
+                                        </p>
+                                        <p>
+                                            <mat-icon color="error">search</mat-icon> Monto de Supervisión:
+                                            <strong>{{detalle.n_supervisionobra| currency: 'S/. ' }}</strong>
+                                        </p>
+
+                                        <p>
+                                            <mat-icon>highlight</mat-icon>Luminarias:
+                                            <strong>{{detalle.n_luminarias}}</strong>
+                                        </p>
+                                        <p>
+                                            <mat-icon color="accent">stacked_line_chart</mat-icon> Kilometros de Linea
+                                            Primaria:
+                                            <strong>{{detalle.n_lp }}</strong>
+                                        </p>
+                                        <p>
+                                            <mat-icon color="primary">stacked_line_chart</mat-icon> Kilometros de Red
+                                            Primaria:
+                                            <strong>{{detalle.n_rp}}</strong>
+                                        </p>
+                                        <p>
+                                            <mat-icon color="error">groups</mat-icon> Localidades de Red Secundaria:
+                                            <strong>{{detalle.n_rs}}</strong>
+                                        </p>
+                                    </div>
+
+                                </div>
+
+                                <mat-card-actions>
+                                    <mat-divider></mat-divider>
+                                    <button mat-button color="accent" (click)="openDialog(detalle)">VER
+                                        DETALLE</button>
+                                </mat-card-actions>
+
+                            </mat-expansion-panel>
+
+                        </div>
+                    </mat-accordion>
+                </div>
+                <div>
+                    <button mat-button matStepperPrevious>Back</button>
+                    <button mat-button (click)="stepper.reset()">Reset</button>
+                </div>
+            </mat-step>
+        </mat-horizontal-stepper>
+    </div>
+</app-menu>

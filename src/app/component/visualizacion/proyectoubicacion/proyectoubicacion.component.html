@@ -1,0 +1,113 @@
+<div class="contenedorBody" [hidden]="proyecto.n_idgen_proyecto==0">
+
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header class="back-expansion">
+        <mat-panel-title>
+          <mat-icon matSuffix>filter_list</mat-icon> Filtros
+        </mat-panel-title>
+        <mat-panel-description>
+          Filtrado de datos en la lista
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <div class="contenedor">
+
+        <mat-form-field>
+          <mat-select placeholder="Departamentos">
+            <mat-option value="0" (click)='selectDepartamento(0)'>
+              -TODOS-
+            </mat-option>
+            <mat-option *ngFor="let departamento of departamentos" [value]="departamento.n_idgen_departamento"
+              (click)='selectDepartamento(departamento.n_idgen_departamento)'>
+              {{departamento.c_nombre}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-select placeholder="Provincia">
+            <mat-option value="0" (click)='selectProvincia(0)'>
+              -TODOS-
+            </mat-option>
+            <mat-option *ngFor="let provincia of provincias" [value]="provincia.n_idgen_provincia"
+              (click)='selectProvincia(provincia.n_idgen_provincia)'>
+              {{provincia.c_nombre}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-select placeholder="Distrito">
+            <mat-option value="0" (click)='selectDistrito(0)'>
+              -TODOS-
+            </mat-option>
+            <mat-option *ngFor="let distrito of distritos" [value]="distrito.n_idgen_distrito"
+              (click)='selectDistrito(distrito.n_idgen_distrito)'>
+              {{distrito.c_nombre}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-select placeholder="Seleccione una fases" [(value)]="idfase">
+            <mat-option *ngFor="let faseubigeo of fasesubigeo" [value]="faseubigeo.n_idgen_fase"
+              (click)='changetabubigeo(faseubigeo)'>
+              {{faseubigeo.c_nombre}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+  <h4>Ubicación ({{proyecto.c_fase}}): Departamentos: {{ubigeo1}} Provincias: {{ubigeo2}} Distritos: {{ubigeo3}}</h4>
+  <div class="example-button-row">
+    <button mat-raised-button color="primary" (click)="fileInput.click()">
+      <span>Cargar Archivo</span>
+      <input #fileInput type="file" style="display: none;" (change)="incomingfile($event)" placeholder="Upload file"
+        accept=".xlsx">
+    </button>
+    &nbsp;
+    <a mat-raised-button color="primary" href="assets/Formato_Carga_Localidad.xlsx" download>
+      Descargar Formato
+    </a>
+  </div>
+
+  <mat-form-field>
+    <input matInput placeholder="Buscar" [(ngModel)]="textfilter" (keyup)="applyFilter($event.target.value)">
+    <mat-icon matSuffix>search</mat-icon>
+  </mat-form-field>
+  <div class="container_list">
+    <mat-spinner *ngIf="load"></mat-spinner>
+    <div class="container_table" [hidden]="load">
+      <table mat-table [dataSource]="tabla" matSort class="mat-elevation-z8">
+        <ng-container matColumnDef="check">
+          <th mat-header-cell *matHeaderCellDef>
+            <mat-checkbox></mat-checkbox>
+          </th>
+          <td mat-cell *matCellDef="let element">
+            <mat-checkbox (click)="guardarcheck(element)" [(ngModel)]="element.b_flag"></mat-checkbox>
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="c_departamento">
+          <th mat-header-cell *matHeaderCellDef color="error"> Departamento </th>
+          <td mat-cell *matCellDef="let element"> {{element.c_departamento}} </td>
+        </ng-container>
+        <ng-container matColumnDef="c_provincia">
+          <th mat-header-cell *matHeaderCellDef color="error"> Provincia </th>
+          <td mat-cell *matCellDef="let element"> {{element.c_provincia}} </td>
+        </ng-container>
+        <ng-container matColumnDef="c_distrito">
+          <th mat-header-cell *matHeaderCellDef color="error"> Distrito </th>
+          <td mat-cell *matCellDef="let element"> {{element.c_distrito}} </td>
+        </ng-container>
+        <ng-container matColumnDef="c_centropoblado">
+          <th mat-header-cell *matHeaderCellDef color="error"> Centro Poblado </th>
+          <td mat-cell *matCellDef="let element"> {{element.c_centropoblado}} </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <ng-template let-row matRowDef cdkVirtualFor [matRowDefColumns]="displayedColumns">
+          <tr mat-row></tr>
+        </ng-template>
+      </table>
+      <mat-paginator [pageSizeOptions]="pagin" showFirstLastButtons></mat-paginator>
+    </div>
+  </div>
+</div>
+<p [hidden]="proyecto.n_idgen_proyecto>0">Debe pulsar el botón guardar antes</p>

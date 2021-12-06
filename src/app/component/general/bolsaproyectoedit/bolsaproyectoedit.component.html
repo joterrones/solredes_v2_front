@@ -1,0 +1,99 @@
+<h3 mat-dialog-title>Edición {{item.c_nombreproyecto}}</h3>
+
+<mat-horizontal-stepper [linear]="true" #stepper>
+    <mat-step>
+        <ng-template matStepLabel>Datos</ng-template>
+        <form class="example-container" #newForm="ngForm" (ngSubmit)="guardar(newForm)">
+            <div mat-dialog-content class="contenedor">
+                <mat-form-field>
+                    <input matInput placeholder="Nombre del Proyecto" name="c_nombreproyecto"
+                        #c_nombreproyecto="ngModel" [(ngModel)]="item.c_nombreproyecto" minlength="3" required />
+
+                        <mat-icon matSuffix>mode_edit</mat-icon>
+                    <mat-hint class="error" *ngIf="item.c_nombreproyecto.length<3">debe tener mínimo de 3 dígitos
+                    </mat-hint>
+                </mat-form-field>
+                <mat-form-field>
+                    <input matInput placeholder="Código CUI" name="c_cui" #c_cui="ngModel" [(ngModel)]="item.c_cui"
+                        minlength="3" required />
+                        <mat-icon matSuffix>mode_edit</mat-icon>
+                    <mat-hint class="error" *ngIf="item.c_cui.length<3">debe tener mínimo de 3 dígitos</mat-hint>
+                </mat-form-field>
+                <mat-form-field>
+                    <input matInput placeholder="Código MINEM" name="n_numerominem" #c_cui="ngModel" [(ngModel)]="item.n_numerominem"
+                        maxlength="3" required />
+                        <mat-icon matSuffix>mode_edit</mat-icon>
+                    <mat-hint class="error" *ngIf="item.n_numerominem.length==0">debe tener mínimo de 3 dígitos</mat-hint>
+                </mat-form-field>
+                <!--<mat-form-field>
+                    <input matInput placeholder="Responsable" name="c_responsable" #c_responsable="ngModel"
+                        [(ngModel)]="item.c_responsable" />
+                </mat-form-field>-->
+
+                <mat-form-field>
+                    <input type="number" (keypress)="numberOnly($event)" matInput placeholder="N° Localidades"
+                        name="n_localidades" #n_localidades="ngModel"
+                        [(ngModel)]="item.n_localidades" maxlength="4" />
+                    <mat-icon matSuffix>mode_edit</mat-icon>
+                </mat-form-field>
+                <mat-form-field>
+                    <input type="number" (keypress)="numberOnly($event)" matInput placeholder="N° Población Beneficiada"
+                        name="n_poblacion" #n_poblacion="ngModel"
+                        [(ngModel)]="item.n_poblacion" maxlength="4" />
+                    <mat-icon matSuffix>mode_edit</mat-icon>
+                </mat-form-field>
+                <mat-form-field>
+                    <input type="number" (keypress)="numberOnly($event)" matInput placeholder="N° Viviendas"
+                        name="n_viviendas" #n_viviendas="ngModel"
+                        [(ngModel)]="item.n_viviendas" maxlength="4" />
+                    <mat-icon matSuffix>mode_edit</mat-icon>
+                </mat-form-field>
+                <mat-form-field>
+                    <input type="number" (keypress)="numberOnly($event)" matInput placeholder="KM Red"
+                        name="n_kmred" #n_kmred="ngModel"
+                        [(ngModel)]="item.n_kmred" maxlength="4" />
+                    <mat-icon matSuffix>mode_edit</mat-icon>
+                </mat-form-field>
+                <mat-form-field>
+                    <input type="number" (keypress)="numberOnly($event)" matInput placeholder="Transformadores"
+                        name="n_trafos" #n_trafos="ngModel"
+                        [(ngModel)]="item.n_trafos" maxlength="4" />
+                    <mat-icon matSuffix>mode_edit</mat-icon>
+                </mat-form-field>
+                <mat-form-field>
+                    <input type="number" (keypress)="numberOnly($event)" matInput placeholder="Lamparas"
+                        name="n_lamparas" #n_lamparas="ngModel"
+                        [(ngModel)]="item.n_lamparas" maxlength="4" />
+                    <mat-icon matSuffix>mode_edit</mat-icon>
+                </mat-form-field>
+
+                <!--<mat-form-field>
+                    <mat-select placeholder="Fase" [(value)]="item.n_idgen_fase" required>
+                      <mat-option *ngFor="let fase of fases" [value]="fase.n_idgen_fase">
+                        {{fase.c_nombre}}
+                      </mat-option>
+                    </mat-select>
+                </mat-form-field>-->
+            </div>
+            <div mat-dialog-actions>
+                <div>
+                    <button mat-button type="submit" cdkFocusInitial [disabled]="!newForm.form.valid">
+                        <mat-icon>save</mat-icon>
+                        <span>Guardar</span>
+                    </button>
+                </div>
+                <div style="display: flex; justify-content: flex-end">
+                    <label style="color: red;"> *Información Obligatoria</label>
+                </div>
+            </div>
+        </form>
+    </mat-step>
+    <mat-step>
+        <ng-template matStepLabel>Detalle de Bolsa de Proyecto</ng-template>
+        <app-bolsaproyectodetalle [bolsaproyecto]="item"></app-bolsaproyectodetalle>
+    </mat-step>
+    <mat-step>
+        <ng-template matStepLabel>Ubicación</ng-template>
+        <app-bolsaproyectoubicacion [bolsaproyecto]="item"></app-bolsaproyectoubicacion>
+    </mat-step>
+</mat-horizontal-stepper>

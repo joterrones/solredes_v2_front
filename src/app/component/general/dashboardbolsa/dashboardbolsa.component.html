@@ -1,0 +1,198 @@
+<app-menu>
+    <div class="contenedorBody" id="printSectionId">
+        <h2>REPORTE ESTADISTICO - BOLSA DE PROYECTOS</h2>
+        <mat-accordion>
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        Filtros y Exportación de Datos
+                    </mat-panel-title>
+                    <mat-panel-description>
+                        Pulsar para desplegar las opciones
+                    </mat-panel-description>
+                </mat-expansion-panel-header>
+                <div class="contenedorfiltro">
+                    <mat-form-field style="width: 30%;display: none;">
+                        <mat-select placeholder="Fases">
+                            <mat-option value="0" (click)='selectFase(0)'>
+                                -TODOS-
+                            </mat-option>
+                            <mat-option *ngFor="let fase of fases" [value]="fase.n_idgen_fase"
+                                (click)='selectFase(fase.n_idgen_fase)'>
+                                {{fase.c_nombre}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field style="width: 30%;">
+                        <mat-select placeholder="Departamentos">
+                            <mat-option value="0" (click)="selectDepartamento(0)">
+                                -TODOS-
+                            </mat-option>
+                            <mat-option value="-100" (click)="selectDepartamento(-100)">
+                                -SIN ASIGNAR-
+                              </mat-option>
+                            <mat-option *ngFor="let item of departamentos" [value]="item.n_idgen_departamento"
+                                (click)="selectDepartamento(item.n_idgen_departamento)">
+                                {{item.c_nombre}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field style="width: 30%;">
+                        <mat-select placeholder="Año de Programación">
+                            <mat-option value="0" (click)="selectAnnio(0)">
+                                -TODOS-
+                            </mat-option>
+                            <mat-option *ngFor="let item of annios" [value]="item.n_annio"
+                                (click)="selectAnnio(item.n_annio)">
+                                {{item.n_annio}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <!--<mat-action-row>
+                    <button mat-button color="accent" (click)="printToCart('printSectionId')">Imprimir</button>
+                </mat-action-row>-->
+            </mat-expansion-panel>
+        </mat-accordion>
+
+        <div class="contenedorChart">
+            <div class="elementoChart">
+                <mat-card>
+                    <h3>CANTIDAD DE PROYECTOS POR DEPARTAMENTO</h3>
+                    <canvas id="dashboarddepartamento">{{myChartDepartamento}}</canvas>
+                </mat-card>
+            </div>
+            <div class="elementoChart">
+                <mat-card>
+                    <h3>CANTIDAD DE PROYECTOS PROGRAMADOS POR AÑO</h3>
+                    <canvas id="dashboardannio">{{MyCharAnnio}}</canvas>
+                </mat-card>
+            </div>
+            <div class="elementoChart">
+                <mat-card>
+                    <h3>MONTO PROGRAMADO VS EJECUTADO POR AÑO</h3>
+                    <canvas id="dashboardmontoprogramado">{{MyCharMontoProgramado}}</canvas>
+                    <h5>Monto Programado Total: {{ntotalmontoprogramado | number : '0.00'}} / Monto Ejecutado Total: {{ntotalmontoejecutado | number : '0.00'}}</h5>
+                    <h5>% Ejecutado vs Programado: {{nporcentaje1 | number : '0.00'}}</h5>
+                </mat-card>
+            </div>
+            <div class="elementoChart">
+                <mat-card>
+                    <h3>MONTO PIA Y PIM POR AÑO</h3>
+                    <canvas id="dashboardmontoejecutado">{{MyCharMontoEjecutado}}</canvas>
+                    <h5>Monto PIM Total: {{ntotalmontopim | number : '0.00'}} / Monto PIA Total: {{ntotalmontopia | number : '0.00'}}</h5>
+                    <h5>% PIM vs PIA: {{nporcentaje2 | number : '0.00'}}</h5>
+                </mat-card>
+            </div>
+        </div>
+        <h2>
+            <p>Información de la Bolsa de Proyectos</p>
+        </h2>
+        <div class="contenedorChart">
+            <div class="elementoTotal">
+                <mat-card class="example-card">
+                    <mat-card-content>
+                        <h2>
+                            <p>Total en Bolsa</p>
+                        </h2>
+                        <h2 style="text-align: center">{{ntotproyectos | number}}</h2>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+            <div class="elementoTotal">
+                <mat-card class="example-card">
+                    <mat-card-content>
+                        <h2>
+                            <p>Proyectos en Desarrollo</p>
+                        </h2>
+                        <h2 style="text-align: center">{{ntotendesarrollo | number}}</h2>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+            <div class="elementoTotal">
+                <mat-card class="example-card">
+                    <mat-card-content>
+                        <h2>
+                            <p>Proyectos en Cartera</p>
+                        </h2>
+                        <h2 style="text-align: center">{{ntotencartera | number}}</h2>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+        </div>
+        <div class="contenedorChart">
+            <div class="elementoTotal">
+                <mat-card class="example-card">
+                    <mat-card-content>
+                        <h3>
+                            <p>Total PIA</p>
+                        </h3>
+                        <h3 style="text-align: center">{{ntotalmontopia | number}}</h3>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+            <div class="elementoTotal">
+                <mat-card class="example-card">
+                    <mat-card-content>
+                        <h3>
+                            <p>Total PIM</p>
+                        </h3>
+                        <h3 style="text-align: center">{{ntotalmontopim | number}}</h3>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+            <div class="elementoTotal">
+                <mat-card class="example-card">
+                    <mat-card-content>
+                        <h3>
+                            <p>Total (PIA - PIM)</p>
+                        </h3>
+                        <h3 style="text-align: center">{{ntotalmontodif2 | number}}</h3>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+        </div>
+        <div class="contenedorChart">
+            <div class="elementoTotal">
+                <mat-card class="example-card">
+                    <mat-card-content>
+                        <h3>
+                            <p>Total Programado</p>
+                        </h3>
+                        <h3 style="text-align: center">{{ntotalmontoprogramado2 | number}}</h3>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+            <div class="elementoTotal">
+                <mat-card class="example-card">
+                    <mat-card-content>
+                        <h3>
+                            <p>Total Ejecutado</p>
+                        </h3>
+                        <h3 style="text-align: center">{{ntotalmontoejecutado | number}}</h3>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+            <div class="elementoTotal">
+                <mat-card class="example-card">
+                    <mat-card-content>
+                        <h3>
+                            <p>Total Reprogramado</p>
+                        </h3>
+                        <h3 style="text-align: center">{{ntotalmontoreprogramado | number}}</h3>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+            <div class="elementoTotal">
+                <mat-card class="example-card">
+                    <mat-card-content>
+                        <h4>
+                            <p>Diferencia (PIM - Total Reprogramado)</p>
+                        </h4>
+                        <h3 style="text-align: center">{{ntotalmontodif | number}}</h3>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+        </div>
+    </div>
+</app-menu>

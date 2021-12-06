@@ -1,0 +1,19 @@
+table {
+    width: 100%;
+  }
+  
+  .contenedor {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    flex-wrap: wrap;
+  }
+  
+  .contenedorBody {
+    margin: 1%;
+  }
+  
+  p {
+    margin: 10px;
+    width: 350px;
+  }

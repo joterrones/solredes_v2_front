@@ -1,0 +1,20 @@
+table{
+width: 100%;
+}
+.contenedorBody {
+    margin: 1%;
+  }
+  .mat-column-n_orden{
+    width: 20%;
+}
+.mat-column-eliminar{
+    width: 10%;
+}
+
+.mat-column-editar{
+    width: 10%;
+}
+
+mat-form-field{
+    width: 100px;
+}

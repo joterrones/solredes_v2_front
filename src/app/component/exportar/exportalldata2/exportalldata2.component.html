@@ -1,0 +1,14 @@
+<div class="wrapper">
+    <div class="row">
+        <div title="Datos Detallados por Proyecto (horizontal)" style="margin: 5px; display: inline; float: left; position:relative;">
+            <button mat-icon-button  (click)="generaralldataproyecto()"><mat-icon>list_alt</mat-icon> </button>
+        </div>
+        <div class="progress progress-striped active" style="margin-top: 5px; float:left">
+            <div style="margin: 5px;" *ngIf="edited==true" class="alert alert-success alert-dismissible fade in"
+                role="alert">
+                <strong style="font-size: small;"></strong>
+                <mat-spinner  diameter="25"></mat-spinner>
+            </div>
+        </div>
+    </div>
+</div>

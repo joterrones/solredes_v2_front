@@ -1,0 +1,49 @@
+table{
+    width: 100%;
+}
+
+.contenedorBody {
+    margin: 1%;
+}
+
+.contenedorfiltro {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.example-spacer {
+    flex: 1 1 auto;
+}
+
+.mat-column-c_nombre {
+    width: 45%;
+    font-size: 12px;
+    padding-right: 15px;
+  }
+
+  .mat-column-c_cui {
+    width: 8%;
+    font-size: 12px;
+  }
+
+  .mat-column-n_numerominem {
+    width: 8%;
+    font-size: 12px;
+  }
+
+  .mat-column-c_areaasignada {
+    width: 8%;
+    font-size: 12px;
+  }
+
+  .mat-column-c_estado {
+    width: 10%;
+    font-size: 12px;
+  }
+
+  .mat-column-n_annioprograma {
+    width: 10%;
+    font-size: 12px;
+  }

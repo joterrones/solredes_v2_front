@@ -1,0 +1,160 @@
+Edición {{proyecto.c_nombreproyecto}}
+
+
+<mat-horizontal-stepper [linear]="true" #stepper>
+  <mat-step>
+    <ng-template matStepLabel>Datos</ng-template>
+    <div class="contenedor">
+
+      <mat-form-field>
+        <input matInput placeholder="Nombre de Proyecto" name="c_nombreproyecto" #c_nombreproyecto="ngModel"
+          [(ngModel)]="proyecto.c_nombreproyecto" required />
+        <mat-hint class="error" *ngIf="!proyecto.c_nombreproyecto">Es requerido</mat-hint>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Código MEM" name="c_codigomem" #c_codigomem="ngModel"
+          [(ngModel)]="proyecto.c_codigomem" required />
+        <mat-hint class="error" *ngIf="!proyecto.c_codigomem">Es requerido</mat-hint>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Código CUI" name="c_codigocui" #c_codigocui="ngModel"
+          [(ngModel)]="proyecto.c_codigocui" required />
+        <mat-hint class="error" *ngIf="!proyecto.c_codigocui">Es requerido</mat-hint>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Código SNIP" name="c_codigosnip" #c_codigosnip="ngModel"
+          [(ngModel)]="proyecto.c_codigosnip" required />
+        <mat-hint class="error" *ngIf="!proyecto.c_codigosnip">Es requerido</mat-hint>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Objetivo" name="c_objetivoproyecto" #c_objetivoproyecto="ngModel"
+          [(ngModel)]="proyecto.c_objetivoproyecto" required />
+        <mat-hint class="error" *ngIf="!proyecto.c_objetivoproyecto">Es requerido</mat-hint>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-select placeholder="Unidad Formuladora" [(value)]="proyecto.n_id_unidadformuladora">
+          <mat-option *ngFor="let item of unidadformuladoras" [value]="item.n_idgen_lista">
+            {{item.c_valorlista}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-select placeholder="Unidad Ejecutora" [(value)]="proyecto.n_id_unidadejecutora">
+          <mat-option *ngFor="let item of unidadejecutoras" [value]="item.n_idgen_lista">
+            {{item.c_valorlista}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-select placeholder="Tipo de Ejecución" [(value)]="proyecto.n_id_tipoejecucion">
+          <mat-option *ngFor="let item of tipoejecuciones" [value]="item.n_idgen_lista">
+            {{item.c_valorlista}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-select placeholder="Fuentes de Financiamiento" [(value)]="proyecto.n_id_fuentefinanciamiento">
+          <mat-option *ngFor="let item of fuentefinanciamientos" [value]="item.n_idgen_lista">
+            {{item.c_valorlista}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Latitud" name="c_latitud" #c_latitud="ngModel" [(ngModel)]="proyecto.c_latitud"
+          required />
+        <mat-hint class="error" *ngIf="!proyecto.c_latitud">Es requerido</mat-hint>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Longitud" name="c_longitud" #c_longitud="ngModel" [(ngModel)]="proyecto.c_longitud"
+          required />
+        <mat-hint class="error" *ngIf="!proyecto.c_longitud">Es requerido</mat-hint>
+      </mat-form-field>
+    </div>
+
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Datos Adicionales</ng-template>
+    <mat-tab-group (selectedIndexChange)="tabselected($event)">
+      <mat-tab *ngFor="let fase of fases">
+        <ng-template mat-tab-label> 
+          <span>{{fase.c_nombre}}</span>
+        </ng-template>
+        <h4>{{fase.c_nombre}}</h4>
+        <mat-spinner *ngIf="changing"></mat-spinner>
+        <table mat-table [dataSource]="tablaatributo" matSort class="mat-elevation-z8" [hidden]="changing">
+          <ng-container matColumnDef="nombreatributo">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+              <p style="color: black;"><strong>Descripción </strong></p>
+            </th>
+            <td mat-cell *matCellDef="let element">
+              <p style="color: black;">{{element.c_atributo  }} ({{element.c_unidad}})</p>
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="valoratributo">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+              <p style="color: black;"><strong>Valor del Archivo </strong></p>
+            </th>
+            <td mat-cell *matCellDef="let element">
+              <div [hidden]="element.c_tipodato!='text'">
+                <mat-form-field style="margin-top: 10px; width: 100%;">
+                  <input type="text" matInput placeholder="Ingrese {{element.c_atributo}}" name="c_valoratributo"
+                    #c_valoratributo="ngModel" [(ngModel)]="element.c_valoratributo" maxlength="200" />
+                  <mat-icon matSuffix>mode_edit</mat-icon>
+                </mat-form-field>
+              </div>
+              <div [hidden]="element.c_tipodato!='number'">
+                <mat-form-field style="margin-top: 10px; width: 100%;">
+                  <input (keypress)="decimalOnly($event)" matInput placeholder="Ingrese {{element.c_atributo}}"
+                    name="c_valoratributo" #c_valoratributo="ngModel" [(ngModel)]="element.c_valoratributo"
+                    maxlength="200" (blur)="decimalValid($event.target.value, element)" />
+                  <mat-icon matSuffix>mode_edit</mat-icon>
+                </mat-form-field>
+              </div>
+              <div [hidden]="element.c_tipodato!='date'">
+                <mat-form-field style="margin-top: 10px; width: 100%;">
+                  <input type="number" (keypress)="numberOnly($event)" matInput
+                    placeholder="Ingrese {{element.c_atributo}}" name="c_valoratributo" #c_valoratributo="ngModel"
+                    [(ngModel)]="element.c_valoratributo" maxlength="200" />
+                  <mat-icon matSuffix>mode_edit</mat-icon>
+                </mat-form-field>
+              </div>
+              <div [hidden]="element.c_tipodato!='file'">
+                <p style="color: blue;">
+                  <mat-form-field style="margin-top: 10px; width: 100%;">
+                    <input matInput placeholder="Ingrese {{element.c_atributo}}" name="c_valoratributo"
+                      #c_valoratributo="ngModel" [(ngModel)]="element.c_valoratributo" maxlength="200" />
+                    <mat-icon matSuffix>mode_edit</mat-icon>
+                  </mat-form-field>
+                  <input id="file" #fileInput hidden type='file' (change)="uploadfile($event.target.files,element)">
+                  <button mat-mini-fab color="accent" (click)="fileInput.click()" style="margin-left: 10px;">
+                    <mat-icon>attach_file</mat-icon>
+                  </button>
+                  <button mat-mini-fab color="accent" aria-label="Example icon button with a plus one icon"
+                    style="margin-left: 10px;" (click)="download(element.c_valoratributo)">
+                    <mat-icon>get_app</mat-icon>
+                  </button>
+                </p>
+              </div>
+            </td>
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="displayedColumnsAtributo"></tr>
+          <ng-template let-row matRowDef cdkVirtualFor [matRowDefColumns]="displayedColumnsAtributo">
+            <tr mat-row></tr>
+          </ng-template>
+        </table>
+      </mat-tab>
+    </mat-tab-group>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Ubicación</ng-template>
+    <app-proyectoubicacion [proyecto]="proyecto"></app-proyectoubicacion>
+  </mat-step>
+</mat-horizontal-stepper>
+
+<div mat-dialog-actions>
+
+  <button mat-button cdkFocusInitial (click)="guardar()">
+    <mat-icon color="accent">save</mat-icon>
+    <span>Guardar</span>
+  </button>
+</div>

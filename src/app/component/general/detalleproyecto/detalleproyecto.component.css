@@ -1,0 +1,57 @@
+.contenedor {
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  flex-wrap: wrap;
+}
+
+.example-fill-remaining-space {
+  flex: 1 1 auto;
+}
+
+table {
+  width: 100%;
+}
+
+.mat-column-tarea {
+  width: 65%;
+}
+
+.mat-column-d_fechaprogramada {
+  width: 25%;
+}
+
+.mat-column-n_diaatrasados {
+  width: 10%;
+}
+
+.mat-column-nombre {
+  width: 60%;
+}
+
+.mat-column-archivo {
+  width: 30%;
+}
+
+.mat-column-descarga {
+  width: 10%;
+}
+
+
+.mat-column-nombreatributo {
+  width: 50%;
+}
+
+.mat-column-valoratributo {
+  width: 50%;
+}
+
+mat-card-actions{
+  display: flex;
+  flex-wrap: wrap;
+
+}
+
+.graf{
+  width: 30%;
+}

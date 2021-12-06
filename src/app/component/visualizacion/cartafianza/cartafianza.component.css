@@ -1,0 +1,26 @@
+table {
+    width: 100%;
+}
+.error{
+    color: red;
+}
+
+.contenedor {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.control-short{
+    width: 250px;
+    margin-left: 10px;
+}
+
+.control-large{
+    width: 500px;
+    margin-left: 10px;
+}
+.control-ruta{
+    width: 155px;
+}
