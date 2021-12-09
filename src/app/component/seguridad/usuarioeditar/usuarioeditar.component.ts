@@ -5,7 +5,7 @@ import { BaseComponent } from '../../base/base.component';
 import { Router } from "@angular/router";
 import { AppSettings } from '../../../common/appsettings';
 
-import { Usuario, UsuarioEditar, Role, Entidad } from '../../../interface/seguridad.interface';
+import { Usuario, UsuarioEditar, Role } from '../../../interface/seguridad.interface';
 import { ResultadoApi} from '../../../interface/common.interface';
 
 import { SeguridadService } from '../../../service/seguridad.service';
@@ -21,7 +21,7 @@ export class UsuarioeditarComponent extends BaseComponent implements OnInit {
   usuario: Usuario;
   editar: boolean;
   roles: Role[];
-  entidades: Entidad[];
+  /*entidades: Entidad[];*/
   b_comboentidad: boolean = true;
   identidad = 0;
 
@@ -39,27 +39,27 @@ export class UsuarioeditarComponent extends BaseComponent implements OnInit {
     if (this.data.usuario == null) {
       this.editar = false;
       this.usuario = {
-        n_idseg_user: 0,
+        n_idseg_userprofile: 0,
         c_username: "",
-        c_name: "",
-        c_lastname: "",
-        c_documentid: "",
-        c_phone: "",
-        c_repassword: "",
-        c_password: "",
-        n_idseg_role: 0,
-        n_idgen_entidad: 0
+        c_nombre1: "",
+        c_appaterno: "",
+        c_dni: "",
+        /*c_phone: "",*/
+        c_reclave: "",
+        c_clave: "",
+        n_idseg_rol: 0
+        /*n_idgen_entidad: 0*/
       };
       this.identidad = 0;
     } else {
       this.editar = true;
       this.usuario = this.data.usuario;
-      this.usuario.c_password = "0000000";
-      this.usuario.c_repassword = "0000000";
-      this.identidad = this.usuario.n_idgen_entidad;
+      this.usuario.c_clave = "0000000";
+      this.usuario.c_reclave = "0000000";
+      /*this.identidad = this.usuario.n_idgen_entidad;*/
     }
     this.roles = this.data.roles;
-    this.entidades = this.data.entidades;
+    /*this.entidades = this.data.entidades;*/
     console.log('Contenido de usuario');
     console.log(this.usuario);
   }
@@ -87,13 +87,13 @@ export class UsuarioeditarComponent extends BaseComponent implements OnInit {
       });
   }
 
-  addentidad() {
+  /*addentidad() {
     this.b_comboentidad = false;
-  }
+  }*/
 
-  guardarentidad(text, key) {
+  /*guardarentidad(text, key) {
     if (key === "Enter") {
-      var request={c_name:text};
+      var request={c_nombre1:text};
       this._generalservice.save(request, this.getToken().token).subscribe(
         result => {
           try {
@@ -115,9 +115,9 @@ export class UsuarioeditarComponent extends BaseComponent implements OnInit {
           }
         });
     }
-  }
+  }*/
 
-  getentidad() {
+  /*getentidad() {
     this._generalservice.get(this.getToken().token).subscribe(
       result => {
         console.log(result)
@@ -134,5 +134,5 @@ export class UsuarioeditarComponent extends BaseComponent implements OnInit {
           this.openSnackBar(AppSettings.SERVICE_NO_CONECT_SERVER, 99);
         }
       });
-  }
+  }*/
 }

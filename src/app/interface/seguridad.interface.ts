@@ -1,26 +1,25 @@
 export interface Usuario {
-    n_idseg_user: number;
+    n_idseg_userprofile: number;
     c_username: String;
-    c_name:String; 
-    c_lastname:String;
-    c_phone:String; 
-    c_documentid:String;
-
-    c_password:String;
-    c_repassword:String;
-    n_idseg_role:number,
-    n_idgen_entidad:number
+    c_nombre1:String; 
+    c_appaterno:String;
+    /*c_phone:String; */
+    c_dni:String;
+    c_clave:String;
+    c_reclave:String;
+    n_idseg_rol:number
+    /*n_idgen_entidad:number*/
 }
 
 export interface Role{
-    n_idseg_role:number,
-    c_role:String,
+    n_idseg_rol:number,
+    c_nombre:String,
 }
 
-export interface Entidad{
+/*export interface Entidad{
     n_idgen_entidad: number,
-    c_name: String
-}
+    c_nombre1: String
+}*/
 
 export interface ResetarClave {
     data: Usuario,
@@ -31,5 +30,5 @@ export interface ResetarClave {
 export interface UsuarioEditar{
     usuario:Usuario,
     roles:Role[],
-    entidades:Entidad[],
+    /*entidades:Entidad[],*/
 }

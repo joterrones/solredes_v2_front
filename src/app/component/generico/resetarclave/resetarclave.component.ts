@@ -34,7 +34,7 @@ export class ResetearclaveComponent extends BaseComponent {
     console.log(this.data)
     this.usuario.username = data.data.c_username;
     this.usuario.esreset=this.data.esresetpassword;
-    
+    console.log(this.usuario.username)
     console.log(this.data);
 
   }

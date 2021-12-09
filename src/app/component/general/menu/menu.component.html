@@ -9,7 +9,12 @@
                 <mat-icon>account_box</mat-icon>
                 <span>Administración de Usuarios</span>
             </a>
-            <hr>
+            
+            <a mat-list-item [routerLink]="['/rol']" >
+                <mat-icon></mat-icon>
+                <span>Administración de Roles</span>
+            </a>                         
+            <hr>            
             <a mat-list-item [routerLink]="['/bolsaproyecto']" >
                 <mat-icon>local_mall</mat-icon>
                 <span>Bolsa de Proyectos</span>
@@ -67,8 +72,9 @@
                 <button mat-menu-item (click)="logoff()">Cerrar Sesión</button>
             </mat-menu>
         </mat-toolbar>
+        <!--Aquí va el contenido de los formularios-->
         <ng-content>
-            <!--Aquí va el contenido de los formularios-->
+            
         </ng-content>
     </mat-sidenav-content>
 </mat-sidenav-container>

@@ -24,6 +24,9 @@ import { VersionComponent} from './component/general/version/version.component';
 import { ProgramaComponent} from './component/general/programa/programa.component';
 import { CurvasComponent} from './component/visualizacion/curvas/curvas.component';
 import { DashboardbolsaComponent } from './component/general/dashboardbolsa/dashboardbolsa.component';
+import { RoleditarComponent } from './component/seguridad/roleditar/roleditar.component';
+import { RolComponent } from './component/seguridad/rol/rol.component';
+
 //Array de rutas
 const appRoutes:Routes=[
     {path:'',component:ProyectoComponent},
@@ -47,7 +50,8 @@ const appRoutes:Routes=[
     {path:'exportalldata',component:ExportalldataComponent},
     {path:'graficobolsa',component:DashboardbolsaComponent},
     {path:'app',component:AppComponent},
-    {path:'**',component:ProyectoComponent}
+    {path:'**',component:ProyectoComponent},    
+    {path:'rol',component:RolComponent}    
 ]
 export const appRoutingProviders: any[]=[];
 export const routing1:ModuleWithProviders=RouterModule.forRoot(appRoutes)

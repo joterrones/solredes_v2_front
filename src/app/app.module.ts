@@ -97,6 +97,9 @@ import { BolsaproyectodetalleComponent } from './component/general/bolsaproyecto
 import { ExportbolsaproyectoComponent } from './component/exportar/exportbolsaproyecto/exportbolsaproyecto.component';
 import { DashboardbolsaComponent } from './component/general/dashboardbolsa/dashboardbolsa.component';
 import { ExportdatoadicionalComponent } from './component/exportar/exportdatoadicional/exportdatoadicional.component';
+import { RoleditarComponent } from './component/seguridad/roleditar/roleditar.component';
+import { RolComponent } from './component/seguridad/rol/rol.component';
+
 
 @NgModule({
   declarations: [
@@ -156,7 +159,9 @@ import { ExportdatoadicionalComponent } from './component/exportar/exportdatoadi
     BolsaproyectodetalleComponent,
     ExportbolsaproyectoComponent,
     DashboardbolsaComponent,
-    ExportdatoadicionalComponent
+    ExportdatoadicionalComponent,
+    RoleditarComponent,
+    RolComponent,   
   ],
   imports: [
     FormsModule,

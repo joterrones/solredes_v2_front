@@ -1,4 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+
+
 import { MatPaginator, MatTableDataSource, MatSort } from '@angular/material';
 import { MatDialog } from '@angular/material';
 import { MatSnackBar } from '@angular/material';
@@ -9,30 +11,31 @@ import { ResultadoApi } from '../../../interface/common.interface';
 import { Confirmar } from '../../../interface/confirmar.interface';
 import { SeguridadService } from '../../../service/seguridad.service';
 import { GeneralService } from '../../../service/general.service';
-import { ResetearclaveComponent } from '../../generico/resetarclave/resetarclave.component';
-import { UsuarioeditarComponent } from '../usuarioeditar/usuarioeditar.component';
+import { RoleditarComponent } from '../roleditar/roleditar.component';
 import { ConfirmComponent } from '../../general/confirm/confirm.component';
+
 @Component({
-  selector: 'app-usuario',
-  templateUrl: './usuario.component.html',
-  styleUrls: ['./usuario.component.css'],
+  selector: 'app-rol',
+  templateUrl: './rol.component.html',
+  styleUrls: ['./rol.component.css'],
   providers: [SeguridadService, GeneralService]
 })
-export class UsuarioComponent extends BaseComponent implements OnInit {
-  tit: String = "SEGURIDAD > GESTOR DE USUARIOS";
+export class RolComponent extends BaseComponent implements OnInit {
+
+
+  tit: String = "SEGURIDAD > GESTOR DE ROLES";
 
   roles: [];
   idroles = 0;
-  entidades: [];
-  identidad = 0;
   textfilter = '';
 
-  displayedColumns: string[] = ['editar', 'username', 'c_nombre', 'c_dni', 'c_rol', 'resetear', 'eliminar'];
-  public tablaUsuarios: MatTableDataSource<any>;
+  displayedColumns: string[] = ['editar','c_nombre', 'n_nivel', 'eliminar'];
+  public tablaRoles: MatTableDataSource<any>;
   public confirmar: Confirmar;
 
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: false }) sort: MatSort;
+
 
   constructor(
     public snackBar: MatSnackBar,
@@ -40,40 +43,32 @@ export class UsuarioComponent extends BaseComponent implements OnInit {
     public _seguridad_service: SeguridadService,
     public _general_service: GeneralService,
     public dialog: MatDialog
-  ) {
+  ) { 
     super(snackBar, router);
   }
 
   ngOnInit() {
-    this.getrole();
-    //this.getentidad();
-    this.getTablaUsuario();
+    this.getrole();    
+    this.getTablaRol();
   }
-
+  
   selectRole(n_idseg_rol) {
     this.idroles = n_idseg_rol;
-    this.getTablaUsuario();
+    this.getTablaRol();
   }
-
-  selectEntidad(n_idgen_entidad) {
-    this.identidad = n_idgen_entidad;
-    this.getTablaUsuario();
-  }
-
-  getTablaUsuario() {
+  getTablaRol() {
     let request = {
-      n_idseg_rol: this.idroles,
-      n_idgen_entidad: this.identidad
+      n_idseg_rol: this.idroles      
     }
-    this._seguridad_service.get(request, this.getToken().token).subscribe(
+    this._seguridad_service.getrole(this.getToken().token).subscribe(
       result => {
 
         try {
           if (result.estado) {
             console.log(result);
-            this.tablaUsuarios = new MatTableDataSource<any>(result.data);
-            this.tablaUsuarios.sort = this.sort;
-            this.tablaUsuarios.paginator = this.paginator;
+            this.tablaRoles = new MatTableDataSource<any>(result.data);
+            this.tablaRoles.sort = this.sort;
+            this.tablaRoles.paginator = this.paginator;
           } else {
             this.openSnackBar(result.mensaje, 99);
           }
@@ -105,57 +100,23 @@ export class UsuarioComponent extends BaseComponent implements OnInit {
       });
   }
 
-  getentidad() {
-    this._general_service.get(this.getToken().token).subscribe(
-      result => {
-        console.log(result)
-        let resultado = <ResultadoApi>result;
-        if (resultado.estado) {
-          this.entidades = resultado.data;
-        } else {
-          this.openSnackBar(resultado.mensaje, 99);
-        }
-      }, error => {
-        try {
-          this.openSnackBar(error.error.Detail, error.error.StatusCode);
-        } catch (error) {
-          this.openSnackBar(AppSettings.SERVICE_NO_CONECT_SERVER, 99);
-        }
-      });
-  }
-
   applyFilter(filterValue: String) {
-    this.tablaUsuarios.filter = filterValue.trim().toLowerCase();
+    this.tablaRoles.filter = filterValue.trim().toLowerCase();
   }
 
   openDialog(usuario): void {
-    const dialogRef = this.dialog.open(UsuarioeditarComponent, {
+    const dialogRef = this.dialog.open(RoleditarComponent, {
       width: '750px',
-      data: { usuario: usuario, roles: this.roles, entidades: this.entidades }
+      data: { usuario: usuario, roles: this.roles}
     });
     dialogRef.afterClosed().subscribe(result => {
       try {
-        this.getentidad();
-        this.getTablaUsuario();
+        this.getTablaRol();
 
       } catch (error) {
         console.log(error);
-        this.getTablaUsuario();
+        this.getTablaRol();
       }
-    });
-  }
-
-  openDialogClave(usuario): void {
-    let data = {
-      data: usuario,
-      titulo: "Resetear Contraseña",
-      esresetpassword: true
-    };
-    const dialogRefClave = this.dialog.open(ResetearclaveComponent, {
-      width: '750px',
-      data: data
-    });
-    dialogRefClave.afterClosed().subscribe(result => {
     });
   }
 
@@ -177,7 +138,7 @@ export class UsuarioComponent extends BaseComponent implements OnInit {
       result => {
         try {
           if (result.estado) {
-            this.getTablaUsuario();
+            this.getTablaRol();
             this.openSnackBar("Usuario eliminado", 200);
           } else {
             this.openSnackBar(result.mensaje, 99);
@@ -193,5 +154,5 @@ export class UsuarioComponent extends BaseComponent implements OnInit {
         }
       });
   }
-}
 
+}
