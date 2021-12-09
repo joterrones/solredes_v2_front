@@ -33,6 +33,7 @@ const appRoutes:Routes=[
     {path:'login',component:LoginComponent},
     {path:'grafico',component:DashboadComponent},
     {path:'usuario',component:UsuarioComponent},
+    {path:'rol',component:RolComponent}   ,
     {path:'proyecto',component:ProyectoComponent},
     {path:'tipoproyecto',component:TipoproyectoComponent},
     {path:'grupo',component:GrupoComponent},
@@ -51,7 +52,7 @@ const appRoutes:Routes=[
     {path:'graficobolsa',component:DashboardbolsaComponent},
     {path:'app',component:AppComponent},
     {path:'**',component:ProyectoComponent},    
-    {path:'rol',component:RolComponent}    
+     
 ]
 export const appRoutingProviders: any[]=[];
 export const routing1:ModuleWithProviders=RouterModule.forRoot(appRoutes)
