@@ -99,6 +99,22 @@ import { DashboardbolsaComponent } from './component/general/dashboardbolsa/dash
 import { ExportdatoadicionalComponent } from './component/exportar/exportdatoadicional/exportdatoadicional.component';
 import { RoleditarComponent } from './component/seguridad/roleditar/roleditar.component';
 import { RolComponent } from './component/seguridad/rol/rol.component';
+import { LineaComponent } from './component/configGeneral/linea/linea.component';
+import { EmpresaComponent } from './component/configGeneral/empresa/empresa.component';
+import { EmpresaeditarComponent } from './component/configGeneral/empresaeditar/empresaeditar.component';
+import { LineaeditarComponent } from './component/configGeneral/lineaeditar/lineaeditar.component';
+import { TipolineaComponent } from './component/configGeneral/tipolinea/tipolinea.component';
+import { TipolineaeditarComponent } from './component/configGeneral/tipolineaeditar/tipolineaeditar.component';
+import { ZonaComponent } from './component/configGeneral/zona/zona.component';
+import { ZonaeditComponent } from './component/configGeneral/zonaedit/zonaedit.component';
+import { ConfproyectoComponent } from './component/configGeneral/confproyecto/confproyecto.component';
+import { ConfproyectoeditarComponent } from './component/configGeneral/confproyectoeditar/confproyectoeditar.component';
+import { TipofotoComponent } from './component/configGeneral/tipofoto/tipofoto.component';
+import { TipofotoeditarComponent } from './component/configGeneral/tipofotoeditar/tipofotoeditar.component';
+import { EstructuraComponent } from './component/configGeneral/estructura/estructura.component';
+import { EstructuraeditarComponent } from './component/configGeneral/estructuraeditar/estructuraeditar.component';
+import { TipoempresaComponent } from './component/configGeneral/tipoempresa/tipoempresa.component';
+import { TipoempresaeditarComponent } from './component/configGeneral/tipoempresaeditar/tipoempresaeditar.component';
 
 
 @NgModule({
@@ -116,7 +132,7 @@ import { RolComponent } from './component/seguridad/rol/rol.component';
     UsuarioeditarComponent,
     ResetearclaveComponent,
     ConfirmarComponent,
-    ProyectoComponent,
+    ProyectoComponent,    
     ProyectoeditComponent,
     TipoproyectoComponent,
     TipoproyectoeditComponent,
@@ -161,7 +177,21 @@ import { RolComponent } from './component/seguridad/rol/rol.component';
     DashboardbolsaComponent,
     ExportdatoadicionalComponent,
     RoleditarComponent,
-    RolComponent,   
+    RolComponent,
+    LineaComponent,
+    EmpresaComponent,
+    EmpresaeditarComponent,
+    LineaeditarComponent,
+    TipolineaComponent,
+    TipolineaeditarComponent,
+    ZonaComponent,
+    ZonaeditComponent,       
+    ConfproyectoComponent, 
+    ConfproyectoeditarComponent, 
+    TipofotoComponent,
+    TipofotoeditarComponent, 
+    EstructuraComponent, 
+    EstructuraeditarComponent, TipoempresaComponent, TipoempresaeditarComponent,   
   ],
   imports: [
     FormsModule,

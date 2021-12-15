@@ -24,8 +24,16 @@ import { VersionComponent} from './component/general/version/version.component';
 import { ProgramaComponent} from './component/general/programa/programa.component';
 import { CurvasComponent} from './component/visualizacion/curvas/curvas.component';
 import { DashboardbolsaComponent } from './component/general/dashboardbolsa/dashboardbolsa.component';
-import { RoleditarComponent } from './component/seguridad/roleditar/roleditar.component';
 import { RolComponent } from './component/seguridad/rol/rol.component';
+import { LineaComponent } from './component/configGeneral/linea/linea.component';
+import { EmpresaComponent } from './component/configGeneral/empresa/empresa.component';
+import { TipolineaComponent } from './component/configGeneral/tipolinea/tipolinea.component';
+import { ZonaComponent } from './component/configGeneral/zona/zona.component';
+import { ConfproyectoComponent } from './component/configGeneral/confproyecto/confproyecto.component';
+import { TipofotoComponent } from './component/configGeneral/tipofoto/tipofoto.component';
+import { EstructuraComponent } from './component/configGeneral/estructura/estructura.component';
+import { TipoempresaComponent } from './component/configGeneral/tipoempresa/tipoempresa.component';
+
 
 //Array de rutas
 const appRoutes:Routes=[
@@ -51,6 +59,14 @@ const appRoutes:Routes=[
     {path:'exportalldata',component:ExportalldataComponent},
     {path:'graficobolsa',component:DashboardbolsaComponent},
     {path:'app',component:AppComponent},
+    {path:'linea',component:LineaComponent},
+    {path:'empresa',component:EmpresaComponent},
+    {path:'tipolinea',component:TipolineaComponent},
+    {path:'zona',component:ZonaComponent},
+    {path:'confproyecto',component:ConfproyectoComponent},
+    {path:'tipofoto',component:TipofotoComponent},
+    {path:'estructura',component:EstructuraComponent},
+    {path:'tipoempresa',component:TipoempresaComponent},
     {path:'**',component:ProyectoComponent},    
      
 ]

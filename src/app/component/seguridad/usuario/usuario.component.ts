@@ -88,7 +88,10 @@ export class UsuarioComponent extends BaseComponent implements OnInit {
   }
 
   getrole() {
-    this._seguridad_service.getrole(this.getToken().token).subscribe(
+    let request = {
+      n_idseg_rol: this.idroles      
+    }
+    this._seguridad_service.getrole(request,this.getToken().token).subscribe(
       result => {
         let resultado = <ResultadoApi>result;
         if (resultado.estado) {
@@ -131,7 +134,7 @@ export class UsuarioComponent extends BaseComponent implements OnInit {
   openDialog(usuario): void {
     const dialogRef = this.dialog.open(UsuarioeditarComponent, {
       width: '750px',
-      data: { usuario: usuario, roles: this.roles, entidades: this.entidades }
+      data: { usuario: usuario, roles: this.roles }
     });
     dialogRef.afterClosed().subscribe(result => {
       try {

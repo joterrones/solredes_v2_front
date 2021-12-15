@@ -14,6 +14,7 @@ export interface Usuario {
 export interface Role{
     n_idseg_rol:number,
     c_nombre:String,
+    n_nivel: String,
 }
 
 /*export interface Entidad{
@@ -32,3 +33,8 @@ export interface UsuarioEditar{
     roles:Role[],
     /*entidades:Entidad[],*/
 }
+
+export interface Roleditar{  
+    rol: Role,   
+}
+

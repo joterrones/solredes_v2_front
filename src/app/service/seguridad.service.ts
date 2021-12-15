@@ -36,13 +36,15 @@ export class SeguridadService {
         return this._http.post(this.url + 'seguridad/get', request, { headers: reqHeader });
     }
 
-    getrole(token): Observable<any> {
+    getrole(request,token): Observable<any> {
         var reqHeader = new HttpHeaders({
             'Content-Type': 'application/json',
             'Authorization': 'Bearer ' + token
         });
-        return this._http.post(this.url + 'seguridad/getrole', {}, { headers: reqHeader });
+        return this._http.post(this.url + 'seguridad/getrole', request, { headers: reqHeader });
     }
+    
+    
 
     resetarclave(data, token): Observable<any> {
         console.log("Reseteando")
@@ -63,9 +65,25 @@ export class SeguridadService {
         return this._http.post(this.url + 'seguridad/save', data, { headers: reqHeader });
     }
 
+    saveRol(data, token): Observable<any> {
+        var reqHeader = new HttpHeaders({
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
+        });
+        console.log(data)
+        return this._http.post(this.url + 'seguridad/saveRol', data, { headers: reqHeader });
+    }
+
+    
+
     delete(data): Observable<any> {
         console.log(data)
         return this._http.post(this.url + 'seguridad/delete_usuario', data);
+    }
+
+    deleteRol(data): Observable<any> {
+        console.log(data)
+        return this._http.post(this.url + 'seguridad/deleteRol', data);
     }
 
 }

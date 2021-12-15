@@ -1,0 +1,40 @@
+<h1 mat-dialog-title>Edición {{estructura.c_nombre}}</h1>
+<form class="example-container" #newForm="ngForm" (ngSubmit)="guardar(newForm)">
+  <div mat-dialog-content class="contenedor">
+
+    <mat-form-field>
+        <mat-select placeholder="Nombre" [(value)]="estructura.n_idpl_zona" required>
+          <mat-option *ngFor="let z of zona" [value]="z.n_idpl_zona">
+            {{z.c_nombre}}
+          </mat-option>
+        </mat-select>
+    </mat-form-field>    
+    
+    <mat-form-field>
+        <input matInput placeholder="Latitud" name="c_latitud" #c_username="ngModel" [(ngModel)]="estructura.c_latitud"
+          minlength="1" required />
+        <mat-hint class="error" *ngIf="estructura.c_latitud.length<1">debe tener mínimo de 1 dígitos</mat-hint>
+    </mat-form-field> 
+
+    <mat-form-field>
+        <input matInput placeholder="Altitud" name="n_altitud" #c_username="ngModel" [(ngModel)]="estructura.n_altitud"
+          minlength="1" required />
+        <mat-hint class="error" *ngIf="estructura.n_altitud<1">debe tener mínimo de 1 dígitos</mat-hint>
+    </mat-form-field> 
+
+    <mat-form-field>
+        <input matInput placeholder="Longitud" name="c_longitud" #c_username="ngModel" [(ngModel)]="estructura.c_longitud"
+          minlength="1" required />
+        <mat-hint class="error" *ngIf="estructura.c_longitud.length<1">debe tener mínimo de 1 dígitos</mat-hint>
+    </mat-form-field> 
+    
+  </div>
+  <div mat-dialog-actions>
+
+    <button mat-button type="submit" cdkFocusInitial
+      [disabled]="!newForm.form.valid">
+      <mat-icon>save</mat-icon>
+      <span>Guardar</span>
+    </button>
+  </div>
+</form>

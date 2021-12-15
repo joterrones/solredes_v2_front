@@ -1,0 +1,33 @@
+<h1 mat-dialog-title>Edición {{rol.c_nombre}}</h1>
+<form class="example-container" #newForm="ngForm" (ngSubmit)="guardar(newForm)">
+  <div mat-dialog-content class="contenedor">
+
+    <mat-form-field>
+      <input matInput placeholder="Rol" name="c_nombre" #c_username="ngModel" [(ngModel)]="rol.c_nombre"
+        minlength="3" required />
+      <mat-hint class="error" *ngIf="rol.c_nombre.length<3">debe tener mínimo de 3 dígitos</mat-hint>
+    </mat-form-field>
+    
+    <mat-form-field>
+        <input matInput placeholder="Nivel" name="n_nivel" #c_username="ngModel" [(ngModel)]="rol.n_nivel"
+          minlength="1" required />
+        <mat-hint class="error" *ngIf="rol.n_nivel.length<1">debe tener mínimo de 1 dígitos</mat-hint>
+    </mat-form-field>   
+
+    <!-- <mat-form-field>
+      <mat-select placeholder="Nivel" [(value)]="rol.c_nombre" required>
+        <mat-option *ngFor="let rol of rol" [value]="rol.n_nivel">
+          {{rol.n_nivel}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>  -->  
+  </div>
+  <div mat-dialog-actions>
+
+    <button mat-button type="submit" cdkFocusInitial
+      [disabled]="!newForm.form.valid||rol.n_nivel.length<1">
+      <mat-icon>save</mat-icon>
+      <span>Guardar</span>
+    </button>
+  </div>
+</form>

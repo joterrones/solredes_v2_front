@@ -6,7 +6,7 @@ import { Router } from "@angular/router";
 import { AppSettings } from '../../../common/appsettings';
 
 import { Usuario, UsuarioEditar, Role } from '../../../interface/seguridad.interface';
-import { ResultadoApi} from '../../../interface/common.interface';
+//import { ResultadoApi} from '../../../interface/common.interface';
 
 import { SeguridadService } from '../../../service/seguridad.service';
 import { GeneralService } from '../../../service/general.service';
@@ -21,13 +21,14 @@ export class UsuarioeditarComponent extends BaseComponent implements OnInit {
   usuario: Usuario;
   editar: boolean;
   roles: Role[];
-  /*entidades: Entidad[];*/
+  /*entidades: Entidad[];
   b_comboentidad: boolean = true;
-  identidad = 0;
+  identidad = 0;*/
 
-  constructor(public dialogRef: MatDialogRef<UsuarioeditarComponent>,
+  constructor(
+    public dialogRef: MatDialogRef<UsuarioeditarComponent>,
     private _seguridadservice: SeguridadService,
-    private _generalservice: GeneralService,
+    //private _generalservice: GeneralService,
     @Inject(MAT_DIALOG_DATA) public data: UsuarioEditar,
     public _router: Router,
     public snackBar: MatSnackBar) {
@@ -50,7 +51,7 @@ export class UsuarioeditarComponent extends BaseComponent implements OnInit {
         n_idseg_rol: 0
         /*n_idgen_entidad: 0*/
       };
-      this.identidad = 0;
+      /*this.identidad = 0;*/
     } else {
       this.editar = true;
       this.usuario = this.data.usuario;

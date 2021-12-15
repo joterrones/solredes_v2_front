@@ -60,9 +60,8 @@ export class RolComponent extends BaseComponent implements OnInit {
     let request = {
       n_idseg_rol: this.idroles      
     }
-    this._seguridad_service.getrole(this.getToken().token).subscribe(
+    this._seguridad_service.getrole(request,this.getToken().token).subscribe(
       result => {
-
         try {
           if (result.estado) {
             console.log(result);
@@ -83,7 +82,10 @@ export class RolComponent extends BaseComponent implements OnInit {
   }
 
   getrole() {
-    this._seguridad_service.getrole(this.getToken().token).subscribe(
+    let request = {
+      n_idseg_rol: this.idroles
+    }
+    this._seguridad_service.getrole(request, this.getToken().token).subscribe(
       result => {
         let resultado = <ResultadoApi>result;
         if (resultado.estado) {
@@ -104,10 +106,10 @@ export class RolComponent extends BaseComponent implements OnInit {
     this.tablaRoles.filter = filterValue.trim().toLowerCase();
   }
 
-  openDialog(usuario): void {
+  openDialog(rol): void {
     const dialogRef = this.dialog.open(RoleditarComponent, {
       width: '750px',
-      data: { usuario: usuario, roles: this.roles}
+      data: { rol: rol}
     });
     dialogRef.afterClosed().subscribe(result => {
       try {
@@ -123,7 +125,7 @@ export class RolComponent extends BaseComponent implements OnInit {
   eliminar(item): void {
     const dialogRef = this.dialog.open(ConfirmComponent, {
       width: '500px',
-      data: { titulo: "¿Desea eliminar el usuario " + item.c_username + "?" }
+      data: { titulo: "¿Desea eliminar el rol " + item.c_nombre + "?" }
     });
     dialogRef.afterClosed().subscribe(result => {
 
@@ -134,12 +136,12 @@ export class RolComponent extends BaseComponent implements OnInit {
   }
 
   delete_proyecto(proyecto) {
-    this._seguridad_service.delete(proyecto).subscribe(
+    this._seguridad_service.deleteRol(proyecto).subscribe(
       result => {
         try {
           if (result.estado) {
             this.getTablaRol();
-            this.openSnackBar("Usuario eliminado", 200);
+            this.openSnackBar("Rol Eliminado", 200);
           } else {
             this.openSnackBar(result.mensaje, 99);
           }

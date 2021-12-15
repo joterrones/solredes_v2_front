@@ -1,0 +1,33 @@
+<h1 mat-dialog-title>Edición {{zona.c_nombre}}</h1>
+<form class="example-container" #newForm="ngForm" (ngSubmit)="guardar(newForm)">
+  <div mat-dialog-content class="contenedor">
+
+    <mat-form-field>
+      <input matInput placeholder="Nombre" name="c_nombre" #c_username="ngModel" [(ngModel)]="zona.c_nombre"
+        minlength="3" required />
+      <mat-hint class="error" *ngIf="zona.c_nombre.length<3">debe tener mínimo de 3 dígitos</mat-hint>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput type="Codigo" placeholder="Codigo" name="c_codigo" #c_clave="ngModel"  
+        [(ngModel)]="zona.c_codigo" minlength="6" required/>
+      <mat-hint class="error" *ngIf="zona.c_codigo.length<6">debe tener mínimo de 6 dígitos</mat-hint>
+    </mat-form-field>
+      
+    <mat-form-field>
+      <mat-select placeholder="Proyecto" [(value)]="zona.n_idpl_proyecto" required>
+        <mat-option *ngFor="let proyect of proyecto" [value]="proyect.n_idpl_proyecto">
+          {{proyect.c_nombre}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>    
+  </div>
+  <div mat-dialog-actions>
+
+    <button mat-button type="submit" cdkFocusInitial
+      [disabled]="!newForm.form.valid">
+      <mat-icon>save</mat-icon>
+      <span>Guardar</span>
+    </button>
+  </div>
+</form>
