@@ -1,0 +1,93 @@
+<app-menu>
+    <div class="contenedorBody">
+      <h2> ADMINISTRACIÓN DETALLE GUIA</h2>
+      <mat-accordion>
+        <mat-expansion-panel>
+            <mat-expansion-panel-header class="back-expansion">
+                <mat-panel-title>
+                <mat-icon matSuffix>filter_list</mat-icon> Filtros
+                </mat-panel-title>
+                <mat-panel-description>
+                Filtrado de datos en la lista
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+            <div class="contenedor">  
+                <mat-form-field>
+                <mat-select placeholder="Guia">
+                    <mat-option value="0" (click)='selectGuias(0)'>
+                    -TODOS-
+                    </mat-option>
+                    <mat-option *ngFor="let g of guias" [value]="g.n_idalm_guia" (click)='selectGuias(g.n_idalm_guia)'>
+                    {{g.c_nombre}}
+                    </mat-option>
+                </mat-select>
+                </mat-form-field>      
+
+                <mat-form-field>
+                    <mat-select placeholder="Elemento">
+                        <mat-option value="0" (click)='selectElementos(0)'>
+                        -TODOS-
+                        </mat-option>
+                        <mat-option *ngFor="let el of elemento" [value]="el.n_idpl_elemento" (click)='selectElementos(el.n_idpl_elemento)'>
+                        {{el.c_nombre}}
+                        </mat-option>
+                    </mat-select>
+                    </mat-form-field> 
+            </div>
+  
+        </mat-expansion-panel>
+      </mat-accordion>
+      <br />
+      <mat-card>
+        <mat-form-field>
+          <input matInput placeholder="Buscar" [(ngModel)]="textfilter" (keyup)="applyFilter($event.target.value)">
+          <mat-icon matSuffix>search</mat-icon>
+        </mat-form-field>
+        <table mat-table [dataSource]="tablaAlmacen" matSort class="mat-elevation-z8">
+          <ng-container matColumnDef="editar">
+            <th mat-header-cell *matHeaderCellDef> <button mat-icon-button color="accent" (click)="openDialog(null)" [disabled]="true">
+                <mat-icon aria-label="Example icon-button with a heart icon">add</mat-icon>
+              </button> </th>
+            <td mat-cell *matCellDef="let element">
+              <button mat-icon-button color="accent" (click)="openDialog(element)">
+                <mat-icon aria-label="Example icon-button with a heart icon">edit</mat-icon>
+              </button>
+            </td>
+          </ng-container> 
+          <ng-container matColumnDef="c_nombreguia">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Guia </th>
+            <td mat-cell *matCellDef="let element"> {{element.c_nombreguia}} </td>
+          </ng-container>  
+          <ng-container matColumnDef="c_cantidad">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Cantidad </th>
+            <td mat-cell *matCellDef="let element"> {{element.n_cantidad}} </td>
+          </ng-container>                
+          <ng-container matColumnDef="c_nombreel">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Elemento </th>
+            <td mat-cell *matCellDef="let element"> {{element.c_nombreel}} </td>
+          </ng-container>              
+  
+          <!-- Button Eliminar -->
+          <ng-container matColumnDef="eliminar">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Eliminar </th>
+            <td mat-cell *matCellDef="let element">
+              <button mat-icon-button color="error" (click)="eliminar(element)" [disabled]="true">
+                <mat-icon aria-label="Example icon-button with a heart icon">delete</mat-icon>
+              </button>
+            </td>
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <ng-template let-row matRowDef cdkVirtualFor [matRowDefColumns]="displayedColumns">
+            <tr mat-row></tr>
+  
+          </ng-template>
+  
+        </table>
+  
+        <mat-paginator [pageSizeOptions]="pagin" showFirstLastButtons></mat-paginator>
+      </mat-card>
+    </div>
+  </app-menu>
+
+
+

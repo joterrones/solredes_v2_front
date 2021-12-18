@@ -1,0 +1,33 @@
+<h1 mat-dialog-title>Edición {{almacen.c_nombre}}</h1>
+<form class="example-container" #newForm="ngForm" (ngSubmit)="guardar(newForm)">
+  <div mat-dialog-content class="contenedor">
+
+    <mat-form-field>
+      <input matInput placeholder="Nombre" name="c_nombre" #c_username="ngModel" [(ngModel)]="almacen.c_nombre"
+        minlength="3" required />
+      <mat-hint class="error" *ngIf="almacen.c_nombre.length<3">debe tener mínimo de 3 dígitos</mat-hint>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput type="Direccion" placeholder="Direccion" name="c_direccion" #c_clave="ngModel"  
+        [(ngModel)]="almacen.c_direccion" minlength="6" required/>
+      <mat-hint class="error" *ngIf="almacen.c_direccion.length<6">debe tener mínimo de 6 dígitos</mat-hint>
+    </mat-form-field>
+      
+    <mat-form-field>
+      <mat-select placeholder="Proyecto" [(value)]="almacen.n_idpro_proyecto" required>
+        <mat-option *ngFor="let proyectos of proyecto" [value]="proyectos.n_idpro_proyecto">
+          {{proyectos.c_nombre}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>    
+  </div>
+  <div mat-dialog-actions>
+
+    <button mat-button type="submit" cdkFocusInitial
+      [disabled]="!newForm.form.valid">
+      <mat-icon>save</mat-icon>
+      <span>Guardar</span>
+    </button>
+  </div>
+</form>

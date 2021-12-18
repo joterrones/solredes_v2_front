@@ -33,6 +33,9 @@ import { ConfproyectoComponent } from './component/configGeneral/confproyecto/co
 import { TipofotoComponent } from './component/configGeneral/tipofoto/tipofoto.component';
 import { EstructuraComponent } from './component/configGeneral/estructura/estructura.component';
 import { TipoempresaComponent } from './component/configGeneral/tipoempresa/tipoempresa.component';
+import { AlmacenComponent } from './component/almacen/almacen/almacen.component';
+import { GuiaComponent } from './component/almacen/guia/guia.component';
+import { GuiadetalleComponent } from './component/almacen/detalleguia/guiadetalle.component';
 
 
 //Array de rutas
@@ -67,6 +70,9 @@ const appRoutes:Routes=[
     {path:'tipofoto',component:TipofotoComponent},
     {path:'estructura',component:EstructuraComponent},
     {path:'tipoempresa',component:TipoempresaComponent},
+    {path:'almacen',component:AlmacenComponent},
+    {path:'guia',component:GuiaComponent},
+    {path:'guiadetalle',component:GuiadetalleComponent},
     {path:'**',component:ProyectoComponent},    
      
 ]

@@ -1,4 +1,4 @@
-.mat-elevation-z4{
+/*.mat-elevation-z4{
   background-color: white;
 
 }
@@ -89,4 +89,158 @@
 
 .mat-toolbar.mat-primary{
   color: white;
+}*/
+
+/********************************************/
+
+
+
+.mat-elevation-z4{
+  background-color: white;
+  
 }
+ .fondologin{
+  height: 100%;
+  width: auto;
+  margin-top: -1px;
+  padding: 0%; 
+  
+  background: linear-gradient(0deg, #4F4B4A, #4F4B4A);
+}
+.example-fill-remaining-space {
+    flex: 1 1 auto;
+}
+.spacer {
+  -webkit-box-flex: 1;
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+}
+
+.example-card {
+  
+  align-content: center;
+  background: transparent;  
+  color: #fff;    
+  top: calc(20% - 0px);
+  left: calc(10% - 0px);
+  width: 30%;
+  height: 65%;
+  border: none;
+ }
+
+.login-contenedor{ 
+  
+    width: 60%;
+    height: 70%; 
+    background-size: 100% 100%;
+    background-image: url('../../../../assets/images/login3.PNG');
+    filter: drop-shadow(5px 5px 4px rgba(0, 0, 0, 0.6));
+    background-size: cover;
+    margin: 30px auto;
+    border-radius: 10px;    
+    align-content: center;
+   
+ }
+ .submitload{
+  height: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+ }
+ .errorLogin{
+   color: red;
+   
+ }
+.example-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+}
+.example-container .mat-form-field + .mat-form-field {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  
+}
+
+
+.titulologin{
+  
+  margin: 0 0 24px;
+  font-size: 32dp;
+  font-weight: 900;
+  line-height: 35px;
+  text-shadow: 0 4px 4px rgba(0,0,0,.22);
+  color: white;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 0px;
+  margin: 10px;
+  
+}
+.imglogo1{
+  width: 200px;
+  margin-left: 2px;
+  height: auto;
+}
+.imglogo2{
+  width: 35px;
+  height: auto;
+  margin-left: 12px;
+}
+.imglogo3{
+  width: 25px;
+  height: auto;
+  margin-left: 12px;
+}
+.titulo{
+  color: #3f51b5;
+}
+.mat-toolbar {
+  position: relative;
+}
+.cuerpo{
+  height: 100%;
+  
+}
+
+.mat-toolbar.mat-primary{
+  color: white;
+}
+
+.img{
+  display: flex;  
+  justify-content: center; 
+  
+}
+
+img{
+  width: 50%;
+}
+
+.btnicon{  
+  color: #fff;
+}
+
+mat-card-header{
+  position: absolute;
+  left: 21%;
+  right: 35%;
+  top: -5%;
+  bottom: 85%;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 48px;
+  line-height: 56px;
+
+  color: #FFFFFF;
+}
+
+
+

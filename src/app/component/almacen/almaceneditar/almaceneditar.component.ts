@@ -5,26 +5,25 @@ import { BaseComponent } from '../../base/base.component';
 import { Router } from "@angular/router";
 import { AppSettings } from '../../../common/appsettings';
 
-import { Linea, LineaEditar, Tipolinea } from '../../../interface/configGeneral.interface';
-import { confGeneralService } from '../../../service/confGeneral.service';
-
+import { Almacen, AlmacenEditar, Proyecto } from '../../../interface/almacen.interface';
+import { AlmacenService } from 'src/app/service/almacen.service';
 
 @Component({
-  selector: 'app-lineaeditar',
-  templateUrl: './lineaeditar.component.html',
-  styleUrls: ['./lineaeditar.component.css'],
-  providers: [confGeneralService]
+  selector: 'app-almaceneditar',
+  templateUrl: './almaceneditar.component.html',
+  styleUrls: ['./almaceneditar.component.css'],
+  providers: [AlmacenService]
 })
-export class LineaeditarComponent extends BaseComponent implements OnInit {
+export class AlmaceneditarComponent extends BaseComponent implements OnInit {
 
-  linea: Linea;
+  almacen: Almacen;
   editar: boolean;
-  tipolinea: Tipolinea[];
+  proyecto: Proyecto[];
 
   constructor(
-    public dialogRef: MatDialogRef<LineaeditarComponent>,    
-    public _confiGeneral_service: confGeneralService,
-    @Inject(MAT_DIALOG_DATA) public data: LineaEditar,
+    public dialogRef: MatDialogRef<AlmaceneditarComponent>,    
+    public _almacen_service: AlmacenService,
+    @Inject(MAT_DIALOG_DATA) public data: AlmacenEditar,
     public _router: Router,
     public snackBar: MatSnackBar) {
       super(snackBar, _router);
@@ -32,31 +31,31 @@ export class LineaeditarComponent extends BaseComponent implements OnInit {
 
   ngOnInit() {
 
-    if (this.data.linea == null) {
+    if (this.data.almacen == null) {
       this.editar = false;
-      this.linea = {
-        n_idpl_linea: 0,
+      this.almacen = {
+        n_idalm_almacen: 0,
         c_nombre: "",
-        c_codigo: "",
-        n_idpl_tipolinea: 0    
+        c_direccion: "",
+        n_idpro_proyecto: 0    
       };
       
     } else {
       this.editar = true;
-      this.linea = this.data.linea; 
+      this.almacen = this.data.almacen; 
     }
-    this.tipolinea = this.data.tipolinea;    
-    console.log('Contenido de Linea');
-    console.log(this.linea);
+    this.proyecto = this.data.proyecto;    
+    console.log('Contenido de almacen');
+    console.log(this.almacen);
   }
 
   guardar(newForm) {
-    this.linea;
-    this._confiGeneral_service.saveLinea(this.linea, this.getToken().token).subscribe(
+    this.almacen;
+    this._almacen_service.saveAlmacen(this.almacen, this.getToken().token).subscribe(
       result => {
         try {
           if (result.estado) {
-            this.dialogRef.close({ flag: true, data: this.linea });
+            this.dialogRef.close({ flag: true, data: this.almacen });
           } else {
             this.openSnackBar(result.mensaje, 99);
           }
@@ -75,5 +74,3 @@ export class LineaeditarComponent extends BaseComponent implements OnInit {
 
 
 }
-
-

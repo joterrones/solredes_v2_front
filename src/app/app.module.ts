@@ -115,6 +115,12 @@ import { EstructuraComponent } from './component/configGeneral/estructura/estruc
 import { EstructuraeditarComponent } from './component/configGeneral/estructuraeditar/estructuraeditar.component';
 import { TipoempresaComponent } from './component/configGeneral/tipoempresa/tipoempresa.component';
 import { TipoempresaeditarComponent } from './component/configGeneral/tipoempresaeditar/tipoempresaeditar.component';
+import { AlmacenComponent } from './component/almacen/almacen/almacen.component';
+import { AlmaceneditarComponent } from './component/almacen/almaceneditar/almaceneditar.component';
+import { GuiaComponent } from './component/almacen/guia/guia.component';
+import { GuiaeditarComponent } from './component/almacen/guiaeditar/guiaeditar.component';
+import { GuiadetalleComponent } from './component/almacen/detalleguia/guiadetalle.component';
+import { GuiadetalleeditarComponent } from './component/almacen/detalleguiaeditar/guiadetalleeditar.component';
 
 
 @NgModule({
@@ -191,7 +197,15 @@ import { TipoempresaeditarComponent } from './component/configGeneral/tipoempres
     TipofotoComponent,
     TipofotoeditarComponent, 
     EstructuraComponent, 
-    EstructuraeditarComponent, TipoempresaComponent, TipoempresaeditarComponent,   
+    EstructuraeditarComponent, 
+    TipoempresaComponent, 
+    TipoempresaeditarComponent, 
+    AlmacenComponent, 
+    AlmaceneditarComponent, 
+    GuiaComponent, 
+    GuiaeditarComponent, 
+    GuiadetalleComponent, 
+    GuiadetalleeditarComponent,   
   ],
   imports: [
     FormsModule,
