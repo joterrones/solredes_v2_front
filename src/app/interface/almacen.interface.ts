@@ -34,7 +34,8 @@ export interface Periodos{
 export interface GuiaEditar{
     guia: Guia,
     periodos: Periodos[],
-    almacen: Almacen[]
+    almacen: Almacen[],
+    n_idalm_almacen: number
 }
 
 export interface DetalleGuia{
@@ -43,7 +44,9 @@ export interface DetalleGuia{
     n_idpl_elemento: number,
     c_nombreguia: String,
     c_nombreel: String,
-    n_cantidad: number
+    n_cantidad: number,
+    c_ruta: String,
+    c_nombreImg: String
 }
 
 export interface Elementos{
@@ -59,5 +62,11 @@ export interface Guias{
 export interface DetalleGuiaEditar{
     detalleguia: DetalleGuia,
     guias: Guias[],
-    elemento: Elementos[]
+    elemento: Elementos[],
+    n_idalm_guia: number,
+}
+
+export interface Photo {
+    _id?: string;
+    imagePath: string;
 }

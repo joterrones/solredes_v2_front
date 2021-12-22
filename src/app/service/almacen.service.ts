@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from "rxjs";
 import { AppSettings } from '../common/appsettings';
+import { Photo } from '../interface/almacen.interface';
+
 
 @Injectable()
 export class AlmacenService{
@@ -68,6 +70,7 @@ export class AlmacenService{
             'Content-Type': 'application/json',
             'Authorization': 'Bearer ' + token
         });        
+        console.log("almacenes"+data)
         return this._http.post(this.url + 'almacen/getAlmacenes',data, { headers: reqHeader });
     }
 
@@ -130,10 +133,36 @@ export class AlmacenService{
             'Content-Type': 'application/json',
             'Authorization': 'Bearer ' + token
         });
-        console.log('enviando datos a node')
+        console.log('enviando datos a node detalle guia')
         console.log(data)
         return this._http.post(this.url + 'almacen/saveDetalleGuia', data, { headers: reqHeader });
     }
+
+    saveImgDetalleGuia(data, token): Observable<any> {
+        var reqHeader = new HttpHeaders({
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
+        });
+        console.log('enviando datos IMG a node detalle guia')
+        console.log(data)
+        return this._http.post(this.url + 'almacen/saveImgDetalleGuia', data, { headers: reqHeader });
+    }
     
+    deleteDetalleGuia(data): Observable<any> {
+        console.log(data)
+        console.log('borrando')
+        return this._http.post(this.url + 'almacen/deleteDetalleGuia', data);
+    }
+
+    uploadfile(extension,detalleguia,fileToUpload,token):Observable<any>{
+            
+        const formData: FormData = new FormData();
+        formData.append('DA', fileToUpload, fileToUpload.name);
+        return this._http.post(this.url+'almacen/uploadimagen?extension='+extension+'&detalleguia='+detalleguia,formData);
+    }  
+
+    getImagen() {
+        return this._http.get<Photo>(this.url+'archivos/imgDetalleguia/DetalleGuia_1121/64572.png');
+    }
 
 }

@@ -71,8 +71,8 @@ const appRoutes:Routes=[
     {path:'estructura',component:EstructuraComponent},
     {path:'tipoempresa',component:TipoempresaComponent},
     {path:'almacen',component:AlmacenComponent},
-    {path:'guia',component:GuiaComponent},
-    {path:'guiadetalle',component:GuiadetalleComponent},
+    {path:'guia/:n_idalm_almacen/:c_nombre',component:GuiaComponent},
+    {path:'guiadetalle/:n_idalm_guia/:c_nombre/:c_nombreAlmacen/:n_idalm_almacen',component:GuiadetalleComponent},
     {path:'**',component:ProyectoComponent},    
      
 ]

@@ -25,7 +25,7 @@ export class AlmacenComponent extends BaseComponent implements OnInit {
   idtproyecto = 0;  
   textfilter = '';
 
-  displayedColumns: string[] = ['editar', 'c_nombre', 'c_direccion','c_nombrep','eliminar'];
+  displayedColumns: string[] = ['editar', 'c_nombre', 'c_direccion','c_nombrep','detalle','eliminar'];
   public tablaAlmacen: MatTableDataSource<any>;
   public confirmar: Confirmar;
 
@@ -41,7 +41,7 @@ export class AlmacenComponent extends BaseComponent implements OnInit {
     super(snackBar, router);
   }
 
-  ngOnInit() {   
+  ngOnInit() {       
     this.getProyecto();     
     this.getTablaAlmacen();
   }  
@@ -57,9 +57,9 @@ export class AlmacenComponent extends BaseComponent implements OnInit {
     }
     
     this._almacen_service.getAlmacen(request,this.getToken().token).subscribe(
-      result => {
-
+      result => {        
         try {
+          
           if (result.estado) {
             console.log(result);
             this.tablaAlmacen = new MatTableDataSource<any>(result.data);
@@ -102,6 +102,10 @@ export class AlmacenComponent extends BaseComponent implements OnInit {
   applyFilter(filterValue: String) {
     this.tablaAlmacen.filter = filterValue.trim().toLowerCase();
   }
+
+  showGuia(element): void {    
+    this.router.navigate(["/guia/"+element.n_idalm_almacen+"/"+element.c_nombre]);
+  }  
 
   openDialog(almacen): void {
     const dialogRef = this.dialog.open(AlmaceneditarComponent, {

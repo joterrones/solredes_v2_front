@@ -15,7 +15,7 @@ import { AlmacenService } from 'src/app/service/almacen.service';
   providers: [AlmacenService]
 })
 export class GuiaeditarComponent extends BaseComponent implements OnInit {
-
+ 
   guia: Guia
   almacen: Almacen[];
   editar: boolean;
@@ -35,7 +35,7 @@ export class GuiaeditarComponent extends BaseComponent implements OnInit {
       this.editar = false;
       this.guia = {
         n_idalm_guia: 0,
-        n_idalm_almacen: 0, 
+        n_idalm_almacen: this.data.n_idalm_almacen, 
         n_idgen_periodo: 0, 
         c_nombre: "",
         c_direccion: "",

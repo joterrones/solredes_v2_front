@@ -3,7 +3,7 @@ import { MatPaginator, MatTableDataSource, MatSort } from '@angular/material';
 import { MatDialog } from '@angular/material';
 import { MatSnackBar } from '@angular/material';
 import { AppSettings } from '../../../common/appsettings'
-import { Router } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { BaseComponent } from '../../base/base.component';
 import { ResultadoApi } from '../../../interface/common.interface';
 import { Confirmar } from '../../../interface/confirmar.interface';
@@ -20,15 +20,21 @@ import { GuiadetalleeditarComponent } from '../detalleguiaeditar/guiadetalleedit
 export class GuiadetalleComponent extends BaseComponent implements OnInit {
 
   tit: String = "SEGURIDAD > GESTOR DE DETALLE GUIA";
+  file: File;
+  n_idalm_guia = "";
+  c_nombreguia = "";
+  c_nombreAlmacen="";
+  n_idalm_almacen="";
 
-  guias: [];
+  iddetalleguia=0;
+
   idguias = 0;  
   elemento:[];
   idelementos = 0;
   
   textfilter = '';
 
-  displayedColumns: string[] = ['editar','c_nombreguia', 'c_cantidad', 'c_nombreel','eliminar'];
+  displayedColumns: string[] = ['editar', 'c_nombreel','c_cantidad','eliminar'];
   public tablaAlmacen: MatTableDataSource<any>;
   public confirmar: Confirmar;
 
@@ -38,22 +44,21 @@ export class GuiadetalleComponent extends BaseComponent implements OnInit {
   constructor(
     public snackBar: MatSnackBar,
     public router: Router,
-    public _almacen_service: AlmacenService,    
+    public _almacen_service: AlmacenService, 
+    private _Activatedroute: ActivatedRoute,    
     public dialog: MatDialog
   ) {
     super(snackBar, router);
   }
 
   ngOnInit() {   
-    this.getGuias();     
+    this.n_idalm_guia = this._Activatedroute.snapshot.paramMap.get("n_idalm_guia");
+    this.c_nombreguia = this._Activatedroute.snapshot.paramMap.get("c_nombre");
+    this.c_nombreAlmacen = this._Activatedroute.snapshot.paramMap.get("c_nombreAlmacen");
+    this.n_idalm_almacen = this._Activatedroute.snapshot.paramMap.get("n_idalm_almacen");   
     this.getElementos();  
     this.getTablaDetalleGuia();
   }  
-
-  selectGuias(n_idalm_guia) {
-    this.idguias = n_idalm_guia;
-    this.getTablaDetalleGuia();
-  }
   
   selectElementos(n_idpl_elemento) {
     this.idelementos = n_idpl_elemento;
@@ -62,7 +67,7 @@ export class GuiadetalleComponent extends BaseComponent implements OnInit {
 
   getTablaDetalleGuia() {
     let request = {
-      n_idalm_guia: this.idguias,    
+      n_idalm_guia: this.n_idalm_guia,    
       n_idpl_elemento: this.idelementos  
     }
     
@@ -72,6 +77,7 @@ export class GuiadetalleComponent extends BaseComponent implements OnInit {
         try {
           if (result.estado) {
             console.log(result);
+            console.log(result.data);
             this.tablaAlmacen = new MatTableDataSource<any>(result.data);
             this.tablaAlmacen.sort = this.sort;
             this.tablaAlmacen.paginator = this.paginator;
@@ -88,28 +94,6 @@ export class GuiadetalleComponent extends BaseComponent implements OnInit {
       });
   }
 
-  getGuias() {
-    let request = {
-      n_idalm_guia: this.guias      
-    }
-    this._almacen_service.getGuias(request,this.getToken().token).subscribe(
-      result => {
-        let resultado = <ResultadoApi>result;
-        if (resultado.estado) {
-          this.guias = resultado.data;
-          console.log("datos guias")
-          console.log(this.guias)
-        } else {
-          this.openSnackBar(resultado.mensaje, 99);
-        }
-      }, error => {
-        try {
-          this.openSnackBar(error.error.Detail, error.error.StatusCode);
-        } catch (error) {
-          this.openSnackBar(AppSettings.SERVICE_NO_CONECT_SERVER, 99);
-        }
-      });
-  }
 
   getElementos() {
     let request = {
@@ -119,9 +103,7 @@ export class GuiadetalleComponent extends BaseComponent implements OnInit {
       result => {
         let resultado = <ResultadoApi>result;
         if (resultado.estado) {
-          this.elemento = resultado.data;
-          console.log("datos guias")
-          console.log(this.guias)
+          this.elemento = resultado.data; 
         } else {
           this.openSnackBar(resultado.mensaje, 99);
         }
@@ -141,7 +123,7 @@ export class GuiadetalleComponent extends BaseComponent implements OnInit {
   openDialog(detalleguia): void {    
     const dialogRef = this.dialog.open(GuiadetalleeditarComponent, {
       width: '750px',
-      data: { detalleguia: detalleguia, guias: this.guias, elemento: this.elemento }    
+      data: { detalleguia: detalleguia, elemento: this.elemento, n_idalm_guia: this.n_idalm_guia }    
       
     });
     dialogRef.afterClosed().subscribe(result => {
@@ -163,13 +145,13 @@ export class GuiadetalleComponent extends BaseComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
 
       if (result) {
-        this.deleteGuia(item);
+        this.deleteDetalleGuia(item);
       }
     });
   }
 
-  deleteGuia(item) {
-    this._almacen_service.deleteGuia(item).subscribe(
+  deleteDetalleGuia(item) {
+    this._almacen_service.deleteDetalleGuia(item).subscribe(
       result => {
         try {
           if (result.estado) {

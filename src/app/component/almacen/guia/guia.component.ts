@@ -3,7 +3,7 @@ import { MatPaginator, MatTableDataSource, MatSort } from '@angular/material';
 import { MatDialog } from '@angular/material';
 import { MatSnackBar } from '@angular/material';
 import { AppSettings } from '../../../common/appsettings'
-import { Router } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { BaseComponent } from '../../base/base.component';
 import { ResultadoApi } from '../../../interface/common.interface';
 import { Confirmar } from '../../../interface/confirmar.interface';
@@ -21,14 +21,17 @@ export class GuiaComponent extends BaseComponent implements OnInit {
 
   tit: String = "SEGURIDAD > GESTOR DE GUIA";
 
-  almacen: [];
+  n_idalm_almacen="";
+  c_nombreAlmacen="";
+
+  
   idalmacen = 0;  
   periodos:[];
   idperiodo = 0;
   
   textfilter = '';
 
-  displayedColumns: string[] = ['editar', 'c_nombre', 'c_direccion','c_nombreal','periodo','c_ruc','c_nroguia', 'c_observacion','eliminar'];
+  displayedColumns: string[] = ['editar', 'c_nombre', 'c_direccion','periodo','c_ruc','c_nroguia', 'c_observacion','detalle','eliminar'];
   public tablaAlmacen: MatTableDataSource<any>;
   public confirmar: Confirmar;
 
@@ -38,23 +41,24 @@ export class GuiaComponent extends BaseComponent implements OnInit {
   constructor(
     public snackBar: MatSnackBar,
     public router: Router,
-    public _almacen_service: AlmacenService,    
+    public _almacen_service: AlmacenService,   
+    private _Activatedroute: ActivatedRoute, 
     public dialog: MatDialog
   ) {
     super(snackBar, router);
   }
 
   ngOnInit() {   
-    this.getAlmacenes();     
+    
+    this.n_idalm_almacen = this._Activatedroute.snapshot.paramMap.get("n_idalm_almacen");
+    this.c_nombreAlmacen = this._Activatedroute.snapshot.paramMap.get("c_nombre");
+    console.log("idalmacen"+this.n_idalm_almacen)
+        
     this.getPeriodos();  
     this.getTablaGuia();
   }  
 
-  selectAlmacenes(n_idalm_almacen) {
-    this.idalmacen = n_idalm_almacen;
-    this.getTablaGuia();
-  }
-  
+    
   selectPeriodos(n_idgen_periodo) {
     this.idperiodo = n_idgen_periodo;
     this.getTablaGuia();
@@ -62,7 +66,7 @@ export class GuiaComponent extends BaseComponent implements OnInit {
 
   getTablaGuia() {
     let request = {
-      n_idalm_almacen: this.idalmacen,    
+      n_idalm_almacen: this.n_idalm_almacen,    
       n_idgen_periodo: this.idperiodo  
     }
     
@@ -70,11 +74,11 @@ export class GuiaComponent extends BaseComponent implements OnInit {
       result => {
 
         try {
-          if (result.estado) {
-            console.log(result);
+          if (result.estado) {            
             this.tablaAlmacen = new MatTableDataSource<any>(result.data);
             this.tablaAlmacen.sort = this.sort;
             this.tablaAlmacen.paginator = this.paginator;
+            
           } else {
             this.openSnackBar(result.mensaje, 99);
           }
@@ -88,28 +92,7 @@ export class GuiaComponent extends BaseComponent implements OnInit {
       });
   }
 
-  getAlmacenes() {
-    let request = {
-      n_idalm_almacen: this.almacen      
-    }
-    this._almacen_service.getAlmacenes(request,this.getToken().token).subscribe(
-      result => {
-        let resultado = <ResultadoApi>result;
-        if (resultado.estado) {
-          this.almacen = resultado.data;
-          console.log("datos almacen")
-          console.log(this.almacen)
-        } else {
-          this.openSnackBar(resultado.mensaje, 99);
-        }
-      }, error => {
-        try {
-          this.openSnackBar(error.error.Detail, error.error.StatusCode);
-        } catch (error) {
-          this.openSnackBar(AppSettings.SERVICE_NO_CONECT_SERVER, 99);
-        }
-      });
-  }
+  
 
   getPeriodos() {
     let request = {
@@ -119,9 +102,7 @@ export class GuiaComponent extends BaseComponent implements OnInit {
       result => {
         let resultado = <ResultadoApi>result;
         if (resultado.estado) {
-          this.periodos = resultado.data;
-          console.log("datos Periodos")
-          console.log(this.almacen)
+          this.periodos = resultado.data;          
         } else {
           this.openSnackBar(resultado.mensaje, 99);
         }
@@ -139,9 +120,10 @@ export class GuiaComponent extends BaseComponent implements OnInit {
   }
 
   openDialog(guia): void {    
+    
     const dialogRef = this.dialog.open(GuiaeditarComponent, {
       width: '750px',
-      data: { guia: guia, almacen: this.almacen, periodos: this.periodos }    
+      data: { guia: guia,  periodos: this.periodos, n_idalm_almacen: this.n_idalm_almacen}    
       
     });
     dialogRef.afterClosed().subscribe(result => {
@@ -153,6 +135,10 @@ export class GuiaComponent extends BaseComponent implements OnInit {
         this.getTablaGuia();
       }
     });
+  }  
+
+  showGuiaDetalle(element): void {
+    this.router.navigate(["/guiadetalle/"+element.n_idalm_guia+"/"+element.c_nombre+"/"+this.c_nombreAlmacen+"/"+this.n_idalm_almacen]);
   }  
 
   eliminar(item): void {
