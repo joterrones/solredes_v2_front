@@ -93,19 +93,22 @@
 
 /********************************************/
 
-
+.barra{
+  background-color: #E12836;
+}
 
 .mat-elevation-z4{
   background-color: white;
   
 }
  .fondologin{
-  height: 100%;
+  height: 94%;
   width: auto;
-  margin-top: -1px;
-  padding: 0%; 
+  margin-top:-1px;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  background-image: url('../../../../assets/images/MINEM.jpg');
   
-  background: linear-gradient(0deg, #4F4B4A, #4F4B4A);
 }
 .example-fill-remaining-space {
     flex: 1 1 auto;
@@ -121,25 +124,27 @@
   align-content: center;
   background: transparent;  
   color: #fff;    
-  top: calc(20% - 0px);
-  left: calc(10% - 0px);
-  width: 30%;
-  height: 65%;
-  border: none;
+  left: 11%;
+  width: 70%;
+  height: 50%;
+  filter: drop-shadow(5px 5px 4px rgba(0, 0, 0, 0.6));
  }
+ .example-full-width {
+  width: 100%;
+  color: #fff;
+}
 
 .login-contenedor{ 
-  
-    width: 60%;
-    height: 70%; 
-    background-size: 100% 100%;
-    background-image: url('../../../../assets/images/login3.PNG');
-    filter: drop-shadow(5px 5px 4px rgba(0, 0, 0, 0.6));
-    background-size: cover;
-    margin: 30px auto;
-    border-radius: 10px;    
+    position: absolute;
+    top: 25%;
+    left: 40%;
+    width: 20%;
+    height: 50%;
+    background: rgba(0,0,0,.5);
+    filter: drop-shadow(5px 5px 4px rgba(0, 0, 0, 0.6));    
+    border-radius: 10px;  
     align-content: center;
-   
+ 
  }
  .submitload{
   height: 50%;
@@ -156,6 +161,7 @@
   display: flex;
   flex-direction: column;
   align-content: center;
+  
 }
 .example-container .mat-form-field + .mat-form-field {
   margin-top: 20px;
@@ -165,16 +171,12 @@
 
 
 .titulologin{
-  
   margin: 0 0 24px;
-  font-size: 32dp;
+  font-size: 32px;
   font-weight: 900;
   line-height: 35px;
   text-shadow: 0 4px 4px rgba(0,0,0,.22);
   color: white;
-  font-family: Roboto;
-  font-style: normal;
-  font-weight: normal;
   
   display: flex;
   align-items: center;
@@ -216,31 +218,71 @@
 .img{
   display: flex;  
   justify-content: center; 
-  
+
 }
 
 img{
+  position: relative;
   width: 50%;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  -webkit-transition: all .2s ease-in-out;
+  -moz-transition: all .2s ease-in-out;
+  -o-transition: all .2s ease-in-out;
+  transition: all .2s ease-in-out;
 }
 
 .btnicon{  
+  border-radius: 4px;
+  text-align: center;
+  background: rgb(225, 40, 54);
+  color: #fff;
+  width: 60%;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+}
+
+mat-card-header{ 
+  justify-content: center;
+  position: relative;
+  right: 20px;
+  font-weight: 200;
+  font-size: 15px;
   color: #fff;
 }
 
-mat-card-header{
-  position: absolute;
-  left: 21%;
-  right: 35%;
-  top: -5%;
-  bottom: 85%;
-  font-family: Roboto;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 48px;
-  line-height: 56px;
 
-  color: #FFFFFF;
+input{
+  border: none;
+  border-left: 5px solid;
+  background: none;
+  border-color: rgb(225, 40, 54);
+  
+  color: #fff;
+  font-weight: 300;
+  font-size: 15px;
+  line-height: 35px;
+
+  -webkit-transition: all .2s ease-in-out;
+  -moz-transition: all .2s ease-in-out;
+  -o-transition: all .2s ease-in-out;
+  transition: all .2s ease-in-out;
 }
 
+input:focus{
+  outline: 0;
+  background: rgba(225, 40, 54,.2);
+  border-radius: 30px;
+  border-color: transparent;
+  border-radius: 5px;
+}
 
-
+mat-label{
+  position: absolute;
+  left: 10px;
+  color: #fff;
+}
+/******************************************************/

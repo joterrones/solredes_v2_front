@@ -1,33 +1,39 @@
 <div class="cuerpo"> 
-  <mat-toolbar color="primary" class="mat-elevation-z8">SOL REDES 2.0</mat-toolbar>
+  <mat-toolbar color="primary" class="mat-elevation-z8 barra">SOL REDES 2.0</mat-toolbar>
   <div class="fondologin">
     <br />
     <h1 class="titulologin">Herramienta para contruccíon y supervisión de proyectos de eléctrificacion </h1>
     <div class="login-contenedor">
       <mat-card class="example-card">
                          
-        <mat-card-header>Accesar           
+        <mat-card-header>
+          <h1>Accesar</h1>           
         </mat-card-header>        
         <mat-card-content> 
           <div class="img">
             <img src="../../../../assets/images/user1.png" >
           </div>          
           <form class="example-container" #newForm="ngForm" (ngSubmit)="login(newForm)">
+
             <mat-form-field class="example-full-width" >
-              <input matInput placeholder="Usuario" name="c_username" #c_username="ngModel" 
+              <mat-label>Usuario</mat-label>
+              <input matInput  name="c_username" #c_username="ngModel" 
                 [(ngModel)]="dataLogin.c_username" required >
               <mat-icon matSuffix>person</mat-icon>
             </mat-form-field>
+
             <mat-form-field class="example-full-width">
-              <input matInput type="{{typepassword}}" placeholder="Password" name="c_clave" #c_clave="ngModel" 
+              <mat-label>Password</mat-label>
+              <input matInput type="{{typepassword}}" name="c_clave" #c_clave="ngModel" 
                 [(ngModel)]="dataLogin.c_clave" required />
               <mat-icon matSuffix (click)="changetipepassword()">{{iconpassword}}</mat-icon>
             </mat-form-field>
             <div class="submitload">
               <button *ngIf="!flag" type="submit" color="primary" mat-button
                 matTooltip="Permite acceder a la plataforma" [disabled]="!newForm.form.valid" class="btnicon">
-                <mat-icon >input</mat-icon>
+                
                 <span>Ingresar</span>
+                
               </button>
               <mat-spinner *ngIf="flag"></mat-spinner>
             </div>

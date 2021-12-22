@@ -23,7 +23,7 @@ export class GuiadetalleeditarComponent extends BaseComponent implements OnInit 
   guias: Guias[]; 
   elemento: Elementos[]; 
   showImg: string | ArrayBuffer;
-
+  urlImagen: string;
   constructor(
     public dialogRef: MatDialogRef<GuiadetalleeditarComponent>,    
     public _almacen_service: AlmacenService,
@@ -34,10 +34,7 @@ export class GuiadetalleeditarComponent extends BaseComponent implements OnInit 
   }
 
   ngOnInit() {
-    this._almacen_service.getImagen().subscribe(
-      res => console.log(res),
-      err => console.log(err)
-    )
+    
     if (this.data.detalleguia == null) {
       this.editar = false;
       this.detalleguia = {
@@ -53,9 +50,10 @@ export class GuiadetalleeditarComponent extends BaseComponent implements OnInit 
       
     } else {
       this.editar = true;
-      this.detalleguia = this.data.detalleguia; 
+      this.detalleguia = this.data.detalleguia;
+      this.urlImagen = AppSettings.URL_IMG_DETALLE_GUIA+this.detalleguia.c_ruta;
     }
-     
+    
     this.elemento = this.data.elemento;  
     console.log('Contenido de Detalle Guia');
     console.log(this.detalleguia);
@@ -91,10 +89,10 @@ export class GuiadetalleeditarComponent extends BaseComponent implements OnInit 
     reader.onload = e => this.showImg = reader.result;
     reader.readAsDataURL(this.file);    
     this.uploadFileToActivity()
-  }1
+  }
 
   uploadFileToActivity() {
-    console.log("asdassssssssssssssssssssssss",this.file)
+    
     let extension = this.file.name;
     this._almacen_service.uploadfile(extension, "DetalleGuia_" + this.detalleguia.n_idalm_detalleguia, this.file, this.getToken().token).subscribe(
       result => {
