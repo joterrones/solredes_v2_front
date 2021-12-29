@@ -121,6 +121,8 @@ import { GuiaComponent } from './component/almacen/guia/guia.component';
 import { GuiaeditarComponent } from './component/almacen/guiaeditar/guiaeditar.component';
 import { GuiadetalleComponent } from './component/almacen/detalleguia/guiadetalle.component';
 import { GuiadetalleeditarComponent } from './component/almacen/detalleguiaeditar/guiadetalleeditar.component';
+import { ImportacionPlanillaComponent } from './component/importacion-planilla/importacion-planilla.component';
+import { ProyectoSeleccionComponent } from './component/proyecto-seleccion/proyecto-seleccion.component';
 
 
 @NgModule({
@@ -205,7 +207,7 @@ import { GuiadetalleeditarComponent } from './component/almacen/detalleguiaedita
     GuiaComponent, 
     GuiaeditarComponent, 
     GuiadetalleComponent, 
-    GuiadetalleeditarComponent,   
+    GuiadetalleeditarComponent, ImportacionPlanillaComponent, ProyectoSeleccionComponent,   
   ],
   imports: [
     FormsModule,

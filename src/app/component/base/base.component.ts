@@ -12,7 +12,7 @@ import { Router } from "@angular/router";
 export class BaseComponent implements OnInit {
 
   bLogin: boolean = true;
-
+  proyecto:any;
 
   objsnack: SnackInterface = {
     mensaje: "",
@@ -25,6 +25,8 @@ export class BaseComponent implements OnInit {
     public snackBar: MatSnackBar, public router: Router
   ) {
     this.isLogin();
+
+    this.proyecto = this.getProyecto();
   }
 
   ngOnInit() {
@@ -46,15 +48,16 @@ export class BaseComponent implements OnInit {
     var currentUser = JSON.parse(localStorage.getItem('currentUser'));
     return currentUser;
   }
-  public getTokenString(): String {
+  /*public getTokenString(): String {
     var currentUser = JSON.parse(localStorage.getItem('currentUser'));
     return currentUser.tocken;
-  }
+  }*/
 
+  /*
   public getUsuarioLogin(): String {
     var currentUser = JSON.parse(localStorage.getItem('user'));
     return currentUser.token;
-  }
+  }*/
 
   public getUser(): any {
     var currentUser = JSON.parse(localStorage.getItem('currentUser'));
@@ -63,6 +66,15 @@ export class BaseComponent implements OnInit {
 
   public setToken(obj) {
     localStorage.setItem('currentUser', JSON.stringify(obj));
+  }
+
+  public setProyecto(obj) {
+    localStorage.setItem('proyecto', JSON.stringify(obj));
+  }
+
+  public getProyecto(): any {
+    var currentUser = JSON.parse(localStorage.getItem('proyecto'));
+    return currentUser;
   }
 
   public openSnackBar(mensaje: String, tipo: number) {

@@ -1,0 +1,29 @@
+
+  .contenedor{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap:wrap
+  }
+  .contenedor mat-form-field{
+    margin:1%;
+  }
+  .body{ 
+    margin:1%;
+  }
+  .example-margin{
+    margin-top: 2%;
+  }
+  .mat-row, .mat-header-row {  
+    min-width: 2800px;  
+    width: 100%;  
+ }  
+ .mat-column-LINEA {
+  width: 300px;
+}
+.mat-column-ESTRUCTURA {
+  width: 300px;
+}
+.mat-column-ESTRUCTURA_ANTERIOR {
+  width: 300px;
+}

@@ -15,6 +15,10 @@ export class ProyectoService {
         this.url = AppSettings.URL;
     }
 
+    get_seleccionproyecto(req): Observable<any> {
+        return this._http.post(this.url + 'proyecto/get_seleccionproyecto', req);
+    }
+
     get(req): Observable<any> {
         return this._http.post(this.url + 'proyecto/get', req);
     }

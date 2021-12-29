@@ -36,7 +36,8 @@ import { TipoempresaComponent } from './component/configGeneral/tipoempresa/tipo
 import { AlmacenComponent } from './component/almacen/almacen/almacen.component';
 import { GuiaComponent } from './component/almacen/guia/guia.component';
 import { GuiadetalleComponent } from './component/almacen/detalleguia/guiadetalle.component';
-
+import { ImportacionPlanillaComponent } from './component/importacion-planilla/importacion-planilla.component';
+import { ProyectoSeleccionComponent } from './component/proyecto-seleccion/proyecto-seleccion.component';
 
 //Array de rutas
 const appRoutes:Routes=[
@@ -71,6 +72,8 @@ const appRoutes:Routes=[
     {path:'estructura',component:EstructuraComponent},
     {path:'tipoempresa',component:TipoempresaComponent},
     {path:'almacen',component:AlmacenComponent},
+    {path:'importacionplanilla',component:ImportacionPlanillaComponent},
+    {path:'proyectoseleccion',component:ProyectoSeleccionComponent},
     {path:'guia/:n_idalm_almacen/:c_nombre',component:GuiaComponent},
     {path:'guiadetalle/:n_idalm_guia/:c_nombre/:c_nombreAlmacen/:n_idalm_almacen',component:GuiadetalleComponent},
     {path:'**',component:ProyectoComponent},    

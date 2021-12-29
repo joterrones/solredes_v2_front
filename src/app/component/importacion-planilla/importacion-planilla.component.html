@@ -1,0 +1,140 @@
+<app-menu>
+    <div class="body">
+        <h4>{{tit}}</h4>
+        <input type="file" style="display: inline-block;" (change)="incomingfile($event)" placeholder="Upload file"
+            accept=".xlsx">
+        <button type="button" class="btn btn-info" (click)="conexionapi(1)">Estructuras</button>
+        <button type="button" class="btn btn-info" (click)="conexionapi(2)">Vanos</button>
+
+        <mat-progress-bar class="example-margin" [value]="value" [bufferValue]="bufferValue">
+        </mat-progress-bar>
+        <table mat-table [dataSource]="tabla" matSort class="mat-elevation-z8">
+            <ng-container matColumnDef="ESTADO">
+                <th mat-header-cell *matHeaderCellDef color="error"> </th>
+                <td mat-cell *matCellDef="let element">
+                    <button mat-icon-button aria-label="Example icon-button with a heart icon"
+                        matTooltip="element.MENSAJE" color="error" *ngIf="!element.ESTADO">
+                        <mat-icon>close</mat-icon>
+                    </button>
+                    <button mat-icon-button aria-label="Example icon-button with a heart icon"
+                        matTooltip="element.MENSAJE" color="primary" *ngIf="element.ESTADO">
+                        <mat-icon>check</mat-icon>
+                    </button>
+                    {{element.MENSAJE}}
+                </td>
+            </ng-container>
+            <ng-container matColumnDef="LINEA">
+                <th mat-header-cell *matHeaderCellDef color="error"> LINEA </th>
+                <td mat-cell *matCellDef="let element"> {{element.LINEA}} </td>
+            </ng-container>
+            <ng-container matColumnDef="ESTRUCTURA">
+                <th mat-header-cell *matHeaderCellDef color="error"> ESTRUCTURA </th>
+                <td mat-cell *matCellDef="let element"> {{element.ESTRUCTURA}} </td>
+            </ng-container>
+            <ng-container matColumnDef="ESTRUCTURA_ANTERIOR">
+                <th mat-header-cell *matHeaderCellDef color="error"> ESTRUCTURA_ANTERIOR </th>
+                <td mat-cell *matCellDef="let element"> {{element.ESTRUCTURA_ANTERIOR}} </td>
+            </ng-container>
+            <ng-container matColumnDef="ARMADO_P">
+                <th mat-header-cell *matHeaderCellDef color="error"> ARMADO_P </th>
+                <td mat-cell *matCellDef="let element"> {{element.ARMADO_P}} </td>
+            </ng-container>
+            <ng-container matColumnDef="ARMADO_S">
+                <th mat-header-cell *matHeaderCellDef color="error"> ARMADO_S </th>
+                <td mat-cell *matCellDef="let element"> {{element.ARMADO_S}} </td>
+            </ng-container>
+            <ng-container matColumnDef="PROGRESIVA">
+                <th mat-header-cell *matHeaderCellDef color="error"> PROGRESIVA </th>
+                <td mat-cell *matCellDef="let element"> {{element.PROGRESIVA}} </td>
+            </ng-container>
+            <ng-container matColumnDef="VANO">
+                <th mat-header-cell *matHeaderCellDef color="error"> VANO </th>
+                <td mat-cell *matCellDef="let element"> {{element.VANO}} </td>
+            </ng-container>
+            <ng-container matColumnDef="T_TERRENO">
+                <th mat-header-cell *matHeaderCellDef color="error"> T_TERRENO </th>
+                <td mat-cell *matCellDef="let element"> {{element.T_TERRENO}} </td>
+            </ng-container>
+            <ng-container matColumnDef="S_CANTIDAD">
+                <th mat-header-cell *matHeaderCellDef color="error"> S_CANTIDAD </th>
+                <td mat-cell *matCellDef="let element"> {{element.S_CANTIDAD}} </td>
+            </ng-container>
+            <ng-container matColumnDef="S_TIPO">
+                <th mat-header-cell *matHeaderCellDef color="error"> S_TIPO </th>
+                <td mat-cell *matCellDef="let element"> {{element.S_TIPO}} </td>
+            </ng-container>
+            <ng-container matColumnDef="COOR_E">
+                <th mat-header-cell *matHeaderCellDef color="error"> COOR_E </th>
+                <td mat-cell *matCellDef="let element"> {{element.COOR_E}} </td>
+            </ng-container>
+            <ng-container matColumnDef="COOR_N">
+                <th mat-header-cell *matHeaderCellDef color="error"> COOR_N </th>
+                <td mat-cell *matCellDef="let element"> {{element.COOR_N}} </td>
+            </ng-container>
+            <ng-container matColumnDef="CONDUCTOR_35">
+                <th mat-header-cell *matHeaderCellDef color="error"> CONDUCTOR_35 </th>
+                <td mat-cell *matCellDef="let element"> {{element.CONDUCTOR_35}} </td>
+            </ng-container>
+            <ng-container matColumnDef="CONDUCTOR_70">
+                <th mat-header-cell *matHeaderCellDef color="error"> CONDUCTOR_70 </th>
+                <td mat-cell *matCellDef="let element"> {{element.CONDUCTOR_70}} </td>
+            </ng-container>
+            <ng-container matColumnDef="AISLADOR_56_3">
+                <th mat-header-cell *matHeaderCellDef color="error"> AISLADOR_56_3 </th>
+                <td mat-cell *matCellDef="let element"> {{element.AISLADOR_56_3}} </td>
+            </ng-container>
+            <ng-container matColumnDef="AISLADOR_POLIMERICO">
+                <th mat-header-cell *matHeaderCellDef color="error"> AISLADOR_POLIMERICO </th>
+                <td mat-cell *matCellDef="let element"> {{element.AISLADOR_POLIMERICO}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="AMOR_35">
+                <th mat-header-cell *matHeaderCellDef color="error"> AMOR_35 </th>
+                <td mat-cell *matCellDef="let element"> {{element.AMOR_35}} </td>
+            </ng-container>
+            <ng-container matColumnDef="AMOR_70">
+                <th mat-header-cell *matHeaderCellDef color="error"> AMOR_70 </th>
+                <td mat-cell *matCellDef="let element"> {{element.AMOR_35}} </td>
+            </ng-container>
+            <ng-container matColumnDef="RI_A">
+                <th mat-header-cell *matHeaderCellDef color="error"> RI_A </th>
+                <td mat-cell *matCellDef="let element"> {{element.RI_A}} </td>
+            </ng-container>
+            <ng-container matColumnDef="RV_A">
+                <th mat-header-cell *matHeaderCellDef color="error"> RV_A </th>
+                <td mat-cell *matCellDef="let element"> {{element.RV_A}} </td>
+            </ng-container>
+            <ng-container matColumnDef="PAT_TIPO">
+                <th mat-header-cell *matHeaderCellDef color="error"> PAT_TIPO </th>
+                <td mat-cell *matCellDef="let element"> {{element.PAT_TIPO}} </td>
+            </ng-container>
+            <ng-container matColumnDef="PAT_CANTIDAD">
+                <th mat-header-cell *matHeaderCellDef color="error"> PAT_CANTIDAD </th>
+                <td mat-cell *matCellDef="let element"> {{element.PAT_CANTIDAD}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="TRANS_5">
+                <th mat-header-cell *matHeaderCellDef color="error"> TRANS_5 </th>
+                <td mat-cell *matCellDef="let element"> {{element.TRANS_5}} </td>
+            </ng-container>
+            <ng-container matColumnDef="TRANS_10">
+                <th mat-header-cell *matHeaderCellDef color="error"> TRANS_10 </th>
+                <td mat-cell *matCellDef="let element"> {{element.TRANS_10}} </td>
+            </ng-container>
+            <ng-container matColumnDef="TRANS_15">
+                <th mat-header-cell *matHeaderCellDef color="error"> TRANS_15 </th>
+                <td mat-cell *matCellDef="let element"> {{element.TRANS_15}} </td>
+            </ng-container>
+            <ng-container matColumnDef="FASES">
+                <th mat-header-cell *matHeaderCellDef color="error"> FASES </th>
+                <td mat-cell *matCellDef="let element"> {{element.FASES}} </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <ng-template let-row matRowDef cdkVirtualFor [matRowDefColumns]="displayedColumns">
+                <tr mat-row></tr>
+            </ng-template>
+        </table>
+        <mat-paginator [pageSizeOptions]="[10,20,50,100,1000]" showFirstLastButtons></mat-paginator>
+    </div>
+</app-menu>
