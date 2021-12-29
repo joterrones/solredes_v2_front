@@ -123,6 +123,11 @@ import { GuiadetalleComponent } from './component/almacen/detalleguia/guiadetall
 import { GuiadetalleeditarComponent } from './component/almacen/detalleguiaeditar/guiadetalleeditar.component';
 import { ImportacionPlanillaComponent } from './component/importacion-planilla/importacion-planilla.component';
 import { ProyectoSeleccionComponent } from './component/proyecto-seleccion/proyecto-seleccion.component';
+import { AdmiArchivosComponent } from './component/archivos/admi-archivos/admi-archivos.component';
+import { AdmiArchivosEditarComponent } from './component/archivos/admi-archivos-editar/admi-archivos-editar.component';
+import { ArchivosComponent } from './component/archivos/archivos/archivos.component';
+import { ArchivosEditarComponent } from './component/archivos/archivos-editar/archivos-editar.component';
+
 
 
 @NgModule({
@@ -208,6 +213,11 @@ import { ProyectoSeleccionComponent } from './component/proyecto-seleccion/proye
     GuiaeditarComponent, 
     GuiadetalleComponent, 
     GuiadetalleeditarComponent, ImportacionPlanillaComponent, ProyectoSeleccionComponent,   
+    GuiadetalleeditarComponent, 
+    AdmiArchivosComponent, 
+    AdmiArchivosEditarComponent, 
+    ArchivosComponent, 
+    ArchivosEditarComponent,   
   ],
   imports: [
     FormsModule,

@@ -1,0 +1,21 @@
+table {
+    width: 100%;
+  }
+
+.contenedorBody {
+  margin: 1%;
+}
+
+.contenedor {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.navega{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}

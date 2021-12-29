@@ -5,56 +5,55 @@ import { BaseComponent } from '../../base/base.component';
 import { Router } from "@angular/router";
 import { AppSettings } from '../../../common/appsettings';
 
-import { Almacen, AlmacenEditar, Proyecto } from '../../../interface/almacen.interface';
-import { AlmacenService } from 'src/app/service/almacen.service';
+
+import { ArchivosServices } from 'src/app/service/archivos.service';
+import { Carpeta, CarpetaEditar } from 'src/app/interface/archivos.interface';
+
 
 @Component({
-  selector: 'app-almaceneditar',
-  templateUrl: './almaceneditar.component.html',
-  styleUrls: ['./almaceneditar.component.css'],
-  providers: [AlmacenService]
+  selector: 'app-admi-archivos-editar',
+  templateUrl: './admi-archivos-editar.component.html',
+  styleUrls: ['./admi-archivos-editar.component.css'],
+  providers: [ArchivosServices]
 })
-export class AlmaceneditarComponent extends BaseComponent implements OnInit {
+export class AdmiArchivosEditarComponent extends BaseComponent implements OnInit {
 
-  almacen: Almacen;
+  carpeta: Carpeta;
   editar: boolean;
-  proyecto: Proyecto[];
 
   constructor(
-    public dialogRef: MatDialogRef<AlmaceneditarComponent>,    
-    public _almacen_service: AlmacenService,
-    @Inject(MAT_DIALOG_DATA) public data: AlmacenEditar,
+    public dialogRef: MatDialogRef<AdmiArchivosEditarComponent>,    
+    public _archivos_service: ArchivosServices,  
+    @Inject(MAT_DIALOG_DATA) public data: CarpetaEditar,
     public _router: Router,
     public snackBar: MatSnackBar) {
       super(snackBar, _router);
   }
 
-  ngOnInit() {    
-    if (this.data.almacen == null) {
+  ngOnInit() {
+
+    if (this.data.carpeta == null) {
       this.editar = false;
-      this.almacen = {
-        n_idalm_almacen: 0,
+      this.carpeta = {
+        id_carpeta: 0,
         c_nombre: "",
-        c_direccion: "",
-        n_idpro_proyecto: 0    
+        d_fechamodi: ""
       };
       
     } else {
       this.editar = true;
-      this.almacen = this.data.almacen; 
+      this.carpeta = this.data.carpeta; 
     }
-    this.proyecto = this.data.proyecto;    
-    console.log('Contenido de almacen');
-    console.log(this.almacen);
+    console.log(this.carpeta);
   }
 
   guardar(newForm) {
-    this.almacen;
-    this._almacen_service.saveAlmacen(this.almacen, this.getToken().token).subscribe(
+    this.carpeta;
+    this._archivos_service.saveCarpeta(this.carpeta, this.getToken().token).subscribe(
       result => {
         try {
           if (result.estado) {
-            this.dialogRef.close({ flag: true, data: this.almacen });
+            this.dialogRef.close({ flag: true, data: this.carpeta });
           } else {
             this.openSnackBar(result.mensaje, 99);
           }
