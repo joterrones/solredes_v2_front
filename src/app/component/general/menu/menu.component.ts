@@ -7,13 +7,13 @@ import { MatSnackBar } from '@angular/material';
 import { Router } from "@angular/router";
 import { ResetearclaveComponent } from '../../generico/resetarclave/resetarclave.component';
 import { MatDialog } from '@angular/material';
-import { MapaService } from '../../../service/mapa.services';
+//import { MapaService } from '../../../service/mapa.services';
 import { saveAs } from 'file-saver';
 @Component({
   selector: 'app-menu',
   templateUrl: './menu.component.html',
   styleUrls: ['./menu.component.css'],
-  providers: [MapaService]
+  //providers: [MapaService]
 
 })
 export class MenuComponent extends BaseComponent implements OnInit {
@@ -46,7 +46,7 @@ export class MenuComponent extends BaseComponent implements OnInit {
     public router: Router,
     public snackBar: MatSnackBar,
     public dialog: MatDialog,
-    public mapaService: MapaService) {
+    /*public mapaService: MapaService*/) {
     super(snackBar, router);
     setInterval(() => {
       this.date = new Date()
@@ -118,12 +118,12 @@ export class MenuComponent extends BaseComponent implements OnInit {
 
 
   descargarManual = () => {
-    this.mapaService.download("DGER_HSP_Guia_Usuario_HSP.pdf").subscribe(
+  /*  this.mapaService.download("DGER_HSP_Guia_Usuario_HSP.pdf").subscribe(
       result => {
         saveAs(result, "DGER_HSP_Guia_Usuario_HSP.pdf");
       }, error => {
         this.openSnackBar(<any>error, 99);
-      });
+      });*/
   }
 
 }

@@ -1,0 +1,36 @@
+<app-menu>
+    <div class="contenedorbody">
+        <h4>{{tit}}</h4>
+        <button mat-icon-button color="primary" (click)="actualizar()"> Actualizar
+            <mat-icon aria-label="Example icon-button with a heart icon">loop</mat-icon>
+        </button>
+        <br />
+        <mat-form-field>
+            <mat-select placeholder="Versiones" >
+              <mat-option *ngFor="let item of versiones" [value]="item.id"  (click)="selecVersion(item.id)">
+                {{item.nombre}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+        <br />
+        <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" [mapTypeControl]='true' [mapTypeId]="'hybrid'">
+            <agm-marker-cluster [maxZoom]="12" imagePath="http://35.184.146.235/Multimedia/Nama/images/m">
+                <agm-marker *ngFor="let marker of markers " [latitude]="marker.lat" [longitude]="marker.lng"
+                    [markerDraggable]="true" [opacity]="marker.alpha" [iconUrl]="
+              {
+                url:  './assets/mapa/'+marker.data.c_iconomapa+'.png' 
+            }" (markerClick)="clicked($event,marker)">
+                </agm-marker>
+                <ng-container>
+                    <agm-polyline *ngFor="let polyline of polilineas;let i = index;" [strokeColor]="primary">
+                        <agm-polyline-point *ngFor="let point of polyline.path" [latitude]="point.c_latitud"
+                            [longitude]="point.c_longitud">
+                        </agm-polyline-point>
+                    </agm-polyline>
+                </ng-container>
+            </agm-marker-cluster>
+        </agm-map>
+
+    </div>
+</app-menu>

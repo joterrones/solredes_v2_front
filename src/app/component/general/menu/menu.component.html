@@ -58,41 +58,20 @@
                 <mat-icon></mat-icon>
                 <span>Importación de planillas</span>
             </a>  
+            <a mat-list-item [routerLink]="['/importacionlinea']" >
+                <mat-icon></mat-icon>
+                <span>Importación de lineas</span>
+            </a>  
+            <a mat-list-item [routerLink]="['/mapalinea']" >
+                <mat-icon></mat-icon>
+                <span>Mapa Linea</span>
+            </a>  
+            
             <hr>
             <a mat-list-item [routerLink]="['/AdmArchivos']" >
                 <mat-icon></mat-icon>
                 <span>Administración de Archivos</span>
             </a> 
-            <hr>
-            <a mat-list-item [routerLink]="['/bolsaproyecto']" >
-                <mat-icon>local_mall</mat-icon>
-                <span>Bolsa de Proyectos</span>
-            </a>
-            <a mat-list-item [routerLink]="['/graficobolsa']" >
-                <mat-icon>dashboard</mat-icon>
-                <span>Tablero Bolsa de Proyectos</span>
-            </a>
-            <hr>
-            <a mat-list-item [routerLink]="['/grupo']" >
-                <mat-icon>settings</mat-icon>
-                <span>Gestión Configuraciones</span>
-            </a>
-            <a mat-list-item [routerLink]="['/proyecto']" >
-                <mat-icon>dynamic_feed</mat-icon>
-                <span>Seguimiento de Proyectos</span>
-            </a>
-            <a mat-list-item [routerLink]="['/mapa']" >
-                <mat-icon>map</mat-icon>
-                <span>Mapa de Monitoreo</span>
-            </a>
-            <a mat-list-item [routerLink]="['/lineatiempo']" >
-                <mat-icon>trending_up</mat-icon>
-                <span>Proyecto por Fases</span>
-            </a>
-            <a mat-list-item [routerLink]="['/grafico']" *ngIf="dashboard">
-                <mat-icon>dashboard</mat-icon>
-                <span>Tablero de Mando</span>
-            </a>
         </mat-nav-list>
     </mat-sidenav>
     <mat-sidenav-content>
