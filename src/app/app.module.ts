@@ -93,6 +93,8 @@ import { ArchivosEditarComponent } from './component/archivos/archivos-editar/ar
 import {MatTooltipModule} from '@angular/material/tooltip';
 import { ImportacionLineaComponent } from './component/importacion-linea/importacion-linea.component';
 import { MapaLineaComponent } from './component/mapa-linea/mapa-linea.component';
+import { MapaGeneralComponent } from './component/mapa-general/mapa-general.component';
+import { MapaBaseComponent } from './component/mapa-base/mapa-base.component';
 
 
 @NgModule({
@@ -147,7 +149,7 @@ import { MapaLineaComponent } from './component/mapa-linea/mapa-linea.component'
     AdmiArchivosComponent, 
     AdmiArchivosEditarComponent, 
     ArchivosComponent, 
-    ArchivosEditarComponent, ImportacionLineaComponent, MapaLineaComponent,   
+    ArchivosEditarComponent, ImportacionLineaComponent, MapaLineaComponent, MapaGeneralComponent, MapaBaseComponent,   
   ],
   imports: [
     FormsModule,

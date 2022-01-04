@@ -32,7 +32,7 @@ import { ProyectoSeleccionComponent } from './component/proyecto-seleccion/proye
 import { AdmiArchivosComponent } from './component/archivos/admi-archivos/admi-archivos.component';
 import { ArchivosComponent } from './component/archivos/archivos/archivos.component';
 import { MapaLineaComponent } from './component/mapa-linea/mapa-linea.component';
-
+import { MapaGeneralComponent } from './component/mapa-general/mapa-general.component';
 //Array de rutas
 const appRoutes:Routes=[
     {path:'',component:LoginComponent},
@@ -59,6 +59,7 @@ const appRoutes:Routes=[
     {path:'importacionplanilla',component:ImportacionPlanillaComponent},
     {path:'importacionlinea',component:ImportacionLineaComponent},
     {path:'mapalinea',component:MapaLineaComponent},
+    {path:'mapageneral',component:MapaGeneralComponent},
     {path:'proyectoseleccion',component:ProyectoSeleccionComponent},
     {path:'guia/:n_idalm_almacen/:c_nombre',component:GuiaComponent},
     {path:'guiadetalle/:n_idalm_guia/:c_nombre/:c_nombreAlmacen/:n_idalm_almacen',component:GuiadetalleComponent},
