@@ -30,13 +30,11 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
-import { MapaComponent } from './component/general/mapa/mapa.component';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import { ResumenComponent } from './component/general/resumen/resumen.component';
 import { DashboadComponent } from './component/general/dashboad/dashboad.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
@@ -47,53 +45,18 @@ import { UsuarioComponent } from './component/seguridad/usuario/usuario.componen
 import { UsuarioeditarComponent } from './component/seguridad/usuarioeditar/usuarioeditar.component';
 import { ResetearclaveComponent } from './component/generico/resetarclave/resetarclave.component';
 import { ConfirmarComponent } from './component/generico/confirmar/confirmar.component';
-
 import { AgmJsMarkerClustererModule } from '@agm/js-marker-clusterer';
-import { ProyectoComponent } from './component/visualizacion/proyecto/proyecto.component';
-import { ProyectoeditComponent } from './component/visualizacion/proyectoedit/proyectoedit.component';
-import { TipoproyectoComponent } from './component/configuracion/tipoproyecto/tipoproyecto.component';
-import { TipoproyectoeditComponent } from './component/configuracion/tipoproyectoedit/tipoproyectoedit.component';
-import { TipoproyectoconfigComponent } from './component/configuracion/tipoproyectoconfig/tipoproyectoconfig.component';
-import { FaseComponent } from './component/configuracion/fase/fase.component';
-import { FaseeditComponent } from './component/configuracion/faseedit/faseedit.component';
-import { ActividadComponent } from './component/configuracion/actividad/actividad.component';
-import { TareaComponent } from './component/configuracion/tarea/tarea.component';
-import { ActividadeditComponent } from './component/configuracion/actividadedit/actividadedit.component';
-import { TareaeditComponent } from './component/configuracion/tareaedit/tareaedit.component';
-import { GrupoComponent } from './component/configuracion/grupo/grupo.component';
-import { TareaconfigComponent } from './component/configuracion/tareaconfig/tareaconfig.component';
-import { ProyectoconfigComponent } from './component/visualizacion/proyectoconfig/proyectoconfig.component';
-import { ProyectoregistroComponent } from './component/visualizacion/proyectoregistro/proyectoregistro.component';
-
 import { MatTabsModule } from '@angular/material/tabs';
 import { ConfirmComponent } from './component/general/confirm/confirm.component';
-import { TarearegistroComponent } from './component/visualizacion/tarearegistro/tarearegistro.component';
 import { MatGridListModule } from '@angular/material/grid-list';
-import { ProyectoubicacionComponent } from './component/visualizacion/proyectoubicacion/proyectoubicacion.component';
-import { DetalleproyectoComponent } from './component/general/detalleproyecto/detalleproyecto.component';
-import { VerificadorproyectoComponent } from './component/visualizacion/verificadorproyecto/verificadorproyecto.component';
-import { DiaferiadoComponent } from './component/configuracion/diaferiado/diaferiado.component';
-import { ProyectofechaComponent } from './component/visualizacion/proyectofecha/proyectofecha.component';
-import { LineatiempoComponent } from './component/visualizacion/lineatiempo/lineatiempo.component';
 import { ProyectousuarioComponent } from './component/seguridad/proyectousuario/proyectousuario.component';
 import { ExportperfilxlsComponent } from './component/exportar/exportperfilxls/exportperfilxls.component';
-import { BolsaproyectoComponent } from './component/general/bolsaproyecto/bolsaproyecto.component';
-import { BolsaproyectoeditComponent } from './component/general/bolsaproyectoedit/bolsaproyectoedit.component';
-import { BolsaproyectoubicacionComponent } from './component/general/bolsaproyectoubicacion/bolsaproyectoubicacion.component';
-import { VersionComponent } from './component/general/version/version.component';
 import { ProgramaComponent } from './component/general/programa/programa.component';
-import { VersioneditComponent } from './component/general/versionedit/versionedit.component';
 import { ExportControlObraXlsComponent } from './component/exportar/export-control-obra-xls/export-control-obra-xls.component';
-import { LineatiempototalComponent } from './component/visualizacion/lineatiempototal/lineatiempototal.component';
 import {MatChipsModule} from '@angular/material/chips';
-import { TarearegistroguardarComponent } from './component/visualizacion/tarearegistroguardar/tarearegistroguardar.component';
-import { SituacionComponent } from './component/visualizacion/situacion/situacion.component';
-import { ExportControlSupervisorComponent } from './component/exportar/export-control-supervisor/export-control-supervisor.component';
-import { CartafianzaComponent } from './component/visualizacion/cartafianza/cartafianza.component';
+import { ExportControlSupervisorComponent } from './component/exportar/export-control-supervisor/export-control-supervisor.component';;
 import { ExportalldataComponent } from './component/exportar/exportalldata/exportalldata.component';
-import { CurvasComponent } from './component/visualizacion/curvas/curvas.component';
 import { Exportalldata2Component } from './component/exportar/exportalldata2/exportalldata2.component';
-import { BolsaproyectodetalleComponent } from './component/general/bolsaproyectodetalle/bolsaproyectodetalle.component';
 import { ExportbolsaproyectoComponent } from './component/exportar/exportbolsaproyecto/exportbolsaproyecto.component';
 import { DashboardbolsaComponent } from './component/general/dashboardbolsa/dashboardbolsa.component';
 import { ExportdatoadicionalComponent } from './component/exportar/exportdatoadicional/exportdatoadicional.component';
@@ -126,12 +89,6 @@ import { ProyectoSeleccionComponent } from './component/proyecto-seleccion/proye
 import { AdmiArchivosComponent } from './component/archivos/admi-archivos/admi-archivos.component';
 import { AdmiArchivosEditarComponent } from './component/archivos/admi-archivos-editar/admi-archivos-editar.component';
 import { ArchivosEditarComponent } from './component/archivos/archivos-editar/archivos-editar.component';
-import { UsuarioproyectoComponent } from './component/seguridad/usuarioproyecto/usuarioproyecto.component';
-import { ValoresGeneralesComponent } from './component/configGeneral/valores-generales/valores-generales.component';
-import { ValoresGeneralesEditarComponent } from './component/configGeneral/valores-generales-editar/valores-generales-editar.component';
-import { TragrupoComponent } from './component/configGeneral/tragrupo/tragrupo.component';
-import { TragrupoEditarComponent } from './component/configGeneral/tragrupo-editar/tragrupo-editar.component';
-import { ProyectousuaioComponent } from './component/configGeneral/proyectousuaio/proyectousuaio.component';
 
 
 
@@ -142,55 +99,20 @@ import { ProyectousuaioComponent } from './component/configGeneral/proyectousuai
     LoginComponent,
     HomeComponent,
     MenuComponent,
-    MapaComponent,
-    ResumenComponent,
     DashboadComponent,
     SnackComponent,
     UsuarioComponent,
     UsuarioeditarComponent,
     ResetearclaveComponent,
     ConfirmarComponent,
-    ProyectoComponent,    
-    ProyectoeditComponent,
-    TipoproyectoComponent,
-    TipoproyectoeditComponent,
-    TipoproyectoconfigComponent,
-    FaseComponent,
-    FaseeditComponent,
-    ActividadComponent,
-    ActividadeditComponent,
-    TareaComponent,
-    TareaeditComponent,
-    GrupoComponent,
-    TareaconfigComponent,
-    ProyectoconfigComponent,
-    ProyectoregistroComponent,
     ConfirmComponent,
-    TarearegistroComponent,
-    ProyectoubicacionComponent,
-    DetalleproyectoComponent,
-    VerificadorproyectoComponent,
-    DiaferiadoComponent,
-    ProyectofechaComponent,
-    LineatiempoComponent,
     ProyectousuarioComponent,
     ExportperfilxlsComponent,
-    BolsaproyectoComponent,
-    BolsaproyectoeditComponent,
-    BolsaproyectoubicacionComponent,
-    VersionComponent,
     ProgramaComponent,
-    VersioneditComponent,
     ExportControlObraXlsComponent,
-    LineatiempototalComponent,
-    TarearegistroguardarComponent,
-    SituacionComponent,
     ExportControlSupervisorComponent,
-    CartafianzaComponent,
     ExportalldataComponent,
-    CurvasComponent,
     Exportalldata2Component,
-    BolsaproyectodetalleComponent,
     ExportbolsaproyectoComponent,
     DashboardbolsaComponent,
     ExportdatoadicionalComponent,
@@ -223,12 +145,17 @@ import { ProyectousuaioComponent } from './component/configGeneral/proyectousuai
     GuiadetalleeditarComponent, 
     AdmiArchivosComponent, 
     AdmiArchivosEditarComponent, 
+<<<<<<< HEAD
     ArchivosEditarComponent, 
     UsuarioproyectoComponent, 
     ValoresGeneralesComponent, 
     ValoresGeneralesEditarComponent, 
     TragrupoComponent, 
     TragrupoEditarComponent, ProyectousuaioComponent,   
+=======
+    ArchivosComponent, 
+    ArchivosEditarComponent, ImportacionLineaComponent, MapaLineaComponent,   
+>>>>>>> b480092b0830b9518c6a67aa86f4dcb690c72431
   ],
   imports: [
     FormsModule,
@@ -264,6 +191,7 @@ import { ProyectousuaioComponent } from './component/configGeneral/proyectousuai
     MatTabsModule,
     MatChipsModule,
     ObserversModule,
+    MatTooltipModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyDpcWweoH2IqPSGvBX91N46EsIdY-IfNiY'
     })
@@ -272,24 +200,8 @@ import { ProyectousuaioComponent } from './component/configGeneral/proyectousuai
     SnackComponent,
     ResetearclaveComponent,
     UsuarioeditarComponent,
-    ProyectoeditComponent,
-    TipoproyectoeditComponent,
-    TipoproyectoconfigComponent,
-    FaseeditComponent,
-    ActividadeditComponent,
-    TareaeditComponent,
-    TareaconfigComponent,
-    ProyectoconfigComponent,
-    ProyectoregistroComponent,
     ConfirmComponent,
-    DetalleproyectoComponent,
-    ProyectofechaComponent,
     ProyectousuarioComponent,
-    TarearegistroComponent,
-    BolsaproyectoeditComponent,
-    VersioneditComponent,
-    SituacionComponent,
-    CartafianzaComponent
   ],
   providers: [
     MatDatepickerModule, 

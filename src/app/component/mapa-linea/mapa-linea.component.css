@@ -1,0 +1,32 @@
+
+.contenedorbody{
+    margin: 1%;
+  }
+  .contenedorbody2{
+  
+    display: flex;
+    flex-direction: column;
+    flex-wrap:wrap
+  }
+    .contenedor{
+     
+      display: flex;
+      flex-direction: row;
+      justify-content:space-around;
+      flex-wrap:wrap
+    }
+    .hijo{
+      max-width: 100px;
+    }
+  
+    agm-map{
+      margin-top: 1%;
+      min-height: 300px;
+      height: 700px;
+      max-height: 550px;
+    }
+  
+    .tamanomapa{
+      width: 100%;
+      height: 100%;
+    }
