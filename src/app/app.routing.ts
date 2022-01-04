@@ -12,7 +12,7 @@ import { ExportperfilxlsComponent } from './component/exportar/exportperfilxls/e
 import { ExportControlObraXlsComponent } from './component/exportar/export-control-obra-xls/export-control-obra-xls.component';
 import { ExportControlSupervisorComponent } from './component/exportar/export-control-supervisor/export-control-supervisor.component';
 import { ExportalldataComponent } from './component/exportar/exportalldata/exportalldata.component';
-import { ProgramaComponent} from './component/general/programa/programa.component';
+import { ProgramaComponent} from './component/general/programa/programa.component';;
 import { DashboardbolsaComponent } from './component/general/dashboardbolsa/dashboardbolsa.component';
 import { RolComponent } from './component/seguridad/rol/rol.component';
 import { LineaComponent } from './component/configGeneral/linea/linea.component';
@@ -27,12 +27,14 @@ import { AlmacenComponent } from './component/almacen/almacen/almacen.component'
 import { GuiaComponent } from './component/almacen/guia/guia.component';
 import { GuiadetalleComponent } from './component/almacen/detalleguia/guiadetalle.component';
 import { ImportacionPlanillaComponent } from './component/importacion-planilla/importacion-planilla.component';
-import { ImportacionLineaComponent } from './component/importacion-linea/importacion-linea.component';
 import { ProyectoSeleccionComponent } from './component/proyecto-seleccion/proyecto-seleccion.component';
 import { AdmiArchivosComponent } from './component/archivos/admi-archivos/admi-archivos.component';
-import { ArchivosComponent } from './component/archivos/archivos/archivos.component';
 import { MapaLineaComponent } from './component/mapa-linea/mapa-linea.component';
 import { MapaGeneralComponent } from './component/mapa-general/mapa-general.component';
+import { ValoresGeneralesComponent } from './component/configGeneral/valores-generales/valores-generales.component'; 
+import { TragrupoComponent } from './component/configGeneral/tragrupo/tragrupo.component';
+import { ImportacionLineaComponent } from './component/importacion-linea/importacion-linea.component';
+
 //Array de rutas
 const appRoutes:Routes=[
     {path:'',component:LoginComponent},
@@ -63,8 +65,10 @@ const appRoutes:Routes=[
     {path:'proyectoseleccion',component:ProyectoSeleccionComponent},
     {path:'guia/:n_idalm_almacen/:c_nombre',component:GuiaComponent},
     {path:'guiadetalle/:n_idalm_guia/:c_nombre/:c_nombreAlmacen/:n_idalm_almacen',component:GuiadetalleComponent},
-    {path:'AdmArchivos',component:AdmiArchivosComponent},
-    {path:'archivos/:id_carpeta/:c_nombre',component:ArchivosComponent},
+    {path:'AdmArchivos',component:AdmiArchivosComponent},    
+    {path:'valoresGenerales',component:ValoresGeneralesComponent}, 
+    {path:'tragrupos',component:TragrupoComponent},
+    
     {path:'**',component:LoginComponent},    
      
 ]

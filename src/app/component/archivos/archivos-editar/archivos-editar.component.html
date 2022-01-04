@@ -2,9 +2,9 @@
 <form class="example-container" #newForm="ngForm" (ngSubmit)="guardar(newForm)">
     
     <div mat-dialog-content class="contenedor">
-        <mat-form-field>
+        <mat-form-field >
         <input matInput placeholder="ARCHIVO" name="c_nombre" #c_clave="ngModel"  
-            [(ngModel)]="archivo.c_nombre" minlength="3" required/>
+            [(ngModel)]="archivo.c_nombre" minlength="3" required />
         <mat-hint class="error" *ngIf="archivo.c_nombre.length<3">debe tener mínimo de 3 dígitos</mat-hint>
         </mat-form-field>
 
@@ -14,8 +14,8 @@
         </button>
 
         <mat-form-field>
-            <mat-select placeholder="Carpeta" [(value)]="archivo.id_carpeta" required [disabled]="!editar">
-              <mat-option *ngFor="let ca of carpetas" [value]="ca.id_carpeta">
+            <mat-select placeholder="Carpeta" [(value)]="archivo.n_iddoc_archivopadre" required [disabled]="!editar">
+              <mat-option *ngFor="let ca of carpetas" [value]="ca.n_iddoc_archivo">
                 {{ca.c_nombre}}
               </mat-option>
             </mat-select>

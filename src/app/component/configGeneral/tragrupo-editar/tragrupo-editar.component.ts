@@ -5,27 +5,25 @@ import { BaseComponent } from '../../base/base.component';
 import { Router } from "@angular/router";
 import { AppSettings } from '../../../common/appsettings';
 
-import { Linea, LineaEditar, Tipolinea, Zona } from '../../../interface/configGeneral.interface';
+import { EditarTraGrupos, Linea, LineaEditar, Proyecto, Proyectos, Tipolinea, TraGrupos, Zona } from '../../../interface/configGeneral.interface';
 import { confGeneralService } from '../../../service/confGeneral.service';
 
-
 @Component({
-  selector: 'app-lineaeditar',
-  templateUrl: './lineaeditar.component.html',
-  styleUrls: ['./lineaeditar.component.css'],
+  selector: 'app-tragrupo-editar',
+  templateUrl: './tragrupo-editar.component.html',
+  styleUrls: ['./tragrupo-editar.component.css'],
   providers: [confGeneralService]
 })
-export class LineaeditarComponent extends BaseComponent implements OnInit {
+export class TragrupoEditarComponent extends BaseComponent implements OnInit {
 
-  linea: Linea;
+  traGrupos: TraGrupos;
   editar: boolean;
-  tipolinea: Tipolinea[];
-  zona: Zona[];
+  proyectos: Proyectos[];
 
   constructor(
-    public dialogRef: MatDialogRef<LineaeditarComponent>,    
+    public dialogRef: MatDialogRef<TragrupoEditarComponent>,    
     public _confiGeneral_service: confGeneralService,
-    @Inject(MAT_DIALOG_DATA) public data: LineaEditar,
+    @Inject(MAT_DIALOG_DATA) public data: EditarTraGrupos,
     public _router: Router,
     public snackBar: MatSnackBar) {
       super(snackBar, _router);
@@ -33,33 +31,33 @@ export class LineaeditarComponent extends BaseComponent implements OnInit {
 
   ngOnInit() {
 
-    if (this.data.linea == null) {
+    if (this.data.traGrupos == null) {
       this.editar = false;
-      this.linea = {
-        n_idpl_linea: 0,
+      this.traGrupos = {
+        n_idtra_grupo: 0,
+        n_idpro_proyecto: 0,
         c_nombre: "",
-        c_codigo: "",
-        n_idpl_tipolinea: 0,
-        n_idpl_zona: 0    
+        c_nombrep: ""  
       };
       
     } else {
       this.editar = true;
-      this.linea = this.data.linea; 
+      this.traGrupos = this.data.traGrupos; 
     }
-    this.tipolinea = this.data.tipolinea;  
-    this.zona = this.data.zona;  
-    console.log('Contenido de Linea');
-    console.log(this.linea);
+    this.proyectos = this.data.proyectos;  
+    console.log('Contenido de Proyecto');
+    console.log(this.proyectos);
   }
 
   guardar(newForm) {
-    this.linea;
-    this._confiGeneral_service.saveLinea(this.linea, this.getToken().token).subscribe(
+    console.log(this.traGrupos);
+    
+    this.traGrupos;
+    this._confiGeneral_service.savetraGrupos(this.traGrupos, this.getToken().token).subscribe(
       result => {
         try {
           if (result.estado) {
-            this.dialogRef.close({ flag: true, data: this.linea });
+            this.dialogRef.close({ flag: true, data: this.traGrupos });
           } else {
             this.openSnackBar(result.mensaje, 99);
           }
@@ -76,7 +74,4 @@ export class LineaeditarComponent extends BaseComponent implements OnInit {
       });
   }
 
-
 }
-
-

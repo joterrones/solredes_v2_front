@@ -1,11 +1,18 @@
-<h1 mat-dialog-title>Edición {{carpeta.c_nombre}}</h1>
+<h1 mat-dialog-title>Edición {{archivo.c_nombre}}</h1>
 <form class="example-container" #newForm="ngForm" (ngSubmit)="guardar(newForm)">
   <div mat-dialog-content class="contenedor">
 
     <mat-form-field>
-      <input matInput placeholder="Nombre" name="c_nombre" #c_username="ngModel" [(ngModel)]="carpeta.c_nombre"
+      <input matInput placeholder="Nombre" name="c_nombre" #c_username="ngModel" [(ngModel)]="archivo.c_nombre"
         minlength="3" required />
-      <mat-hint class="error" *ngIf="carpeta.c_nombre.length<3">debe tener mínimo de 3 dígitos</mat-hint>
+      <mat-hint class="error" *ngIf="archivo.c_nombre.length<3">debe tener mínimo de 3 dígitos</mat-hint>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-select placeholder="Carpeta" [(value)]="archivo.n_iddoc_archivopadre" required [disabled]="!editar">
+        <mat-option *ngFor="let ca of carpetas" [value]="ca.n_iddoc_archivo">
+          {{ca.c_nombre}}
+        </mat-option>
+      </mat-select>
     </mat-form-field>
     <button mat-button type="submit" cdkFocusInitial
       [disabled]="!newForm.form.valid">

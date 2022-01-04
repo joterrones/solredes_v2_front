@@ -88,13 +88,18 @@ import { ImportacionPlanillaComponent } from './component/importacion-planilla/i
 import { ProyectoSeleccionComponent } from './component/proyecto-seleccion/proyecto-seleccion.component';
 import { AdmiArchivosComponent } from './component/archivos/admi-archivos/admi-archivos.component';
 import { AdmiArchivosEditarComponent } from './component/archivos/admi-archivos-editar/admi-archivos-editar.component';
-import { ArchivosComponent } from './component/archivos/archivos/archivos.component';
 import { ArchivosEditarComponent } from './component/archivos/archivos-editar/archivos-editar.component';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import { ImportacionLineaComponent } from './component/importacion-linea/importacion-linea.component';
 import { MapaLineaComponent } from './component/mapa-linea/mapa-linea.component';
 import { MapaGeneralComponent } from './component/mapa-general/mapa-general.component';
 import { MapaBaseComponent } from './component/mapa-base/mapa-base.component';
+import { UsuarioproyectoComponent } from './component/seguridad/usuarioproyecto/usuarioproyecto.component';
+import { ValoresGeneralesComponent } from './component/configGeneral/valores-generales/valores-generales.component';
+import { ValoresGeneralesEditarComponent } from './component/configGeneral/valores-generales-editar/valores-generales-editar.component';
+import { TragrupoComponent } from './component/configGeneral/tragrupo/tragrupo.component';
+import { TragrupoEditarComponent } from './component/configGeneral/tragrupo-editar/tragrupo-editar.component';
+import { ProyectousuaioComponent } from './component/configGeneral/proyectousuaio/proyectousuaio.component';
 
 
 @NgModule({
@@ -144,12 +149,24 @@ import { MapaBaseComponent } from './component/mapa-base/mapa-base.component';
     GuiaComponent, 
     GuiaeditarComponent, 
     GuiadetalleComponent, 
-    GuiadetalleeditarComponent, ImportacionPlanillaComponent, ProyectoSeleccionComponent,   
+    GuiadetalleeditarComponent, 
+    ImportacionPlanillaComponent, 
+    ProyectoSeleccionComponent,   
     GuiadetalleeditarComponent, 
     AdmiArchivosComponent, 
     AdmiArchivosEditarComponent, 
-    ArchivosComponent, 
-    ArchivosEditarComponent, ImportacionLineaComponent, MapaLineaComponent, MapaGeneralComponent, MapaBaseComponent,   
+    ArchivosEditarComponent, 
+    ImportacionLineaComponent,
+     MapaLineaComponent, 
+     MapaGeneralComponent, 
+     MapaBaseComponent,   
+    ArchivosEditarComponent, 
+    UsuarioproyectoComponent, 
+    ValoresGeneralesComponent, 
+    ValoresGeneralesEditarComponent, 
+    TragrupoComponent, 
+    TragrupoEditarComponent, 
+    ProyectousuaioComponent,   
   ],
   imports: [
     FormsModule,

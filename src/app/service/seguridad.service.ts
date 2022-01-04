@@ -86,4 +86,37 @@ export class SeguridadService {
         return this._http.post(this.url + 'seguridad/deleteRol', data);
     }
 
+    getProyectos(token): Observable<any> {
+        var reqHeader = new HttpHeaders({
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
+        });
+        return this._http.post(this.url + 'seguridad/getProyectos', { headers: reqHeader });
+    }
+
+    getUserPro(data, token): Observable<any> {
+        var reqHeader = new HttpHeaders({
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
+        });
+        return this._http.post(this.url + 'seguridad/getUserPro', data, { headers: reqHeader });
+    }
+
+    saveUserPro(data, token): Observable<any> {
+        var reqHeader = new HttpHeaders({
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
+        });
+        console.log(data)
+        return this._http.post(this.url + 'seguridad/saveUserPro', data, { headers: reqHeader });
+    }
+
+    resetUserPro(data, token): Observable<any> {
+        var reqHeader = new HttpHeaders({
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
+        });
+        return this._http.post(this.url + 'seguridad/resetUserPro', data, { headers: reqHeader });
+    }
+
 }

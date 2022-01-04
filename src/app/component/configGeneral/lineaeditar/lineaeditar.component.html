@@ -21,6 +21,14 @@
         </mat-option>
       </mat-select>
     </mat-form-field>    
+
+    <mat-form-field>
+      <mat-select placeholder="zona" [(value)]="linea.n_idpl_zona" required>
+        <mat-option *ngFor="let z of zona" [value]="z.n_idpl_zona">
+          {{z.c_nombre}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field> 
   </div>
   <div mat-dialog-actions>
 

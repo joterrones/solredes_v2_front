@@ -1,22 +1,16 @@
-export interface Carpeta{
-    id_carpeta: number,
-    c_nombre: String,
-    d_fechamodi: String
-}
-
-export interface CarpetaEditar{
-    carpeta: Carpeta
-}
 
 export interface Archivo{
-    id_archivo: number,
-    id_carpeta: number,
+    n_iddoc_archivo: number,
+    n_idpro_proyecto: number,    
     c_nombre: String,
-    c_ruta: String
+    c_ruta: String,
+    c_rutalogica: String,
+    c_checksum: String,
+    c_tipo: String,
+    n_iddoc_archivopadre: number
 }
 
 export interface ArchivoEditar{
     archivo: Archivo,
-    id_carpeta: number,
-    carpetas: Carpeta[]
+    n_iddoc_archivopadre: number
 }

@@ -12,6 +12,7 @@ import { GeneralService } from '../../../service/general.service';
 import { ResetearclaveComponent } from '../../generico/resetarclave/resetarclave.component';
 import { UsuarioeditarComponent } from '../usuarioeditar/usuarioeditar.component';
 import { ConfirmComponent } from '../../general/confirm/confirm.component';
+import { UsuarioproyectoComponent } from '../usuarioproyecto/usuarioproyecto.component';
 @Component({
   selector: 'app-usuario',
   templateUrl: './usuario.component.html',
@@ -27,7 +28,7 @@ export class UsuarioComponent extends BaseComponent implements OnInit {
   identidad = 0;
   textfilter = '';
 
-  displayedColumns: string[] = ['editar', 'username', 'c_nombre', 'c_dni', 'c_rol', 'resetear', 'eliminar'];
+  displayedColumns: string[] = ['editar', 'username', 'c_nombre', 'c_dni', 'c_rol', 'asigProyecto','resetear', 'eliminar'];
   public tablaUsuarios: MatTableDataSource<any>;
   public confirmar: Confirmar;
 
@@ -46,7 +47,6 @@ export class UsuarioComponent extends BaseComponent implements OnInit {
 
   ngOnInit() {
     this.getrole();
-    //this.getentidad();
     this.getTablaUsuario();
   }
 
@@ -145,6 +145,19 @@ export class UsuarioComponent extends BaseComponent implements OnInit {
         console.log(error);
         this.getTablaUsuario();
       }
+    });
+  }
+
+  openDialogProyecto(usuario): void {
+    let data = {
+      usuario: usuario,
+      titulo: "Asignar Proyecto"
+    };
+    const dialogAsigPro = this.dialog.open(UsuarioproyectoComponent, {
+      width: '750px',
+      data: data
+    });
+    dialogAsigPro.afterClosed().subscribe(result => {
     });
   }
 
