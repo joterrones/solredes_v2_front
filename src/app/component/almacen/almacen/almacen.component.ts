@@ -42,14 +42,9 @@ export class AlmacenComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit() {       
-    this.getProyectos();     
+        
     this.getTablaAlmacen();
-  }  
-
-  selectProyecto(n_idpro_proyecto) {
-    this.idtproyecto = n_idpro_proyecto;
-    this.getTablaAlmacen();
-  }
+  } 
   
   getTablaAlmacen() {
     let request = {
@@ -75,27 +70,6 @@ export class AlmacenComponent extends BaseComponent implements OnInit {
         }
       }, error => {
         this.openSnackBar(error.error, 99);
-      });
-  }
-
-  getProyectos() {
-    let request = {
-      n_idpro_proyecto: this.idtproyecto      
-    }
-    this._almacen_service.getProyecto(request,this.getToken().token).subscribe(
-      result => {
-        let resultado = <ResultadoApi>result;
-        if (resultado.estado) {
-          this.proyecto = resultado.data;
-        } else {
-          this.openSnackBar(resultado.mensaje, 99);
-        }
-      }, error => {
-        try {
-          this.openSnackBar(error.error.Detail, error.error.StatusCode);
-        } catch (error) {
-          this.openSnackBar(AppSettings.SERVICE_NO_CONECT_SERVER, 99);
-        }
       });
   }
   

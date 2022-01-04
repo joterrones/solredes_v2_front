@@ -228,7 +228,8 @@ import { PrincipalComponent } from './component/principal/principal.component';
     ProyectousuaioComponent,
     UsuarioproyectoComponent,
     AdmiArchivosEditarComponent,
-    ArchivosEditarComponent
+    ArchivosEditarComponent,
+    AlmaceneditarComponent
   ],
   providers: [
     MatDatepickerModule, 
