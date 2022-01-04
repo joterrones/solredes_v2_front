@@ -34,7 +34,7 @@ import { MapaGeneralComponent } from './component/mapa-general/mapa-general.comp
 import { ValoresGeneralesComponent } from './component/configGeneral/valores-generales/valores-generales.component'; 
 import { TragrupoComponent } from './component/configGeneral/tragrupo/tragrupo.component';
 import { ImportacionLineaComponent } from './component/importacion-linea/importacion-linea.component';
-
+import { PrincipalComponent } from './component/principal/principal.component';
 //Array de rutas
 const appRoutes:Routes=[
     {path:'',component:LoginComponent},
@@ -68,7 +68,7 @@ const appRoutes:Routes=[
     {path:'AdmArchivos',component:AdmiArchivosComponent},    
     {path:'valoresGenerales',component:ValoresGeneralesComponent}, 
     {path:'tragrupos',component:TragrupoComponent},
-    
+    {path:'principal',component:PrincipalComponent},
     {path:'**',component:LoginComponent},    
      
 ]

@@ -2,90 +2,146 @@
     <mat-sidenav #drawer class="sidenav" fixedInViewport="true"
         [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'" [mode]="(isHandset$ | async) ? 'over' : 'side'"
         [opened]="!(isHandset$ | async)">
-        <mat-toolbar class="mat-elevation-z4" color="primary"><label class="titulo">{{proyecto.c_nombre}} {{rol}}</label></mat-toolbar>
+        <mat-toolbar class="mat-elevation-z4" color="primary"><label class="titulo">{{proyecto.c_nombre}}
+                {{rol}}</label></mat-toolbar>
         <mat-nav-list>
+            <mat-accordion>
+                <mat-expansion-panel>
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            <mat-icon>supervisor_account</mat-icon>
+                            Seguridad
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <a mat-list-item [routerLink]="['/usuario']">
+                        <mat-icon>keyboard_arrow_right</mat-icon>
+                        <span>Administración de Usuarios</span>
+                    </a>
 
-            <a mat-list-item [routerLink]="['/usuario']" >
-                <mat-icon>account_box</mat-icon>
-                <span>Administración de Usuarios</span>
-            </a>
-            
-            <a mat-list-item [routerLink]="['/rol']" >
-                <mat-icon></mat-icon>
-                <span>Administración de Roles</span>
-            </a>                         
-            <hr>
-            <a mat-list-item [routerLink]="['/linea']" >
-                <mat-icon></mat-icon>
-                <span>Administración de Linea</span>
-            </a>
-            <a mat-list-item [routerLink]="['/tipolinea']" >
-                <mat-icon></mat-icon>
-                <span>Administración de Tipo Linea</span>
-            </a>  
-            <a mat-list-item [routerLink]="['/zona']" >
-                <mat-icon></mat-icon>
-                <span>Administración de Zona</span>
-            </a>
-            
-            <a mat-list-item [routerLink]="['/confproyecto']" >
-                <mat-icon></mat-icon>
-                <span>Administración de Proyecto</span>
-            </a>
-            <a mat-list-item [routerLink]="['/empresa']" >
-                <mat-icon></mat-icon>
-                <span>Administración de Empresa</span>
-            </a>            
-            <a mat-list-item [routerLink]="['/tipofoto']" >
-                <mat-icon></mat-icon>
-                <span>Administración de Tipo Foto</span>
-            </a>
-            <a mat-list-item [routerLink]="['/estructura']" >
-                <mat-icon></mat-icon>
-                <span>Administración de Estructura</span>
-            </a>
-            
-            <a mat-list-item [routerLink]="['/tipoempresa']" >
-                <mat-icon></mat-icon>
-                <span>Administración de Tipo Empresa</span>
-            </a>
-            <a mat-list-item [routerLink]="['/valoresGenerales']" >
-                <mat-icon></mat-icon>
-                <span>Administración de Valores General</span>
-            </a>
+                    <a mat-list-item [routerLink]="['/rol']">
+                        <mat-icon>keyboard_arrow_right</mat-icon>
+                        <span>Administración de Roles</span>
+                    </a>
+                </mat-expansion-panel>
 
-            <a mat-list-item [routerLink]="['/tragrupos']" >
-                <mat-icon></mat-icon>
-                <span>Administración de Tra_Grupos</span>
-            </a>
-            <hr>
-            <a mat-list-item [routerLink]="['/almacen']" >
-                <mat-icon></mat-icon>
-                <span>Administración de Almacen</span>
-            </a>        
-            <a mat-list-item [routerLink]="['/importacionplanilla']" >
-                <mat-icon></mat-icon>
-                <span>Importación de planillas</span>
-            </a>  
-            <a mat-list-item [routerLink]="['/importacionlinea']" >
-                <mat-icon></mat-icon>
-                <span>Importación de lineas</span>
-            </a>  
-            <a mat-list-item [routerLink]="['/mapalinea']" >
-                <mat-icon></mat-icon>
-                <span>Mapa Linea</span>
-            </a>  
-            <a mat-list-item [routerLink]="['/mapageneral']" >
-                <mat-icon></mat-icon>
-                <span>Mapa General</span>
-            </a>  
-            
-            
-            <hr>
-            <a mat-list-item [routerLink]="['/AdmArchivos']" >
-                <mat-icon></mat-icon>
-                <span>Administración de Archivos</span>
-            </a> 
+                <mat-expansion-panel>
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            <mat-icon>settings</mat-icon>
+                            Maestros
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <a mat-list-item [routerLink]="['/linea']">
+                        <mat-icon>keyboard_arrow_right</mat-icon>
+                        <span>Administración de Linea</span>
+                    </a>
+                    <a mat-list-item [routerLink]="['/tipolinea']">
+                        <mat-icon>keyboard_arrow_right</mat-icon>
+                        <span>Administración de Tipo Linea</span>
+                    </a>
+                    <a mat-list-item [routerLink]="['/zona']">
+                        <mat-icon>keyboard_arrow_right</mat-icon>
+                        <span>Administración de Zona</span>
+                    </a>
+
+                    <a mat-list-item [routerLink]="['/confproyecto']">
+                        <mat-icon>keyboard_arrow_right</mat-icon>
+                        <span>Administración de Proyecto</span>
+                    </a>
+                    <a mat-list-item [routerLink]="['/empresa']">
+                        <mat-icon>keyboard_arrow_right</mat-icon>
+                        <span>Administración de Empresa</span>
+                    </a>
+                    <a mat-list-item [routerLink]="['/tipofoto']">
+                        <mat-icon>keyboard_arrow_right</mat-icon>
+                        <span>Administración de Tipo Foto</span>
+                    </a>
+                    <a mat-list-item [routerLink]="['/estructura']">
+                        <mat-icon>keyboard_arrow_right</mat-icon>
+                        <span>Administración de Estructura</span>
+                    </a>
+
+                    <a mat-list-item [routerLink]="['/tipoempresa']">
+                        <mat-icon>keyboard_arrow_right</mat-icon>
+                        <span>Administración de Tipo Empresa</span>
+                    </a>
+                    <a mat-list-item [routerLink]="['/valoresGenerales']">
+                        <mat-icon>keyboard_arrow_right</mat-icon>
+                        <span>Administración de Valores Generales</span>
+                    </a>
+                </mat-expansion-panel>
+
+                <mat-expansion-panel>
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            <mat-icon>group_work</mat-icon>
+                            Asignación
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <a mat-list-item [routerLink]="['/tragrupos']">
+                        <mat-icon>keyboard_arrow_right</mat-icon>
+                        <span>Administración de Grupos</span>
+                    </a>
+                </mat-expansion-panel>
+
+                <mat-expansion-panel>
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            <mat-icon>file_copy</mat-icon>
+                            Documentos
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <a mat-list-item [routerLink]="['/AdmArchivos']">
+                        <mat-icon>keyboard_arrow_right</mat-icon>
+                        <span>Administración de Archivos</span>
+                    </a>
+                </mat-expansion-panel>
+                <mat-expansion-panel>
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            <mat-icon>cloud_upload</mat-icon>
+                            Importación
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <a mat-list-item [routerLink]="['/importacionplanilla']">
+                        <mat-icon>keyboard_arrow_right</mat-icon>
+                        <span>Importación de planillas</span>
+                    </a>
+                    <a mat-list-item [routerLink]="['/importacionlinea']">
+                        <mat-icon>keyboard_arrow_right</mat-icon>
+                        <span>Importación de lineas</span>
+                    </a>
+                    <a mat-list-item [routerLink]="['/mapalinea']">
+                        <mat-icon>keyboard_arrow_right</mat-icon>
+                        <span>Mapa Linea</span>
+                    </a>
+                </mat-expansion-panel>
+                <mat-expansion-panel>
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            <mat-icon>add_location</mat-icon>
+                            Mapa
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <a mat-list-item [routerLink]="['/mapageneral']">
+                        <mat-icon>keyboard_arrow_right</mat-icon>
+                        <span>Mapa General</span>
+                    </a>
+                </mat-expansion-panel>
+                <mat-expansion-panel>
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            <mat-icon>home</mat-icon>
+                            Almacén
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <a mat-list-item [routerLink]="['/almacen']">
+                        <mat-icon>keyboard_arrow_right</mat-icon>
+                        <span>Administración de almacén y guías</span>
+                    </a>
+                </mat-expansion-panel>
+            </mat-accordion>
+
         </mat-nav-list>
     </mat-sidenav>
     <mat-sidenav-content>
@@ -94,12 +150,12 @@
                 *ngIf="isHandset$ | async">
                 <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
             </button>
-    
+
             <div>
-            
+
                 <label style="font-size: 14px;">
-                    {{date   | date: "dd/MM/yyyy"}}
-                    {{date   | date: "HH:mm:ss"}}
+                    {{date | date: "dd/MM/yyyy"}}
+                    {{date | date: "HH:mm:ss"}}
                 </label>
             </div>
             <span class="example-fill-remaining-space"></span>
@@ -117,7 +173,7 @@
         </mat-toolbar>
         <!--Aquí va el contenido de los formularios-->
         <ng-content>
-            
+
         </ng-content>
     </mat-sidenav-content>
 </mat-sidenav-container>

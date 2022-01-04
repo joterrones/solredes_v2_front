@@ -100,6 +100,7 @@ import { ValoresGeneralesEditarComponent } from './component/configGeneral/valor
 import { TragrupoComponent } from './component/configGeneral/tragrupo/tragrupo.component';
 import { TragrupoEditarComponent } from './component/configGeneral/tragrupo-editar/tragrupo-editar.component';
 import { ProyectousuaioComponent } from './component/configGeneral/proyectousuaio/proyectousuaio.component';
+import { PrincipalComponent } from './component/principal/principal.component';
 
 
 @NgModule({
@@ -166,7 +167,7 @@ import { ProyectousuaioComponent } from './component/configGeneral/proyectousuai
     ValoresGeneralesEditarComponent, 
     TragrupoComponent, 
     TragrupoEditarComponent, 
-    ProyectousuaioComponent,   
+    ProyectousuaioComponent, PrincipalComponent,   
   ],
   imports: [
     FormsModule,

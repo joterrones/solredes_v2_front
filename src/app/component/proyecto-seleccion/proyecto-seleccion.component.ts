@@ -47,7 +47,7 @@ export class ProyectoSeleccionComponent extends BaseComponent implements OnInit 
   irProyecto(item){
     console.log("get_seleccionproyecto usuario", item);
     this.setProyecto(item);
-    this.router.navigate(['/grafico']);
+    this.router.navigate(['/principal']);
   }
 
 }

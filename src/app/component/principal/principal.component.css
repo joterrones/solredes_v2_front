@@ -1,0 +1,14 @@
+.example-card {
+    width: 400px;
+    margin-bottom: 8px;
+    margin: 10px;
+    flex:item
+  }
+
+  .contenedor{
+   margin: 1%;
+  }
+  .lista{
+    display:flex;
+    flex-wrap: wrap;
+  }
