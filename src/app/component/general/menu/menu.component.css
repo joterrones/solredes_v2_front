@@ -1,8 +1,7 @@
 .sidenav-container {
     height: 100%;
+    
   }
-
- 
  
   .example-fill-remaining-space {
     flex: 1 1 auto;
@@ -26,5 +25,11 @@
   .mat-toolbar.mat-primary{
     color: white;
   }
+
+  .sidenav{
+    width: 386px;
+  }
+
   
+
   

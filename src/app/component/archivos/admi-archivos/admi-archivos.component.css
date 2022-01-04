@@ -47,7 +47,7 @@ table {
 
 .example-card {
   
-  width: 323px;
+  width: 325px;
   padding-top: 9px;
   padding-right: 9px;
   padding-bottom: 9px;
@@ -66,13 +66,13 @@ table {
 
 .mat-card-avatar {
   
-  width: 170px;
+  width: 165px;
   flex-shrink: 0;
   object-fit: cover;
 }
 
 .label{
-  width: 170px;
+  width: 165px;
   overflow:hidden;
   white-space:nowrap;
   text-overflow: ellipsis;

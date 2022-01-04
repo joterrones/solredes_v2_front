@@ -5,7 +5,7 @@ import { BaseComponent } from '../../base/base.component';
 import { Router } from "@angular/router";
 import { AppSettings } from '../../../common/appsettings';
 
-import { Usuario, UsuarioEditar, Role } from '../../../interface/seguridad.interface';
+import { UsuarioEditar } from '../../../interface/seguridad.interface';
 import { SeguridadService } from '../../../service/seguridad.service';
 import { ResultadoApi } from 'src/app/interface/common.interface';
 
@@ -32,6 +32,8 @@ export class UsuarioproyectoComponent extends BaseComponent implements OnInit {
     }
 
   ngOnInit() {
+    console.log("PRUEBA DIALOG");
+    
     this.getUserPro();
   }
 

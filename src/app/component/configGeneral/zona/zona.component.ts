@@ -22,7 +22,7 @@ export class ZonaComponent extends BaseComponent implements OnInit {
   tit: String = "SEGURIDAD > GESTOR DE ZONAS";
 
   proyecto: [];
-  idproyecto = 0;  
+  idpro = 0;  
   idzona = 0;
   textfilter = '';
   //displayedColumns: string[] = ['Buscar'];
@@ -48,7 +48,7 @@ export class ZonaComponent extends BaseComponent implements OnInit {
   }
 
   selectProyecto(n_idpl_proyecto) {
-    this.idproyecto = n_idpl_proyecto;
+    this.idpro = n_idpl_proyecto;
     this.getTablaZona();
   }
   
@@ -56,6 +56,8 @@ export class ZonaComponent extends BaseComponent implements OnInit {
     let request = {
       n_idpl_zona: this.idzona,      
     }
+    console.log(this.idzona);
+    
     this._confiGeneral_service.getZona(request, this.getToken().token).subscribe(
       result => {
 
@@ -79,8 +81,9 @@ export class ZonaComponent extends BaseComponent implements OnInit {
   }
 
   getProyecto() {
+    console.log(this.idpro );
     let request = {
-      n_idpl_proyecto: this.idproyecto      
+      n_idpl_proyecto: this.idpro      
     }
     this._confiGeneral_service.getProyecto(request,this.getToken().token).subscribe(
       result => {

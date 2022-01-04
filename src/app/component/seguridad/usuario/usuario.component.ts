@@ -65,6 +65,9 @@ export class UsuarioComponent extends BaseComponent implements OnInit {
       n_idseg_rol: this.idroles,
       n_idgen_entidad: this.identidad
     }
+    console.log( this.idroles)
+    console.log(this.identidad);
+    
     this._seguridad_service.get(request, this.getToken().token).subscribe(
       result => {
 
@@ -149,6 +152,8 @@ export class UsuarioComponent extends BaseComponent implements OnInit {
   }
 
   openDialogProyecto(usuario): void {
+    console.log("PUREBA");
+    
     let data = {
       usuario: usuario,
       titulo: "Asignar Proyecto"

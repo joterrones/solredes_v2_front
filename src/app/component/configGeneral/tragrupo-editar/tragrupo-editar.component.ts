@@ -5,7 +5,7 @@ import { BaseComponent } from '../../base/base.component';
 import { Router } from "@angular/router";
 import { AppSettings } from '../../../common/appsettings';
 
-import { EditarTraGrupos, Linea, LineaEditar, Proyecto, Proyectos, Tipolinea, TraGrupos, Zona } from '../../../interface/configGeneral.interface';
+import { EditarTraGrupos, Proyectos,TraGrupos} from '../../../interface/configGeneral.interface';
 import { confGeneralService } from '../../../service/confGeneral.service';
 
 @Component({

@@ -52,7 +52,7 @@ const appRoutes:Routes=[
     {path:'linea',component:LineaComponent},
     {path:'empresa',component:EmpresaComponent},
     {path:'tipolinea',component:TipolineaComponent},
-    {path:'zona',component:ZonaComponent},
+    {path:'zonas',component:ZonaComponent},
     {path:'confproyecto',component:ConfproyectoComponent},
     {path:'tipofoto',component:TipofotoComponent},
     {path:'estructura',component:EstructuraComponent},
