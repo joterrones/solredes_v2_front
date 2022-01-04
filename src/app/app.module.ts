@@ -89,7 +89,12 @@ import { ProyectoSeleccionComponent } from './component/proyecto-seleccion/proye
 import { AdmiArchivosComponent } from './component/archivos/admi-archivos/admi-archivos.component';
 import { AdmiArchivosEditarComponent } from './component/archivos/admi-archivos-editar/admi-archivos-editar.component';
 import { ArchivosEditarComponent } from './component/archivos/archivos-editar/archivos-editar.component';
-
+import { UsuarioproyectoComponent } from './component/seguridad/usuarioproyecto/usuarioproyecto.component';
+import { ValoresGeneralesComponent } from './component/configGeneral/valores-generales/valores-generales.component';
+import { ValoresGeneralesEditarComponent } from './component/configGeneral/valores-generales-editar/valores-generales-editar.component';
+import { TragrupoComponent } from './component/configGeneral/tragrupo/tragrupo.component';
+import { TragrupoEditarComponent } from './component/configGeneral/tragrupo-editar/tragrupo-editar.component';
+import { ProyectousuaioComponent } from './component/configGeneral/proyectousuaio/proyectousuaio.component';
 
 
 @NgModule({
@@ -145,17 +150,15 @@ import { ArchivosEditarComponent } from './component/archivos/archivos-editar/ar
     GuiadetalleeditarComponent, 
     AdmiArchivosComponent, 
     AdmiArchivosEditarComponent, 
-<<<<<<< HEAD
+
     ArchivosEditarComponent, 
     UsuarioproyectoComponent, 
     ValoresGeneralesComponent, 
     ValoresGeneralesEditarComponent, 
     TragrupoComponent, 
-    TragrupoEditarComponent, ProyectousuaioComponent,   
-=======
-    ArchivosComponent, 
-    ArchivosEditarComponent, ImportacionLineaComponent, MapaLineaComponent,   
->>>>>>> b480092b0830b9518c6a67aa86f4dcb690c72431
+    TragrupoEditarComponent, 
+    ProyectousuaioComponent,   
+
   ],
   imports: [
     FormsModule,
