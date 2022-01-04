@@ -99,6 +99,16 @@ export class confGeneralService{
         return this._http.post(this.url + 'configuracionGeneral/getZona', data, { headers: reqHeader });
     }
 
+    getZonas(data, token): Observable<any> {
+        var reqHeader = new HttpHeaders({
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
+        });
+        console.log('enviando datos a node zona')
+        console.log(data)
+        return this._http.post(this.url + 'configuracionGeneral/getZonas', data, { headers: reqHeader });
+    }
+
     saveZona(data, token): Observable<any> {
         var reqHeader = new HttpHeaders({
             'Content-Type': 'application/json',
@@ -207,4 +217,88 @@ export class confGeneralService{
         console.log(data)        
         return this._http.post(this.url + 'configuracionGeneral/deleteTipoEmpresa', data);
     } 
+
+    getValoresGnr(token): Observable<any> {
+        var reqHeader = new HttpHeaders({
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
+        });
+        return this._http.post(this.url + 'configuracionGeneral/getValoresGnr', { headers: reqHeader });
+    }
+
+    saveValoresGnr(data, token): Observable<any> {
+        var reqHeader = new HttpHeaders({
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
+        });
+        console.log('enviando datos a node')
+        console.log(data)
+        return this._http.post(this.url + 'configuracionGeneral/saveValoresGnr', data, { headers: reqHeader });
+    }
+
+    deleteValorGnr(data): Observable<any> {
+        console.log('borrando Tipo linea')
+        console.log(data)        
+        return this._http.post(this.url + 'configuracionGeneral/deleteValorGnr', data);
+    }   
+
+    getTraGrupos(data, token): Observable<any> {
+        var reqHeader = new HttpHeaders({
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
+        });
+        console.log('enviando datos a node linea')
+        console.log(data)
+        return this._http.post(this.url + 'configuracionGeneral/getTraGrupos', data, { headers: reqHeader });
+    }
+
+    getProyectos(token): Observable<any> {
+        var reqHeader = new HttpHeaders({
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
+        });
+        return this._http.post(this.url + 'configuracionGeneral/getProyectos',  { headers: reqHeader });
+    }
+
+    savetraGrupos(data, token): Observable<any> {
+        var reqHeader = new HttpHeaders({
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
+        });        
+        console.log(data)
+        return this._http.post(this.url + 'configuracionGeneral/savetraGrupos', data, { headers: reqHeader });
+    }
+
+    deletetraGrupos(data): Observable<any> {
+        console.log('borrando linea')
+        console.log(data)        
+        return this._http.post(this.url + 'configuracionGeneral/deletetraGrupos', data);
+    }
+
+    getProUser(data, token): Observable<any> {
+        var reqHeader = new HttpHeaders({
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
+        });
+        console.log(data)
+        return this._http.post(this.url + 'configuracionGeneral/getProUser', data, { headers: reqHeader });
+    }
+
+    resetProUser(data, token): Observable<any> {
+        var reqHeader = new HttpHeaders({
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
+        });
+        console.log(data)
+        return this._http.post(this.url + 'configuracionGeneral/resetProUser', data, { headers: reqHeader });
+    }
+
+    saveProUser(data, token): Observable<any> {
+        var reqHeader = new HttpHeaders({
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
+        });        
+        console.log(data)
+        return this._http.post(this.url + 'configuracionGeneral/saveProUser', data, { headers: reqHeader });
+    }
 }

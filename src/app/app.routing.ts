@@ -39,7 +39,9 @@ import { GuiadetalleComponent } from './component/almacen/detalleguia/guiadetall
 import { ImportacionPlanillaComponent } from './component/importacion-planilla/importacion-planilla.component';
 import { ProyectoSeleccionComponent } from './component/proyecto-seleccion/proyecto-seleccion.component';
 import { AdmiArchivosComponent } from './component/archivos/admi-archivos/admi-archivos.component';
-import { ArchivosComponent } from './component/archivos/archivos/archivos.component';
+import { ValoresGeneralesComponent } from './component/configGeneral/valores-generales/valores-generales.component'; 
+import { TragrupoComponent } from './component/configGeneral/tragrupo/tragrupo.component';
+
 
 
 //Array de rutas
@@ -79,8 +81,9 @@ const appRoutes:Routes=[
     {path:'proyectoseleccion',component:ProyectoSeleccionComponent},
     {path:'guia/:n_idalm_almacen/:c_nombre',component:GuiaComponent},
     {path:'guiadetalle/:n_idalm_guia/:c_nombre/:c_nombreAlmacen/:n_idalm_almacen',component:GuiadetalleComponent},
-    {path:'AdmArchivos',component:AdmiArchivosComponent},
-    {path:'archivos/:id_carpeta/:c_nombre',component:ArchivosComponent},
+    {path:'AdmArchivos',component:AdmiArchivosComponent},    
+    {path:'valoresGenerales',component:ValoresGeneralesComponent}, 
+    {path:'tragrupos',component:TragrupoComponent},
     {path:'**',component:ProyectoComponent},    
      
 ]

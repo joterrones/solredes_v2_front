@@ -13,7 +13,8 @@ export interface Linea{
     n_idpl_linea: number,
     c_nombre: String,
     c_codigo: String,
-    n_idpl_tipolinea: number    
+    n_idpl_tipolinea: number,
+    n_idpl_zona: number,    
 }
 
 export interface Tipolinea{
@@ -23,7 +24,8 @@ export interface Tipolinea{
 
 export interface LineaEditar{
     linea: Linea,
-    tipolinea: Tipolinea[]
+    tipolinea: Tipolinea[],
+    zona: Zona[]
 }
 
 export interface EditarTipoLinea{
@@ -83,3 +85,37 @@ export interface TipoEmpresa{
 export interface EditarTipoEmpresa{
     tipoempresa: TipoEmpresa
 }
+
+export interface ValoresGenerales{
+    n_idgen_valoresgenerales: number,
+    c_codigo: String, 
+    c_nombre: String, 
+    n_valorunico: number
+}
+
+export interface EditarValoresGenerales{
+    valoresGnr: ValoresGenerales
+}
+
+export interface TraGrupos{
+    n_idtra_grupo: number,
+    n_idpro_proyecto: number,
+    c_nombre: String,
+    c_nombrep: String
+}
+
+export interface Proyectos{
+    n_idpro_proyecto: number,
+    c_nombre: String,
+}
+
+export interface EditarTraGrupos{
+    traGrupos: TraGrupos,
+    proyectos: Proyectos[]
+}
+
+
+
+
+
+

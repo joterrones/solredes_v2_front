@@ -9,8 +9,8 @@ import { Router } from '@angular/router';
 import { AppSettings } from 'src/app/common/appsettings';
 import { ConfirmComponent } from '../../general/confirm/confirm.component';
 import { AdmiArchivosEditarComponent } from '../admi-archivos-editar/admi-archivos-editar.component';
-import { ResultadoApi } from 'src/app/interface/common.interface';
-
+import { ArchivosEditarComponent } from '../archivos-editar/archivos-editar.component';
+import { saveAs } from 'file-saver';
 
 @Component({
   selector: 'app-admi-archivos',
@@ -21,7 +21,8 @@ import { ResultadoApi } from 'src/app/interface/common.interface';
 export class AdmiArchivosComponent extends BaseComponent implements OnInit {
 
   textfilter = '';
-
+  archivos: [];
+  n_iddoc_archivopadre: number = 0;
   displayedColumns: string[] = ['editar', 'c_nombre','d_fechamodi','eliminar'];
   public tablaCarpetas: MatTableDataSource<any>;
   public confirmar: Confirmar;
@@ -42,14 +43,17 @@ export class AdmiArchivosComponent extends BaseComponent implements OnInit {
   }
 
   getTablaArchivos(){
-    this._archivos_service.getCarpetas(this.getToken().token).subscribe(
+
+    let request = {
+      n_iddoc_archivopadre: this.n_iddoc_archivopadre
+    }
+    this._archivos_service.getArchivo(request,this.getToken().token).subscribe(
       result => {
         try {
-          console.log(result)
-          if (result.estado) {            
-            this.tablaCarpetas = new MatTableDataSource<any>(result.data);
-            this.tablaCarpetas.sort = this.sort;
-            this.tablaCarpetas.paginator = this.paginator;
+          if (result.estado) {     
+            console.log(result.data)
+            this.archivos = result.data;           
+            
           } else {
             this.openSnackBar(result.mensaje, 99);
           }
@@ -64,16 +68,26 @@ export class AdmiArchivosComponent extends BaseComponent implements OnInit {
       });
   }
 
-  
-
   applyFilter(filterValue: String) {
     this.tablaCarpetas.filter = filterValue.trim().toLowerCase();
   }
 
-  openDialog(carpeta): void {
+  editArchivo(archivo){
+    console.log(archivo);
+    console.log(archivo.c_tipo);
+    if(archivo.c_tipo === "2"){
+      this.openDialogArchivo(archivo);
+    }else{
+      this.openDialogCarpeta(archivo);
+    }
+  }
+
+  openDialogCarpeta(archivo): void {
+    console.log(archivo);
+    
     const dialogRef = this.dialog.open(AdmiArchivosEditarComponent, {
-      width: '750px',
-      data: { carpeta: carpeta}
+      width: '750px', 
+      data: { archivo: archivo, n_iddoc_archivopadre: this.n_iddoc_archivopadre}
     });
     dialogRef.afterClosed().subscribe(result => {
       try {        
@@ -86,26 +100,43 @@ export class AdmiArchivosComponent extends BaseComponent implements OnInit {
     });
   }  
 
-  eliminar(item): void {
-    const dialogRef = this.dialog.open(ConfirmComponent, {
-      width: '500px',
-      data: { titulo: "¿Desea eliminar la Carpeta " + item.c_nombre + "?" }
+  openDialogArchivo(archivo): void {
+    console.log(archivo);
+    const dialogRef = this.dialog.open(ArchivosEditarComponent, {
+      width: '750px', 
+      data: { archivo: archivo, n_iddoc_archivopadre: this.n_iddoc_archivopadre}
     });
     dialogRef.afterClosed().subscribe(result => {
+      try {        
+        this.getTablaArchivos();
 
-      if (result) {
-        this.delete_carpeta(item);
+      } catch (error) {
+        console.log(error);
+        this.getTablaArchivos();
       }
     });
   }
 
-  delete_carpeta(item) {
-    this._archivos_service.deleteCarpeta(item).subscribe(
+  eliminar(item): void {
+    const dialogRef = this.dialog.open(ConfirmComponent, {
+      width: '500px',
+      data: { titulo: "¿Esta seguro que desea eliminar: " + item.c_nombre + "?" }
+    });
+    dialogRef.afterClosed().subscribe(result => {
+
+      if (result) {
+        this.delete_archivo(item);
+      }
+    });
+  }
+
+  delete_archivo(item) {
+    this._archivos_service.deleteArchivo(item).subscribe(
       result => {
         try {
           if (result.estado) {
             this.getTablaArchivos();
-            this.openSnackBar("Carpeta eliminada", 200);
+            this.openSnackBar("Elemento eliminado", 200);
           } else {
             this.openSnackBar(result.mensaje, 99);
           }
@@ -122,7 +153,18 @@ export class AdmiArchivosComponent extends BaseComponent implements OnInit {
   }
 
   showArchivos(element): void {    
-    this.router.navigate(["/archivos/"+element.id_carpeta+"/"+element.c_nombre]);
+    //this.router.navigate(["/archivos/"+element.id_carpeta+"/"+element.c_nombre]);
+    this.n_iddoc_archivopadre = element.n_iddoc_archivo;
+    this.getTablaArchivos()
+  }
+
+  download(element) {
+    this._archivos_service.downloadArchivo( element.c_ruta).subscribe(
+      result => {
+        saveAs(result,element.c_nombre);
+      }, error => {
+        this.openSnackBar(<any>error, 99);
+      });
   }
 
 }

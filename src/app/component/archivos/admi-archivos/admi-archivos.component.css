@@ -19,3 +19,62 @@ table {
   justify-content: space-between;
   flex-wrap: wrap;
 }
+
+.navega2{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;  
+  padding-top: 7px;
+  padding-right: 7px;
+  padding-bottom: 7px;
+  min-width: 0;
+}
+.navega3{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+
+.contenedorArchivos{
+  display: flex;
+  flex-direction: column;
+}
+
+.cont{
+  margin: 7px;
+}
+
+.example-card {
+  
+  width: 323px;
+  padding-top: 9px;
+  padding-right: 9px;
+  padding-bottom: 9px;
+  padding-left: 9px;
+}
+
+.subtitulo{
+  margin-top: 25px;
+  margin-bottom: 7px;
+}
+
+.example-header-image{
+  display: flex;
+  align-items: center;
+}
+
+.mat-card-avatar {
+  
+  width: 170px;
+  flex-shrink: 0;
+  object-fit: cover;
+}
+
+.label{
+  width: 170px;
+  overflow:hidden;
+  white-space:nowrap;
+  text-overflow: ellipsis;
+  margin-left: 5px;
+}

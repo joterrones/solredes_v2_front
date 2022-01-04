@@ -125,8 +125,13 @@ import { ImportacionPlanillaComponent } from './component/importacion-planilla/i
 import { ProyectoSeleccionComponent } from './component/proyecto-seleccion/proyecto-seleccion.component';
 import { AdmiArchivosComponent } from './component/archivos/admi-archivos/admi-archivos.component';
 import { AdmiArchivosEditarComponent } from './component/archivos/admi-archivos-editar/admi-archivos-editar.component';
-import { ArchivosComponent } from './component/archivos/archivos/archivos.component';
 import { ArchivosEditarComponent } from './component/archivos/archivos-editar/archivos-editar.component';
+import { UsuarioproyectoComponent } from './component/seguridad/usuarioproyecto/usuarioproyecto.component';
+import { ValoresGeneralesComponent } from './component/configGeneral/valores-generales/valores-generales.component';
+import { ValoresGeneralesEditarComponent } from './component/configGeneral/valores-generales-editar/valores-generales-editar.component';
+import { TragrupoComponent } from './component/configGeneral/tragrupo/tragrupo.component';
+import { TragrupoEditarComponent } from './component/configGeneral/tragrupo-editar/tragrupo-editar.component';
+import { ProyectousuaioComponent } from './component/configGeneral/proyectousuaio/proyectousuaio.component';
 
 
 
@@ -212,12 +217,18 @@ import { ArchivosEditarComponent } from './component/archivos/archivos-editar/ar
     GuiaComponent, 
     GuiaeditarComponent, 
     GuiadetalleComponent, 
-    GuiadetalleeditarComponent, ImportacionPlanillaComponent, ProyectoSeleccionComponent,   
+    GuiadetalleeditarComponent, 
+    ImportacionPlanillaComponent, 
+    ProyectoSeleccionComponent,   
     GuiadetalleeditarComponent, 
     AdmiArchivosComponent, 
     AdmiArchivosEditarComponent, 
-    ArchivosComponent, 
-    ArchivosEditarComponent,   
+    ArchivosEditarComponent, 
+    UsuarioproyectoComponent, 
+    ValoresGeneralesComponent, 
+    ValoresGeneralesEditarComponent, 
+    TragrupoComponent, 
+    TragrupoEditarComponent, ProyectousuaioComponent,   
   ],
   imports: [
     FormsModule,

@@ -9,25 +9,24 @@ import { ResultadoApi } from '../../../interface/common.interface';
 import { Confirmar } from '../../../interface/confirmar.interface';
 import { confGeneralService } from '../../../service/confGeneral.service';
 import { ConfirmComponent } from '../../general/confirm/confirm.component';
-import { LineaeditarComponent } from '../lineaeditar/lineaeditar.component';
+import { TragrupoEditarComponent } from '../tragrupo-editar/tragrupo-editar.component';
+import { ProyectousuaioComponent } from '../proyectousuaio/proyectousuaio.component';
+
 
 @Component({
-  selector: 'app-linea',
-  templateUrl: './linea.component.html',
-  styleUrls: ['./linea.component.css'],
+  selector: 'app-tragrupo',
+  templateUrl: './tragrupo.component.html',
+  styleUrls: ['./tragrupo.component.css'],
   providers: [confGeneralService]
 })
-export class LineaComponent extends BaseComponent implements OnInit {
-  tit: String = "SEGURIDAD > GESTOR DE LINEAS";
+export class TragrupoComponent extends BaseComponent implements OnInit {
 
-  tipolinea: [];
-  zona: [];
-  idtipolinea = 0;  
-  idzona = 0;
+  proyectos: [];
+  idproyecto = 0;  
   textfilter = '';
 
-  displayedColumns: string[] = ['editar', 'c_nombre', 'c_codigo', 'tipolinea', 'zona','eliminar'];
-  public tablaLineas: MatTableDataSource<any>;
+  displayedColumns: string[] = ['editar', 'c_nombre', 'c_nombrep','asigUsuario','eliminar'];
+  public tablaTraGrupos: MatTableDataSource<any>;
   public confirmar: Confirmar;
 
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
@@ -43,35 +42,28 @@ export class LineaComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getzona();
-    this.gettipolinea();    
-    this.getTablaLinea();
+    this.getProyectos();    
+    this.getTablaTraGrupos();
   }
 
-  selectTipolinea(n_idpl_tipolinea) {
-    this.idtipolinea = n_idpl_tipolinea;
-    this.getTablaLinea();
-  }
-
-  selectZona(n_idpl_zona) {
-    this.idzona = n_idpl_zona;
-    this.getTablaLinea();
+  selectProyecto(n_idpro_proyecto) {
+    this.idproyecto = n_idpro_proyecto;
+    this.getTablaTraGrupos();
   }
   
-  getTablaLinea() {
+  getTablaTraGrupos() {
     let request = {
-      n_idpl_tipolinea: this.idtipolinea,     
-      n_idpl_zona: this.idzona 
+      n_idpro_proyecto: this.idproyecto
     }
-    this._confiGeneral_service.getLinea(request, this.getToken().token).subscribe(
+    this._confiGeneral_service.getTraGrupos(request, this.getToken().token).subscribe(
       result => {
 
         try {
           if (result.estado) {
             console.log(result);
-            this.tablaLineas = new MatTableDataSource<any>(result.data);
-            this.tablaLineas.sort = this.sort;
-            this.tablaLineas.paginator = this.paginator;
+            this.tablaTraGrupos = new MatTableDataSource<any>(result.data);
+            this.tablaTraGrupos.sort = this.sort;
+            this.tablaTraGrupos.paginator = this.paginator;
           } else {
             this.openSnackBar(result.mensaje, 99);
           }
@@ -85,16 +77,14 @@ export class LineaComponent extends BaseComponent implements OnInit {
       });
   }
 
-  gettipolinea() {
-    let request = {
-      n_idpl_tipolinea: this.idtipolinea      
-    }
-    this._confiGeneral_service.gettipolinea(request,this.getToken().token).subscribe(
+  getProyectos() {
+    
+    this._confiGeneral_service.getProyectos(this.getToken().token).subscribe(
       result => {
         let resultado = <ResultadoApi>result;
         if (resultado.estado) {
-          this.tipolinea = resultado.data;
-          console.log(this.tipolinea);
+          this.proyectos = resultado.data;
+          console.log(this.proyectos);
         } else {
           this.openSnackBar(resultado.mensaje, 99);
         }
@@ -107,45 +97,25 @@ export class LineaComponent extends BaseComponent implements OnInit {
       });
   }
 
-  getzona(){
-    let request = {
-      n_idpl_tipolinea: this.idtipolinea      
-    }
-    this._confiGeneral_service.getZonas(request,this.getToken().token).subscribe(
-      result => {
-        let resultado = <ResultadoApi>result;
-        if (resultado.estado) {
-          console.log(resultado.data);          
-          this.zona = resultado.data;
-          console.log(this.zona);
-        } else {
-          this.openSnackBar(resultado.mensaje, 99);
-        }
-      }, error => {
-        try {
-          this.openSnackBar(error.error.Detail, error.error.StatusCode);
-        } catch (error) {
-          this.openSnackBar(AppSettings.SERVICE_NO_CONECT_SERVER, 99);
-        }
-      });
-  }
   
   applyFilter(filterValue: String) {
-    this.tablaLineas.filter = filterValue.trim().toLowerCase();
+    this.tablaTraGrupos.filter = filterValue.trim().toLowerCase();
   }
 
-  openDialog(linea): void {
-    const dialogRef = this.dialog.open(LineaeditarComponent, {
+  openDialog(traGrupos): void {
+    const dialogRef = this.dialog.open(TragrupoEditarComponent, {
+      
       width: '750px',
-      data: { linea: linea, tipolinea: this.tipolinea, zona: this.zona}
+      data: { traGrupos: traGrupos, proyectos: this.proyectos}
+      
     });
     dialogRef.afterClosed().subscribe(result => {
       try {        
-        this.getTablaLinea();
+        this.getTablaTraGrupos();
 
       } catch (error) {
         console.log(error);
-        this.getTablaLinea();
+        this.getTablaTraGrupos();
       }
     });
   }  
@@ -153,22 +123,22 @@ export class LineaComponent extends BaseComponent implements OnInit {
   eliminar(item): void {
     const dialogRef = this.dialog.open(ConfirmComponent, {
       width: '500px',
-      data: { titulo: "¿Desea eliminar la Linea " + item.c_nombre + "?" }
+      data: { titulo: "¿Desea eliminar el Grupo " + item.c_nombre + "?" }
     });
     dialogRef.afterClosed().subscribe(result => {
 
       if (result) {
-        this.delete_linea(item);
+        this.deletetraGrupos(item);
       }
     });
   }
 
-  delete_linea(item) {
-    this._confiGeneral_service.deleteLinea(item).subscribe(
+  deletetraGrupos(item) {
+    this._confiGeneral_service.deletetraGrupos(item).subscribe(
       result => {
         try {
           if (result.estado) {
-            this.getTablaLinea();
+            this.getTablaTraGrupos();
             this.openSnackBar("Linea eliminada", 200);
           } else {
             this.openSnackBar(result.mensaje, 99);
@@ -184,5 +154,15 @@ export class LineaComponent extends BaseComponent implements OnInit {
         }
       });
   }
+
+  openDialogUsuarios(grupo): void {
+    const dialogAsigPro = this.dialog.open(ProyectousuaioComponent, {
+      width: '750px',
+      data: grupo, 
+    });
+    dialogAsigPro.afterClosed().subscribe(result => {
+    });
+  }
+
 
 }
