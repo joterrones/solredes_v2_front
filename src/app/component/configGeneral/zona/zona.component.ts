@@ -43,7 +43,7 @@ export class ZonaComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getProyecto();    
+    this.getProyectos();    
     this.getTablaZona();
   }
 
@@ -80,7 +80,7 @@ export class ZonaComponent extends BaseComponent implements OnInit {
       });
   }
 
-  getProyecto() {
+  getProyectos() {
     console.log(this.idpro );
     let request = {
       n_idpl_proyecto: this.idpro      

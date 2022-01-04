@@ -42,7 +42,7 @@ export class AlmacenComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit() {       
-    this.getProyecto();     
+    this.getProyectos();     
     this.getTablaAlmacen();
   }  
 
@@ -78,7 +78,7 @@ export class AlmacenComponent extends BaseComponent implements OnInit {
       });
   }
 
-  getProyecto() {
+  getProyectos() {
     let request = {
       n_idpro_proyecto: this.idtproyecto      
     }
