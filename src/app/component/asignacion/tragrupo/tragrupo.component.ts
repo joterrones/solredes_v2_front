@@ -5,12 +5,12 @@ import { MatSnackBar } from '@angular/material';
 import { AppSettings } from '../../../common/appsettings'
 import { Router } from "@angular/router";
 import { BaseComponent } from '../../base/base.component';
-import { ResultadoApi } from '../../../interface/common.interface';
 import { Confirmar } from '../../../interface/confirmar.interface';
 import { confGeneralService } from '../../../service/confGeneral.service';
 import { ConfirmComponent } from '../../general/confirm/confirm.component';
 import { TragrupoEditarComponent } from '../tragrupo-editar/tragrupo-editar.component';
 import { ProyectousuaioComponent } from '../proyectousuaio/proyectousuaio.component';
+import { LineausuarioComponent } from '../lineausuario/lineausuario.component';
 
 
 @Component({
@@ -22,10 +22,9 @@ import { ProyectousuaioComponent } from '../proyectousuaio/proyectousuaio.compon
 export class TragrupoComponent extends BaseComponent implements OnInit {
 
   proyectos: [];
-  idproyecto = 0;  
   textfilter = '';
 
-  displayedColumns: string[] = ['editar', 'c_nombre', 'c_nombrep','asigUsuario','eliminar'];
+  displayedColumns: string[] = ['editar', 'c_nombre', 'asigLinea','asigUsuario','eliminar'];
   public tablaTraGrupos: MatTableDataSource<any>;
   public confirmar: Confirmar;
 
@@ -41,26 +40,21 @@ export class TragrupoComponent extends BaseComponent implements OnInit {
     super(snackBar, router);
   }
 
-  ngOnInit() {
-    this.getProyectos();    
-    this.getTablaTraGrupos();
-  }
-
-  selectProyecto(n_idpro_proyecto) {
-    this.idproyecto = n_idpro_proyecto;
+  ngOnInit() { 
     this.getTablaTraGrupos();
   }
   
   getTablaTraGrupos() {
+    console.log(this.proyecto.n_idpro_proyecto);
     let request = {
-      n_idpro_proyecto: this.idproyecto
+      n_idpro_proyecto: this.proyecto.n_idpro_proyecto
     }
     this._confiGeneral_service.getTraGrupos(request, this.getToken().token).subscribe(
       result => {
 
         try {
           if (result.estado) {
-            console.log(result);
+            console.log(result.data);
             this.tablaTraGrupos = new MatTableDataSource<any>(result.data);
             this.tablaTraGrupos.sort = this.sort;
             this.tablaTraGrupos.paginator = this.paginator;
@@ -77,27 +71,6 @@ export class TragrupoComponent extends BaseComponent implements OnInit {
       });
   }
 
-  getProyectos() {
-    
-    this._confiGeneral_service.getProyectos(this.getToken().token).subscribe(
-      result => {
-        let resultado = <ResultadoApi>result;
-        if (resultado.estado) {
-          this.proyectos = resultado.data;
-          console.log(this.proyectos);
-        } else {
-          this.openSnackBar(resultado.mensaje, 99);
-        }
-      }, error => {
-        try {
-          this.openSnackBar(error.error.Detail, error.error.StatusCode);
-        } catch (error) {
-          this.openSnackBar(AppSettings.SERVICE_NO_CONECT_SERVER, 99);
-        }
-      });
-  }
-
-  
   applyFilter(filterValue: String) {
     this.tablaTraGrupos.filter = filterValue.trim().toLowerCase();
   }
@@ -157,6 +130,15 @@ export class TragrupoComponent extends BaseComponent implements OnInit {
 
   openDialogUsuarios(grupo): void {
     const dialogAsigPro = this.dialog.open(ProyectousuaioComponent, {
+      width: '750px',
+      data: grupo, 
+    });
+    dialogAsigPro.afterClosed().subscribe(result => {
+    });
+  }
+
+  openDialogLinea(grupo): void {
+    const dialogAsigPro = this.dialog.open(LineausuarioComponent, {
       width: '750px',
       data: grupo, 
     });

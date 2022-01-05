@@ -4,8 +4,6 @@ import { MatDialogRef, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
 import { BaseComponent } from '../../base/base.component';
 import { Router } from "@angular/router";
 import { AppSettings } from '../../../common/appsettings';
-import {MatDialogModule} from '@angular/material/dialog';
-import {MatDialog} from '@angular/material';
 
 import { confGeneralService } from '../../../service/confGeneral.service';
 import { ResultadoApi } from 'src/app/interface/common.interface';
@@ -18,8 +16,7 @@ import { TraGrupos } from 'src/app/interface/configGeneral.interface';
   providers: [confGeneralService]
 })
 export class ProyectousuaioComponent extends BaseComponent implements OnInit {
-
-  grupo: [];
+  
   ProUser: [];
 
   constructor(

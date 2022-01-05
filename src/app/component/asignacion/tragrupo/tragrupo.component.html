@@ -1,34 +1,6 @@
 <app-menu>
     <div class="contenedorBody">
         <h2> ADMINISTRACIÓN DE TRA_GRUPOS</h2>
-        <mat-accordion>
-            <mat-expansion-panel>
-                <mat-expansion-panel-header class="back-expansion">
-                    <mat-panel-title>
-                        <mat-icon matSuffix>filter_list</mat-icon> Filtros
-                    </mat-panel-title>
-                    <mat-panel-description>
-                        Filtrado de datos en la lista
-                    </mat-panel-description>
-                </mat-expansion-panel-header>
-                <div class="contenedor">
-
-                    <mat-form-field>
-                        <mat-select placeholder="Proyectos">
-                            <mat-option value="0" (click)='selectProyecto(0)'>
-                                -TODOS-
-                            </mat-option>
-                            <mat-option *ngFor="let pro of proyectos" [value]="pro.n_idpro_proyecto"
-                                (click)='selectProyecto(pro.n_idpro_proyecto)'>
-                                {{pro.c_nombre}}
-                            </mat-option>
-                        </mat-select>
-                    </mat-form-field>
-
-                </div>
-
-            </mat-expansion-panel>
-        </mat-accordion>
         <br />
         <mat-card>
             <mat-form-field>
@@ -53,14 +25,20 @@
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </th>
                     <td mat-cell *matCellDef="let element"> {{element.c_nombre }} </td>
                 </ng-container>
-                <ng-container matColumnDef="c_nombrep">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Proyecto </th>
-                    <td mat-cell *matCellDef="let element"> {{element.c_nombrep}} </td>
+
+                <!-- Asignar Linea -->
+                <ng-container matColumnDef="asigLinea">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Lineas</th>
+                    <td mat-cell *matCellDef="let element">
+                    <button mat-icon-button (click)="openDialogLinea(element)" color="accent">
+                        <mat-icon aria-label="Example icon-button with a heart icon">playlist_add_check</mat-icon>
+                    </button>
+                    </td>
                 </ng-container>
 
                 <!-- Asignar Usuarios -->
                 <ng-container matColumnDef="asigUsuario">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Usiarios</th>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Usuarios</th>
                     <td mat-cell *matCellDef="let element">
                     <button mat-icon-button (click)="openDialogUsuarios(element)" color="accent">
                         <mat-icon aria-label="Example icon-button with a heart icon">playlist_add_check</mat-icon>

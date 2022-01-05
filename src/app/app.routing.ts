@@ -32,7 +32,7 @@ import { AdmiArchivosComponent } from './component/archivos/admi-archivos/admi-a
 import { MapaLineaComponent } from './component/mapa-linea/mapa-linea.component';
 import { MapaGeneralComponent } from './component/mapa-general/mapa-general.component';
 import { ValoresGeneralesComponent } from './component/configGeneral/valores-generales/valores-generales.component'; 
-import { TragrupoComponent } from './component/configGeneral/tragrupo/tragrupo.component';
+import { TragrupoComponent } from './component/asignacion/tragrupo/tragrupo.component';
 import { ImportacionLineaComponent } from './component/importacion-linea/importacion-linea.component';
 import { PrincipalComponent } from './component/principal/principal.component';
 //Array de rutas

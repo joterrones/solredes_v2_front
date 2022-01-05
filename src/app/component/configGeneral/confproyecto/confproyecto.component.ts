@@ -46,7 +46,7 @@ export class ConfproyectoComponent extends BaseComponent implements OnInit {
   
   getTablaProyecto() {  
     let request = {
-      n_idpl_proyecto: this.idproyecto      
+      n_idpro_proyecto: this.idproyecto      
     }
     this._confiGeneral_service.getProyecto(request,this.getToken().token).subscribe(
       result => {                

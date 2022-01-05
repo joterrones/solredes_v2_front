@@ -36,17 +36,15 @@ export class TragrupoEditarComponent extends BaseComponent implements OnInit {
       this.traGrupos = {
         n_idtra_grupo: 0,
         n_idpro_proyecto: 0,
-        c_nombre: "",
-        c_nombrep: ""  
+        c_nombre: ""
       };
       
     } else {
       this.editar = true;
       this.traGrupos = this.data.traGrupos; 
     }
-    this.proyectos = this.data.proyectos;  
-    console.log('Contenido de Proyecto');
-    console.log(this.proyectos);
+    console.log(this.traGrupos);
+    
   }
 
   guardar(newForm) {

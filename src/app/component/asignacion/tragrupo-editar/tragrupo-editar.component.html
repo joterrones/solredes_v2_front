@@ -8,14 +8,6 @@
             <mat-hint class="error" *ngIf="traGrupos.c_nombre.length<3">debe tener mínimo de 3 dígitos</mat-hint>
         </mat-form-field>
 
-        <mat-form-field>
-            <mat-select placeholder="Proyecto" [(value)]="traGrupos.n_idpro_proyecto" required>
-                <mat-option *ngFor="let pro of proyectos" [value]="pro.n_idpro_proyecto">
-                    {{pro.c_nombre}}
-                </mat-option>
-            </mat-select>
-        </mat-form-field>
-
     </div>
     <div mat-dialog-actions>
 

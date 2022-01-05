@@ -17,6 +17,9 @@ export class ArchivosEditarComponent extends BaseComponent implements OnInit {
   archivo: Archivo;
   editar: boolean;
   carpetas: [];
+
+  procesando: boolean = false;
+  editNomArchivo: boolean = false;
   constructor(
     public dialogRef: MatDialogRef<ArchivosEditarComponent>,    
     public _archivos_service: ArchivosServices,  
@@ -49,6 +52,9 @@ export class ArchivosEditarComponent extends BaseComponent implements OnInit {
   }
 
   getCarpetas(){    
+    console.log("procesando",this.procesando);
+    this.editNomArchivo = true;
+    this.procesando = false;
     this._archivos_service.getCarpetas(this.getToken().token).subscribe(
       result => {
         try {
@@ -68,6 +74,7 @@ export class ArchivosEditarComponent extends BaseComponent implements OnInit {
   }
 
   uploadfile(files: FileList) {
+    this.procesando = true;
     this.file = files.item(0);  
     console.log("CARGA ARC",this.file)
     this.uploadFileToActivity();
@@ -110,12 +117,15 @@ export class ArchivosEditarComponent extends BaseComponent implements OnInit {
           this.archivo.c_ruta = result.c_ruta;
           this.archivo.c_nombre = result.c_nombre;
           this.archivo.c_checksum = result.c_checksum;
+          this.procesando = false;
+          this.editNomArchivo = false;
           console.log("CHECKSUM: ",this.archivo.c_checksum);
-          
+          /* */
         } else {
           this.openSnackBar(result.mensaje, 99);
         }
       }, error => {
+        this.procesando = false;
         this.openSnackBar(<any>error, 99);
         alert(error.error);
       });

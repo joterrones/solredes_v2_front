@@ -252,14 +252,6 @@ export class confGeneralService{
         return this._http.post(this.url + 'configuracionGeneral/getTraGrupos', data, { headers: reqHeader });
     }
 
-    getProyectos(token): Observable<any> {
-        var reqHeader = new HttpHeaders({
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + token
-        });
-        return this._http.post(this.url + 'configuracionGeneral/getProyectos',  { headers: reqHeader });
-    }
-
     savetraGrupos(data, token): Observable<any> {
         var reqHeader = new HttpHeaders({
             'Content-Type': 'application/json',
@@ -300,5 +292,32 @@ export class confGeneralService{
         });        
         console.log(data)
         return this._http.post(this.url + 'configuracionGeneral/saveProUser', data, { headers: reqHeader });
+    }
+
+    getLineaUser(data, token): Observable<any> {
+        var reqHeader = new HttpHeaders({
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
+        });
+        console.log(data)
+        return this._http.post(this.url + 'configuracionGeneral/getLineaUser', data, { headers: reqHeader });
+    }
+
+    resetLineaUser(data, token): Observable<any> {
+        var reqHeader = new HttpHeaders({
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
+        });
+        console.log(data)
+        return this._http.post(this.url + 'configuracionGeneral/resetLineaUser', data, { headers: reqHeader });
+    }
+
+    saveLineaUser(data, token): Observable<any> {
+        var reqHeader = new HttpHeaders({
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
+        });        
+        console.log(data)
+        return this._http.post(this.url + 'configuracionGeneral/saveLineaUser', data, { headers: reqHeader });
     }
 }

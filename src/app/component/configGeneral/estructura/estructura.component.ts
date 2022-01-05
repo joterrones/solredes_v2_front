@@ -54,7 +54,7 @@ export class EstructuraComponent extends BaseComponent implements OnInit {
     }
     this._confiGeneral_service.getEstructura(request, this.getToken().token).subscribe(
       result => {      
-        console.log('retorna del node a tablatipoFoto')  
+        console.log('retorna del node a tablaEstructura')  
         console.log(result);
         this.tablaEstructura = new MatTableDataSource<any>(result.data);
         this.tablaEstructura.sort = this.sort;

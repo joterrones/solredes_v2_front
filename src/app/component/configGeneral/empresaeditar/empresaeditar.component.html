@@ -10,8 +10,8 @@
 
     <mat-form-field>
         <input matInput placeholder="RUC" name="c_ruc" #c_username="ngModel" [(ngModel)]="empresa.c_ruc"
-          minlength="3" required />
-        <mat-hint class="error" *ngIf="empresa.c_ruc.length<3">debe tener mínimo de 3 dígitos</mat-hint>
+          length="11" required />
+        <mat-hint class="error" *ngIf="empresa.c_ruc.length<11">debe tener 11 dígitos</mat-hint>
       </mat-form-field>
     
     <mat-form-field>
