@@ -34,7 +34,7 @@ export interface EditarTipoLinea{
 
 export interface Zona{
     n_idpl_zona: number,
-    n_idpl_proyecto: number,
+    n_idpro_proyecto: number,
     c_codigo: String,
     c_nombre: String
 }
@@ -100,8 +100,7 @@ export interface EditarValoresGenerales{
 export interface TraGrupos{
     n_idtra_grupo: number,
     n_idpro_proyecto: number,
-    c_nombre: String,
-    c_nombrep: String
+    c_nombre: String
 }
 
 export interface Proyectos{

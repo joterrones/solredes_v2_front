@@ -1,34 +1,35 @@
+
 <h1 mat-dialog-title>Edición {{archivo.c_nombre}}</h1>
 <form class="example-container" #newForm="ngForm" (ngSubmit)="guardar(newForm)">
-    
+
     <div mat-dialog-content class="contenedor">
-        <mat-form-field >
-        <input matInput placeholder="ARCHIVO" name="c_nombre" #c_clave="ngModel"  
-            [(ngModel)]="archivo.c_nombre" minlength="3" required />
-        <mat-hint class="error" *ngIf="archivo.c_nombre.length<3">debe tener mínimo de 3 dígitos</mat-hint>
+        
+        <mat-form-field>
+            <input matInput placeholder="ARCHIVO" name="c_nombre" #c_clave="ngModel" [(ngModel)]="archivo.c_nombre"
+                minlength="3" required [disabled]="editNomArchivo"/>
+            <mat-hint class="error" *ngIf="archivo.c_nombre.length<3">debe tener mínimo de 3 dígitos</mat-hint>
         </mat-form-field>
 
         <input id="file" #fileInput hidden type='file' (change)="uploadfile($event.target.files)">
-        <button type="button" mat-mini-fab color="accent" (click)="fileInput.click()" style="margin-left: 10px;" [disabled]="editar">
-        <mat-icon>cloud_upload</mat-icon>
+        <button type="button" mat-mini-fab color="accent" (click)="fileInput.click()" style="margin-left: 10px;"
+            [disabled]="editar">
+            <mat-icon>cloud_upload</mat-icon>
         </button>
 
         <mat-form-field>
             <mat-select placeholder="Carpeta" [(value)]="archivo.n_iddoc_archivopadre" required [disabled]="!editar">
-              <mat-option *ngFor="let ca of carpetas" [value]="ca.n_iddoc_archivo">
-                {{ca.c_nombre}}
-              </mat-option>
+                <mat-option *ngFor="let ca of carpetas" [value]="ca.n_iddoc_archivo">
+                    {{ca.c_nombre}}
+                </mat-option>
             </mat-select>
         </mat-form-field>
     </div>
-  
+    <mat-progress-bar class="example-margin" mode="indeterminate" *ngIf="procesando">
+    </mat-progress-bar>
     <div mat-dialog-actions>
-        <button mat-button type="submit" cdkFocusInitial
-        [disabled]="!newForm.form.valid">
-        <mat-icon>save</mat-icon>
-        <span>Guardar</span>
+        <button mat-button type="submit" cdkFocusInitial [disabled]="!newForm.form.valid">
+            <mat-icon>save</mat-icon>
+            <span>Guardar</span>
         </button>
     </div>
 </form>
-
-

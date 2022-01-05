@@ -59,16 +59,10 @@ export class GuiadetalleComponent extends BaseComponent implements OnInit {
     this.getElementos();  
     this.getTablaDetalleGuia();
   }  
-  
-  selectElementos(n_idpl_elemento) {
-    this.idelementos = n_idpl_elemento;
-    this.getTablaDetalleGuia();
-  }
 
   getTablaDetalleGuia() {
     let request = {
-      n_idalm_guia: this.n_idalm_guia,    
-      n_idpl_elemento: this.idelementos  
+      n_idalm_guia: this.n_idalm_guia
     }
     
     this._almacen_service.getDetalleGuia(request,this.getToken().token).subscribe(

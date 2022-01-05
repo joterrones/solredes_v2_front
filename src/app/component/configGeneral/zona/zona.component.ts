@@ -21,12 +21,10 @@ export class ZonaComponent extends BaseComponent implements OnInit {
 
   tit: String = "SEGURIDAD > GESTOR DE ZONAS";
 
-  proyecto: [];
-  idpro = 0;  
   idzona = 0;
   textfilter = '';
   //displayedColumns: string[] = ['Buscar'];
-  displayedColumns: string[] = ['editar', 'c_codigo', 'c_nombre', 'c_nombreP', 'eliminar'];
+  displayedColumns: string[] = ['editar', 'c_codigo', 'c_nombre', 'eliminar'];
   public tablaLineas: MatTableDataSource<any>;
   public confirmar: Confirmar;
 
@@ -42,14 +40,9 @@ export class ZonaComponent extends BaseComponent implements OnInit {
     super(snackBar, router);
   }
 
-  ngOnInit() {
-    this.getProyectos();    
+  ngOnInit() {   
     this.getTablaZona();
-  }
-
-  selectProyecto(n_idpl_proyecto) {
-    this.idpro = n_idpl_proyecto;
-    this.getTablaZona();
+    console.log(this.proyecto.n_idpro_proyecto);
   }
   
   getTablaZona() {
@@ -79,29 +72,6 @@ export class ZonaComponent extends BaseComponent implements OnInit {
         this.openSnackBar(error.error, 99);
       });
   }
-
-  getProyectos() {
-    console.log(this.idpro );
-    let request = {
-      n_idpl_proyecto: this.idpro      
-    }
-    this._confiGeneral_service.getProyecto(request,this.getToken().token).subscribe(
-      result => {
-        let resultado = <ResultadoApi>result;
-        if (resultado.estado) {
-          this.proyecto = resultado.data;
-        } else {
-          this.openSnackBar(resultado.mensaje, 99);
-        }
-      }, error => {
-        try {
-          this.openSnackBar(error.error.Detail, error.error.StatusCode);
-        } catch (error) {
-          this.openSnackBar(AppSettings.SERVICE_NO_CONECT_SERVER, 99);
-        }
-      });
-  }
-
   
   applyFilter(filterValue: String) {
     this.tablaLineas.filter = filterValue.trim().toLowerCase();
@@ -110,7 +80,7 @@ export class ZonaComponent extends BaseComponent implements OnInit {
   openDialog(zona): void {
     const dialogRef = this.dialog.open(ZonaeditComponent, {
       width: '750px',
-      data: { zona: zona, proyecto: this.proyecto }
+      data: { zona: zona, proyecto: this.proyecto.n_idpro_proyecto }
     });
     dialogRef.afterClosed().subscribe(result => {
       try {        

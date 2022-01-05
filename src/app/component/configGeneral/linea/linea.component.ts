@@ -68,7 +68,7 @@ export class LineaComponent extends BaseComponent implements OnInit {
 
         try {
           if (result.estado) {
-            console.log(result);
+            console.log(result.data);
             this.tablaLineas = new MatTableDataSource<any>(result.data);
             this.tablaLineas.sort = this.sort;
             this.tablaLineas.paginator = this.paginator;

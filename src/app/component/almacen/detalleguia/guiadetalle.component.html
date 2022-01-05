@@ -1,31 +1,6 @@
 <app-menu>
     <div class="contenedorBody">
       <h2>  ADMINISTRACIÓN DE ALMACEN: {{c_nombreAlmacen}} -> GUIA: {{c_nombreguia}} -> DETALLE GUIA</h2>
-      <mat-accordion>
-        <mat-expansion-panel>
-            <mat-expansion-panel-header class="back-expansion">
-                <mat-panel-title>
-                <mat-icon matSuffix>filter_list</mat-icon> Filtros
-                </mat-panel-title>
-                <mat-panel-description>
-                Filtrado de datos en la lista
-                </mat-panel-description>
-            </mat-expansion-panel-header>
-            <div class="contenedor">  
-              <mat-form-field>
-                  <mat-select placeholder="Elemento">
-                      <mat-option value="0" (click)='selectElementos(0)'>
-                      -TODOS-
-                      </mat-option>
-                      <mat-option *ngFor="let el of elemento" [value]="el.n_idpl_elemento" (click)='selectElementos(el.n_idpl_elemento)'>
-                      {{el.c_nombre}}
-                      </mat-option>
-                  </mat-select>
-                </mat-form-field> 
-            </div>
-  
-        </mat-expansion-panel>
-      </mat-accordion>
       <br />
       <mat-card>
         <div class="navega">

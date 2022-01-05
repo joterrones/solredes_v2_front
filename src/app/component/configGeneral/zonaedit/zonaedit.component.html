@@ -14,13 +14,6 @@
       <mat-hint class="error" *ngIf="zona.c_codigo.length<6">debe tener mínimo de 6 dígitos</mat-hint>
     </mat-form-field>
       
-    <mat-form-field>
-      <mat-select placeholder="Proyecto" [(value)]="zona.n_idpl_proyecto" required>
-        <mat-option *ngFor="let proyect of proyecto" [value]="proyect.n_idpl_proyecto">
-          {{proyect.c_nombre}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>    
   </div>
   <div mat-dialog-actions>
 

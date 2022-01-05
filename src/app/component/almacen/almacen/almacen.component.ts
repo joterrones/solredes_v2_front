@@ -21,11 +21,9 @@ export class AlmacenComponent extends BaseComponent implements OnInit {
 
   tit: String = "SEGURIDAD > GESTOR DE ALMACEN";
 
-  proyecto: [];
-  idtproyecto = 0;  
   textfilter = '';
 
-  displayedColumns: string[] = ['editar', 'c_nombre', 'c_direccion','c_nombrep','detalle','eliminar'];
+  displayedColumns: string[] = ['editar', 'c_nombre', 'c_direccion','detalle','eliminar'];
   public tablaAlmacen: MatTableDataSource<any>;
   public confirmar: Confirmar;
 
@@ -47,8 +45,9 @@ export class AlmacenComponent extends BaseComponent implements OnInit {
   } 
   
   getTablaAlmacen() {
+    console.log(this.proyecto.n_idpro_proyecto);
     let request = {
-      n_idpro_proyecto: this.idtproyecto,      
+      n_idpro_proyecto: this.proyecto.n_idpro_proyecto,      
     }
     
     this._almacen_service.getAlmacen(request,this.getToken().token).subscribe(
@@ -56,7 +55,7 @@ export class AlmacenComponent extends BaseComponent implements OnInit {
         try {
           
           if (result.estado) {
-            console.log(result);
+            console.log(result.data);
             this.tablaAlmacen = new MatTableDataSource<any>(result.data);
             this.tablaAlmacen.sort = this.sort;
             this.tablaAlmacen.paginator = this.paginator;
@@ -84,7 +83,7 @@ export class AlmacenComponent extends BaseComponent implements OnInit {
   openDialog(almacen): void {
     const dialogRef = this.dialog.open(AlmaceneditarComponent, {
       width: '750px',
-      data: { almacen: almacen, proyecto: this.proyecto }
+      data: { almacen: almacen/*, proyecto: this.proyecto*/ }
     });
     dialogRef.afterClosed().subscribe(result => {
       try {        

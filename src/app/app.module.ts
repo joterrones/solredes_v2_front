@@ -97,10 +97,11 @@ import { MapaBaseComponent } from './component/mapa-base/mapa-base.component';
 import { UsuarioproyectoComponent } from './component/seguridad/usuarioproyecto/usuarioproyecto.component';
 import { ValoresGeneralesComponent } from './component/configGeneral/valores-generales/valores-generales.component';
 import { ValoresGeneralesEditarComponent } from './component/configGeneral/valores-generales-editar/valores-generales-editar.component';
-import { TragrupoComponent } from './component/configGeneral/tragrupo/tragrupo.component';
-import { TragrupoEditarComponent } from './component/configGeneral/tragrupo-editar/tragrupo-editar.component';
-import { ProyectousuaioComponent } from './component/configGeneral/proyectousuaio/proyectousuaio.component';
+import { TragrupoComponent } from './component/asignacion/tragrupo/tragrupo.component';
+import { TragrupoEditarComponent } from './component/asignacion/tragrupo-editar/tragrupo-editar.component';
+import { ProyectousuaioComponent } from './component/asignacion/proyectousuaio/proyectousuaio.component';
 import { PrincipalComponent } from './component/principal/principal.component';
+import { LineausuarioComponent } from './component/asignacion/lineausuario/lineausuario.component';
 
 
 @NgModule({
@@ -167,7 +168,7 @@ import { PrincipalComponent } from './component/principal/principal.component';
     ValoresGeneralesEditarComponent, 
     TragrupoComponent, 
     TragrupoEditarComponent, 
-    ProyectousuaioComponent, PrincipalComponent,   
+    ProyectousuaioComponent, PrincipalComponent, LineausuarioComponent,   
   ],
   imports: [
     FormsModule,
@@ -229,7 +230,10 @@ import { PrincipalComponent } from './component/principal/principal.component';
     UsuarioproyectoComponent,
     AdmiArchivosEditarComponent,
     ArchivosEditarComponent,
-    AlmaceneditarComponent
+    AlmaceneditarComponent,
+    LineausuarioComponent,
+    GuiaeditarComponent,
+    GuiadetalleeditarComponent
   ],
   providers: [
     MatDatepickerModule, 

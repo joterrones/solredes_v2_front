@@ -32,7 +32,7 @@ export class GuiaComponent extends BaseComponent implements OnInit {
   textfilter = '';
 
   displayedColumns: string[] = ['editar', 'c_nombre', 'c_direccion','periodo','c_ruc','c_nroguia', 'c_observacion','detalle','eliminar'];
-  public tablaAlmacen: MatTableDataSource<any>;
+  public tablaGuia: MatTableDataSource<any>;
   public confirmar: Confirmar;
 
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
@@ -69,15 +69,18 @@ export class GuiaComponent extends BaseComponent implements OnInit {
       n_idalm_almacen: this.n_idalm_almacen,    
       n_idgen_periodo: this.idperiodo  
     }
+    console.log(request);
     
     this._almacen_service.getGuia(request,this.getToken().token).subscribe(
       result => {
 
         try {
-          if (result.estado) {            
-            this.tablaAlmacen = new MatTableDataSource<any>(result.data);
-            this.tablaAlmacen.sort = this.sort;
-            this.tablaAlmacen.paginator = this.paginator;
+          if (result.estado) {    
+            console.log(result.data);
+                    
+            this.tablaGuia = new MatTableDataSource<any>(result.data);
+            this.tablaGuia.sort = this.sort;
+            this.tablaGuia.paginator = this.paginator;
             
           } else {
             this.openSnackBar(result.mensaje, 99);
@@ -116,7 +119,7 @@ export class GuiaComponent extends BaseComponent implements OnInit {
   }
   
   applyFilter(filterValue: String) {
-    this.tablaAlmacen.filter = filterValue.trim().toLowerCase();
+    this.tablaGuia.filter = filterValue.trim().toLowerCase();
   }
 
   openDialog(guia): void {    

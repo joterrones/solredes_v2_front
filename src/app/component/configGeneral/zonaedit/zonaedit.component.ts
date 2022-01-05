@@ -20,7 +20,6 @@ export class ZonaeditComponent extends BaseComponent implements OnInit {
 
   zona: Zona;  
   editar: boolean;
-  proyecto: Proyecto[]
   
   constructor(
     
@@ -39,7 +38,7 @@ export class ZonaeditComponent extends BaseComponent implements OnInit {
       this.editar = false;      
       this.zona = {
         n_idpl_zona:0,
-        n_idpl_proyecto:0,
+        n_idpro_proyecto: this.proyecto.n_idpro_proyecto,
         c_codigo:'',
         c_nombre:''                      
       };      
