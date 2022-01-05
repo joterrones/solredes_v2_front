@@ -23,8 +23,9 @@
             }" (markerClick)="clicked($event,marker)">
                 </agm-marker>
                 <ng-container>
-                    <agm-polyline *ngFor="let polyline of polilineas;let i = index;" [strokeColor]="primary">
-                        <agm-polyline-point *ngFor="let point of polyline.path" [latitude]="point.c_latitud"
+                <!-- <agm-polyline *ngFor="let polyline of polilineas;let i = index;" [strokeColor]="black">-->   
+                    <agm-polyline *ngFor="let polyline of polilineas;let i = index;" >
+                    <agm-polyline-point *ngFor="let point of polyline.path" [latitude]="point.c_latitud"
                             [longitude]="point.c_longitud">
                         </agm-polyline-point>
                     </agm-polyline>
