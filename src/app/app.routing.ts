@@ -21,7 +21,6 @@ import { TipolineaComponent } from './component/configGeneral/tipolinea/tipoline
 import { ZonaComponent } from './component/configGeneral/zona/zona.component';
 import { ConfproyectoComponent } from './component/configGeneral/confproyecto/confproyecto.component';
 import { TipofotoComponent } from './component/configGeneral/tipofoto/tipofoto.component';
-import { EstructuraComponent } from './component/configGeneral/estructura/estructura.component';
 import { TipoempresaComponent } from './component/configGeneral/tipoempresa/tipoempresa.component';
 import { AlmacenComponent } from './component/almacen/almacen/almacen.component';
 import { GuiaComponent } from './component/almacen/guia/guia.component';
@@ -55,7 +54,6 @@ const appRoutes:Routes=[
     {path:'zonas',component:ZonaComponent},
     {path:'confproyecto',component:ConfproyectoComponent},
     {path:'tipofoto',component:TipofotoComponent},
-    {path:'estructura',component:EstructuraComponent},
     {path:'tipoempresa',component:TipoempresaComponent},
     {path:'almacen',component:AlmacenComponent},
     {path:'importacionplanilla',component:ImportacionPlanillaComponent},

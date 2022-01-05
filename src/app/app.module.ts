@@ -74,8 +74,6 @@ import { ConfproyectoComponent } from './component/configGeneral/confproyecto/co
 import { ConfproyectoeditarComponent } from './component/configGeneral/confproyectoeditar/confproyectoeditar.component';
 import { TipofotoComponent } from './component/configGeneral/tipofoto/tipofoto.component';
 import { TipofotoeditarComponent } from './component/configGeneral/tipofotoeditar/tipofotoeditar.component';
-import { EstructuraComponent } from './component/configGeneral/estructura/estructura.component';
-import { EstructuraeditarComponent } from './component/configGeneral/estructuraeditar/estructuraeditar.component';
 import { TipoempresaComponent } from './component/configGeneral/tipoempresa/tipoempresa.component';
 import { TipoempresaeditarComponent } from './component/configGeneral/tipoempresaeditar/tipoempresaeditar.component';
 import { AlmacenComponent } from './component/almacen/almacen/almacen.component';
@@ -142,8 +140,6 @@ import { LineausuarioComponent } from './component/asignacion/lineausuario/linea
     ConfproyectoeditarComponent, 
     TipofotoComponent,
     TipofotoeditarComponent, 
-    EstructuraComponent, 
-    EstructuraeditarComponent, 
     TipoempresaComponent, 
     TipoempresaeditarComponent, 
     AlmacenComponent, 
@@ -221,7 +217,6 @@ import { LineausuarioComponent } from './component/asignacion/lineausuario/linea
     ConfproyectoeditarComponent,
     EmpresaeditarComponent,    
     TipofotoeditarComponent,
-    EstructuraeditarComponent,
     TipoempresaeditarComponent,
     ProyectousuarioComponent,    
     TragrupoEditarComponent,
