@@ -80,7 +80,7 @@ export class ValoresGeneralesComponent extends BaseComponent implements OnInit {
   eliminar(item): void {
     const dialogRef = this.dialog.open(ConfirmComponent, {
       width: '500px',
-      data: { titulo: "¿Desea eliminar el Tipo de Linea " + item.c_nombre + "?" }
+      data: { titulo: "¿Desea eliminar el Valor General " + item.c_nombre + "?" }
     });
     dialogRef.afterClosed().subscribe(result => {
 
@@ -96,7 +96,7 @@ export class ValoresGeneralesComponent extends BaseComponent implements OnInit {
         try {
           if (result.estado) {
             this.getTablaValoresGenerales();
-            this.openSnackBar("Tipo Linea Eliminado", 200);
+            this.openSnackBar("Valor General Eliminado", 200);
           } else {
             this.openSnackBar(result.mensaje, 99);
           }

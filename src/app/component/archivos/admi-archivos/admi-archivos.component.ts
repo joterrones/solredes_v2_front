@@ -136,7 +136,7 @@ export class AdmiArchivosComponent extends BaseComponent implements OnInit {
         try {
           if (result.estado) {
             this.getTablaArchivos();
-            this.openSnackBar("Elemento eliminado", 200);
+            this.openSnackBar("Archivo eliminado", 200);
           } else {
             this.openSnackBar(result.mensaje, 99);
           }

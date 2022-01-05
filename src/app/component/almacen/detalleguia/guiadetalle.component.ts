@@ -134,7 +134,7 @@ export class GuiadetalleComponent extends BaseComponent implements OnInit {
   eliminar(item): void {
     const dialogRef = this.dialog.open(ConfirmComponent, {
       width: '500px',
-      data: { titulo: "¿Desea eliminar la Guia " + item.c_nombre + "?" }
+      data: { titulo: "¿Desea eliminar el Detalle Guia " + item.c_nombre + "?" }
     });
     dialogRef.afterClosed().subscribe(result => {
 
@@ -150,7 +150,7 @@ export class GuiadetalleComponent extends BaseComponent implements OnInit {
         try {
           if (result.estado) {
             this.getTablaDetalleGuia();
-            this.openSnackBar("Guia eliminada", 200);
+            this.openSnackBar("Detalle Guia eliminada", 200);
           } else {
             this.openSnackBar(result.mensaje, 99);
           }

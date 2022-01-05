@@ -85,7 +85,7 @@ export class ConfproyectoComponent extends BaseComponent implements OnInit {
   eliminar(item): void {
     const dialogRef = this.dialog.open(ConfirmComponent, {
       width: '500px',
-      data: { titulo: "¿Desea eliminar el Tipo de Linea " + item.c_nombret + "?" }
+      data: { titulo: "¿Desea eliminar el Proyecto " + item.c_nombret + "?" }
     });
     dialogRef.afterClosed().subscribe(result => {
 
@@ -101,7 +101,7 @@ export class ConfproyectoComponent extends BaseComponent implements OnInit {
         try {
           if (result.estado) {
             this.getTablaProyecto();
-            this.openSnackBar("Tipo Linea Eliminado", 200);
+            this.openSnackBar("Proyecto Eliminado", 200);
           } else {
             this.openSnackBar(result.mensaje, 99);
           }

@@ -112,7 +112,7 @@ export class TragrupoComponent extends BaseComponent implements OnInit {
         try {
           if (result.estado) {
             this.getTablaTraGrupos();
-            this.openSnackBar("Linea eliminada", 200);
+            this.openSnackBar("Grupo eliminada", 200);
           } else {
             this.openSnackBar(result.mensaje, 99);
           }

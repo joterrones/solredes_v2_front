@@ -80,7 +80,7 @@ export class EmpresaComponent extends BaseComponent implements OnInit {
   eliminar(item): void {
     const dialogRef = this.dialog.open(ConfirmComponent, {
       width: '500px',
-      data: { titulo: "¿Desea eliminar el rol " + item.c_nombrecorto + "?" }
+      data: { titulo: "¿Desea eliminar la Empresa " + item.c_nombrecorto + "?" }
     });
     dialogRef.afterClosed().subscribe(result => {
 
@@ -96,7 +96,7 @@ export class EmpresaComponent extends BaseComponent implements OnInit {
         try {
           if (result.estado) {
             this.getTablaEmpresa();
-            this.openSnackBar("Rol Eliminado", 200);
+            this.openSnackBar("Empresa Eliminado", 200);
           } else {
             this.openSnackBar(result.mensaje, 99);
           }
