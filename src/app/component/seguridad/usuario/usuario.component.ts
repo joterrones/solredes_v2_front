@@ -24,8 +24,6 @@ export class UsuarioComponent extends BaseComponent implements OnInit {
 
   roles: [];
   idroles = 0;
-  entidades: [];
-  identidad = 0;
   textfilter = '';
 
   displayedColumns: string[] = ['editar', 'username', 'c_nombre', 'c_dni', 'c_rol', 'asigProyecto','resetear', 'eliminar'];
@@ -55,18 +53,13 @@ export class UsuarioComponent extends BaseComponent implements OnInit {
     this.getTablaUsuario();
   }
 
-  selectEntidad(n_idgen_entidad) {
-    this.identidad = n_idgen_entidad;
-    this.getTablaUsuario();
-  }
+
 
   getTablaUsuario() {
     let request = {
-      n_idseg_rol: this.idroles,
-      n_idgen_entidad: this.identidad
+      n_idseg_rol: this.idroles
     }
     console.log( this.idroles)
-    console.log(this.identidad);
     
     this._seguridad_service.get(request, this.getToken().token).subscribe(
       result => {
@@ -111,25 +104,6 @@ export class UsuarioComponent extends BaseComponent implements OnInit {
       });
   }
 
-  getentidad() {
-    this._general_service.get(this.getToken().token).subscribe(
-      result => {
-        console.log(result)
-        let resultado = <ResultadoApi>result;
-        if (resultado.estado) {
-          this.entidades = resultado.data;
-        } else {
-          this.openSnackBar(resultado.mensaje, 99);
-        }
-      }, error => {
-        try {
-          this.openSnackBar(error.error.Detail, error.error.StatusCode);
-        } catch (error) {
-          this.openSnackBar(AppSettings.SERVICE_NO_CONECT_SERVER, 99);
-        }
-      });
-  }
-
   applyFilter(filterValue: String) {
     this.tablaUsuarios.filter = filterValue.trim().toLowerCase();
   }
@@ -141,7 +115,6 @@ export class UsuarioComponent extends BaseComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(result => {
       try {
-        this.getentidad();
         this.getTablaUsuario();
 
       } catch (error) {

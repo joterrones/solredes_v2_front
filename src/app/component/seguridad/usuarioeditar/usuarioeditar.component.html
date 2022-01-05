@@ -37,10 +37,7 @@
         #c_documentid="ngModel" [(ngModel)]="usuario.c_dni" maxlength="8" minlength="8" required />
       <mat-hint class="error" *ngIf="usuario.c_dni.length!=8">debe tener mínimo de 8 dígitos</mat-hint>
     </mat-form-field>
-    <!--<mat-form-field>
-      <input type="text" (keypress)="numberOnly($event)" matInput placeholder="Teléfono" name="c_phone"
-        #c_phone="ngModel" [(ngModel)]="usuario.c_phone" maxlength="200" />
-    </mat-form-field>-->
+ 
     <mat-form-field>
       <mat-select placeholder="Roles" [(value)]="usuario.n_idseg_rol" required>
         <mat-option *ngFor="let rol of roles" [value]="rol.n_idseg_rol">
@@ -48,18 +45,6 @@
         </mat-option>
       </mat-select>
     </mat-form-field>
-    <!--<mat-form-field>
-      <mat-select placeholder="Empresa" [(value)]="usuario.n_idgen_entidad" required *ngIf="b_comboentidad">
-        <mat-option value="0" (click)='addentidad()'>
-          + Nuevo
-        </mat-option>
-        <mat-option *ngFor="let entidad of entidades" [value]="entidad.n_idgen_entidad">
-          {{entidad.c_nombre1}}
-        </mat-option>
-      </mat-select>
-      <input matInput placeholder="Nueva Entidad" *ngIf="!b_comboentidad" minlength="200" required (keyup)="guardarentidad($event.target.value,$event.key)"/>
-
-    </mat-form-field>-->
   </div>
   <div mat-dialog-actions>
 
