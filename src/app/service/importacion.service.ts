@@ -34,4 +34,12 @@ export class ImportacionService {
         return this._http.post(this.url + 'importacion/insertlinea', request);
     }
 
+    insertSuministro(request): Observable<any> {
+        return this._http.post(this.url + 'importacion/insertSuministro', request);
+    }
+
+    insertMontaje(request): Observable<any> {
+        return this._http.post(this.url + 'importacion/insertMontaje', request);
+    }
+
 }

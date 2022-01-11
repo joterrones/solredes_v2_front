@@ -28,7 +28,6 @@ export class ConfproyectoeditarComponent extends BaseComponent implements OnInit
     public _router: Router,
     public snackBar: MatSnackBar
     
-
   ) { 
     super(snackBar, _router);
   }
@@ -37,8 +36,12 @@ export class ConfproyectoeditarComponent extends BaseComponent implements OnInit
     if (this.data.proyecto == null) {
       this.editar = false;
       this.proyecto = {
-        n_idpl_proyecto:0,
-        c_nombre:''              
+        n_idpro_proyecto:0,
+        c_nombre:'',
+        c_detalle:'',
+        c_color:'',
+        c_rutalogo: '',
+        c_rutaimg:''
       };      
     } else {
       this.editar = true;

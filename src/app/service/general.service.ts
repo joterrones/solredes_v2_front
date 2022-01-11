@@ -15,73 +15,20 @@ export class GeneralService {
         this.url = AppSettings.URL;
     }
 
-    get(token): Observable<any> {
-        var reqHeader = new HttpHeaders({
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + token
-        });
-        return this._http.post(this.url + 'general/get', {}, { headers: reqHeader });
+    get(proyecto):Observable<any>{
+        let request={proyecto:proyecto};
+        return this._http.post(this.url+'general/get',request);
     }
-
-
-    save(data, token): Observable<any> {
-        var reqHeader = new HttpHeaders({
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + token
-        });
-        console.log(data)
-        return this._http.post(this.url + 'general/save', data, { headers: reqHeader });
+    getzona(proyecto):Observable<any>{
+        let request={proyecto:proyecto};
+        return this._http.post(this.url+'general/getzona',request);
     }
-
-    get_feriado(token): Observable<any> {
-        var reqHeader = new HttpHeaders({
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + token
-        });
-        return this._http.post(this.url + 'general/get_feriado', {}, { headers: reqHeader });
+    gettipolinea(proyecto):Observable<any>{
+        let request={proyecto:proyecto};
+        return this._http.post(this.url+'general/gettipolinea',request);
     }
-
-
-    save_feriado(data, token): Observable<any> {
-        var reqHeader = new HttpHeaders({
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + token
-        });
-        console.log(data)
-        return this._http.post(this.url + 'general/save_feriado', data, { headers: reqHeader });
+    getlinea(request,proyecto):Observable<any>{
+        request.proyecto=proyecto;
+        return this._http.post(this.url+'general/getlinea',request);
     }
-
-    getdepartamento(data, token): Observable<any> {
-        var reqHeader = new HttpHeaders({
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + token
-        });
-        console.log(data)
-        return this._http.post(this.url + 'general/getdepartamento', data, { headers: reqHeader });
-    }
-    getprovincia(data, token): Observable<any> {
-        var reqHeader = new HttpHeaders({
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + token
-        });
-        console.log(data)
-        return this._http.post(this.url + 'general/getprovincia', data, { headers: reqHeader });
-    }
-    getdistrito(data, token): Observable<any> {
-        var reqHeader = new HttpHeaders({
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + token
-        });
-        console.log(data)
-        return this._http.post(this.url + 'general/getdistrito', data, { headers: reqHeader });
-    }
-    getcentropoblado(data, token): Observable<any> {
-        var reqHeader = new HttpHeaders({
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + token
-        });
-        console.log(data)
-        return this._http.post(this.url + 'general/getcentropoblado', data, { headers: reqHeader });
-    }
-
 }

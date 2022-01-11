@@ -34,6 +34,13 @@ import { ValoresGeneralesComponent } from './component/configGeneral/valores-gen
 import { TragrupoComponent } from './component/asignacion/tragrupo/tragrupo.component';
 import { ImportacionLineaComponent } from './component/importacion-linea/importacion-linea.component';
 import { PrincipalComponent } from './component/principal/principal.component';
+import { ImportacionSuministrosComponent } from './component/importacion-suministros/importacion-suministros.component';
+import { ImportacionMontajeComponent } from './component/importacion-montaje/importacion-montaje.component';
+import { TipoelementoComponent } from './component/configGeneral/tipoelemento/tipoelemento.component';
+import { CategoriatipomontajeComponent } from './component/configGeneral/categoriatipomontaje/categoriatipomontaje.component';
+import { ElementoComponent } from './component/elemento/elemento.component';
+import { ArmadoComponent } from './component/armado/armado.component';
+import { MetradoComponent } from './component/metrado/metrado.component';
 //Array de rutas
 const appRoutes:Routes=[
     {path:'',component:LoginComponent},
@@ -67,6 +74,13 @@ const appRoutes:Routes=[
     {path:'valoresGenerales',component:ValoresGeneralesComponent}, 
     {path:'tragrupos',component:TragrupoComponent},
     {path:'principal',component:PrincipalComponent},
+    {path:'importacionsuministros',component:ImportacionSuministrosComponent}, 
+    {path:'importacionmontaje',component:ImportacionMontajeComponent}, 
+    {path:'tipoelemento',component:TipoelementoComponent},
+    {path:'tipomontaje',component:CategoriatipomontajeComponent}, 
+    {path:'elemento',component:ElementoComponent},
+    {path:'armado',component:ArmadoComponent}, 
+    {path:'metrado',component:MetradoComponent},
     {path:'**',component:LoginComponent},    
      
 ]

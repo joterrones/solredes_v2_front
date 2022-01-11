@@ -160,9 +160,4 @@ export class AlmacenService{
         formData.append('DA', fileToUpload, fileToUpload.name);
         return this._http.post(this.url+'almacen/uploadimagen?extension='+extension+'&detalleguia='+detalleguia,formData);
     }  
-
-    getImagen() {
-        return this._http.get<Photo>(this.url+'archivos/imgDetalleguia/DetalleGuia_1121/64572.png');
-    }
-
 }

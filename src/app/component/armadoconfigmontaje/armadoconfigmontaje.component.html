@@ -1,0 +1,29 @@
+<h4 mat-dialog-title>Edición [{{data.item.c_codigo}}] {{data.item.c_nombre}}</h4>
+<mat-form-field>
+    <input matInput placeholder="Buscar" (keyup)="applyFilter($event.target.value)">
+    <mat-icon matSuffix>search</mat-icon>
+</mat-form-field>
+<table mat-table [dataSource]="tabla" matSort class="mat-elevation-z8">
+
+    <ng-container matColumnDef="c_codigo">
+        <th mat-header-cell *matHeaderCellDef color="error"> Código </th>
+        <td mat-cell *matCellDef="let element"> {{element.c_codigo}} </td>
+    </ng-container>
+    <ng-container matColumnDef="c_nombre">
+        <th mat-header-cell *matHeaderCellDef color="error"> Nombre </th>
+        <td mat-cell *matCellDef="let element"> {{element.c_nombre}} </td>
+    </ng-container>
+    <ng-container matColumnDef="estado">
+        <th mat-header-cell *matHeaderCellDef color="error"> Estado </th>
+        <td mat-cell *matCellDef="let element">
+            <mat-checkbox matInput placeholder="Lámina" name="estado" #estado="ngModel" [(ngModel)]="element.estado"
+              color="primary" (click)="changeestado(element)"></mat-checkbox>
+        </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <ng-template let-row matRowDef cdkVirtualFor [matRowDefColumns]="displayedColumns">
+        <tr mat-row></tr>
+    </ng-template>
+
+</table>
+<mat-paginator [pageSizeOptions]="[10,20,50,100]" showFirstLastButtons></mat-paginator>

@@ -100,6 +100,22 @@ import { TragrupoEditarComponent } from './component/asignacion/tragrupo-editar/
 import { ProyectousuaioComponent } from './component/asignacion/proyectousuaio/proyectousuaio.component';
 import { PrincipalComponent } from './component/principal/principal.component';
 import { LineausuarioComponent } from './component/asignacion/lineausuario/lineausuario.component';
+import { ImportacionSuministrosComponent } from './component/importacion-suministros/importacion-suministros.component';
+import { TipoelementoComponent } from './component/configGeneral/tipoelemento/tipoelemento.component';
+import { TipoelementoeditarComponent } from './component/configGeneral/tipoelementoeditar/tipoelementoeditar.component';
+import { ImportacionMontajeComponent } from './component/importacion-montaje/importacion-montaje.component';
+import { CategoriatipomontajeComponent } from './component/configGeneral/categoriatipomontaje/categoriatipomontaje.component';
+import { CategoriatipomontajeeditarComponent } from './component/configGeneral/categoriatipomontajeeditar/categoriatipomontajeeditar.component';
+import { ConfproyectoimgComponent } from './component/configGeneral/confproyectoimg/confproyectoimg.component';
+import { ConfproyectoimglogoComponent } from './component/configGeneral/confproyectoimglogo/confproyectoimglogo.component';
+import { ConfproyectocolorComponent } from './component/configGeneral/confproyectocolor/confproyectocolor.component';
+import { ElementoComponent } from './component/elemento/elemento.component';
+import { ArmadoComponent } from './component/armado/armado.component';
+import { DetallearmadoComponent } from './component/detallearmado/detallearmado.component';
+import { ArmadoconfigmontajeComponent } from './component/armadoconfigmontaje/armadoconfigmontaje.component';
+import { MetradoComponent } from './component/metrado/metrado.component';
+import { MetradomontajeComponent } from './component/metradomontaje/metradomontaje.component';
+import { DetallemetradoComponent } from './component/detallemetrado/detallemetrado.component';
 
 
 @NgModule({
@@ -164,7 +180,25 @@ import { LineausuarioComponent } from './component/asignacion/lineausuario/linea
     ValoresGeneralesEditarComponent, 
     TragrupoComponent, 
     TragrupoEditarComponent, 
-    ProyectousuaioComponent, PrincipalComponent, LineausuarioComponent,   
+    ProyectousuaioComponent, 
+    PrincipalComponent, 
+    LineausuarioComponent, 
+    ImportacionSuministrosComponent, 
+    TipoelementoComponent, 
+    TipoelementoeditarComponent, 
+    ImportacionMontajeComponent, 
+    CategoriatipomontajeComponent, 
+    CategoriatipomontajeeditarComponent, 
+    ConfproyectoimgComponent, 
+    ConfproyectoimglogoComponent, 
+    ConfproyectocolorComponent, 
+    ElementoComponent, 
+    ArmadoComponent, 
+    DetallearmadoComponent, 
+    ArmadoconfigmontajeComponent, 
+    MetradoComponent, 
+    MetradomontajeComponent, 
+    DetallemetradoComponent,   
   ],
   imports: [
     FormsModule,
@@ -228,7 +262,15 @@ import { LineausuarioComponent } from './component/asignacion/lineausuario/linea
     AlmaceneditarComponent,
     LineausuarioComponent,
     GuiaeditarComponent,
-    GuiadetalleeditarComponent
+    GuiadetalleeditarComponent,
+    TipoelementoeditarComponent,
+    CategoriatipomontajeeditarComponent,
+    ConfproyectoimgComponent,
+    ConfproyectoimglogoComponent,
+    ConfproyectocolorComponent,
+    DetallearmadoComponent,
+    ArmadoconfigmontajeComponent,
+    DetallemetradoComponent
   ],
   providers: [
     MatDatepickerModule, 

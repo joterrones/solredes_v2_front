@@ -1,0 +1,85 @@
+<app-menu>
+    <div class="contenedorBody">
+        <h2>{{tit}}</h2>
+        <br />
+        <mat-card>
+            <mat-form-field>
+                <input matInput placeholder="Buscar" (keyup)="applyFilter($event.target.value)">
+                <mat-icon matSuffix>search</mat-icon>
+            </mat-form-field>
+
+            <table mat-table [dataSource]="tabla" matSort class="mat-elevation-z8">
+                <!--<ng-container matColumnDef="n_idpl_elemento">
+                    <th mat-header-cell *matHeaderCellDef color="error"> ID </th>
+                    <td mat-cell *matCellDef="let element"> {{element.n_idpl_elemento}} </td>
+                </ng-container> -->
+                <ng-container matColumnDef="c_codigo">
+                    <th mat-header-cell *matHeaderCellDef color="error"> Código </th>
+                    <td mat-cell *matCellDef="let element"> {{element.c_codigo}} </td>
+                </ng-container>
+                <ng-container matColumnDef="c_nombre">
+                    <th mat-header-cell *matHeaderCellDef color="error"> Nombre </th>
+                    <td mat-cell *matCellDef="let element"> {{element.c_nombre}} </td>
+                </ng-container>
+                <ng-container matColumnDef="b_partidanueva">
+                    <th mat-header-cell *matHeaderCellDef color="error"> Partida Nueva </th>
+                    <td mat-cell *matCellDef="let element">
+                        <mat-checkbox name="b_partidanueva" #b_partidanueva="ngModel"
+                            [(ngModel)]="element.b_partidanueva"></mat-checkbox>
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="c_material">
+                    <th mat-header-cell *matHeaderCellDef color="error"> Material </th>
+                    <td mat-cell *matCellDef="let element">
+                        <mat-select placeholder="Seleccione" multiple [(value)]="element.array_material">
+                            <mat-option *ngFor="let item of material" [value]="item.id"
+                                (click)="onSelectChange(element)">
+                                {{item.nombre}}
+                            </mat-option>
+                        </mat-select>
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="c_esfuerzo">
+                    <th mat-header-cell *matHeaderCellDef color="error"> Esfuerzo </th>
+                    <td mat-cell *matCellDef="let element">
+
+                        <mat-select placeholder="Seleccione" multiple [(value)]="element.array_esfuerzo">
+                            <mat-option *ngFor="let item of esfuerzo" [value]="item.id"
+                                (click)="onSelectChange(element)">
+                                {{item.nombre}}
+                            </mat-option>
+                        </mat-select>
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="c_altura">
+                    <th mat-header-cell *matHeaderCellDef color="error"> Altura </th>
+                    <td mat-cell *matCellDef="let element">
+                        <mat-select placeholder="Seleccione" multiple [(value)]="element.array_altura">
+                            <mat-option *ngFor="let item of altura" [value]="item.id" (click)="onSelectChange(element)">
+                                {{item.nombre}}
+                            </mat-option>
+                        </mat-select>
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="c_seccionconductor">
+                    <th mat-header-cell *matHeaderCellDef color="error"> Sección C. </th>
+                    <td mat-cell *matCellDef="let element">
+                        <mat-select placeholder="Seleccione" multiple [(value)]="element.array_seccionconductor">
+                            <mat-option *ngFor="let item of seccion" [value]="item.id"
+                                (click)="onSelectChange(element)">
+                                {{item.nombre}}
+                            </mat-option>
+                        </mat-select>
+                    </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <ng-template let-row matRowDef cdkVirtualFor [matRowDefColumns]="displayedColumns">
+                    <tr mat-row></tr>
+                </ng-template>
+            </table>
+            <mat-paginator [pageSizeOptions]="pagin" showFirstLastButtons></mat-paginator>
+        </mat-card>
+
+    </div>
+</app-menu>

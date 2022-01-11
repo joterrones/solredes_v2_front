@@ -9,6 +9,7 @@ import { ResetearclaveComponent } from '../../generico/resetarclave/resetarclave
 import { MatDialog } from '@angular/material';
 //import { MapaService } from '../../../service/mapa.services';
 import { saveAs } from 'file-saver';
+import { AppSettings } from 'src/app/common/appsettings';
 @Component({
   selector: 'app-menu',
   templateUrl: './menu.component.html',
@@ -34,7 +35,10 @@ export class MenuComponent extends BaseComponent implements OnInit {
   public dashboard_bolsa: boolean = false;
   public bolsa_proyecto: boolean = false;
 
+  colorPro: string;
+
   date: Date;
+  urlImagen: string;
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
@@ -54,8 +58,10 @@ export class MenuComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.colorPro = this.proyecto.c_color
+    console.log(this.proyecto.c_color);
 
-
+    this.urlImagen = AppSettings.URL_IMG_PROYECTO+this.proyecto.c_rutalogo;
     if (this.bLogin) {
       this.username = this.getToken().data.c_username;
       this.usuario = this.getToken().data;

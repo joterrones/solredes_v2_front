@@ -10,6 +10,9 @@ import { Confirmar } from '../../../interface/confirmar.interface';
 import { confGeneralService } from '../../../service/confGeneral.service';
 import { ConfirmComponent } from '../../general/confirm/confirm.component';
 import { ConfproyectoeditarComponent } from '../confproyectoeditar/confproyectoeditar.component';
+import { ConfproyectoimglogoComponent } from '../confproyectoimglogo/confproyectoimglogo.component';
+import { ConfproyectoimgComponent } from '../confproyectoimg/confproyectoimg.component';
+import { ConfproyectocolorComponent } from '../confproyectocolor/confproyectocolor.component';
 
 @Component({
   selector: 'app-confproyecto',
@@ -24,7 +27,7 @@ export class ConfproyectoComponent extends BaseComponent implements OnInit {
   idproyecto = 0;
   textfilter = '';  
 
-  displayedColumns: string[] = ['editar','c_nombrep', 'eliminar'];
+  displayedColumns: string[] = ['editar','c_nombrep', 'c_detalle','c_color','c_rutalogo','c_rutaimg','eliminar'];
   public tablaProyecto: MatTableDataSource<any>;
   public confirmar: Confirmar;
 
@@ -81,11 +84,62 @@ export class ConfproyectoComponent extends BaseComponent implements OnInit {
       }
     });
   }
+
+  openDialogImgLogo(proyecto): void {
+    console.log(proyecto)
+    const dialogRef = this.dialog.open(ConfproyectoimglogoComponent, {
+      width: '750px',
+      data: { proyecto }
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      try {
+        this.getTablaProyecto();
+
+      } catch (error) {
+        console.log(error);
+        this.getTablaProyecto();
+      }
+    });
+  }
+
+  openDialogImg(proyecto): void {
+    console.log(proyecto)
+    const dialogRef = this.dialog.open(ConfproyectoimgComponent, {
+      width: '750px',
+      data: { proyecto }
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      try {
+        this.getTablaProyecto();
+
+      } catch (error) {
+        console.log(error);
+        this.getTablaProyecto();
+      }
+    });
+  }
   
+  openDialogColor(proyecto): void {
+    console.log(proyecto)
+    const dialogRef = this.dialog.open(ConfproyectocolorComponent, {
+      width: '750px',
+      data: { proyecto }
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      try {
+        this.getTablaProyecto();
+
+      } catch (error) {
+        console.log(error);
+        this.getTablaProyecto();
+      }
+    });
+  }
+
   eliminar(item): void {
     const dialogRef = this.dialog.open(ConfirmComponent, {
       width: '500px',
-      data: { titulo: "¿Desea eliminar el Proyecto " + item.c_nombret + "?" }
+      data: { titulo: "¿Desea eliminar el Proyecto " + item.c_nombre + "?" }
     });
     dialogRef.afterClosed().subscribe(result => {
 

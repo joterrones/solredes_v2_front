@@ -1,0 +1,20 @@
+<h1 mat-dialog-title>Edición {{proyecto.c_nombre}}</h1>
+<form class="example-container" #newForm="ngForm" (ngSubmit)="guardar(newForm)">
+    
+    <div mat-dialog-content class="contenedor">
+        <img [src]="showImg || urlImagen || showImgDefault" alt="img" style="min-width: 400px; max-width: 400px;">
+
+        <input id="file" #fileInput hidden type='file' (change)="uploadfile($event.target.files)" >
+        <button type="button" mat-mini-fab color="accent" (click)="fileInput.click()" style="margin-left: 10px;">
+            <mat-icon>cloud_upload</mat-icon>
+        </button>        
+        
+    </div>
+    
+    <div mat-dialog-actions>
+        <button mat-button type="submit" cdkFocusInitial [disabled]="!newForm.form.valid">
+            <mat-icon>save</mat-icon>
+            <span>Guardar</span>
+        </button>
+    </div>
+</form>

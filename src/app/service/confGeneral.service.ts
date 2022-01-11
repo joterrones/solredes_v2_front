@@ -153,7 +153,7 @@ export class confGeneralService{
             'Authorization': 'Bearer ' + token
         });
         return this._http.post(this.url + 'configuracionGeneral/getTipoFoto', { headers: reqHeader });
-    }
+    } 
 
     saveTipoFoto(data, token): Observable<any> {
         var reqHeader = new HttpHeaders({
@@ -319,5 +319,89 @@ export class confGeneralService{
         });        
         console.log(data)
         return this._http.post(this.url + 'configuracionGeneral/saveLineaUser', data, { headers: reqHeader });
+    }
+
+    getTipoElemento(token): Observable<any> {
+        var reqHeader = new HttpHeaders({
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
+        });
+        return this._http.post(this.url + 'configuracionGeneral/getTipoElemento', { headers: reqHeader });
+    } 
+
+    saveTipoElemento(data, token): Observable<any> {
+        var reqHeader = new HttpHeaders({
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
+        });
+        console.log('enviando datos a node')
+        console.log(data)
+        return this._http.post(this.url + 'configuracionGeneral/saveTipoElemento', data, { headers: reqHeader });
+    }
+
+    deleteTipoElemento(data): Observable<any> {
+        console.log(data)
+        console.log('borrando tipo elemento')
+        return this._http.post(this.url + 'configuracionGeneral/deleteTipoElemento', data);
+    }
+
+    getTipoMontaje(token): Observable<any> {
+        var reqHeader = new HttpHeaders({
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
+        });
+        return this._http.post(this.url + 'configuracionGeneral/getTipoMontaje', { headers: reqHeader });
+    } 
+
+    saveTipoMontaje(data, token): Observable<any> {
+        var reqHeader = new HttpHeaders({
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
+        });
+        console.log('enviando datos a node')
+        console.log(data)
+        return this._http.post(this.url + 'configuracionGeneral/saveTipoMontaje', data, { headers: reqHeader });
+    }
+
+    deleteTipoMontaje(data): Observable<any> {
+        console.log(data)
+        console.log('borrando tipo montaje')
+        return this._http.post(this.url + 'configuracionGeneral/deleteTipoMontaje', data);
+    }
+
+    uploadfile(extension,archivo,fileToUpload,token):Observable<any>{
+            
+        const formData: FormData = new FormData();
+        formData.append('DA', fileToUpload, fileToUpload.name);
+        return this._http.post(this.url+'configuracionGeneral/uploadfile?extension='+extension+'&archivo='+archivo,formData);
+    } 
+
+    saveProImg(data, token): Observable<any> {
+        var reqHeader = new HttpHeaders({
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
+        });
+        console.log('enviando datos a node archivo....')
+        console.log(data)
+        return this._http.post(this.url + 'configuracionGeneral/saveProImg', data, { headers: reqHeader });
+    }
+
+    saveProImgLogo(data, token): Observable<any> {
+        var reqHeader = new HttpHeaders({
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
+        });
+        console.log('enviando datos a node archivo....')
+        console.log(data)
+        return this._http.post(this.url + 'configuracionGeneral/saveProImgLogo', data, { headers: reqHeader });
+    }
+
+    saveColorPro(data, token): Observable<any> {
+        var reqHeader = new HttpHeaders({
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
+        });
+        console.log(data)
+        return this._http.post(this.url + 'configuracionGeneral/saveColorPro', data, { headers: reqHeader });
     }
 }

@@ -1,0 +1,56 @@
+<app-menu>
+    <div class="body">
+        <h4>{{tit}}</h4>
+        <input type="file" style="display: inline-block;" (change)="incomingfile($event)" placeholder="Upload file"
+            accept=".xlsx" #fileInput [hidden]="true">
+
+            
+        <button mat-raised-button color="primary" (click)="fileInput.click()" class="boton" [disabled]="procesando">(0) Subir Archivo</button>
+        <button mat-raised-button color="primary" (click)="conexionapi(1)" class="boton" [disabled]="procesando">(1) Cargar</button>
+        <button mat-raised-button color="primary" (click)="download()" class="boton" >Descargar</button>
+    
+
+        <mat-progress-bar class="example-margin" mode="indeterminate" *ngIf="procesando">
+        </mat-progress-bar>
+        <table mat-table [dataSource]="tabla" matSort class="mat-elevation-z8">
+            <ng-container matColumnDef="ESTADO">
+                <th mat-header-cell *matHeaderCellDef color="error"> ESTADO </th>
+                <td mat-cell *matCellDef="let element">
+                    <button mat-icon-button aria-label="Example icon-button with a heart icon" #tooltip="matTooltip"
+                        [matTooltip]="element.c_mensaje" color="error" *ngIf="!element.b_flag">
+                        <mat-icon>close</mat-icon>
+                    </button>
+                    <button mat-icon-button aria-label="Example icon-button with a heart icon"
+                        [matTooltip]="element.c_mensaje" color="primary" *ngIf="element.b_flag" #tooltip="matTooltip">
+                        <mat-icon>check</mat-icon>
+                    </button>
+                </td>
+            </ng-container>
+            <ng-container matColumnDef="CODIGO_GRUPO">
+                <th mat-header-cell *matHeaderCellDef color="error"> CODIGO GRUPO </th>
+                <td mat-cell *matCellDef="let element"> {{element.CODIGO_GRUPO}} </td>
+            </ng-container>
+            <ng-container matColumnDef="DESCRIPCION_GRUPO">
+                <th mat-header-cell *matHeaderCellDef color="error"> DESCRIPCION GRUPO </th>
+                <td mat-cell *matCellDef="let element"> {{element.DESCRIPCION_GRUPO}} </td>
+            </ng-container>
+            <ng-container matColumnDef="CODIGO_SUMINISTRO">
+                <th mat-header-cell *matHeaderCellDef color="error"> CODIGO SUMINISTRO </th>
+                <td mat-cell *matCellDef="let element"> {{element.CODIGO_SUMINISTRO}} </td>
+            </ng-container>
+            <ng-container matColumnDef="DESCRIPCION_SUMINISTRO">
+                <th mat-header-cell *matHeaderCellDef color="error"> DESCRIPCION SUMINISTRO </th>
+                <td mat-cell *matCellDef="let element"> {{element.DESCRIPCION_SUMINISTRO}} </td>
+            </ng-container>
+            <ng-container matColumnDef="UNIDAD">
+                <th mat-header-cell *matHeaderCellDef color="error"> UNIDAD </th>
+                <td mat-cell *matCellDef="let element"> {{element.UNIDAD}} </td>
+            </ng-container>            
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <ng-template let-row matRowDef cdkVirtualFor [matRowDefColumns]="displayedColumns">
+                <tr mat-row></tr>
+            </ng-template>
+        </table>
+        <mat-paginator [pageSizeOptions]="[50,100,1000]" showFirstLastButtons></mat-paginator>
+    </div>
+</app-menu>

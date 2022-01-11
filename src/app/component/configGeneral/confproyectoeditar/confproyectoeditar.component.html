@@ -8,6 +8,11 @@
       <mat-hint class="error" *ngIf="proyecto.c_nombre.length<3">debe tener mínimo de 3 dígitos</mat-hint>
     </mat-form-field>      
     
+    <mat-form-field>
+      <input matInput placeholder="Nombre" name="c_nombrecorto" #c_username="ngModel" [(ngModel)]="proyecto.c_detalle"
+        minlength="3" required />
+      <mat-hint class="error" *ngIf="proyecto.c_nombre.length<3">debe tener mínimo de 3 dígitos</mat-hint>
+    </mat-form-field>   
   </div>
   <div mat-dialog-actions>
 

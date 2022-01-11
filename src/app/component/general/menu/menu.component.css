@@ -30,6 +30,15 @@
     width: 386px;
   }
 
+  .logo{
+    display: flex;
+    justify-content: space-around;
+    flex-wrap:wrap;
+    margin-top: 50%;
+  }
   
+  .barra{
+    background-color: #e65100;
+  }
 
   

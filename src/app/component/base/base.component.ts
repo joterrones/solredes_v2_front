@@ -77,6 +77,11 @@ export class BaseComponent implements OnInit {
     return currentUser;
   }
 
+  public getProyect(): any {
+    var currentUser = JSON.parse(localStorage.getItem('proyecto')).c_nombre;
+    return currentUser;
+  }
+
   public openSnackBar(mensaje: String, tipo: number) {
     if (mensaje == 'Token inválido!.') {
       localStorage.clear();

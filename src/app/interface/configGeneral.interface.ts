@@ -44,8 +44,12 @@ export interface ZonaEditar{
 }
 
 export interface Proyecto{
-    n_idpl_proyecto: number,
+    n_idpro_proyecto: number,
     c_nombre: String,
+    c_detalle: String,
+    c_color: String,
+    c_rutalogo: String,
+    c_rutaimg: String
 }
 
 export interface EditarProyecto{
@@ -113,6 +117,25 @@ export interface EditarTraGrupos{
     proyectos: Proyectos[]
 }
 
+export interface TipoElemento{
+    n_idpl_tipoelemento: number,
+    c_codigo: String,
+    c_nombre: String
+}
+
+export interface EditarTipoElemento{
+    tipoelemento: TipoElemento
+}
+
+export interface TipoMontaje{
+    n_idmon_categoriatipomontaje: number,
+    c_codigo: String,
+    c_nombre: String
+}
+
+export interface EditarTipoMontaje{
+    tipomontaje: TipoMontaje
+}
 
 
 

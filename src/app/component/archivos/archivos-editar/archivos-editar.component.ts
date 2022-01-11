@@ -103,7 +103,6 @@ export class ArchivosEditarComponent extends BaseComponent implements OnInit {
           this.openSnackBar(AppSettings.SERVICE_NO_CONECT_SERVER, 99);
         }
       });
-      
   } 
   
   uploadFileToActivity() {

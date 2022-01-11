@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
+import { AppSettings } from 'src/app/common/appsettings';
 import { ProyectoService } from 'src/app/service/proyecto.service';
 import { BaseComponent } from '../base/base.component';
 
@@ -11,7 +12,8 @@ import { BaseComponent } from '../base/base.component';
   providers: [ProyectoService]
 })
 export class ProyectoSeleccionComponent extends BaseComponent implements OnInit {
-  proyectos = []
+  proyectos = [];
+  urlImagen: string;
   constructor(public _proyecto_service: ProyectoService,
     public _router: Router,
     public snackBar: MatSnackBar) {
@@ -19,6 +21,7 @@ export class ProyectoSeleccionComponent extends BaseComponent implements OnInit 
   }
 
   ngOnInit() {
+    this.urlImagen = AppSettings.URL_IMG_PROYECTO;
     this.getProyectos();
   }
 
@@ -30,7 +33,7 @@ export class ProyectoSeleccionComponent extends BaseComponent implements OnInit 
         console.log("get_seleccionproyecto", result)
         try {
           if (result.estado) {
-            this.proyectos = result.data
+            this.proyectos = result.data            
           } else {
             // this.openSnackBar(result.mensaje, 99);
           }

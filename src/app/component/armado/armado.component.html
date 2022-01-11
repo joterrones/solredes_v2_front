@@ -1,0 +1,166 @@
+<app-menu>
+    <div class="contenedorBody">
+        <div *ngIf="!config">
+            <mat-accordion>
+                <mat-expansion-panel>
+                    <mat-expansion-panel-header class="back-expansion">
+                        <mat-panel-title>
+                            <mat-icon matSuffix>filter_list</mat-icon> Filtros
+                        </mat-panel-title>
+                        <mat-panel-description>
+                            Filtrado de datos en la lista
+                        </mat-panel-description>
+                    </mat-expansion-panel-header>
+                    <div class="contenedor">
+                        <mat-form-field>
+                            <mat-select placeholder="Tipo de Armados">
+                                <mat-option *ngFor="let item of tipoarmado" [value]="item.n_idpl_tipoarmado"
+                                    (click)='onSelectTipoArmado(item.n_idpl_tipoarmado)'>
+                                    {{item.c_nombre}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+
+                    </div>
+                </mat-expansion-panel>
+            </mat-accordion>
+            <br />
+            <mat-card>
+                <mat-form-field>
+                    <input matInput placeholder="Buscar" (keyup)="applyFilter($event.target.value)">
+                    <mat-icon matSuffix>search</mat-icon>
+                </mat-form-field>
+                <table mat-table [dataSource]="tabla" matSort class="mat-elevation-z8">
+
+                    <!-- Button Editar -->
+                    <ng-container matColumnDef="ver">
+                        <th mat-header-cell *matHeaderCellDef> <button mat-icon-button color="primary"
+                                (click)="openDialog(null,tipoarmado)">
+                                <mat-icon aria-label="Example icon-button with a heart icon">add</mat-icon>
+                            </button> </th>
+                        <td mat-cell *matCellDef="let element">
+                            <button mat-icon-button color="primary" (click)="openDialog(element,tipoarmado)">
+                                <mat-icon aria-label="Example icon-button with a heart icon">edit</mat-icon>
+                            </button>
+                        </td>
+                    </ng-container>
+                    <ng-container matColumnDef="c_codigo">
+                        <th mat-header-cell *matHeaderCellDef color="error"> Código </th>
+                        <td mat-cell *matCellDef="let element"> {{element.c_codigo}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="c_nombre">
+                        <th mat-header-cell *matHeaderCellDef color="error"> Nombre </th>
+                        <td mat-cell *matCellDef="let element"> {{element.c_nombre}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="c_codigo_corto">
+                        <th mat-header-cell *matHeaderCellDef color="error"> Código Corto </th>
+                        <td mat-cell *matCellDef="let element"> {{element.c_codigo_corto}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="c_iconomapa">
+                        <th mat-header-cell *matHeaderCellDef color="error"> Ícono Mapa </th>
+                        <td mat-cell *matCellDef="let element">
+                            <!-- <div *ngIf="element.c_iconomapa!=null">
+                      <img src="assets/noimage.png" height="20"
+                        width="20" />
+                    </div>-->
+                        </td>
+                    </ng-container>
+                    <ng-container matColumnDef="c_rutaimg">
+                        <th mat-header-cell *matHeaderCellDef color="error"> Lámina </th>
+                        <td mat-cell *matCellDef="let element">
+                            <!--<div *ngIf="element.c_rutaimg!=null">
+                      <img src="assets/noimage.png" height="20" width="20" />
+          
+                    </div>-->
+                        </td>
+                    </ng-container>
+                    <ng-container matColumnDef="n_version">
+                        <th mat-header-cell *matHeaderCellDef color="error"> Versión </th>
+                        <td mat-cell *matCellDef="let element"> {{element.n_version}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="tipo_armado">
+                        <th mat-header-cell *matHeaderCellDef color="error"> Tipo Armado </th>
+                        <td mat-cell *matCellDef="let element"> {{element.c_codigotipoarmado}} </td>
+                    </ng-container>
+                    <!-- Button Config -->
+                    <ng-container matColumnDef="config">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Conf. Sum. </th>
+                        <td mat-cell *matCellDef="let element">
+                            <button mat-icon-button color="primary" (click)="configurar(element)">
+                                <mat-icon aria-label="Example icon-button with a heart icon">settings</mat-icon>
+                            </button>
+                        </td>
+                    </ng-container>
+
+                    <!-- Button Config -->
+                    <ng-container matColumnDef="configmont">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Conf. Mont. </th>
+                        <td mat-cell *matCellDef="let element">
+                            <button mat-icon-button color="primary" (click)="openDialogConfigMontaje(element)">
+                                <mat-icon aria-label="Example icon-button with a heart icon">settings</mat-icon>
+                            </button>
+                        </td>
+                    </ng-container>
+                    <!-- Button Eliminar -->
+                    <ng-container matColumnDef="eliminar">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Eliminar </th>
+                        <td mat-cell *matCellDef="let element">
+                            <button mat-icon-button color="error" (click)="eliminar(element)">
+                                <mat-icon aria-label="Example icon-button with a heart icon">delete</mat-icon>
+                            </button>
+                        </td>
+                    </ng-container>
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <ng-template let-row matRowDef cdkVirtualFor [matRowDefColumns]="displayedColumns">
+                        <tr mat-row></tr>
+                    </ng-template>
+                </table>
+                <mat-paginator [pageSizeOptions]="[10,20,50,100]" showFirstLastButtons></mat-paginator>
+            </mat-card>
+        </div>
+
+        <div *ngIf="config">
+            <mat-card>
+                <h2>{{"["+armado.c_codigo +"] "+ armado.c_nombre}}</h2>
+                
+                <div class="navega">
+                    <mat-form-field>
+                        <input matInput placeholder="Buscar" (keyup)="applyFilterConfig($event.target.value)">
+                        <mat-icon matSuffix>search</mat-icon>
+                    </mat-form-field>
+                    <button mat-icon-button color="primary" (click)="back()">
+                        <mat-icon>keyboard_backspace</mat-icon>
+                    </button>
+                </div>
+                <table mat-table [dataSource]="tablaconfig" matSort class="mat-elevation-z8">
+                    <ng-container matColumnDef="c_codigo">
+                        <th mat-header-cell *matHeaderCellDef color="error" mat-sort-header> Código </th>
+                        <td mat-cell *matCellDef="let element"> {{element.c_codigo}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="c_nombre">
+                        <th mat-header-cell *matHeaderCellDef color="error" mat-sort-header> Nombre </th>
+                        <td mat-cell *matCellDef="let element"> {{element.c_nombre}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="c_unidad">
+                        <th mat-header-cell *matHeaderCellDef color="error" mat-sort-header> Unidad </th>
+                        <td mat-cell *matCellDef="let element"> {{element.c_unidadmedida}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="n_cantidad">
+                        <th mat-header-cell *matHeaderCellDef color="error" mat-sort-header> Cantidad </th>
+                        <td mat-cell *matCellDef="let element">
+                            <input matInput placeholder="Catidad" name="n_cantidad" #n_cantidad="ngModel"
+                                [(ngModel)]="element.n_cantidad" (keypress)="keyPress($event,element)"
+                                (focus)="onFocus(element)">
+                        </td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="displayedColumnsConfig"></tr>
+                    <ng-template let-row matRowDef cdkVirtualFor [matRowDefColumns]="displayedColumnsConfig">
+                        <tr mat-row></tr>
+                    </ng-template>
+                </table>
+                <mat-paginator [pageSizeOptions]="[20,50,100]" showFirstLastButtons></mat-paginator>
+            </mat-card>
+        </div>
+    </div>
+</app-menu>

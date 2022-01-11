@@ -1,0 +1,49 @@
+<app-menu>
+    <div class="body">
+
+        <mat-form-field>
+          <mat-select placeholder="Tipo">
+            <mat-option *ngFor="let item of filtro" [value]="item.id" (click)='onSelectTipo(item.id)'>
+              {{item.nombre}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      
+        <mat-table [dataSource]="tabla" class="mat-elevation-z8">
+          <ng-container matColumnDef="c_codigo">
+            <mat-header-cell *matHeaderCellDef> No. </mat-header-cell>
+            <mat-cell *matCellDef="let element"><label [ngClass]="(element.isGroupBy == true)?'group':''">
+              <!--    {{element.c_codigo.replace('RS_','').replace('RP_','').replace('LP_','')}} -->
+              {{element.c_codigo}}
+            </label> </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="c_nombre">
+            <mat-header-cell *matHeaderCellDef> Partida </mat-header-cell>
+            <mat-cell *matCellDef="let element"> <label
+                [ngClass]="(element.isGroupBy == true)?'group':''">{{element.c_nombre}}</label> </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="c_unidad">
+            <mat-header-cell *matHeaderCellDef> Unidad </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.c_unidadmedida}} </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="n_cantidad">
+            <mat-header-cell *matHeaderCellDef> Cantidad </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.cantidad}} </mat-cell>
+          </ng-container>
+          <!-- Button Eliminar -->
+          <ng-container matColumnDef="estructuras">
+            <mat-header-cell *matHeaderCellDef> Estructuras </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              <button mat-icon-button color="primary" (click)="openDialog(element)" *ngIf="element.isGroupBy == false">
+                <mat-icon aria-label="Example icon-button with a heart icon">zoom_in</mat-icon>
+              </button>
+            </mat-cell>
+          </ng-container>
+      
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+        </mat-table>
+      
+      
+      </div>
+</app-menu>
