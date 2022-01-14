@@ -33,12 +33,14 @@ export class RoleditarComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.usuarioLog = this.getUser().data;
     if (this.data.rol == null) {
       this.editar = false;
       this.rol = {
         n_idseg_rol:0,
         c_nombre:'',
-        n_nivel:''        
+        n_nivel:'',
+        n_id_usermodi: this.usuarioLog.n_idseg_userprofile        
       };      
     } else {
       this.editar = true;
@@ -49,7 +51,7 @@ export class RoleditarComponent extends BaseComponent implements OnInit {
   }
 
   guardar(newForm) {
-    this.rol;
+    this.rol.n_id_usermodi = this.usuarioLog.n_idseg_userprofile;
     this._seguridadservice.saveRol(this.rol, this.getToken().token).subscribe(
       result => {
         try {

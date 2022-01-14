@@ -40,6 +40,7 @@ export class CategoriatipomontajeComponent extends BaseComponent implements OnIn
   }
 
   ngOnInit() {       
+    this.usuarioLog = this.getUser().data;
     this.getTablaTipoMontaje();
   }  
   
@@ -86,13 +87,17 @@ export class CategoriatipomontajeComponent extends BaseComponent implements OnIn
     dialogRef.afterClosed().subscribe(result => {
 
       if (result) {
-        this.deleteTipoFoto(item);
+        this.deleteTipoMontaje(item);
       }
     });
   }
 
-  deleteTipoFoto(elemento) {
-    this._confiGeneral_service.deleteTipoMontaje(elemento).subscribe(
+  deleteTipoMontaje(elemento) {
+    let request = {
+      n_idmon_categoriatipomontaje: elemento.n_idmon_categoriatipomontaje,
+      n_id_usermodi: this.usuarioLog.n_idseg_userprofile
+    }
+    this._confiGeneral_service.deleteTipoMontaje(request).subscribe(
       result => {
         try {
           if (result.estado) {

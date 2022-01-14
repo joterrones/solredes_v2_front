@@ -31,6 +31,7 @@ export class AdmiArchivosEditarComponent extends BaseComponent implements OnInit
   }
 
   ngOnInit() {
+    this.usuarioLog = this.getUser().data;
     this.getCarpetas();
     if (this.data.archivo == null) {
       this.editar = false;
@@ -42,7 +43,8 @@ export class AdmiArchivosEditarComponent extends BaseComponent implements OnInit
         c_rutalogica: "",
         c_checksum: "",
         c_tipo: "1",
-        n_iddoc_archivopadre: this.data.n_iddoc_archivopadre
+        n_iddoc_archivopadre: this.data.n_iddoc_archivopadre,
+        n_id_usermodi: this.usuarioLog.n_idseg_userprofile
       };
       
     } else {
@@ -73,7 +75,7 @@ export class AdmiArchivosEditarComponent extends BaseComponent implements OnInit
   }
 
   guardar(newForm) {
-    this.archivo;
+    this.archivo.n_id_usermodi= this.usuarioLog.n_idseg_userprofile;
     this._archivos_service.saveArchivo(this.archivo, this.getToken().token).subscribe(
       result => {
         try {

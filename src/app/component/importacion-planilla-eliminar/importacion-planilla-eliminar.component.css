@@ -1,0 +1,15 @@
+table {
+    width: 100%;
+}
+
+.btnborrar{
+    background-color: red;
+    height: 40px;
+}
+
+.contenido{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;  
+}

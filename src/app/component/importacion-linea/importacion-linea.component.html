@@ -7,7 +7,7 @@
             
         <button mat-raised-button color="primary" (click)="fileInput.click()" class="boton" [disabled]="procesando">(0) Subir Archivo</button>
         <button mat-raised-button color="primary" (click)="conexionapi(1)" class="boton" [disabled]="procesando">(1) Cargar</button>
-    
+        <button mat-raised-button color="primary" (click)="download()" class="boton" >Descargar</button>
 
         <mat-progress-bar class="example-margin" mode="indeterminate" *ngIf="procesando">
         </mat-progress-bar>

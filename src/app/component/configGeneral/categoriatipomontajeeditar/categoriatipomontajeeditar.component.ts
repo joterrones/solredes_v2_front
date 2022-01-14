@@ -33,12 +33,14 @@ export class CategoriatipomontajeeditarComponent extends BaseComponent implement
   }
 
   ngOnInit() {
+    this.usuarioLog = this.getUser().data;
     if (this.data.tipomontaje == null) {
       this.editar = false;
       this.tipomontaje = {
         n_idmon_categoriatipomontaje:0,
         c_codigo:'',
-        c_nombre:''              
+        c_nombre:'',        
+        n_id_usermodi: this.usuarioLog.n_idseg_userprofile              
       };      
     } else {
       this.editar = true;
@@ -49,7 +51,7 @@ export class CategoriatipomontajeeditarComponent extends BaseComponent implement
   }
   
   guardar(newForm) {
-    this.tipomontaje;
+    this.tipomontaje.n_id_usermodi= this.usuarioLog.n_idseg_userprofile;
     this._configGeneralservice.saveTipoMontaje(this.tipomontaje, this.getToken().token).subscribe(
       result => {
         try {

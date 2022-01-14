@@ -54,15 +54,20 @@ export class SeguridadService {
             'Authorization': 'Bearer ' + token
         });
         return this._http.post(this.url + 'seguridad/resetearclave', data, { headers: reqHeader });
+    } 
+
+    valDni(data): Observable<any> {        
+        console.log(data)
+        return this._http.post(this.url + 'seguridad/valDni', data);
     }
 
-    save(data, token): Observable<any> {
+    saveUser(data, token): Observable<any> {
         var reqHeader = new HttpHeaders({
             'Content-Type': 'application/json',
             'Authorization': 'Bearer ' + token
         });
         console.log(data)
-        return this._http.post(this.url + 'seguridad/save', data, { headers: reqHeader });
+        return this._http.post(this.url + 'seguridad/saveUser', data, { headers: reqHeader });
     }
 
     saveRol(data, token): Observable<any> {

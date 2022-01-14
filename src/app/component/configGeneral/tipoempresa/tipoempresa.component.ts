@@ -41,6 +41,7 @@ export class TipoempresaComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit() {       
+    this.usuarioLog = this.getUser().data;
     this.getTablaTipoEmpresa();
   }  
   
@@ -93,7 +94,11 @@ export class TipoempresaComponent extends BaseComponent implements OnInit {
   }
 
   deleteTipoEmpresa(item) {
-    this._confiGeneral_service.deleteTipoEmpresa(item).subscribe(
+    let request = {
+      n_idgen_tipoempresa: item.n_idgen_tipoempresa,
+      n_id_usermodi: this.usuarioLog.n_idseg_userprofile
+    }
+    this._confiGeneral_service.deleteTipoEmpresa(request).subscribe(
       result => {
         try {
           if (result.estado) {

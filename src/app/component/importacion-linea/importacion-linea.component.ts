@@ -4,13 +4,16 @@ import { MatPaginator, MatTableDataSource, MatSort } from '@angular/material';
 import { MatDialog, MatSnackBar } from '@angular/material';
 import { BaseComponent } from '../base/base.component';
 import * as XLSX from 'xlsx';
+import { Router } from '@angular/router';
+import { saveAs } from 'file-saver';
+
 @Component({
   selector: 'app-importacion-linea',
   templateUrl: './importacion-linea.component.html',
   styleUrls: ['./importacion-linea.component.css'],
   providers: [ImportacionService]
 })
-export class ImportacionLineaComponent implements OnInit {
+export class ImportacionLineaComponent extends BaseComponent implements OnInit {
 
 
   tit = 'Carga de datos';
@@ -35,8 +38,10 @@ export class ImportacionLineaComponent implements OnInit {
   constructor(
     public _importacion_service: ImportacionService,
     public dialog: MatDialog,
-    public snack_1: MatSnackBar
+    public snack_1: MatSnackBar,
+    public _router: Router,
   ) {
+    super(snack_1, _router)
   }
 
   ngOnInit() {
@@ -121,6 +126,15 @@ export class ImportacionLineaComponent implements OnInit {
         console.log(<any>error);
         //this.openSnackBar(<any>error, 99);
         this.procesando = false;
+      });
+  }
+
+  download(){
+    this._importacion_service.downloadPlantillaLinea().subscribe(
+      result => {
+        saveAs(result, "Plantilla_linea");
+      }, error => {
+        this.openSnackBar(<any>error, 99);
       });
   }
 

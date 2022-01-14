@@ -26,7 +26,7 @@ export class UsuarioComponent extends BaseComponent implements OnInit {
   idroles = 0;
   textfilter = '';
 
-  displayedColumns: string[] = ['editar', 'username', 'c_nombre', 'c_dni', 'c_rol', 'asigProyecto','resetear', 'eliminar'];
+  displayedColumns: string[] = ['editar', 'username', 'c_nombre1','c_nombre2', 'c_appaterno','c_apmaterno','c_dni', 'c_rol', 'asigProyecto','resetear', 'eliminar'];
   public tablaUsuarios: MatTableDataSource<any>;
   public confirmar: Confirmar;
 
@@ -44,6 +44,7 @@ export class UsuarioComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.usuarioLog = this.getUser().data;
     this.getrole();
     this.getTablaUsuario();
   }
@@ -59,11 +60,9 @@ export class UsuarioComponent extends BaseComponent implements OnInit {
     let request = {
       n_idseg_rol: this.idroles
     }
-    console.log( this.idroles)
     
     this._seguridad_service.get(request, this.getToken().token).subscribe(
-      result => {
-
+      result => {        
         try {
           if (result.estado) {
             console.log(result);
@@ -161,13 +160,17 @@ export class UsuarioComponent extends BaseComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
 
       if (result) {
-        this.delete_proyecto(item);
+        this.deleteUsuario(item);
       }
     });
   }
 
-  delete_proyecto(proyecto) {
-    this._seguridad_service.delete(proyecto).subscribe(
+  deleteUsuario(item) {
+    let request = {
+      n_idseg_userprofile: item.n_idseg_userprofile,
+      n_id_usermodi: this.usuarioLog.n_idseg_userprofile
+    }
+    this._seguridad_service.delete(request).subscribe(
       result => {
         try {
           if (result.estado) {

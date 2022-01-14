@@ -18,7 +18,7 @@ export class AlmaceneditarComponent extends BaseComponent implements OnInit {
 
   almacen: Almacen;
   editar: boolean;
-  proyecto: Proyecto[];
+  proyectos: Proyecto[];
 
   constructor(
     public dialogRef: MatDialogRef<AlmaceneditarComponent>,    
@@ -30,26 +30,28 @@ export class AlmaceneditarComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit() {    
+    this.usuarioLog = this.getUser().data;
     if (this.data.almacen == null) {
       this.editar = false;
       this.almacen = {
         n_idalm_almacen: 0,
         c_nombre: "",
         c_direccion: "",
-        n_idpro_proyecto: 0    
+        n_idpro_proyecto: this.proyecto.n_idpro_proyecto,    
+        n_id_usermodi: this.usuarioLog.n_idseg_userprofile
       };
       
     } else {
       this.editar = true;
       this.almacen = this.data.almacen; 
     }
-    this.proyecto = this.data.proyecto;    
+    this.proyectos = this.data.proyectos;    
     console.log('Contenido de almacen');
     console.log(this.almacen);
   }
 
   guardar(newForm) {
-    this.almacen;
+    this.almacen.n_id_usermodi= this.usuarioLog.n_idseg_userprofile;
     this._almacen_service.saveAlmacen(this.almacen, this.getToken().token).subscribe(
       result => {
         try {

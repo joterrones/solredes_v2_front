@@ -33,12 +33,14 @@ export class TipoelementoeditarComponent extends BaseComponent implements OnInit
   }
 
   ngOnInit() {
+    this.usuarioLog = this.getUser().data;
     if (this.data.tipoelemento == null) {
       this.editar = false;
       this.tipoelemento = {
         n_idpl_tipoelemento:0,
         c_codigo:'',
-        c_nombre:''              
+        c_nombre:'',  
+        n_id_usermodi: this.usuarioLog.n_idseg_userprofile            
       };      
     } else {
       this.editar = true;
@@ -49,7 +51,7 @@ export class TipoelementoeditarComponent extends BaseComponent implements OnInit
   }
   
   guardar(newForm) {
-    this.tipoelemento;
+    this.tipoelemento.n_id_usermodi= this.usuarioLog.n_idseg_userprofile;
     this._configGeneralservice.saveTipoElemento(this.tipoelemento, this.getToken().token).subscribe(
       result => {
         try {

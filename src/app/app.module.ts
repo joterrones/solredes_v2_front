@@ -116,7 +116,7 @@ import { ArmadoconfigmontajeComponent } from './component/armadoconfigmontaje/ar
 import { MetradoComponent } from './component/metrado/metrado.component';
 import { MetradomontajeComponent } from './component/metradomontaje/metradomontaje.component';
 import { DetallemetradoComponent } from './component/detallemetrado/detallemetrado.component';
-
+import { ImportacionPlanillaEliminarComponent } from './component/importacion-planilla-eliminar/importacion-planilla-eliminar.component';
 
 @NgModule({
   declarations: [
@@ -198,7 +198,8 @@ import { DetallemetradoComponent } from './component/detallemetrado/detallemetra
     ArmadoconfigmontajeComponent, 
     MetradoComponent, 
     MetradomontajeComponent, 
-    DetallemetradoComponent,   
+    DetallemetradoComponent, 
+    ImportacionPlanillaEliminarComponent, 
   ],
   imports: [
     FormsModule,
@@ -270,7 +271,9 @@ import { DetallemetradoComponent } from './component/detallemetrado/detallemetra
     ConfproyectocolorComponent,
     DetallearmadoComponent,
     ArmadoconfigmontajeComponent,
-    DetallemetradoComponent
+    DetallemetradoComponent,
+    ImportacionPlanillaEliminarComponent,
+    MetradomontajeComponent
   ],
   providers: [
     MatDatepickerModule, 

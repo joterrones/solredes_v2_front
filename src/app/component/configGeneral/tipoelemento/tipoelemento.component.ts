@@ -39,7 +39,8 @@ export class TipoelementoComponent extends BaseComponent implements OnInit {
     super(snackBar, router);
   }
 
-  ngOnInit() {       
+  ngOnInit() {     
+    this.usuarioLog = this.getUser().data;  
     this.getTablaTipoElemento();
   }  
   
@@ -86,13 +87,17 @@ export class TipoelementoComponent extends BaseComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
 
       if (result) {
-        this.deleteTipoFoto(item);
+        this.deleteTipoElemento(item);
       }
     });
   }
 
-  deleteTipoFoto(elemento) {
-    this._confiGeneral_service.deleteTipoElemento(elemento).subscribe(
+  deleteTipoElemento(elemento) {
+    let request = {
+      n_idpl_tipoelemento: elemento.n_idpl_tipoelemento,
+      n_id_usermodi: this.usuarioLog.n_idseg_userprofile
+    }
+    this._confiGeneral_service.deleteTipoElemento(request).subscribe(
       result => {
         try {
           if (result.estado) {

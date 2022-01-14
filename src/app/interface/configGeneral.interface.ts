@@ -2,7 +2,8 @@ export interface Empresa{
     n_idgen_empresa: number,
     c_nombrecorto: String,
     c_ruc: String,
-    c_razonsocial: String
+    c_razonsocial: String,
+    n_id_usermodi: number
 }
 
 export interface EmpresaEditar{
@@ -15,11 +16,13 @@ export interface Linea{
     c_codigo: String,
     n_idpl_tipolinea: number,
     n_idpl_zona: number,    
+    n_id_usermodi: number
 }
 
 export interface Tipolinea{
     n_idpl_tipolinea: number,
-    c_nombre: String    
+    c_nombre: String,
+    n_id_usermodi: number    
 }
 
 export interface LineaEditar{
@@ -36,7 +39,8 @@ export interface Zona{
     n_idpl_zona: number,
     n_idpro_proyecto: number,
     c_codigo: String,
-    c_nombre: String
+    c_nombre: String,
+    n_id_usermodi: number
 }
 export interface ZonaEditar{
     zona: Zona,
@@ -49,7 +53,8 @@ export interface Proyecto{
     c_detalle: String,
     c_color: String,
     c_rutalogo: String,
-    c_rutaimg: String
+    c_rutaimg: String,
+    n_id_usermodi:number
 }
 
 export interface EditarProyecto{
@@ -60,7 +65,8 @@ export interface TipoFoto{
     n_idgen_tipofoto: number,
     c_nombre: String,
     c_codigo: String,
-    n_tipo: String
+    n_tipo: String,
+    n_id_usermodi: number
 }
 
 export interface EditarTipoFoto{
@@ -83,7 +89,8 @@ export interface EditarEstructura{
 
 export interface TipoEmpresa{
     n_idgen_tipoempresa: number,
-    c_nombre: String
+    c_nombre: String,    
+    n_id_usermodi: number
 }
 
 export interface EditarTipoEmpresa{
@@ -94,7 +101,8 @@ export interface ValoresGenerales{
     n_idgen_valoresgenerales: number,
     c_codigo: String, 
     c_nombre: String, 
-    n_valorunico: number
+    n_valorunico: number,
+    n_id_usermodi: number
 }
 
 export interface EditarValoresGenerales{
@@ -104,7 +112,8 @@ export interface EditarValoresGenerales{
 export interface TraGrupos{
     n_idtra_grupo: number,
     n_idpro_proyecto: number,
-    c_nombre: String
+    c_nombre: String,
+    n_id_usermodi: number
 }
 
 export interface Proyectos{
@@ -120,7 +129,8 @@ export interface EditarTraGrupos{
 export interface TipoElemento{
     n_idpl_tipoelemento: number,
     c_codigo: String,
-    c_nombre: String
+    c_nombre: String,
+    n_id_usermodi: number
 }
 
 export interface EditarTipoElemento{
@@ -130,7 +140,8 @@ export interface EditarTipoElemento{
 export interface TipoMontaje{
     n_idmon_categoriatipomontaje: number,
     c_codigo: String,
-    c_nombre: String
+    c_nombre: String,
+    n_id_usermodi: number
 }
 
 export interface EditarTipoMontaje{

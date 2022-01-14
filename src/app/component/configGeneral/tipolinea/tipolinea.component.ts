@@ -41,6 +41,7 @@ export class TipolineaComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit() {       
+    this.usuarioLog = this.getUser().data;
     this.getTablaTipolinea();
   }  
   
@@ -88,13 +89,17 @@ export class TipolineaComponent extends BaseComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
 
       if (result) {
-        this.delete_proyecto(item);
+        this.deleteTipoLinea(item);
       }
     });
   }
 
-  delete_proyecto(item) {
-    this._confiGeneral_service.deleteTipoLinea(item).subscribe(
+  deleteTipoLinea(item) {
+    let request = {
+      n_idpl_tipolinea: item.n_idpl_tipolinea,
+      n_id_usermodi: this.usuarioLog.n_idseg_userprofile
+    }
+    this._confiGeneral_service.deleteTipoLinea(request).subscribe(
       result => {
         try {
           if (result.estado) {

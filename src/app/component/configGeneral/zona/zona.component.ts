@@ -41,6 +41,7 @@ export class ZonaComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit() {   
+    this.usuarioLog = this.getUser().data;
     this.getTablaZona();
     console.log(this.proyecto.n_idpro_proyecto);
   }
@@ -107,7 +108,11 @@ export class ZonaComponent extends BaseComponent implements OnInit {
   }
 
   delete_linea(item) {
-    this._confiGeneral_service.deleteZona(item).subscribe(
+    let request = {
+      n_idpl_zona: item.n_idpl_zona,
+      n_id_usermodi: this.usuarioLog.n_idseg_userprofile
+    }
+    this._confiGeneral_service.deleteZona(request).subscribe(
       result => {
         try {
           if (result.estado) {

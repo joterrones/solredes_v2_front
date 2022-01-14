@@ -35,10 +35,11 @@ export class ConfproyectoimgComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.showImgDefault = "assets/images/imgDefault.jpg";
+    this.usuarioLog = this.getUser().data;
     this.editar = true;
     this.proyecto = this.data.proyecto;
-    this.urlImagen = AppSettings.URL_IMG_PROYECTO+this.proyecto.c_rutaimg;
+    this.urlImagen = AppSettings.URL_IMG_PROYECTO+this.proyecto.c_rutaimg;    
+    this.showImgDefault = "assets/images/imgDefault.jpg";
     console.log(this.urlImagen);
     console.log('Contenido de Detalle Proyecto');
     console.log(this.proyecto);
@@ -46,7 +47,7 @@ export class ConfproyectoimgComponent extends BaseComponent implements OnInit {
 
 
   guardar(newForm) {
-    
+    this.proyecto.n_id_usermodi= this.usuarioLog.n_idseg_userprofile;
     console.log(this.proyecto);
     this._confiGeneral_service.saveProImg(this.proyecto, this.getToken().token).subscribe(
       result => {

@@ -22,16 +22,30 @@
     </mat-form-field>
 
     <mat-form-field>
-      <input matInput placeholder="Nombres" name="c_name" #c_name="ngModel" [(ngModel)]="usuario.c_nombre1" minlength="3"
+      <input matInput placeholder="1° Nombre" name="c_name" #c_name="ngModel" [(ngModel)]="usuario.c_nombre1" minlength="3"
         required />
       <mat-hint class="error" *ngIf="usuario.c_nombre1.length<3">debe tener mínimo de 3 dígitos</mat-hint>
     </mat-form-field>
 
     <mat-form-field>
-      <input matInput placeholder="Apellidos" name="lastName" #c_lastname="ngModel" [(ngModel)]="usuario.c_appaterno"
+      <input matInput placeholder="2° Nombre" name="c_name" #c_name="ngModel" [(ngModel)]="usuario.c_nombre2" 
+        required />
+      <mat-hint class="error"></mat-hint>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput placeholder="Apellido Paterno" name="lastName" #c_lastname="ngModel" [(ngModel)]="usuario.c_appaterno"
         minlength="3" required />
       <mat-hint class="error" *ngIf="usuario.c_appaterno.length<3">debe tener mínimo de 3 dígitos</mat-hint>
     </mat-form-field>
+
+    <mat-form-field>
+      <input matInput placeholder="Apellido Materno" name="lastName" #c_lastname="ngModel" [(ngModel)]="usuario.c_apmaterno"
+        minlength="3" required />
+      <mat-hint class="error" *ngIf="usuario.c_apmaterno.length<3">debe tener mínimo de 3 dígitos</mat-hint>
+    </mat-form-field>
+
+
     <mat-form-field>
       <input type="text" (keypress)="numberOnly($event)" matInput placeholder="DNI" name="c_documentid"
         #c_documentid="ngModel" [(ngModel)]="usuario.c_dni" maxlength="8" minlength="8" required />

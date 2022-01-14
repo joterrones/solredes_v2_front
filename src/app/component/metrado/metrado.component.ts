@@ -1,8 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog, MatPaginator, MatSnackBar, MatSort, MatTableDataSource } from '@angular/material';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MetradoService } from 'src/app/service/metrado.service';
 import { MetradoMontajeService } from 'src/app/service/metradomontaje.service';
+import { VersionService } from 'src/app/service/version.service';
 import { BaseComponent } from '../base/base.component';
 import { DetallemetradoComponent } from '../detallemetrado/detallemetrado.component';
 
@@ -10,7 +11,7 @@ import { DetallemetradoComponent } from '../detallemetrado/detallemetrado.compon
   selector: 'app-metrado',
   templateUrl: './metrado.component.html',
   styleUrls: ['./metrado.component.css'],
-  providers: [MetradoService, MetradoMontajeService]
+  providers: [MetradoService, MetradoMontajeService,VersionService]
 })
 export class MetradoComponent extends BaseComponent implements OnInit {
 
@@ -21,11 +22,11 @@ export class MetradoComponent extends BaseComponent implements OnInit {
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: false }) sort: MatSort;
 
-  tipolineas: Array<any>;
-  idtipolinea: number;
-
-  pn_idpl_linea: number;
-  pn_version: number;
+  versiones = [];
+  ver: boolean;
+  n_idpl_linea="";
+  n_idpl_tipolinea="";
+  idversion="";
 
   filtro = [{ id: 1, nombre: "Suministro" },
   { id: 2, nombre: "Montaje" }];
@@ -33,6 +34,8 @@ export class MetradoComponent extends BaseComponent implements OnInit {
   constructor(
     public _metrado_service: MetradoService,
     public _metrado_montaje_service: MetradoMontajeService,
+    private _Activatedroute: ActivatedRoute, 
+    public _version_service: VersionService,
     public dialog: MatDialog,
     public snack_1: MatSnackBar,
     public router: Router
@@ -41,6 +44,9 @@ export class MetradoComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.n_idpl_linea = this._Activatedroute.snapshot.paramMap.get("n_idpl_linea");
+    this.n_idpl_tipolinea = this._Activatedroute.snapshot.paramMap.get("n_idpl_tipolinea");
+    this.versiones = this._version_service.get();
   }
 
   onSelectTipo(id) {
@@ -54,18 +60,23 @@ export class MetradoComponent extends BaseComponent implements OnInit {
     }
   }
 
+  selecVersion(id) {
+    this.idversion = id;
+    this.ver = true;
+  }
+
   public getTabla() {
     let request = {
-      n_idpl_tipolinea: this.idtipolinea,
-      n_idpl_linea: this.pn_idpl_linea,
-      n_version: this.pn_version
+      n_idpl_tipolinea: this.n_idpl_tipolinea,
+      n_idpl_linea: this.n_idpl_linea,
+      n_version: this.idversion
     };
     console.log(request);
     
     this._metrado_service.get(request, this.getProyect()).subscribe(
       result => {
         console.log("Metrado");
-        console.log(result);
+        console.log(result.data);
         if (result.estado) {
           this.tabla = new MatTableDataSource<any>(result.data);
           this.tabla.sort = this.sort;
@@ -82,9 +93,9 @@ export class MetradoComponent extends BaseComponent implements OnInit {
 
   public getTablaMontaje() {
     let request = {
-      n_idpl_tipolinea: this.idtipolinea,
-      n_idpl_linea: this.pn_idpl_linea,
-      n_version: this.pn_version
+      n_idpl_tipolinea: this.n_idpl_tipolinea,
+      n_idpl_linea: this.n_idpl_linea,
+      n_version: this.idversion
     };
     this._metrado_montaje_service.getmontaje(request, this.getProyect()).subscribe(
       result => {
@@ -107,20 +118,12 @@ export class MetradoComponent extends BaseComponent implements OnInit {
     return item.isGroupBy;
   }
 
-  public setparametros(n_idpl_linea, n_version, n_idpl_tiplinea) {
-    this.pn_idpl_linea = n_idpl_linea;
-    this.pn_version = n_version;
-    this.idtipolinea = n_idpl_tiplinea;
-    this.getTabla();
-
-  }
-
   openDialog(item): void {
     let data = {
       item: item,
       n_idpl_elemento: item.n_idpl_elemento,
-      n_idpl_linea: this.pn_idpl_linea,
-      n_version: this.pn_version
+      n_idpl_linea: this.n_idpl_linea,
+      n_version: this.idversion
     };
     const dialogRef = this.dialog.open(DetallemetradoComponent, {
       width: '80%',

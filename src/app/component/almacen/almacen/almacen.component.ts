@@ -40,7 +40,7 @@ export class AlmacenComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit() {       
-        
+    this.usuarioLog = this.getUser().data;    
     this.getTablaAlmacen();
   } 
   
@@ -110,7 +110,11 @@ export class AlmacenComponent extends BaseComponent implements OnInit {
   }
 
   deleteAlmacen(item) {
-    this._almacen_service.deleteAlmacen(item).subscribe(
+    let request = {
+      n_idalm_almacen: item.n_idalm_almacen,
+      n_id_usermodi: this.usuarioLog.n_idseg_userprofile
+    }
+    this._almacen_service.deleteAlmacen(request).subscribe(
       result => {
         try {
           if (result.estado) {

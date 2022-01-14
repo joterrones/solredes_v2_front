@@ -34,13 +34,15 @@ export class TipofotoeditarComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.usuarioLog = this.getUser().data;
     if (this.data.tipofoto == null) {
       this.editar = false;
       this.tipofoto = {
         n_idgen_tipofoto:0,
         c_nombre:'',
         c_codigo:'',
-        n_tipo:''        
+        n_tipo:'',        
+        n_id_usermodi: this.usuarioLog.n_idseg_userprofile        
       };      
     } else {
       this.editar = true;
@@ -51,7 +53,7 @@ export class TipofotoeditarComponent extends BaseComponent implements OnInit {
   }
 
   guardar(newForm) {
-    this.tipofoto;
+    this.tipofoto.n_id_usermodi= this.usuarioLog.n_idseg_userprofile;
     this._configGeneralservice.saveTipoFoto(this.tipofoto, this.getToken().token).subscribe(
       result => {
         try {

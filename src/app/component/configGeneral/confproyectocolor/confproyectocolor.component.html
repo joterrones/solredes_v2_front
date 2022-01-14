@@ -3,7 +3,7 @@
     <h2 mat-dialog-title>Asignar Proyectos</h2>
 
     <mat-selection-list #shoes>
-        <mat-list-option *ngFor="let shoe of typesOfShoes" [value]="shoe.hex">
+        <mat-list-option *ngFor="let shoe of typesOfShoes" [value]="shoe.hex" disableRipple>
           {{shoe.color}}
         </mat-list-option>
     </mat-selection-list>

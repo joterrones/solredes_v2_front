@@ -20,13 +20,14 @@ import { LineaeditarComponent } from '../lineaeditar/lineaeditar.component';
 export class LineaComponent extends BaseComponent implements OnInit {
   tit: String = "SEGURIDAD > GESTOR DE LINEAS";
 
+  //public usuario: any;
   tipolinea: [];
   zona: [];
   idtipolinea = 0;  
   idzona = 0;
   textfilter = '';
 
-  displayedColumns: string[] = ['editar', 'c_nombre', 'c_codigo', 'tipolinea', 'zona','eliminar'];
+  displayedColumns: string[] = ['editar', 'c_nombre', 'c_codigo', 'tipolinea', 'zona','Metrado','MetradoMon','eliminar'];
   public tablaLineas: MatTableDataSource<any>;
   public confirmar: Confirmar;
 
@@ -46,6 +47,10 @@ export class LineaComponent extends BaseComponent implements OnInit {
     this.getzona();
     this.gettipolinea();    
     this.getTablaLinea();
+    this.usuarioLog = this.getUser().data;
+    /*this.usuario = this.getToken().data;
+    console.log('Usuario Menu');
+    console.log(this.usuario);*/
   }
 
   selectTipolinea(n_idpl_tipolinea) {
@@ -164,7 +169,13 @@ export class LineaComponent extends BaseComponent implements OnInit {
   }
 
   delete_linea(item) {
-    this._confiGeneral_service.deleteLinea(item).subscribe(
+    let request = {
+      n_idpl_linea: item.n_idpl_linea,
+      n_id_usermodi: this.usuarioLog.n_idseg_userprofile
+    }
+    console.log(request);
+    
+    this._confiGeneral_service.deleteLinea(request).subscribe(
       result => {
         try {
           if (result.estado) {
@@ -184,5 +195,13 @@ export class LineaComponent extends BaseComponent implements OnInit {
         }
       });
   }
+
+  showMetrado(element): void {      
+    this.router.navigate(["/metrado/"+element.n_idpl_linea+"/"+element.n_idpl_tipolinea]);
+  }  
+
+  showMetradoMon(element): void {      
+    this.router.navigate(["/metradomon/"+element.n_idpl_linea+"/"+element.n_idpl_tipolinea]);
+  }  
 
 }

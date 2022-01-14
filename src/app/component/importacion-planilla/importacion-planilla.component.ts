@@ -6,6 +6,9 @@ import { BaseComponent } from '../base/base.component';
 import * as XLSX from 'xlsx';
 import { VersionService } from 'src/app/service/version.service';
 import { Router } from '@angular/router';
+import { ImportacionPlanillaEliminarComponent } from '../importacion-planilla-eliminar/importacion-planilla-eliminar.component';
+import { saveAs } from 'file-saver';
+
 @Component({
   selector: 'app-importacion-planilla',
   templateUrl: './importacion-planilla.component.html',
@@ -192,6 +195,32 @@ export class ImportacionPlanillaComponent extends BaseComponent implements OnIni
       });
   }
 
+  deleteEstructuras(): void {
+    if(this.idversion){
+      const dialogRef = this.dialog.open(ImportacionPlanillaEliminarComponent, {
+        width: '1250px', 
+        data: { idversion: this.idversion}
+      });
+      dialogRef.afterClosed().subscribe(result => {
+        try {
+        } catch (error) {
+          console.log(error);
+        }
+      });
+    }else{
+      this.openSnackBar("Seleccione una versión", 200);
+    }
+    
+  }
+
+  download(){
+    this._importacion_service.downloadPlantillaRedes().subscribe(
+      result => {
+        saveAs(result, "Plantilla_Redes");
+      }, error => {
+        this.openSnackBar(<any>error, 99);
+      });
+  }
 
 
 }

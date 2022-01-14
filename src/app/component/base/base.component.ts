@@ -13,6 +13,7 @@ export class BaseComponent implements OnInit {
 
   bLogin: boolean = true;
   proyecto:any;
+  usuarioLog:any;
 
   objsnack: SnackInterface = {
     mensaje: "",
@@ -25,11 +26,11 @@ export class BaseComponent implements OnInit {
     public snackBar: MatSnackBar, public router: Router
   ) {
     this.isLogin();
-
     this.proyecto = this.getProyecto();
   }
 
   ngOnInit() {
+    
   }
 
   public isLogin() {
@@ -60,8 +61,8 @@ export class BaseComponent implements OnInit {
   }*/
 
   public getUser(): any {
-    var currentUser = JSON.parse(localStorage.getItem('currentUser'));
-    return currentUser.data;
+    var currentUser = JSON.parse(localStorage.getItem('currentUser'));    
+    return currentUser;
   }
 
   public setToken(obj) {

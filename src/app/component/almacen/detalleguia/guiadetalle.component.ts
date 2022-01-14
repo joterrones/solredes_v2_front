@@ -58,6 +58,7 @@ export class GuiadetalleComponent extends BaseComponent implements OnInit {
     this.n_idalm_almacen = this._Activatedroute.snapshot.paramMap.get("n_idalm_almacen");   
     this.getElementos();  
     this.getTablaDetalleGuia();
+    this.usuarioLog = this.getUser().data;
   }  
 
   getTablaDetalleGuia() {
@@ -145,7 +146,11 @@ export class GuiadetalleComponent extends BaseComponent implements OnInit {
   }
 
   deleteDetalleGuia(item) {
-    this._almacen_service.deleteDetalleGuia(item).subscribe(
+    let request = {
+      n_idalm_detalleguia: item.n_idalm_detalleguia,
+      n_id_usermodi: this.usuarioLog.n_idseg_userprofile
+    }
+    this._almacen_service.deleteDetalleGuia(request).subscribe(
       result => {
         try {
           if (result.estado) {

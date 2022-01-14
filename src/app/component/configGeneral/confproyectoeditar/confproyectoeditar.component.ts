@@ -33,6 +33,7 @@ export class ConfproyectoeditarComponent extends BaseComponent implements OnInit
   }
 
   ngOnInit() {
+    this.usuarioLog = this.getUser().data;
     if (this.data.proyecto == null) {
       this.editar = false;
       this.proyecto = {
@@ -41,7 +42,8 @@ export class ConfproyectoeditarComponent extends BaseComponent implements OnInit
         c_detalle:'',
         c_color:'',
         c_rutalogo: '',
-        c_rutaimg:''
+        c_rutaimg:'',
+        n_id_usermodi: this.usuarioLog.n_idseg_userprofile
       };      
     } else {
       this.editar = true;
@@ -52,7 +54,7 @@ export class ConfproyectoeditarComponent extends BaseComponent implements OnInit
   }
   
   guardar(newForm) {
-    this.proyecto;
+    this.proyecto.n_id_usermodi= this.usuarioLog.n_idseg_userprofile;
     this._configGeneralservice.saveProyecto(this.proyecto, this.getToken().token).subscribe(
       result => {
         try {

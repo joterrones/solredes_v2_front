@@ -2,7 +2,8 @@ export interface Almacen{
     n_idalm_almacen: number,
     c_nombre: String,
     c_direccion: String,
-    n_idpro_proyecto: number    
+    n_idpro_proyecto: number,
+    n_id_usermodi: number 
 }
 
 export interface Proyecto{
@@ -12,7 +13,7 @@ export interface Proyecto{
 
 export interface AlmacenEditar{
     almacen: Almacen,
-    proyecto: Proyecto[]
+    proyectos: Proyecto[]
 }
 
 export interface Guia{
@@ -23,7 +24,8 @@ export interface Guia{
     c_direccion: String,
     c_ruc: String,
     c_nroguia: String,
-    c_observacion: String
+    c_observacion: String,
+    n_id_usermodi: number
 }
 
 export interface Periodos{
@@ -46,7 +48,8 @@ export interface DetalleGuia{
     c_nombreel: String,
     n_cantidad: number,
     c_ruta: String,
-    c_nombreImg: String
+    c_nombreImg: String,
+    n_id_usermodi: number
 }
 
 export interface Elementos{

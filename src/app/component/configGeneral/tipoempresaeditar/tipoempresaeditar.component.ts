@@ -33,11 +33,13 @@ export class TipoempresaeditarComponent extends BaseComponent implements OnInit 
   }
 
   ngOnInit() {
+    this.usuarioLog = this.getUser().data;
     if (this.data.tipoempresa == null) {
       this.editar = false;
       this.tipoempresa = {
         n_idgen_tipoempresa:0,
-        c_nombre:''              
+        c_nombre:'',        
+        n_id_usermodi: this.usuarioLog.n_idseg_userprofile              
       };      
     } else {
       this.editar = true;
@@ -48,7 +50,7 @@ export class TipoempresaeditarComponent extends BaseComponent implements OnInit 
   }
   
   guardar(newForm) {
-    this.tipoempresa;
+    this.tipoempresa.n_id_usermodi= this.usuarioLog.n_idseg_userprofile;
     this._configGeneralservice.saveTipoEmpresa(this.tipoempresa, this.getToken().token).subscribe(
       result => {
         try {

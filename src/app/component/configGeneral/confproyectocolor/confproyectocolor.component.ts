@@ -4,7 +4,7 @@ import { MatDialogRef, MatSnackBar, MAT_DIALOG_DATA } from '@angular/material';
 import { BaseComponent } from '../../base/base.component';
 import { Router } from "@angular/router";
 import { AppSettings } from '../../../common/appsettings';
-
+import {MatListModule} from '@angular/material/list';
 import { confGeneralService } from '../../../service/confGeneral.service';
 import { EditarProyecto, Proyecto } from 'src/app/interface/configGeneral.interface';
 
@@ -39,6 +39,7 @@ export class ConfproyectocolorComponent extends BaseComponent implements OnInit 
     }
 
   ngOnInit() {
+    this.usuarioLog = this.getUser().data;
     this.proyecto.n_idpro_proyecto = this.data.proyecto.n_idpro_proyecto;    
   }
 
@@ -46,7 +47,8 @@ export class ConfproyectocolorComponent extends BaseComponent implements OnInit 
     console.log(newForm);
       let request  ={ 
         c_color: newForm[0],
-        n_idpro_proyecto: this.proyecto.n_idpro_proyecto
+        n_idpro_proyecto: this.proyecto.n_idpro_proyecto,        
+        n_id_usermodi: this.usuarioLog.n_idseg_userprofile
       }
       console.log("Envio datos saveColorPro",request);
       

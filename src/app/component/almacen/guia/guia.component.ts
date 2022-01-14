@@ -49,7 +49,7 @@ export class GuiaComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit() {   
-    
+    this.usuarioLog = this.getUser().data;
     this.n_idalm_almacen = this._Activatedroute.snapshot.paramMap.get("n_idalm_almacen");
     this.c_nombreAlmacen = this._Activatedroute.snapshot.paramMap.get("c_nombre");
     console.log("idalmacen"+this.n_idalm_almacen)
@@ -158,7 +158,11 @@ export class GuiaComponent extends BaseComponent implements OnInit {
   }
 
   deleteGuia(item) {
-    this._almacen_service.deleteGuia(item).subscribe(
+    let request = {
+      n_idalm_guia: item.n_idalm_guia,
+      n_id_usermodi: this.usuarioLog.n_idseg_userprofile
+    }
+    this._almacen_service.deleteGuia(request).subscribe(
       result => {
         try {
           if (result.estado) {

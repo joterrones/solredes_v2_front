@@ -1,0 +1,22 @@
+.contenedor{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap:wrap
+  }
+  .contenedor mat-form-field{
+    margin:1%;
+  }
+
+  .example-viewport {
+    height: 400px;
+  
+    border: 1px solid black;
+  } 
+  
+.example-item {
+  height: 50px;
+}
+table{
+  width: 100%
+}

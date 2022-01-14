@@ -40,6 +40,7 @@ export class EmpresaComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit() {       
+    this.usuarioLog = this.getUser().data;
     this.getTablaEmpresa();
   }  
   
@@ -91,7 +92,11 @@ export class EmpresaComponent extends BaseComponent implements OnInit {
   }
 
   delete_proyecto(proyecto) {
-    this._confiGeneral_service.deleteEmpresa(proyecto).subscribe(
+    let request = {
+      n_idgen_empresa: proyecto.n_idgen_empresa,
+      n_id_usermodi: this.usuarioLog.n_idseg_userprofile
+    }
+    this._confiGeneral_service.deleteEmpresa(request).subscribe(
       result => {
         try {
           if (result.estado) {

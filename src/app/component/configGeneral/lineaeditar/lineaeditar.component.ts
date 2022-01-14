@@ -32,7 +32,7 @@ export class LineaeditarComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit() {
-
+    this.usuarioLog = this.getUser().data;
     if (this.data.linea == null) {
       this.editar = false;
       this.linea = {
@@ -40,7 +40,8 @@ export class LineaeditarComponent extends BaseComponent implements OnInit {
         c_nombre: "",
         c_codigo: "",
         n_idpl_tipolinea: 0,
-        n_idpl_zona: 0    
+        n_idpl_zona: 0,
+        n_id_usermodi: this.usuarioLog.n_idseg_userprofile
       };
       
     } else {
@@ -54,7 +55,9 @@ export class LineaeditarComponent extends BaseComponent implements OnInit {
   }
 
   guardar(newForm) {
-    this.linea;
+    console.log(this.usuarioLog.n_idseg_userprofile);
+    
+    this.linea.n_id_usermodi = this.usuarioLog.n_idseg_userprofile;
     this._confiGeneral_service.saveLinea(this.linea, this.getToken().token).subscribe(
       result => {
         try {

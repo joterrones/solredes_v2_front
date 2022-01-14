@@ -3,6 +3,9 @@ import { ImportacionService } from '../../service/importacion.service'
 import { MatPaginator, MatTableDataSource, MatSort } from '@angular/material';
 import { MatDialog, MatSnackBar } from '@angular/material';
 import * as XLSX from 'xlsx';
+import { Router } from '@angular/router';
+import { BaseComponent } from '../base/base.component';
+import { saveAs } from 'file-saver';
 
 @Component({
   selector: 'app-importacion-montaje',
@@ -10,7 +13,7 @@ import * as XLSX from 'xlsx';
   styleUrls: ['./importacion-montaje.component.css'],
   providers: [ImportacionService]
 })
-export class ImportacionMontajeComponent implements OnInit {
+export class ImportacionMontajeComponent extends BaseComponent implements OnInit {
 
   tit = 'Carga de datos';
   datos;
@@ -35,8 +38,10 @@ export class ImportacionMontajeComponent implements OnInit {
   constructor(
     public _importacion_service: ImportacionService,
     public dialog: MatDialog,
-    public snack_1: MatSnackBar
+    public snack_1: MatSnackBar,
+    public _router: Router,
   ) {
+    super(snack_1, _router)
   }
 
   ngOnInit() {
@@ -119,6 +124,15 @@ export class ImportacionMontajeComponent implements OnInit {
       }, error => {
         console.log(<any>error);
         this.procesando = false;
+      });
+  }
+
+  download(){
+    this._importacion_service.downloadPlantillaMontaje().subscribe(
+      result => {
+        saveAs(result, "Plantilla_Montaje");
+      }, error => {
+        this.openSnackBar(<any>error, 99);
       });
   }
 

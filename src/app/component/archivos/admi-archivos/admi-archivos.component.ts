@@ -39,6 +39,7 @@ export class AdmiArchivosComponent extends BaseComponent implements OnInit {
     super(snackBar, router);
   }
   ngOnInit() {
+    this.usuarioLog = this.getUser().data;
     this.getTablaArchivos();
   }
 
@@ -131,7 +132,12 @@ export class AdmiArchivosComponent extends BaseComponent implements OnInit {
   }
 
   delete_archivo(item) {
-    this._archivos_service.deleteArchivo(item).subscribe(
+    
+    let request = {
+      n_iddoc_archivo: item.n_iddoc_archivo,
+      n_id_usermodi: this.usuarioLog.n_idseg_userprofile
+    }
+    this._archivos_service.deleteArchivo(request).subscribe(
       result => {
         try {
           if (result.estado) {

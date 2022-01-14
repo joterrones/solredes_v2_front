@@ -26,7 +26,7 @@ export class DetallearmadoComponent extends BaseComponent implements OnInit {
     }
 
   ngOnInit() {
-
+    
     this.tipoarmado = this.data.combo;
     if(this.data.item==null){
       this.data.item={
@@ -38,7 +38,7 @@ export class DetallearmadoComponent extends BaseComponent implements OnInit {
   }
 
   guardar(newForm){
-    try {
+    try {      
         this._armado_service.insert(this.data.item,this.getProyect()).subscribe(
           result => {
             if(result.estado){

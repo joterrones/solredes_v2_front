@@ -33,13 +33,15 @@ export class EmpresaeditarComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.usuarioLog = this.getUser().data;
     if (this.data.empresa == null) {
       this.editar = false;
       this.empresa = {
         n_idgen_empresa:0,
         c_nombrecorto:'',
         c_ruc:'',
-        c_razonsocial:''        
+        c_razonsocial:'',  
+        n_id_usermodi: this.usuarioLog.n_idseg_userprofile      
       };      
     } else {
       this.editar = true;
@@ -50,7 +52,9 @@ export class EmpresaeditarComponent extends BaseComponent implements OnInit {
   }
 
   guardar(newForm) {
-    this.empresa;
+    this.empresa.n_id_usermodi= this.usuarioLog.n_idseg_userprofile;
+    console.log(this.empresa);
+    
     this._configGeneralservice.saveEmpresa(this.empresa, this.getToken().token).subscribe(
       result => {
         try {

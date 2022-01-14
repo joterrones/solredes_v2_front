@@ -33,13 +33,15 @@ export class ValoresGeneralesEditarComponent extends BaseComponent implements On
   }
 
   ngOnInit() {
+    this.usuarioLog = this.getUser().data;
     if (this.data.valoresGnr == null) {
       this.editar = false;
       this.valoresGnr = {
         n_idgen_valoresgenerales: 0,
         c_codigo: '', 
         c_nombre: '', 
-        n_valorunico: 0              
+        n_valorunico: 0,
+        n_id_usermodi: this.usuarioLog.n_idseg_userprofile              
       };      
     } else {
       this.editar = true;
@@ -50,7 +52,7 @@ export class ValoresGeneralesEditarComponent extends BaseComponent implements On
   }
 
   guardar(newForm) {
-    this.valoresGnr;
+    this.valoresGnr.n_id_usermodi= this.usuarioLog.n_idseg_userprofile;
     this._configGeneralservice.saveValoresGnr(this.valoresGnr, this.getToken().token).subscribe(
       result => {
         try {

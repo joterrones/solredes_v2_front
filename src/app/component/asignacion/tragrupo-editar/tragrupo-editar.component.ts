@@ -30,13 +30,14 @@ export class TragrupoEditarComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit() {
-
+    this.usuarioLog = this.getUser().data;
     if (this.data.traGrupos == null) {
       this.editar = false;
       this.traGrupos = {
         n_idtra_grupo: 0,
         n_idpro_proyecto: this.proyecto.n_idpro_proyecto,
-        c_nombre: ""
+        c_nombre: "",        
+        n_id_usermodi: this.usuarioLog.n_idseg_userprofile
       };
       
     } else {
@@ -48,9 +49,8 @@ export class TragrupoEditarComponent extends BaseComponent implements OnInit {
   }
 
   guardar(newForm) {
-    console.log(this.traGrupos);
-    
-    this.traGrupos;
+    console.log(this.traGrupos);    
+    this.traGrupos.n_id_usermodi= this.usuarioLog.n_idseg_userprofile;
     this._confiGeneral_service.savetraGrupos(this.traGrupos, this.getToken().token).subscribe(
       result => {
         try {

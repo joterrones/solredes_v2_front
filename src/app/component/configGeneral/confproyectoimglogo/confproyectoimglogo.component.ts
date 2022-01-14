@@ -35,6 +35,7 @@ export class ConfproyectoimglogoComponent extends BaseComponent implements OnIni
   }
 
   ngOnInit() {
+    this.usuarioLog = this.getUser().data;
     this.showImgDefault = "assets/images/imgDefault.jpg";
     this.editar = true;
     this.proyecto = this.data.proyecto;
@@ -46,7 +47,7 @@ export class ConfproyectoimglogoComponent extends BaseComponent implements OnIni
 
 
   guardar(newForm) {
-    
+    this.proyecto.n_id_usermodi= this.usuarioLog.n_idseg_userprofile;
     console.log(this.proyecto);
     this._confiGeneral_service.saveProImgLogo(this.proyecto, this.getToken().token).subscribe(
       result => {

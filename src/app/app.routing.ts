@@ -41,6 +41,7 @@ import { CategoriatipomontajeComponent } from './component/configGeneral/categor
 import { ElementoComponent } from './component/elemento/elemento.component';
 import { ArmadoComponent } from './component/armado/armado.component';
 import { MetradoComponent } from './component/metrado/metrado.component';
+import { MetradomontajeComponent } from './component/metradomontaje/metradomontaje.component';
 //Array de rutas
 const appRoutes:Routes=[
     {path:'',component:LoginComponent},
@@ -80,7 +81,8 @@ const appRoutes:Routes=[
     {path:'tipomontaje',component:CategoriatipomontajeComponent}, 
     {path:'elemento',component:ElementoComponent},
     {path:'armado',component:ArmadoComponent}, 
-    {path:'metrado',component:MetradoComponent},
+    {path:'metrado/:n_idpl_linea/:n_idpl_tipolinea',component:MetradoComponent},
+    {path:'metradomon/:n_idpl_linea/:n_idpl_tipolinea',component:MetradomontajeComponent},
     {path:'**',component:LoginComponent},    
      
 ]

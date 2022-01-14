@@ -42,4 +42,27 @@ export class ImportacionService {
         return this._http.post(this.url + 'importacion/insertMontaje', request);
     }
 
+    deleteEstructLinea(request): Observable<any> {
+        console.log(request);        
+        return this._http.post(this.url + 'importacion/deleteEstructLinea', request);
+    }
+
+    deleteAllEstructLinea(request): Observable<any> {
+        return this._http.post(this.url + 'importacion/deleteAllEstructLinea', request);
+    }
+
+    downloadPlantillaSuministro():Observable<any>{
+        return this._http.get(this.url+'importacion/downloadPlantillaSuministro',{responseType:'blob'});
+    }  
+    downloadPlantillaMontaje():Observable<any>{
+        return this._http.get(this.url+'importacion/downloadPlantillaMontaje',{responseType:'blob'});
+    }  
+    downloadPlantillaLinea():Observable<any>{
+        return this._http.get(this.url+'importacion/downloadPlantillaLinea',{responseType:'blob'});
+    } 
+    downloadPlantillaRedes():Observable<any>{
+        return this._http.get(this.url+'importacion/downloadPlantillaRedes',{responseType:'blob'});
+    }  
+
+
 }

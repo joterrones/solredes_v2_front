@@ -44,6 +44,7 @@ export class ConfproyectoComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit() {       
+    this.usuarioLog = this.getUser().data;
     this.getTablaProyecto();
   }  
   
@@ -149,8 +150,12 @@ export class ConfproyectoComponent extends BaseComponent implements OnInit {
     });
   }
 
-  delete_proyecto(item) {
-    this._confiGeneral_service.deleteProyecto(item).subscribe(
+  delete_proyecto(item) {    
+    let request = {
+      n_idpro_proyecto: item.n_idpro_proyecto,
+      n_id_usermodi: this.usuarioLog.n_idseg_userprofile
+    }
+    this._confiGeneral_service.deleteProyecto(request).subscribe(
       result => {
         try {
           if (result.estado) {

@@ -30,7 +30,7 @@ export class GuiaeditarComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit() {
-
+    this.usuarioLog = this.getUser().data;
     if (this.data.guia == null) {
       this.editar = false;
       this.guia = {
@@ -41,7 +41,8 @@ export class GuiaeditarComponent extends BaseComponent implements OnInit {
         c_direccion: "",
         c_ruc: "",
         c_nroguia: "",
-        c_observacion:"" 
+        c_observacion:"",
+        n_id_usermodi: this.usuarioLog.n_idseg_userprofile 
       };
       
     } else {
@@ -56,7 +57,7 @@ export class GuiaeditarComponent extends BaseComponent implements OnInit {
   }
 
   guardar(newForm) {
-    this.guia;
+    this.guia.n_id_usermodi= this.usuarioLog.n_idseg_userprofile;
     this._almacen_service.saveGuia(this.guia, this.getToken().token).subscribe(
       result => {
         try {

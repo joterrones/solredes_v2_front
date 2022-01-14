@@ -25,15 +25,15 @@
                     </a>
                 </mat-expansion-panel>
             </mat-accordion>
-            <mat-accordion>
-                <mat-expansion-panel>
+            <mat-accordion >
+                <mat-expansion-panel [expanded]="step === 1" >
                     <mat-expansion-panel-header>
                         <mat-panel-title>
                             <mat-icon>settings</mat-icon>
                             Maestros
                         </mat-panel-title>
                     </mat-expansion-panel-header>
-                    <a mat-list-item [routerLink]="['/linea']">
+                    <a mat-list-item [routerLink]="['/linea']" >
                         <mat-icon>keyboard_arrow_right</mat-icon>
                         <span>Administración de Linea</span>
                     </a>
@@ -83,13 +83,10 @@
                         <mat-icon>keyboard_arrow_right</mat-icon>
                         <span>Administración de Armado</span>
                     </a>          
-                    <a mat-list-item [routerLink]="['/metrado']">
-                        <mat-icon>keyboard_arrow_right</mat-icon>
-                        <span>Administración de Metrado</span>
-                    </a>  
+                    
                 </mat-expansion-panel>
 
-                <mat-expansion-panel>
+                <mat-expansion-panel >
                     <mat-expansion-panel-header>
                         <mat-panel-title>
                             <mat-icon>group_work</mat-icon>
@@ -114,7 +111,7 @@
                         <span>Administración de Archivos</span>
                     </a>
                 </mat-expansion-panel>
-                <mat-expansion-panel>
+                <mat-expansion-panel >
                     <mat-expansion-panel-header>
                         <mat-panel-title>
                             <mat-icon>cloud_upload</mat-icon>
@@ -142,15 +139,7 @@
                         <span>Mapa Linea</span>
                     </a>
                 </mat-expansion-panel>
-                <mat-expansion-panel>
-                    <mat-expansion-panel-header>
-                        <mat-panel-title>
-                            <mat-icon>cloud_download</mat-icon>
-                            Elemento
-                        </mat-panel-title>
-                    </mat-expansion-panel-header>                    
-                </mat-expansion-panel>
-                <mat-expansion-panel>
+                <mat-expansion-panel >
                     <mat-expansion-panel-header>
                         <mat-panel-title>
                             <mat-icon>add_location</mat-icon>

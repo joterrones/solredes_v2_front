@@ -34,7 +34,7 @@ export class GuiadetalleeditarComponent extends BaseComponent implements OnInit 
   }
 
   ngOnInit() {
-    
+    this.usuarioLog = this.getUser().data;
     if (this.data.detalleguia == null) {
       this.editar = false;
       this.detalleguia = {
@@ -45,7 +45,8 @@ export class GuiadetalleeditarComponent extends BaseComponent implements OnInit 
         c_nombreel: "",
         n_cantidad: 0,
         c_ruta: "",
-        c_nombreImg:""      
+        c_nombreImg:"",
+        n_id_usermodi: this.usuarioLog.n_idseg_userprofile      
       };
       
     } else {
@@ -61,6 +62,7 @@ export class GuiadetalleeditarComponent extends BaseComponent implements OnInit 
 
 
   guardar(newForm) {
+    this.detalleguia.n_id_usermodi= this.usuarioLog.n_idseg_userprofile
     this._almacen_service.saveDetalleGuia(this.detalleguia, this.getToken().token).subscribe(
       result => {
         try {

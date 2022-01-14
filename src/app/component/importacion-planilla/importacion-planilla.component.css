@@ -33,3 +33,7 @@ table{
 .boton{
   margin: 10px;
 }
+
+.btnborrar{
+  background-color: red;
+}

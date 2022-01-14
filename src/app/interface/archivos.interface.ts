@@ -7,7 +7,8 @@ export interface Archivo{
     c_rutalogica: String,
     c_checksum: String,
     c_tipo: String,
-    n_iddoc_archivopadre: number
+    n_iddoc_archivopadre: number,
+    n_id_usermodi: number
 }
 
 export interface ArchivoEditar{

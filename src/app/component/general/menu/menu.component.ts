@@ -59,7 +59,6 @@ export class MenuComponent extends BaseComponent implements OnInit {
 
   ngOnInit() {
     this.colorPro = this.proyecto.c_color
-    console.log(this.proyecto.c_color);
 
     this.urlImagen = AppSettings.URL_IMG_PROYECTO+this.proyecto.c_rutalogo;
     if (this.bLogin) {
@@ -130,6 +129,12 @@ export class MenuComponent extends BaseComponent implements OnInit {
       }, error => {
         this.openSnackBar(<any>error, 99);
       });*/
+  }
+
+  step: number;
+
+  setStep(index) {
+    this.step = index;
   }
 
 }

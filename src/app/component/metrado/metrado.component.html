@@ -1,49 +1,65 @@
 <app-menu>
-    <div class="body">
+  <div class="body">
 
+    <div class="cont">
+      <div class="cont2">
         <mat-form-field>
-          <mat-select placeholder="Tipo">
+          <mat-select placeholder="Versiones">
+            <mat-option *ngFor="let item of versiones" [value]="item.id" (click)="selecVersion(item.id)">
+              {{item.nombre}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+    
+        <mat-form-field *ngIf="ver">      
+          <mat-select placeholder="Tipo" >
             <mat-option *ngFor="let item of filtro" [value]="item.id" (click)='onSelectTipo(item.id)'>
               {{item.nombre}}
             </mat-option>
           </mat-select>
         </mat-form-field>
-      
-        <mat-table [dataSource]="tabla" class="mat-elevation-z8">
-          <ng-container matColumnDef="c_codigo">
-            <mat-header-cell *matHeaderCellDef> No. </mat-header-cell>
-            <mat-cell *matCellDef="let element"><label [ngClass]="(element.isGroupBy == true)?'group':''">
-              <!--    {{element.c_codigo.replace('RS_','').replace('RP_','').replace('LP_','')}} -->
-              {{element.c_codigo}}
-            </label> </mat-cell>
-          </ng-container>
-          <ng-container matColumnDef="c_nombre">
-            <mat-header-cell *matHeaderCellDef> Partida </mat-header-cell>
-            <mat-cell *matCellDef="let element"> <label
-                [ngClass]="(element.isGroupBy == true)?'group':''">{{element.c_nombre}}</label> </mat-cell>
-          </ng-container>
-          <ng-container matColumnDef="c_unidad">
-            <mat-header-cell *matHeaderCellDef> Unidad </mat-header-cell>
-            <mat-cell *matCellDef="let element"> {{element.c_unidadmedida}} </mat-cell>
-          </ng-container>
-          <ng-container matColumnDef="n_cantidad">
-            <mat-header-cell *matHeaderCellDef> Cantidad </mat-header-cell>
-            <mat-cell *matCellDef="let element"> {{element.cantidad}} </mat-cell>
-          </ng-container>
-          <!-- Button Eliminar -->
-          <ng-container matColumnDef="estructuras">
-            <mat-header-cell *matHeaderCellDef> Estructuras </mat-header-cell>
-            <mat-cell *matCellDef="let element">
-              <button mat-icon-button color="primary" (click)="openDialog(element)" *ngIf="element.isGroupBy == false">
-                <mat-icon aria-label="Example icon-button with a heart icon">zoom_in</mat-icon>
-              </button>
-            </mat-cell>
-          </ng-container>
-      
-          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-          <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
-        </mat-table>
-      
-      
       </div>
+              
+      <button mat-icon-button color="accent" [routerLink]="['/linea/']">                 
+        <mat-icon aria-label="Example icon-button with a heart icon">arrow_back</mat-icon>                
+      </button>
+    </div>    
+
+    <mat-table [dataSource]="tabla" class="mat-elevation-z8">
+      <ng-container matColumnDef="c_codigo">
+        <mat-header-cell *matHeaderCellDef> No. </mat-header-cell>
+        <mat-cell *matCellDef="let element"><label [ngClass]="(element.isGroupBy == true)?'group':''">
+            <!--    {{element.c_codigo.replace('RS_','').replace('RP_','').replace('LP_','')}} -->
+            {{element.c_codigo}}
+          </label> </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="c_nombre">
+        <mat-header-cell *matHeaderCellDef> Partida </mat-header-cell>
+        <mat-cell *matCellDef="let element"> <label
+            [ngClass]="(element.isGroupBy == true)?'group':''">{{element.c_nombre}}</label> </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="c_unidad">
+        <mat-header-cell *matHeaderCellDef> Unidad </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.c_unidadmedida}} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="n_cantidad">
+        <mat-header-cell *matHeaderCellDef> Cantidad </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.cantidad}} </mat-cell>
+      </ng-container>
+     
+      <ng-container matColumnDef="estructuras">
+        <mat-header-cell *matHeaderCellDef> Estructuras </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <button mat-icon-button color="primary" (click)="openDialog(element)" *ngIf="element.isGroupBy == false">
+            <mat-icon aria-label="Example icon-button with a heart icon">zoom_in</mat-icon>
+          </button>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+    </mat-table>
+
+
+  </div>
 </app-menu>

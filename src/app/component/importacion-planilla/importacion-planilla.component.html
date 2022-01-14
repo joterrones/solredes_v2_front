@@ -3,21 +3,23 @@
         <h4>{{tit}}</h4>
         <br />
         <mat-form-field>
-            <mat-select placeholder="Versiones" >
-              <mat-option *ngFor="let item of versiones" [value]="item.id"  (click)="selecVersion(item.id)">
-                {{item.nombre}}
-              </mat-option>
+            <mat-select placeholder="Versiones">
+                <mat-option *ngFor="let item of versiones" [value]="item.id" (click)="selecVersion(item.id)">
+                    {{item.nombre}}
+                </mat-option>
             </mat-select>
-          </mat-form-field>
-          <br />
+        </mat-form-field>
+        <br />
         <input type="file" style="display: inline-block;" (change)="incomingfile($event)" placeholder="Upload file"
             accept=".xlsx" #fileInput [hidden]="true">
 
-            
-        <button mat-raised-button color="primary" (click)="fileInput.click()" class="boton" [disabled]="procesando">(0) Subir Archivo</button>
-        <button mat-raised-button color="primary" (click)="conexionapi(1)" class="boton" [disabled]="procesando">(1) Estructuras</button>
-        <button mat-raised-button color="primary" (click)="conexionapi(2)" class="boton" [disabled]="procesando">(2) Vanos</button>
-        <button mat-raised-button color="primary" (click)="creargeom()" class="boton" [disabled]="procesando">(3) GEOM</button>
+
+        <button mat-raised-button color="primary" (click)="fileInput.click()" class="boton" [disabled]="procesando">(0)Subir Archivo</button>
+        <button mat-raised-button color="primary" (click)="conexionapi(1)" class="boton" [disabled]="procesando">(1)Estructuras</button>
+        <button mat-raised-button color="primary" (click)="conexionapi(2)" class="boton" [disabled]="procesando">(2)Vanos</button>
+        <button mat-raised-button color="primary" (click)="creargeom()" class="boton" [disabled]="procesando">(3)GEOM</button>
+        <button mat-raised-button color="primary" (click)="download()" class="boton" >Descargar</button>
+        <button mat-raised-button color="primary" (click)="deleteEstructuras()" class="btnborrar"> Borrar</button>
 
         <mat-progress-bar class="example-margin" mode="indeterminate" *ngIf="procesando">
         </mat-progress-bar>
@@ -33,7 +35,7 @@
                         [matTooltip]="element.c_mensaje" color="primary" *ngIf="element.b_flag" #tooltip="matTooltip">
                         <mat-icon>check</mat-icon>
                     </button>
-                   
+
                 </td>
             </ng-container>
             <ng-container matColumnDef="LINEA">

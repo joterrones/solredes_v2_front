@@ -19,7 +19,7 @@
                 </ng-container>
                 <ng-container matColumnDef="c_nombre">
                     <th mat-header-cell *matHeaderCellDef color="error"> Nombre </th>
-                    <td mat-cell *matCellDef="let element"> {{element.c_nombre}} </td>
+                    <td mat-cell *matCellDef="let element" style="max-width: 500px;"> {{element.c_nombre}} </td>
                 </ng-container>
                 <ng-container matColumnDef="b_partidanueva">
                     <th mat-header-cell *matHeaderCellDef color="error"> Partida Nueva </th>
@@ -72,7 +72,6 @@
                         </mat-select>
                     </td>
                 </ng-container>
-
                 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                 <ng-template let-row matRowDef cdkVirtualFor [matRowDefColumns]="displayedColumns">
                     <tr mat-row></tr>

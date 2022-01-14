@@ -30,18 +30,21 @@ export class UsuarioeditarComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit() {
-
+    this.usuarioLog = this.getUser().data;
     if (this.data.usuario == null) {
       this.editar = false;
       this.usuario = {
         n_idseg_userprofile: 0,
         c_username: "",
         c_nombre1: "",
+        c_nombre2: "",
         c_appaterno: "",
+        c_apmaterno:"",
         c_dni: "",
         c_reclave: "",
         c_clave: "",
-        n_idseg_rol: 0
+        n_idseg_rol: 0,
+        n_id_usermodi: this.usuarioLog.n_idseg_userprofile
       };
     } else {
       this.editar = true;
@@ -56,8 +59,40 @@ export class UsuarioeditarComponent extends BaseComponent implements OnInit {
   }
 
   guardar(newForm) {
-    this.usuario;
-    this._seguridadservice.save(this.usuario, this.getToken().token).subscribe(
+    console.log(this.editar);
+    
+    if(!this.editar){
+      this.usuario;
+      this._seguridadservice.valDni(this.usuario).subscribe(
+      result => {
+        try {
+          console.log(result.data);          
+          if (result.data.length == 0) {
+            this.guardarUser(newForm);             
+          } else {
+            this.openSnackBar(result.mensaje, 200); 
+          }
+        } catch (error) {
+          this.openSnackBar(AppSettings.SERVICE_NO_CONECT_SERVER, 99);
+        }
+      }, error => {
+        console.error(error);
+        try {
+          this.openSnackBar(error.error.Detail, error.error.StatusCode);
+        } catch (error) {
+          this.openSnackBar(AppSettings.SERVICE_NO_CONECT_SERVER, 99);
+        }
+      });
+    }else{
+      this.guardarUser(newForm); 
+    }
+    
+  }
+
+  guardarUser(newForm) {
+    console.log(this.usuarioLog.n_idseg_userprofile);    
+    this.usuario.n_id_usermodi = this.usuarioLog.n_idseg_userprofile;
+    this._seguridadservice.saveUser(this.usuario, this.getToken().token).subscribe(
       result => {
         try {
           if (result.estado) {

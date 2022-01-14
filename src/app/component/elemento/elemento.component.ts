@@ -137,6 +137,7 @@ export class ElementoComponent extends BaseComponent implements OnInit {
         }
       });
       item.c_seccionconductor = str_seccionconductor;
+      item.n_id_usermodi= this.usuarioLog.n_idseg_userprofile;
       this._elemento_service.updateconfig(item,this.getProyect()).subscribe(
         result => {
           if (result.estado) {

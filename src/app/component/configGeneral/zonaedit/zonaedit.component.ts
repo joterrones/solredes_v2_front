@@ -34,13 +34,17 @@ export class ZonaeditComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.usuarioLog = this.getUser().data;
+    console.log(this.proyecto.n_idpro_proyecto);
+    
     if (this.data.zona == null) {
       this.editar = false;      
       this.zona = {
         n_idpl_zona:0,
         n_idpro_proyecto: this.proyecto.n_idpro_proyecto,
         c_codigo:'',
-        c_nombre:''                      
+        c_nombre:'',
+        n_id_usermodi: this.usuarioLog.n_idseg_userprofile                      
       };      
     } else {
       this.editar = true;
@@ -52,7 +56,7 @@ export class ZonaeditComponent extends BaseComponent implements OnInit {
   }
 
   guardar(newForm) {
-    this.zona;
+    this.zona.n_id_usermodi= this.usuarioLog.n_idseg_userprofile;
     this._configGeneralservice.saveZona(this.zona, this.getToken().token).subscribe(
       result => {
         try {

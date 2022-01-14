@@ -41,6 +41,7 @@ export class TragrupoComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit() { 
+    this.usuarioLog = this.getUser().data;
     this.getTablaTraGrupos();
   }
   
@@ -107,7 +108,11 @@ export class TragrupoComponent extends BaseComponent implements OnInit {
   }
 
   deletetraGrupos(item) {
-    this._confiGeneral_service.deletetraGrupos(item).subscribe(
+    let request = {
+      n_idtra_grupo: item.n_idtra_grupo,
+      n_id_usermodi: this.usuarioLog.n_idseg_userprofile
+    }
+    this._confiGeneral_service.deletetraGrupos(request).subscribe(
       result => {
         try {
           if (result.estado) {

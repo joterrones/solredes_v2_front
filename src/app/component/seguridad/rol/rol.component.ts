@@ -48,6 +48,7 @@ export class RolComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.usuarioLog = this.getUser().data;
     this.getrole();    
     this.getTablaRol();
   }
@@ -130,13 +131,17 @@ export class RolComponent extends BaseComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
 
       if (result) {
-        this.delete_proyecto(item);
+        this.deleteRol(item);
       }
     });
   }
 
-  delete_proyecto(proyecto) {
-    this._seguridad_service.deleteRol(proyecto).subscribe(
+  deleteRol(item) {
+    let request = {
+      n_idseg_rol: item.n_idseg_rol,
+      n_id_usermodi: this.usuarioLog.n_idseg_userprofile
+    }
+    this._seguridad_service.deleteRol(request).subscribe(
       result => {
         try {
           if (result.estado) {

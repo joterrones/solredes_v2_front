@@ -49,9 +49,24 @@
           <td mat-cell *matCellDef="let element"> {{element.c_username}} </td>
         </ng-container>
 
-        <ng-container matColumnDef="c_nombre">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </th>
+        <ng-container matColumnDef="c_nombre1">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>1° Nombre </th>
           <td mat-cell *matCellDef="let element"> {{element.c_nombre1 }} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="c_nombre2">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>2° Nombre </th>
+          <td mat-cell *matCellDef="let element"> {{element.c_nombre2 }} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="c_appaterno">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Apellido Paterno </th>
+          <td mat-cell *matCellDef="let element"> {{element.c_appaterno }} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="c_apmaterno">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Apellido Materno </th>
+          <td mat-cell *matCellDef="let element"> {{element.c_apmaterno }} </td>
         </ng-container>
         <ng-container matColumnDef="c_dni">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> DNI </th>

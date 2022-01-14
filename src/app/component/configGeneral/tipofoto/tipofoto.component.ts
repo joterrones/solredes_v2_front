@@ -40,6 +40,7 @@ export class TipofotoComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit() {       
+    this.usuarioLog = this.getUser().data;
     this.getTablaTipoFoto();
   }  
   
@@ -92,7 +93,11 @@ export class TipofotoComponent extends BaseComponent implements OnInit {
   }
 
   deleteTipoFoto(proyecto) {
-    this._confiGeneral_service.deleteTipoFoto(proyecto).subscribe(
+    let request = {
+      n_idgen_tipofoto: proyecto.n_idgen_tipofoto,
+      n_id_usermodi: this.usuarioLog.n_idseg_userprofile
+    }
+    this._confiGeneral_service.deleteTipoFoto(request).subscribe(
       result => {
         try {
           if (result.estado) {

@@ -39,7 +39,8 @@ export class ValoresGeneralesComponent extends BaseComponent implements OnInit {
   }
 
 
-  ngOnInit() {       
+  ngOnInit() {    
+    this.usuarioLog = this.getUser().data;   
     this.getTablaValoresGenerales();
   }  
   
@@ -91,7 +92,11 @@ export class ValoresGeneralesComponent extends BaseComponent implements OnInit {
   }
 
   deleteValorGnr(item) {
-    this._confiGeneral_service.deleteValorGnr(item).subscribe(
+    let request = {
+      n_idgen_valoresgenerales: item.n_idgen_valoresgenerales,
+      n_id_usermodi: this.usuarioLog.n_idseg_userprofile
+    }
+    this._confiGeneral_service.deleteValorGnr(request).subscribe(
       result => {
         try {
           if (result.estado) {
