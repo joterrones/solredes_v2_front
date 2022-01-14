@@ -10,16 +10,21 @@ import { Confirmar } from '../../../interface/confirmar.interface';
 import { confGeneralService } from '../../../service/confGeneral.service';
 import { ConfirmComponent } from '../../general/confirm/confirm.component';
 import { EmpresaeditarComponent } from '../empresaeditar/empresaeditar.component';
+import { SeguridadService } from 'src/app/service/seguridad.service';
+import { ResultadoApi } from 'src/app/interface/common.interface';
 
 @Component({
   selector: 'app-empresa',
   templateUrl: './empresa.component.html',
   styleUrls: ['./empresa.component.css'],
-  providers: [confGeneralService]
+  providers: [confGeneralService, SeguridadService]
 })
 export class EmpresaComponent extends BaseComponent implements OnInit {
 
   tit: String = "SEGURIDAD > GESTOR DE EMPRESAS";
+
+  pantallaRol= [];
+  permisoEdit: boolean = false;
 
   textfilter = '';
 
@@ -34,6 +39,7 @@ export class EmpresaComponent extends BaseComponent implements OnInit {
     public snackBar: MatSnackBar,
     public router: Router,
     public _confiGeneral_service: confGeneralService,
+    public _seguridad_service: SeguridadService,
     public dialog: MatDialog
   ) { 
     super(snackBar, router);
@@ -41,6 +47,7 @@ export class EmpresaComponent extends BaseComponent implements OnInit {
 
   ngOnInit() {       
     this.usuarioLog = this.getUser().data;
+    this.getPantallaRol();
     this.getTablaEmpresa();
   }  
   
@@ -116,4 +123,35 @@ export class EmpresaComponent extends BaseComponent implements OnInit {
         }
       });
   }
+
+  getPantallaRol() {
+    let request = {
+      n_idseg_userprofile: this.usuarioLog.n_idseg_userprofile
+    }
+    this._seguridad_service.getPantallaRol(request, this.getToken().token).subscribe(
+      result => {
+        let resultado = <ResultadoApi>result;
+        if (resultado.estado) {
+          this.pantallaRol = resultado.data;
+          this.pantallaRol.forEach(element => {            
+            if(element.c_codigo === 'ma-ademp'){
+              console.log(element);
+              console.log(element.c_codigo);
+              if(element.c_permiso === 'MO'){
+                this.permisoEdit = true;
+              }
+            }
+          });
+        } else {
+          this.openSnackBar(resultado.mensaje, 99);
+        }
+      }, error => {
+        try {
+          this.openSnackBar(error.error.Detail, error.error.StatusCode);
+        } catch (error) {
+          this.openSnackBar(AppSettings.SERVICE_NO_CONECT_SERVER, 99);
+        }
+      });
+  }
+
 }

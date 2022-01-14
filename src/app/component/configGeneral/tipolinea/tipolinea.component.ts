@@ -10,17 +10,22 @@ import { Confirmar } from '../../../interface/confirmar.interface';
 import { confGeneralService } from '../../../service/confGeneral.service';
 import { ConfirmComponent } from '../../general/confirm/confirm.component';
 import { TipolineaeditarComponent } from '../tipolineaeditar/tipolineaeditar.component';
+import { SeguridadService } from 'src/app/service/seguridad.service';
+import { ResultadoApi } from 'src/app/interface/common.interface';
 
 
 @Component({
   selector: 'app-tipolinea',
   templateUrl: './tipolinea.component.html',
   styleUrls: ['./tipolinea.component.css'],
-  providers: [confGeneralService]
+  providers: [confGeneralService, SeguridadService]
 })
 export class TipolineaComponent extends BaseComponent implements OnInit {
   tit: String = "SEGURIDAD > GESTOR DE TIPOS DE LINEA";
-  
+
+  pantallaRol= [];
+  permisoEdit: boolean = false;
+
   idtipolinea = 0;
   textfilter = '';  
 
@@ -35,6 +40,8 @@ export class TipolineaComponent extends BaseComponent implements OnInit {
     public snackBar: MatSnackBar,
     public router: Router,
     public _confiGeneral_service: confGeneralService,
+    public _seguridad_service: SeguridadService,
+
     public dialog: MatDialog
   ) { 
     super(snackBar, router);
@@ -42,6 +49,7 @@ export class TipolineaComponent extends BaseComponent implements OnInit {
 
   ngOnInit() {       
     this.usuarioLog = this.getUser().data;
+    this.getPantallaRol();
     this.getTablaTipolinea();
   }  
   
@@ -119,5 +127,35 @@ export class TipolineaComponent extends BaseComponent implements OnInit {
         }
       });
   }
+  getPantallaRol() {
+    let request = {
+      n_idseg_userprofile: this.usuarioLog.n_idseg_userprofile
+    }
+    this._seguridad_service.getPantallaRol(request, this.getToken().token).subscribe(
+      result => {
+        let resultado = <ResultadoApi>result;
+        if (resultado.estado) {
+          this.pantallaRol = resultado.data;
+          this.pantallaRol.forEach(element => {            
+            if(element.c_codigo === 'ma-adtil'){
+              console.log(element);
+              console.log(element.c_codigo);
+              if(element.c_permiso === 'MO'){
+                this.permisoEdit = true;
+              }
+            }
+          });
+        } else {
+          this.openSnackBar(resultado.mensaje, 99);
+        }
+      }, error => {
+        try {
+          this.openSnackBar(error.error.Detail, error.error.StatusCode);
+        } catch (error) {
+          this.openSnackBar(AppSettings.SERVICE_NO_CONECT_SERVER, 99);
+        }
+      });
+  }
+
 
 }

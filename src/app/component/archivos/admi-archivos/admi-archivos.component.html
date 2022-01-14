@@ -6,10 +6,10 @@
           ADMINISTRACIÓN DE ARCHIVOS            
         </mat-card-title>
         <div>
-          <button mat-icon-button color="accent" (click)="openDialogCarpeta(null)">
+          <button mat-icon-button color="accent" (click)="openDialogCarpeta(null)" *ngIf="permisoEdit">
             <mat-icon aria-label="Example icon-button with a heart icon">create_new_folder</mat-icon>
           </button> 
-          <button mat-icon-button color="accent" (click)="openDialogArchivo(null)">
+          <button mat-icon-button color="accent" (click)="openDialogArchivo(null)" *ngIf="permisoEdit">
             <mat-icon aria-label="Example icon-button with a heart icon">note_add</mat-icon>
           </button> 
         </div>
@@ -34,13 +34,13 @@
                   <div class="label">{{element.c_nombre}}</div>              
                 </div>           
                 <div>                      
-                  <button mat-icon-button color="accent" (click)="editArchivo(element)">
+                  <button mat-icon-button color="accent" (click)="editArchivo(element)" *ngIf="permisoEdit">
                     <mat-icon aria-label="Example icon-button with a heart icon">edit</mat-icon>
                   </button>  
-                  <button mat-icon-button color="accent" (click)="download(element)">
+                  <button mat-icon-button color="accent" (click)="download(element)" *ngIf="permisoEdit">
                     <mat-icon aria-label="Example icon-button with a heart icon">cloud_download</mat-icon>
                   </button>            
-                  <button mat-icon-button color="error" (click)="eliminar(element)">
+                  <button mat-icon-button color="error" (click)="eliminar(element)" *ngIf="permisoEdit">
                     <mat-icon aria-label="Example icon-button with a heart icon">delete</mat-icon>
                   </button>                  
                 </div>          
@@ -64,13 +64,13 @@
                   <div class="label">{{element.c_nombre}}</div>                              
                 </div>                                                         
                 <div>
-                  <button mat-icon-button color="accent" (click)="editArchivo(element)">
+                  <button mat-icon-button color="accent" (click)="editArchivo(element)" *ngIf="permisoEdit">
                     <mat-icon aria-label="Example icon-button with a heart icon">edit</mat-icon>
                   </button>  
-                  <button mat-icon-button color="accent" (click)="download(element)">
+                  <button mat-icon-button color="accent" (click)="download(element)" *ngIf="permisoEdit">
                     <mat-icon aria-label="Example icon-button with a heart icon">cloud_download</mat-icon>
                   </button>            
-                  <button mat-icon-button color="error" (click)="eliminar(element)">
+                  <button mat-icon-button color="error" (click)="eliminar(element)" *ngIf="permisoEdit">
                     <mat-icon aria-label="Example icon-button with a heart icon">delete</mat-icon>
                   </button>                  
                 </div>       

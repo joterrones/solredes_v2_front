@@ -2,8 +2,10 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog, MatPaginator, MatSnackBar, MatSort, MatTableDataSource } from '@angular/material';
 import { Router } from '@angular/router';
 import { AppSettings } from 'src/app/common/appsettings';
+import { ResultadoApi } from 'src/app/interface/common.interface';
 import { ArmadoService } from 'src/app/service/armado.service';
 import { GeneralService } from 'src/app/service/general.service';
+import { SeguridadService } from 'src/app/service/seguridad.service';
 import { ArmadoconfigmontajeComponent } from '../armadoconfigmontaje/armadoconfigmontaje.component';
 import { BaseComponent } from '../base/base.component';
 import { DetallearmadoComponent } from '../detallearmado/detallearmado.component';
@@ -13,11 +15,14 @@ import { ConfirmComponent } from '../general/confirm/confirm.component';
   selector: 'app-armado',
   templateUrl: './armado.component.html',
   styleUrls: ['./armado.component.css'],
-  providers: [ArmadoService,GeneralService]
+  providers: [ArmadoService,GeneralService,SeguridadService]
 })
 export class ArmadoComponent extends BaseComponent implements OnInit {
 
   tit = 'ARMADOS';
+
+  pantallaRol= [];
+  permisoEdit: boolean = false;
 
   tabla: MatTableDataSource<any>;
   tablaconfig: MatTableDataSource<any>;
@@ -42,6 +47,7 @@ export class ArmadoComponent extends BaseComponent implements OnInit {
   constructor(
     public _armado_service: ArmadoService,
     public _general_service: GeneralService,
+    public _seguridad_service: SeguridadService,
     public dialog: MatDialog,
     public snack_1: MatSnackBar,
     public router: Router
@@ -50,6 +56,8 @@ export class ArmadoComponent extends BaseComponent implements OnInit {
     }
   
   ngOnInit() {
+    this.usuarioLog = this.getUser().data;    
+    this.getPantallaRol();
     this.getGeneral();
     this.getTipoArmado();
     this.getTabla();
@@ -263,6 +271,37 @@ export class ArmadoComponent extends BaseComponent implements OnInit {
         }
       });
   }
+
+  getPantallaRol() {
+    let request = {
+      n_idseg_userprofile: this.usuarioLog.n_idseg_userprofile
+    }
+    this._seguridad_service.getPantallaRol(request, this.getToken().token).subscribe(
+      result => {
+        let resultado = <ResultadoApi>result;
+        if (resultado.estado) {
+          this.pantallaRol = resultado.data;
+          this.pantallaRol.forEach(element => {            
+            if(element.c_codigo === 'ma-adarm'){
+              console.log(element);
+              console.log(element.c_codigo);
+              if(element.c_permiso === 'MO'){
+                this.permisoEdit = true;
+              }
+            }
+          });
+        } else {
+          this.openSnackBar(resultado.mensaje, 99);
+        }
+      }, error => {
+        try {
+          this.openSnackBar(error.error.Detail, error.error.StatusCode);
+        } catch (error) {
+          this.openSnackBar(AppSettings.SERVICE_NO_CONECT_SERVER, 99);
+        }
+      });
+  }
+
 
 
 }

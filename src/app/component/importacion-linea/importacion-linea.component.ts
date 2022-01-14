@@ -6,15 +6,20 @@ import { BaseComponent } from '../base/base.component';
 import * as XLSX from 'xlsx';
 import { Router } from '@angular/router';
 import { saveAs } from 'file-saver';
+import { SeguridadService } from 'src/app/service/seguridad.service';
+import { ResultadoApi } from 'src/app/interface/common.interface';
+import { AppSettings } from 'src/app/common/appsettings';
 
 @Component({
   selector: 'app-importacion-linea',
   templateUrl: './importacion-linea.component.html',
   styleUrls: ['./importacion-linea.component.css'],
-  providers: [ImportacionService]
+  providers: [ImportacionService,SeguridadService]
 })
 export class ImportacionLineaComponent extends BaseComponent implements OnInit {
 
+  pantallaRol= [];
+  permisoEdit: boolean = false;
 
   tit = 'Carga de datos';
   datos;
@@ -37,6 +42,7 @@ export class ImportacionLineaComponent extends BaseComponent implements OnInit {
 
   constructor(
     public _importacion_service: ImportacionService,
+    public _seguridad_service: SeguridadService,
     public dialog: MatDialog,
     public snack_1: MatSnackBar,
     public _router: Router,
@@ -45,7 +51,8 @@ export class ImportacionLineaComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit() {
-
+    this.usuarioLog = this.getUser().data;  
+    this.getPantallaRol();
   }
 
   arrayBuffer: any;
@@ -137,6 +144,37 @@ export class ImportacionLineaComponent extends BaseComponent implements OnInit {
         this.openSnackBar(<any>error, 99);
       });
   }
+
+  getPantallaRol() {
+    let request = {
+      n_idseg_userprofile: this.usuarioLog.n_idseg_userprofile
+    }
+    this._seguridad_service.getPantallaRol(request, this.getToken().token).subscribe(
+      result => {
+        let resultado = <ResultadoApi>result;
+        if (resultado.estado) {
+          this.pantallaRol = resultado.data;
+          this.pantallaRol.forEach(element => {            
+            if(element.c_codigo === 'imp-impli'){
+              console.log(element);
+              console.log(element.c_codigo);
+              if(element.c_permiso === 'MO'){
+                this.permisoEdit = true;
+              }
+            }
+          });
+        } else {
+          this.openSnackBar(resultado.mensaje, 99);
+        }
+      }, error => {
+        try {
+          this.openSnackBar(error.error.Detail, error.error.StatusCode);
+        } catch (error) {
+          this.openSnackBar(AppSettings.SERVICE_NO_CONECT_SERVER, 99);
+        }
+      });
+  }
+
 
 
 }

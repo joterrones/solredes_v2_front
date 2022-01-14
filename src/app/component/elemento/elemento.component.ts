@@ -2,16 +2,20 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog, MatPaginator, MatSnackBar, MatSort, MatTableDataSource } from '@angular/material';
 import { Router } from '@angular/router';
 import { AppSettings } from 'src/app/common/appsettings';
+import { ResultadoApi } from 'src/app/interface/common.interface';
 import { ElementoService } from 'src/app/service/elemento.service';
+import { SeguridadService } from 'src/app/service/seguridad.service';
 import { BaseComponent } from '../base/base.component';
 
 @Component({
   selector: 'app-elemento',
   templateUrl: './elemento.component.html',
   styleUrls: ['./elemento.component.css'],
-  providers: [ElementoService]
+  providers: [ElementoService, SeguridadService]
 })
 export class ElementoComponent extends BaseComponent implements OnInit {
+  pantallaRol= [];
+  permisoEdit: boolean = false;
 
   tit = 'ELEMENTO';
 
@@ -65,6 +69,7 @@ export class ElementoComponent extends BaseComponent implements OnInit {
 
   constructor(
     public _elemento_service: ElementoService,
+    public _seguridad_service: SeguridadService,
     public dialog: MatDialog,
     public snack_1: MatSnackBar,
     public router: Router
@@ -72,7 +77,9 @@ export class ElementoComponent extends BaseComponent implements OnInit {
     super(snack_1,router)
   }
 
-  ngOnInit() {
+  ngOnInit() {    
+    this.usuarioLog = this.getUser().data;    
+    this.getPantallaRol();
     this.getTabla();
   }
 
@@ -157,5 +164,36 @@ export class ElementoComponent extends BaseComponent implements OnInit {
     this.idversion = n_version;
     this.getTabla();
   }
+
+  getPantallaRol() {
+    let request = {
+      n_idseg_userprofile: this.usuarioLog.n_idseg_userprofile
+    }
+    this._seguridad_service.getPantallaRol(request, this.getToken().token).subscribe(
+      result => {
+        let resultado = <ResultadoApi>result;
+        if (resultado.estado) {
+          this.pantallaRol = resultado.data;
+          this.pantallaRol.forEach(element => {            
+            if(element.c_codigo === 'ma-adele'){
+              console.log(element);
+              console.log(element.c_codigo);
+              if(element.c_permiso === 'MO'){
+                this.permisoEdit = true;
+              }
+            }
+          });
+        } else {
+          this.openSnackBar(resultado.mensaje, 99);
+        }
+      }, error => {
+        try {
+          this.openSnackBar(error.error.Detail, error.error.StatusCode);
+        } catch (error) {
+          this.openSnackBar(AppSettings.SERVICE_NO_CONECT_SERVER, 99);
+        }
+      });
+  }
+
 
 }

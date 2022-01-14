@@ -14,13 +14,13 @@
           </mat-form-field>
 
         <br />
-        <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" [mapTypeControl]='true' [mapTypeId]="'hybrid'">
+        <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" [mapTypeControl]='true' [mapTypeId]="'hybrid'" *ngIf="permisoEdit">
             <agm-marker-cluster [maxZoom]="12" imagePath="http://35.184.146.235/Multimedia/Nama/images/m">
                 <agm-marker *ngFor="let marker of markers " [latitude]="marker.lat" [longitude]="marker.lng"
                     [markerDraggable]="true" [opacity]="marker.alpha" [iconUrl]="
               {
                 url:  './assets/mapa/'+marker.data.c_iconomapa+'.png' 
-            }" (markerClick)="clicked($event,marker)">
+            }" (markerClick)="clicked($event,marker)" >
                 </agm-marker>
                 <ng-container>
                 <!-- <agm-polyline *ngFor="let polyline of polilineas;let i = index;" [strokeColor]="black">-->   
