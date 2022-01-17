@@ -112,7 +112,7 @@ export class ImportacionPlanillaEliminarComponent extends BaseComponent implemen
       });
   }
 
-  eliminarAll(item): void {
+  eliminarAll(item?): void {
     const dialogRef = this.dialog.open(ConfirmComponent, {
       width: '500px',
       data: { titulo: "¿ Seguro que desea eliminar todas las estructuras ?" }
