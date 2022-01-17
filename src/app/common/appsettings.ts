@@ -1,7 +1,7 @@
 
 export class AppSettings {  
-    //public static URL='http://localhost:3200/api/';
-    public static URL='http://35.184.146.235:3200/api/';
+    public static URL='http://localhost:3200/api/';
+    //public static URL='http://35.184.146.235:3200/api/';
     //public static URL='http://172.19.1.18:3200/api/';
     //public static URL_IMG_DETALLE_GUIA='http://localhost:3200/archivos/';
     //public static URL_IMG_PROYECTO='http://localhost:3200/archivos/';

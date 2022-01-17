@@ -46,12 +46,16 @@ table {
   cursor: pointer;
 }
 
-.example-card {
+.example-card {  
   width: 325px;
   padding-top: 9px;
   padding-right: 9px;
   padding-bottom: 9px;
   padding-left: 9px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
   
 }
 
@@ -73,13 +77,9 @@ table {
 }
 
 .label{
-  width: 165px;
+  width: 265px;
   overflow:hidden;
   white-space:nowrap;
   text-overflow: ellipsis;
   margin-left: 5px;
-}
-
-.jo{
-  right: 100px;
 }

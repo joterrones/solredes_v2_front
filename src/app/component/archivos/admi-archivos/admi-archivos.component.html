@@ -12,6 +12,9 @@
           <button mat-icon-button color="accent" (click)="openDialogArchivo(null)" *ngIf="permisoEdit">
             <mat-icon aria-label="Example icon-button with a heart icon">note_add</mat-icon>
           </button> 
+          <button mat-icon-button color="accent" (click)="showArchivosBack()">                 
+            <mat-icon aria-label="Example icon-button with a heart icon">arrow_back</mat-icon>                
+          </button> 
         </div>
       </div>
     </mat-card>
@@ -23,19 +26,16 @@
       </div>
       <div class="navega2">        
         <div *ngFor="let element of archivos"> 
-          <div *ngIf=" element.c_tipo == 1" class="cont" (click)="showArchivos(element)" (contextmenu)="afr">
+          <div *ngIf=" element.c_tipo == 1" class="cont" >
             <mat-card class="example-card">
-              <mat-card-header class="navega3">    
+              <mat-card-header class="navega3" (click)="showArchivos(element)" (contextmenu)="afr">    
                 <div mat-card-avatar class="example-header-image" >
                   <button mat-icon-button> 
                     <mat-icon aria-label="Example icon-button with a heart icon">folder</mat-icon>                     
                   </button>     
                   <div class="label">{{element.c_nombre}}</div>              
-                </div>           
-                <div>  
-                  <button #afr mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
-                    <mat-icon>more_vert</mat-icon>
-                  </button>
+                </div>
+                <div>
                   <mat-menu #menu="matMenu" >
                     <button mat-menu-item (click)="editArchivo(element)" *ngIf="permisoEdit">
                       <mat-icon aria-label="Example icon-button with a heart icon">edit</mat-icon>
@@ -49,9 +49,13 @@
                       <mat-icon aria-label="Example icon-button with a heart icon">delete</mat-icon>
                       <span>Eliminar</span>
                     </button>  
-                  </mat-menu>                                 
-                </div>          
-              </mat-card-header>          
+                  </mat-menu>
+                </div>
+              </mat-card-header> 
+              <button #afr mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+                <mat-icon>more_vert</mat-icon>
+              </button> 
+              
             </mat-card>  
           </div>
         </div>      
