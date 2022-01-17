@@ -21,7 +21,8 @@ import { UsuarioproyectoComponent } from '../usuarioproyecto/usuarioproyecto.com
 })
 export class UsuarioComponent extends BaseComponent implements OnInit {
   tit: String = "SEGURIDAD > GESTOR DE USUARIOS";
-
+  pantallaRol= [];
+  permisoEdit: boolean = false;
   roles: [];
   idroles = 0;
   textfilter = '';
@@ -45,6 +46,7 @@ export class UsuarioComponent extends BaseComponent implements OnInit {
 
   ngOnInit() {
     this.usuarioLog = this.getUser().data;
+    this.getPantallaRol();
     this.getrole();
     this.getTablaUsuario();
   }
@@ -190,5 +192,35 @@ export class UsuarioComponent extends BaseComponent implements OnInit {
         }
       });
   }
+
+  getPantallaRol() {
+    let request = {
+      n_idseg_userprofile: this.usuarioLog.n_idseg_userprofile
+    }
+    this._seguridad_service.getPantallaRol(request, this.getToken().token).subscribe(
+      result => {
+        let resultado = <ResultadoApi>result;
+        if (resultado.estado) {
+          this.pantallaRol = resultado.data;
+          this.pantallaRol.forEach(element => {            
+            if(element.c_codigo === 'se-adusu'){              
+              console.log(element.c_codigo);
+              if(element.c_permiso === 'MO'){
+                this.permisoEdit = true;
+              }              
+            }
+          });
+        } else {
+          this.openSnackBar(resultado.mensaje, 99);
+        }
+      }, error => {
+        try {
+          this.openSnackBar(error.error.Detail, error.error.StatusCode);
+        } catch (error) {
+          this.openSnackBar(AppSettings.SERVICE_NO_CONECT_SERVER, 99);
+        }
+      });
+  }
+
 }
 

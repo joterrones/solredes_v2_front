@@ -11,16 +11,19 @@ import { ConfirmComponent } from '../../general/confirm/confirm.component';
 import { TragrupoEditarComponent } from '../tragrupo-editar/tragrupo-editar.component';
 import { ProyectousuaioComponent } from '../proyectousuaio/proyectousuaio.component';
 import { LineausuarioComponent } from '../lineausuario/lineausuario.component';
+import { SeguridadService } from 'src/app/service/seguridad.service';
+import { ResultadoApi } from 'src/app/interface/common.interface';
 
 
 @Component({
   selector: 'app-tragrupo',
   templateUrl: './tragrupo.component.html',
   styleUrls: ['./tragrupo.component.css'],
-  providers: [confGeneralService]
+  providers: [confGeneralService,SeguridadService]
 })
 export class TragrupoComponent extends BaseComponent implements OnInit {
-
+  pantallaRol= [];
+  permisoEdit: boolean = false;
   proyectos: [];
   textfilter = '';
 
@@ -34,7 +37,8 @@ export class TragrupoComponent extends BaseComponent implements OnInit {
   constructor(
     public snackBar: MatSnackBar,
     public router: Router,
-    public _confiGeneral_service: confGeneralService,    
+    public _confiGeneral_service: confGeneralService,  
+    public _seguridad_service: SeguridadService,  
     public dialog: MatDialog
   ) {
     super(snackBar, router);
@@ -42,6 +46,7 @@ export class TragrupoComponent extends BaseComponent implements OnInit {
 
   ngOnInit() { 
     this.usuarioLog = this.getUser().data;
+    this.getPantallaRol();
     this.getTablaTraGrupos();
   }
   
@@ -150,6 +155,37 @@ export class TragrupoComponent extends BaseComponent implements OnInit {
     dialogAsigPro.afterClosed().subscribe(result => {
     });
   }
+
+  getPantallaRol() {
+    let request = {
+      n_idseg_userprofile: this.usuarioLog.n_idseg_userprofile
+    }
+    this._seguridad_service.getPantallaRol(request, this.getToken().token).subscribe(
+      result => {
+        let resultado = <ResultadoApi>result;
+        if (resultado.estado) {
+          this.pantallaRol = resultado.data;
+          this.pantallaRol.forEach(element => {            
+            if(element.c_codigo === 'as-adgru'){
+              console.log(element);
+              console.log(element.c_codigo);
+              if(element.c_permiso === 'MO'){
+                this.permisoEdit = true;
+              }
+            }
+          });
+        } else {
+          this.openSnackBar(resultado.mensaje, 99);
+        }
+      }, error => {
+        try {
+          this.openSnackBar(error.error.Detail, error.error.StatusCode);
+        } catch (error) {
+          this.openSnackBar(AppSettings.SERVICE_NO_CONECT_SERVER, 99);
+        }
+      });
+  }
+
 
 
 }

@@ -13,12 +13,20 @@ import {
   defaults as defaultControls,
   Control
 } from 'ol/control';
+import { SeguridadService } from 'src/app/service/seguridad.service';
+import { ResultadoApi } from 'src/app/interface/common.interface';
+import { AppSettings } from 'src/app/common/appsettings';
+
 @Component({
   selector: 'app-mapa-general',
   templateUrl: './mapa-general.component.html',
-  styleUrls: ['./mapa-general.component.css']
+  styleUrls: ['./mapa-general.component.css'],
+  providers: [SeguridadService]
 })
 export class MapaGeneralComponent extends BaseComponent implements OnInit {
+  pantallaRol= [];
+  permisoEdit: boolean = false;
+
   map: Map;
   mapexample: Map
   lat: number = -12.088898333333335;
@@ -29,7 +37,8 @@ export class MapaGeneralComponent extends BaseComponent implements OnInit {
   geoserv="Candwi";
   constructor(
     public _router:Router,
-    public snackBar: MatSnackBar
+    public snackBar: MatSnackBar,
+    public _seguridad_service: SeguridadService
   ) { 
 
     super(snackBar, _router)
@@ -38,6 +47,8 @@ export class MapaGeneralComponent extends BaseComponent implements OnInit {
   
 
   ngOnInit(): void {
+    this.usuarioLog = this.getUser().data;    
+    this.getPantallaRol();
     this.map = new Map({
       target: 'ol-map',
       layers: [
@@ -81,4 +92,35 @@ export class MapaGeneralComponent extends BaseComponent implements OnInit {
       controls: defaultControls({attribution: true, zoom: true}).extend([])
     });
   }
+
+  getPantallaRol() {
+    let request = {
+      n_idseg_userprofile: this.usuarioLog.n_idseg_userprofile
+    }
+    this._seguridad_service.getPantallaRol(request, this.getToken().token).subscribe(
+      result => {
+        let resultado = <ResultadoApi>result;
+        if (resultado.estado) {
+          this.pantallaRol = resultado.data;
+          this.pantallaRol.forEach(element => {            
+            if(element.c_codigo === 'ma-mapge'){
+              console.log(element);
+              console.log(element.c_codigo);
+              if(element.c_permiso === 'MO'){
+                this.permisoEdit = true;
+              }
+            }
+          });
+        } else {
+          this.openSnackBar(resultado.mensaje, 99);
+        }
+      }, error => {
+        try {
+          this.openSnackBar(error.error.Detail, error.error.StatusCode);
+        } catch (error) {
+          this.openSnackBar(AppSettings.SERVICE_NO_CONECT_SERVER, 99);
+        }
+      });
+  }
+
 }

@@ -10,16 +10,20 @@ import { Confirmar } from '../../../interface/confirmar.interface';
 import { ConfirmComponent } from '../../general/confirm/confirm.component';
 import { AlmacenService } from 'src/app/service/almacen.service';
 import { AlmaceneditarComponent } from '../almaceneditar/almaceneditar.component';
+import { SeguridadService } from 'src/app/service/seguridad.service';
 
 @Component({
   selector: 'app-almacen',
   templateUrl: './almacen.component.html',
   styleUrls: ['./almacen.component.css'],
-  providers: [AlmacenService]
+  providers: [AlmacenService,SeguridadService]
 })
 export class AlmacenComponent extends BaseComponent implements OnInit {
 
   tit: String = "SEGURIDAD > GESTOR DE ALMACEN";
+
+  pantallaRol= [];
+  permisoEdit: boolean = false;
 
   textfilter = '';
 
@@ -33,7 +37,8 @@ export class AlmacenComponent extends BaseComponent implements OnInit {
   constructor(
     public snackBar: MatSnackBar,
     public router: Router,
-    public _almacen_service: AlmacenService,    
+    public _almacen_service: AlmacenService,
+    public _seguridad_service: SeguridadService,    
     public dialog: MatDialog
   ) {
     super(snackBar, router);
@@ -41,6 +46,7 @@ export class AlmacenComponent extends BaseComponent implements OnInit {
 
   ngOnInit() {       
     this.usuarioLog = this.getUser().data;    
+    this.getPantallaRol();
     this.getTablaAlmacen();
   } 
   
@@ -134,5 +140,36 @@ export class AlmacenComponent extends BaseComponent implements OnInit {
         }
       });
   }
+
+  getPantallaRol() {
+    let request = {
+      n_idseg_userprofile: this.usuarioLog.n_idseg_userprofile
+    }
+    this._seguridad_service.getPantallaRol(request, this.getToken().token).subscribe(
+      result => {
+        let resultado = <ResultadoApi>result;
+        if (resultado.estado) {
+          this.pantallaRol = resultado.data;
+          this.pantallaRol.forEach(element => {            
+            if(element.c_codigo === 'al-adalm'){
+              console.log(element);
+              console.log(element.c_codigo);
+              if(element.c_permiso === 'MO'){
+                this.permisoEdit = true;
+              }
+            }
+          });
+        } else {
+          this.openSnackBar(resultado.mensaje, 99);
+        }
+      }, error => {
+        try {
+          this.openSnackBar(error.error.Detail, error.error.StatusCode);
+        } catch (error) {
+          this.openSnackBar(AppSettings.SERVICE_NO_CONECT_SERVER, 99);
+        }
+      });
+  }
+
 
 }

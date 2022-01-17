@@ -8,15 +8,20 @@ import { VersionService } from 'src/app/service/version.service';
 import { Router } from '@angular/router';
 import { ImportacionPlanillaEliminarComponent } from '../importacion-planilla-eliminar/importacion-planilla-eliminar.component';
 import { saveAs } from 'file-saver';
+import { SeguridadService } from 'src/app/service/seguridad.service';
+import { ResultadoApi } from 'src/app/interface/common.interface';
+import { AppSettings } from 'src/app/common/appsettings';
 
 @Component({
   selector: 'app-importacion-planilla',
   templateUrl: './importacion-planilla.component.html',
   styleUrls: ['./importacion-planilla.component.css'],
-  providers: [ImportacionService, VersionService]
+  providers: [ImportacionService, VersionService, SeguridadService]
 })
 export class ImportacionPlanillaComponent extends BaseComponent implements OnInit {
 
+  pantallaRol= [];
+  permisoEdit: boolean = false;
 
   tit = 'Carga de datos';
   datos = [];
@@ -48,6 +53,7 @@ export class ImportacionPlanillaComponent extends BaseComponent implements OnIni
   constructor(
     public _importacion_service: ImportacionService,
     public _version_service: VersionService,
+    public _seguridad_service: SeguridadService,
     public dialog: MatDialog,
     public _router: Router,
     public snackBar: MatSnackBar
@@ -57,6 +63,8 @@ export class ImportacionPlanillaComponent extends BaseComponent implements OnIni
   }
 
   ngOnInit() {
+    this.usuarioLog = this.getUser().data;  
+    this.getPantallaRol();
     this.versiones = this._version_service.get();
   }
 
@@ -221,6 +229,37 @@ export class ImportacionPlanillaComponent extends BaseComponent implements OnIni
         this.openSnackBar(<any>error, 99);
       });
   }
+
+  getPantallaRol() {
+    let request = {
+      n_idseg_userprofile: this.usuarioLog.n_idseg_userprofile
+    }
+    this._seguridad_service.getPantallaRol(request, this.getToken().token).subscribe(
+      result => {
+        let resultado = <ResultadoApi>result;
+        if (resultado.estado) {
+          this.pantallaRol = resultado.data;
+          this.pantallaRol.forEach(element => {            
+            if(element.c_codigo === 'imp-imppl'){
+              console.log(element);
+              console.log(element.c_codigo);
+              if(element.c_permiso === 'MO'){
+                this.permisoEdit = true;
+              }
+            }
+          });
+        } else {
+          this.openSnackBar(resultado.mensaje, 99);
+        }
+      }, error => {
+        try {
+          this.openSnackBar(error.error.Detail, error.error.StatusCode);
+        } catch (error) {
+          this.openSnackBar(AppSettings.SERVICE_NO_CONECT_SERVER, 99);
+        }
+      });
+  }
+
 
 
 }

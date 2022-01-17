@@ -2,12 +2,12 @@
     <div class="body">
         <h4>{{tit}}</h4>
         <input type="file" style="display: inline-block;" (change)="incomingfile($event)" placeholder="Upload file"
-            accept=".xlsx" #fileInput [hidden]="true">
+            accept=".xlsx" #fileInput [hidden]="true" *ngIf="permisoEdit">
 
             
-        <button mat-raised-button color="primary" (click)="fileInput.click()" class="boton" [disabled]="procesando">(0) Subir Archivo</button>
-        <button mat-raised-button color="primary" (click)="conexionapi(1)" class="boton" [disabled]="procesando">(1) Cargar</button>
-        <button mat-raised-button color="primary" (click)="download()" class="boton" >Descargar</button>
+        <button mat-raised-button color="primary" (click)="fileInput.click()" class="boton" [disabled]="procesando" *ngIf="permisoEdit">(0) Subir Archivo</button>
+        <button mat-raised-button color="primary" (click)="conexionapi(1)" class="boton" [disabled]="procesando" *ngIf="permisoEdit">(1) Cargar</button>
+        <button mat-raised-button color="primary" (click)="download()" class="boton" *ngIf="permisoEdit">Descargar</button>
 
         <mat-progress-bar class="example-margin" mode="indeterminate" *ngIf="procesando">
         </mat-progress-bar>

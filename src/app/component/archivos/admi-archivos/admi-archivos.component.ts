@@ -11,19 +11,22 @@ import { ConfirmComponent } from '../../general/confirm/confirm.component';
 import { AdmiArchivosEditarComponent } from '../admi-archivos-editar/admi-archivos-editar.component';
 import { ArchivosEditarComponent } from '../archivos-editar/archivos-editar.component';
 import { saveAs } from 'file-saver';
+import { SeguridadService } from 'src/app/service/seguridad.service';
+import { ResultadoApi } from 'src/app/interface/common.interface';
 
 @Component({
   selector: 'app-admi-archivos',
   templateUrl: './admi-archivos.component.html',
   styleUrls: ['./admi-archivos.component.css'],
-  providers: [ArchivosServices]
+  providers: [ArchivosServices,SeguridadService]
 })
 export class AdmiArchivosComponent extends BaseComponent implements OnInit {
 
+  pantallaRol= [];
+  permisoEdit: boolean = false;
   textfilter = '';
   archivos: [];
   n_iddoc_archivopadre: number = 0;
-  displayedColumns: string[] = ['editar', 'c_nombre','d_fechamodi','eliminar'];
   public tablaCarpetas: MatTableDataSource<any>;
   public confirmar: Confirmar;
 
@@ -33,13 +36,15 @@ export class AdmiArchivosComponent extends BaseComponent implements OnInit {
   constructor(
     public snackBar: MatSnackBar,
     public router: Router,
-    public _archivos_service: ArchivosServices,    
+    public _archivos_service: ArchivosServices,
+    public _seguridad_service: SeguridadService,    
     public dialog: MatDialog
   ) {
     super(snackBar, router);
   }
   ngOnInit() {
     this.usuarioLog = this.getUser().data;
+    this.getPantallaRol();
     this.getTablaArchivos();
   }
 
@@ -62,15 +67,11 @@ export class AdmiArchivosComponent extends BaseComponent implements OnInit {
           console.log(error)
           this.openSnackBar(AppSettings.SERVICE_NO_CONECT_SERVER, 99);
         } finally {
-          this.applyFilter(this.textfilter);
+          
         }
       }, error => {
         this.openSnackBar(error.error, 99);
       });
-  }
-
-  applyFilter(filterValue: String) {
-    this.tablaCarpetas.filter = filterValue.trim().toLowerCase();
   }
 
   editArchivo(archivo){
@@ -172,5 +173,36 @@ export class AdmiArchivosComponent extends BaseComponent implements OnInit {
         this.openSnackBar(<any>error, 99);
       });
   }
+
+  getPantallaRol() {
+    let request = {
+      n_idseg_userprofile: this.usuarioLog.n_idseg_userprofile
+    }
+    this._seguridad_service.getPantallaRol(request, this.getToken().token).subscribe(
+      result => {
+        let resultado = <ResultadoApi>result;
+        if (resultado.estado) {
+          this.pantallaRol = resultado.data;
+          this.pantallaRol.forEach(element => {            
+            if(element.c_codigo === 'as-adarc'){
+              console.log(element);
+              console.log(element.c_codigo);
+              if(element.c_permiso === 'MO'){
+                this.permisoEdit = true;
+              }
+            }
+          });
+        } else {
+          this.openSnackBar(resultado.mensaje, 99);
+        }
+      }, error => {
+        try {
+          this.openSnackBar(error.error.Detail, error.error.StatusCode);
+        } catch (error) {
+          this.openSnackBar(AppSettings.SERVICE_NO_CONECT_SERVER, 99);
+        }
+      });
+  }
+
 
 }

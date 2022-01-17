@@ -9,11 +9,11 @@
         </mat-form-field>          
         <table mat-table [dataSource]="tablaAlmacen" matSort class="mat-elevation-z8">
           <ng-container matColumnDef="editar">
-            <th mat-header-cell *matHeaderCellDef> <button mat-icon-button color="accent" (click)="openDialog(null)">
+            <th mat-header-cell *matHeaderCellDef> <button mat-icon-button color="accent" (click)="openDialog(null)" *ngIf="permisoEdit">
                 <mat-icon aria-label="Example icon-button with a heart icon">add</mat-icon>
               </button> </th>
             <td mat-cell *matCellDef="let element">
-              <button mat-icon-button color="accent" (click)="openDialog(element)">
+              <button mat-icon-button color="accent" (click)="openDialog(element)" *ngIf="permisoEdit">
                 <mat-icon aria-label="Example icon-button with a heart icon">edit</mat-icon>
               </button>
             </td>
@@ -30,7 +30,7 @@
           <ng-container matColumnDef="detalle">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Detalle </th>
             <td mat-cell *matCellDef="let element">
-              <button mat-icon-button color="accent" (click)="showGuia(element)">                
+              <button mat-icon-button color="accent" (click)="showGuia(element)" [disabled]="!permisoEdit">                
                 <mat-icon aria-label="Example icon-button with a heart icon">description</mat-icon>                
               </button>              
             </td>
@@ -40,7 +40,7 @@
           <ng-container matColumnDef="eliminar">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Eliminar </th>
             <td mat-cell *matCellDef="let element">
-              <button mat-icon-button color="error" (click)="eliminar(element)">
+              <button mat-icon-button color="error" (click)="eliminar(element)" [disabled]="!permisoEdit">
                 <mat-icon aria-label="Example icon-button with a heart icon">delete</mat-icon>
               </button>
             </td>
