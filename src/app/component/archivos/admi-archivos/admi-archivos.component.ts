@@ -82,6 +82,7 @@ export class AdmiArchivosComponent extends BaseComponent implements OnInit {
     }else{
       this.openDialogCarpeta(archivo);
     }
+    return false;
   }
 
   openDialogCarpeta(archivo): void {

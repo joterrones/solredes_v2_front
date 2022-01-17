@@ -93,6 +93,7 @@ export class ElementoComponent extends BaseComponent implements OnInit {
       result => {
         if (result.estado) {
           this.tabla = new MatTableDataSource<any>(result.data);
+          console.log(result.data);          
           this.tabla.sort = this.sort;
           this.tabla.paginator = this.paginator;
         } else {

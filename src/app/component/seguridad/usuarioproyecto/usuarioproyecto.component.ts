@@ -29,7 +29,7 @@ export class UsuarioproyectoComponent extends BaseComponent implements OnInit {
     public snackBar: MatSnackBar
     ){
     super(snackBar, _router);
-    }
+  }
 
   ngOnInit() {
     console.log("PRUEBA DIALOG");

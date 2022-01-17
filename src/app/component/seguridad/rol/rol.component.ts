@@ -13,6 +13,7 @@ import { SeguridadService } from '../../../service/seguridad.service';
 import { GeneralService } from '../../../service/general.service';
 import { RoleditarComponent } from '../roleditar/roleditar.component';
 import { ConfirmComponent } from '../../general/confirm/confirm.component';
+import { RolpermisosComponent } from '../rolpermisos/rolpermisos.component';
 
 @Component({
   selector: 'app-rol',
@@ -32,7 +33,7 @@ export class RolComponent extends BaseComponent implements OnInit {
   idroles = 0;
   textfilter = '';
 
-  displayedColumns: string[] = ['editar','c_nombre', /*'n_nivel',*/ 'eliminar'];
+  displayedColumns: string[] = ['editar','c_nombre', 'permisos', 'eliminar'];
   public tablaRoles: MatTableDataSource<any>;
   public confirmar: Confirmar;
 
@@ -164,6 +165,19 @@ export class RolComponent extends BaseComponent implements OnInit {
           this.openSnackBar(AppSettings.SERVICE_NO_CONECT_SERVER, 99);
         }
       });
+  }
+
+  openDialogPermisos(rol): void {
+    let data = {
+      rol: rol,
+      titulo: "Asignar Permisos"
+    };
+    const dialogAsigPro = this.dialog.open(RolpermisosComponent, {
+      width: '750px',
+      data: data
+    });
+    dialogAsigPro.afterClosed().subscribe(result => {
+    });
   }
 
   getPantallaRol() {

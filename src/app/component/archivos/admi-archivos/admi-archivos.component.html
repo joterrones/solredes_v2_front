@@ -21,28 +21,35 @@
         Carpetas
         <hr>
       </div>
-      <div class="navega2">
-        
+      <div class="navega2">        
         <div *ngFor="let element of archivos"> 
-          <div *ngIf=" element.c_tipo == 1" class="cont">
+          <div *ngIf=" element.c_tipo == 1" class="cont" (click)="showArchivos(element)" (contextmenu)="afr">
             <mat-card class="example-card">
-              <mat-card-header class="navega3">              
-                <div mat-card-avatar class="example-header-image">
-                  <button mat-icon-button (click)="showArchivos(element)"> 
+              <mat-card-header class="navega3">    
+                <div mat-card-avatar class="example-header-image" >
+                  <button mat-icon-button> 
                     <mat-icon aria-label="Example icon-button with a heart icon">folder</mat-icon>                     
                   </button>     
                   <div class="label">{{element.c_nombre}}</div>              
                 </div>           
-                <div>                      
-                  <button mat-icon-button color="accent" (click)="editArchivo(element)" *ngIf="permisoEdit">
-                    <mat-icon aria-label="Example icon-button with a heart icon">edit</mat-icon>
-                  </button>  
-                  <button mat-icon-button color="accent" (click)="download(element)" *ngIf="permisoEdit">
-                    <mat-icon aria-label="Example icon-button with a heart icon">cloud_download</mat-icon>
-                  </button>            
-                  <button mat-icon-button color="error" (click)="eliminar(element)" *ngIf="permisoEdit">
-                    <mat-icon aria-label="Example icon-button with a heart icon">delete</mat-icon>
-                  </button>                  
+                <div>  
+                  <button #afr mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+                    <mat-icon>more_vert</mat-icon>
+                  </button>
+                  <mat-menu #menu="matMenu" >
+                    <button mat-menu-item (click)="editArchivo(element)" *ngIf="permisoEdit">
+                      <mat-icon aria-label="Example icon-button with a heart icon">edit</mat-icon>
+                      <span>Editar</span>
+                    </button>  
+                    <button mat-menu-item (click)="download(element)" *ngIf="permisoEdit">
+                      <mat-icon aria-label="Example icon-button with a heart icon">cloud_download</mat-icon>
+                      <span>Descargar</span>
+                    </button> 
+                    <button mat-menu-item (click)="eliminar(element)" *ngIf="permisoEdit">
+                      <mat-icon aria-label="Example icon-button with a heart icon">delete</mat-icon>
+                      <span>Eliminar</span>
+                    </button>  
+                  </mat-menu>                                 
                 </div>          
               </mat-card-header>          
             </mat-card>  
@@ -59,21 +66,29 @@
           <div *ngIf=" element.c_tipo == 2" class="cont">             
             <mat-card class="example-card">   
               <mat-card-header class="navega3">                 
-                <div mat-card-avatar class="example-header-image ">                 
+                <div mat-card-avatar class="example-header-image">                 
                   <mat-icon aria-label="Example icon-button with a heart icon" >insert_drive_file</mat-icon>   
                   <div class="label">{{element.c_nombre}}</div>                              
                 </div>                                                         
-                <div>
-                  <button mat-icon-button color="accent" (click)="editArchivo(element)" *ngIf="permisoEdit">
-                    <mat-icon aria-label="Example icon-button with a heart icon">edit</mat-icon>
-                  </button>  
-                  <button mat-icon-button color="accent" (click)="download(element)" *ngIf="permisoEdit">
-                    <mat-icon aria-label="Example icon-button with a heart icon">cloud_download</mat-icon>
-                  </button>            
-                  <button mat-icon-button color="error" (click)="eliminar(element)" *ngIf="permisoEdit">
-                    <mat-icon aria-label="Example icon-button with a heart icon">delete</mat-icon>
-                  </button>                  
-                </div>       
+                <div>  
+                  <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+                    <mat-icon>more_vert</mat-icon>
+                  </button>
+                  <mat-menu #menu >
+                    <button mat-menu-item (click)="editArchivo(element)" *ngIf="permisoEdit">
+                      <mat-icon aria-label="Example icon-button with a heart icon">edit</mat-icon>
+                      <span>Editar</span>
+                    </button>  
+                    <button mat-menu-item (click)="download(element)" *ngIf="permisoEdit">
+                      <mat-icon aria-label="Example icon-button with a heart icon">cloud_download</mat-icon>
+                      <span>Descargar</span>
+                    </button> 
+                    <button mat-menu-item (click)="eliminar(element)" *ngIf="permisoEdit">
+                      <mat-icon aria-label="Example icon-button with a heart icon">delete</mat-icon>
+                      <span>Eliminar</span>
+                    </button>  
+                  </mat-menu>                                 
+                </div>        
               </mat-card-header>          
             </mat-card>  
           </div>

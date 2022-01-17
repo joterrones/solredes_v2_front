@@ -125,83 +125,85 @@ export class MenuComponent extends BaseComponent implements OnInit {
         if (resultado.estado) {
           this.pantallaRol = resultado.data;
           console.log(this.pantallaRol);
-
           resultado.data.forEach(element => {
-            switch (element.c_codigo) {
-              case 'se-adusu':
-                this.se_adusu = true;
-                break;
-              case 'se-adrol':
-                this.se_adrol = true;
-                break;
-              case 'ma-adlin':
-                this.ma_adlin = true;
-                break;
-              case 'ma-adtil':
-                this.ma_adtil = true;
-                break;
-              case 'ma-adzon':
-                this.ma_adzon = true;
-                break;
-              case 'ma-adpro':
-                this.ma_adpro = true;
-                break;
-              case 'ma-ademp':
-                this.ma_ademp = true;
-                break;
-              case 'ma-adtfo':
-                this.ma_adtfo = true;
-                break;
-              case 'ma-adtie':
-                this.ma_adtie = true;
-                break;
-              case 'ma-adtel':
-                this.ma_adtel = true;
-                break;
-              case 'ma-adtmo':
-                this.ma_adtmo = true;
-                break;
-              case 'ma-advag':
-                this.ma_advag = true;
-                break;
-              case 'ma-adele':
-                this.ma_adele = true;
-                break;
-              case 'ma-adarm':
-                this.ma_adarm = true;
-                break;
-              case 'ma-admet':
-                this.ma_admet = true;
-                break;
-              case 'as-adgru':
-                this.as_adgru = true;
-                break;
-              case 'as-adarc':
-                this.as_adarc = true;
-                break;
-              case 'imp-imppl':
-                this.imp_imppl = true;
-                break;
-              case 'imp-impli':
-                this.imp_impli = true;
-                break;
-              case 'imp-impsu':
-                this.imp_impsu = true;
-                break;
-              case 'imp-impmo':
-                this.imp_impmo = true;
-                break;
-              case 'ma-mapge':
-                this.ma_mapge = true;
-                break;
-              case 'al-adalm':
-                this.al_adalm = true;
-                break;
-              case 'ma-mapli':
-                this.ma_mapli = true;
-                break;
+            if(element.c_permiso == "MO" || element.c_permiso == "CO"){             
+              switch (element.c_codigo) {
+                case 'se-adusu':
+                  this.se_adusu = true;
+                  break;
+                case 'se-adrol':
+                  this.se_adrol = true;                      
+                  break;
+                case 'ma-adlin':
+                  this.ma_adlin = true;
+                  break;
+                case 'ma-adtil':
+                  this.ma_adtil = true;
+                  break;
+                case 'ma-adzon':
+                  this.ma_adzon = true;
+                  break;
+                case 'ma-adpro':
+                  this.ma_adpro = true;
+                  break;
+                case 'ma-ademp':
+                  this.ma_ademp = true;
+                  break;
+                case 'ma-adtfo':
+                  this.ma_adtfo = true;
+                  break;
+                case 'ma-adtie':
+                  this.ma_adtie = true;
+                  break;
+                case 'ma-adtel':
+                  this.ma_adtel = true;
+                  break;
+                case 'ma-adtmo':
+                  this.ma_adtmo = true;
+                  break;
+                case 'ma-advag':
+                  this.ma_advag = true;
+                  break;
+                case 'ma-adele':
+                  this.ma_adele = true;
+                  break;
+                case 'ma-adarm':
+                  this.ma_adarm = true;
+                  break;
+                case 'ma-admet':
+                  this.ma_admet = true;
+                  break;
+                case 'as-adgru':
+                  this.as_adgru = true;
+                  break;
+                case 'as-adarc':
+                  this.as_adarc = true;
+                  break;
+                case 'imp-imppl':
+                  this.imp_imppl = true;
+                  break;
+                case 'imp-impli':
+                  this.imp_impli = true;
+                  break;
+                case 'imp-impsu':
+                  this.imp_impsu = true;
+                  break;
+                case 'imp-impmo':
+                  this.imp_impmo = true;
+                  break;
+                case 'ma-mapge':
+                  this.ma_mapge = true;
+                  break;
+                case 'al-adalm':
+                  this.al_adalm = true;
+                  break;
+                case 'ma-mapli':
+                  this.ma_mapli = true;
+                  break;
+              }
             }
-          });
+            
+          });               
 
         } else {
           this.openSnackBar(resultado.mensaje, 99);

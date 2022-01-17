@@ -126,8 +126,6 @@ export class UsuarioComponent extends BaseComponent implements OnInit {
   }
 
   openDialogProyecto(usuario): void {
-    console.log("PUREBA");
-    
     let data = {
       usuario: usuario,
       titulo: "Asignar Proyecto"

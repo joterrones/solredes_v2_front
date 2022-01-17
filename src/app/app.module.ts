@@ -117,6 +117,7 @@ import { MetradoComponent } from './component/metrado/metrado.component';
 import { MetradomontajeComponent } from './component/metradomontaje/metradomontaje.component';
 import { DetallemetradoComponent } from './component/detallemetrado/detallemetrado.component';
 import { ImportacionPlanillaEliminarComponent } from './component/importacion-planilla-eliminar/importacion-planilla-eliminar.component';
+import { RolpermisosComponent } from './component/seguridad/rolpermisos/rolpermisos.component';
 
 @NgModule({
   declarations: [
@@ -200,6 +201,7 @@ import { ImportacionPlanillaEliminarComponent } from './component/importacion-pl
     MetradomontajeComponent, 
     DetallemetradoComponent, 
     ImportacionPlanillaEliminarComponent, 
+    RolpermisosComponent, 
   ],
   imports: [
     FormsModule,
@@ -273,7 +275,8 @@ import { ImportacionPlanillaEliminarComponent } from './component/importacion-pl
     ArmadoconfigmontajeComponent,
     DetallemetradoComponent,
     ImportacionPlanillaEliminarComponent,
-    MetradomontajeComponent
+    MetradomontajeComponent,
+    RolpermisosComponent
   ],
   providers: [
     MatDatepickerModule, 

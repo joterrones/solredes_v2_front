@@ -132,4 +132,21 @@ export class SeguridadService {
         return this._http.post(this.url + 'seguridad/getPantallaRol', request, { headers: reqHeader });
     }
 
+    getPantalla(data, token): Observable<any> {
+        var reqHeader = new HttpHeaders({
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
+        });
+        return this._http.post(this.url + 'seguridad/getPantalla', data, { headers: reqHeader });
+    }
+
+    updatePantallaRol(data, token): Observable<any> {
+        console.log(data);        
+        var reqHeader = new HttpHeaders({
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
+        });
+        return this._http.post(this.url + 'seguridad/updatePantallaRol', data, { headers: reqHeader });
+    }
+
 }
