@@ -3,23 +3,14 @@
         [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'" [mode]="(isHandset$ | async) ? 'over' : 'side'"
         [opened]="!(isHandset$ | async)">
         <mat-toolbar class="mat-elevation-z4" color="primary" [ngStyle]="{'background-color': colorPro}"><label
-                class="titulo">{{proyecto.c_nombre}}
-                {{rol}}</label></mat-toolbar>
+                class="titulo">{{proyecto.c_nombre}} <a [routerLink]="['/proyectoseleccion']">
+                    <mat-icon>edit</mat-icon>
+                </a>
+                </label></mat-toolbar>
         <mat-nav-list>
             <mat-accordion>
+            
                 <mat-expansion-panel>
-                    <mat-expansion-panel-header>
-                        <mat-panel-title>
-                            <mat-icon> local_library</mat-icon>
-                            Cambiar Proyecto
-                        </mat-panel-title>
-                    </mat-expansion-panel-header>
-                    <a mat-list-item [routerLink]="['/proyectoseleccion']">
-                        <mat-icon>keyboard_arrow_right</mat-icon>                        
-                        <span>Selecionar Proyecto</span>
-                    </a>
-                </mat-expansion-panel>
-                <mat-expansion-panel >
                     <mat-expansion-panel-header>
                         <mat-panel-title>
                             <mat-icon>supervisor_account</mat-icon>
@@ -35,8 +26,8 @@
                         <mat-icon>keyboard_arrow_right</mat-icon>
                         <span>Administración de Roles</span>
                     </a>
-                </mat-expansion-panel>            
-                <mat-expansion-panel [expanded]="step === 1" >
+                </mat-expansion-panel>
+                <mat-expansion-panel [expanded]="step === 1">
                     <mat-expansion-panel-header>
                         <mat-panel-title>
                             <mat-icon>settings</mat-icon>
@@ -88,15 +79,15 @@
                     <a mat-list-item [routerLink]="['/elemento']" *ngIf="ma_adele">
                         <mat-icon>keyboard_arrow_right</mat-icon>
                         <span>Administración de Elemento</span>
-                    </a>          
+                    </a>
                     <a mat-list-item [routerLink]="['/armado']" *ngIf="ma_adarm">
                         <mat-icon>keyboard_arrow_right</mat-icon>
                         <span>Administración de Armado</span>
-                    </a>          
-                    
+                    </a>
+
                 </mat-expansion-panel>
 
-                <mat-expansion-panel >
+                <mat-expansion-panel>
                     <mat-expansion-panel-header>
                         <mat-panel-title>
                             <mat-icon>group_work</mat-icon>
@@ -121,21 +112,13 @@
                         <span>Administración de Archivos</span>
                     </a>
                 </mat-expansion-panel>
-                <mat-expansion-panel >
+                <mat-expansion-panel>
                     <mat-expansion-panel-header>
                         <mat-panel-title>
                             <mat-icon>cloud_upload</mat-icon>
                             Importación
                         </mat-panel-title>
                     </mat-expansion-panel-header>
-                    <a mat-list-item [routerLink]="['/importacionplanilla']" *ngIf="imp_imppl">
-                        <mat-icon>keyboard_arrow_right</mat-icon>
-                        <span>Importación de planillas</span>
-                    </a>
-                    <a mat-list-item [routerLink]="['/importacionlinea']" *ngIf="imp_impli">
-                        <mat-icon>keyboard_arrow_right</mat-icon>
-                        <span>Importación de lineas</span>
-                    </a>
                     <a mat-list-item [routerLink]="['/importacionsuministros']" *ngIf="imp_impsu">
                         <mat-icon>keyboard_arrow_right</mat-icon>
                         <span>Importación de Suministros</span>
@@ -144,13 +127,21 @@
                         <mat-icon>keyboard_arrow_right</mat-icon>
                         <span>Importación de Montaje</span>
                     </a>
+                    <a mat-list-item [routerLink]="['/importacionlinea']" *ngIf="imp_impli">
+                        <mat-icon>keyboard_arrow_right</mat-icon>
+                        <span>Importación de lineas</span>
+                    </a>
+                    <a mat-list-item [routerLink]="['/importacionplanilla']" *ngIf="imp_imppl">
+                        <mat-icon>keyboard_arrow_right</mat-icon>
+                        <span>Importación de planillas</span>
+                    </a>
                     <!-- *********************************************************** -->
                     <a mat-list-item [routerLink]="['/mapalinea']" *ngIf="ma_mapli">
                         <mat-icon>keyboard_arrow_right</mat-icon>
                         <span>Mapa Linea</span>
                     </a>
                 </mat-expansion-panel>
-                <mat-expansion-panel >
+                <mat-expansion-panel>
                     <mat-expansion-panel-header>
                         <mat-panel-title>
                             <mat-icon>add_location</mat-icon>
@@ -161,7 +152,7 @@
                         <mat-icon>keyboard_arrow_right</mat-icon>
                         <span>Mapa General</span>
                     </a>
-                </mat-expansion-panel> 
+                </mat-expansion-panel>
                 <mat-expansion-panel>
                     <mat-expansion-panel-header>
                         <mat-panel-title>
@@ -173,7 +164,7 @@
                         <mat-icon>keyboard_arrow_right</mat-icon>
                         <span>Administración de almacén y guías</span>
                     </a>
-                </mat-expansion-panel>                
+                </mat-expansion-panel>
             </mat-accordion>
         </mat-nav-list>
         <div class="logo">
@@ -198,7 +189,7 @@
             <button mat-button [matMenuTriggerFor]="usuario">
                 <mat-icon>person</mat-icon>
                 <label class="titulo">
-                    <span>{{username}}</span>
+                    <span>{{username}}-{{rol}}</span>
                 </label>
             </button>
             <mat-menu #usuario="matMenu">
