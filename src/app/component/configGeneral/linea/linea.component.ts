@@ -32,7 +32,7 @@ export class LineaComponent extends BaseComponent implements OnInit {
   idzona = 0;
   textfilter = '';
 
-  displayedColumns: string[] = ['editar', 'c_nombre', 'c_codigo', 'tipolinea', 'zona','Metrado','MetradoMon','eliminar'];
+  displayedColumns: string[] = ['editar', 'c_nombre', 'c_codigo', 'tipolinea', 'zona','Metrado','MetradoMon','mapa','eliminar'];
   public tablaLineas: MatTableDataSource<any>;
   public confirmar: Confirmar;
 
@@ -212,6 +212,9 @@ export class LineaComponent extends BaseComponent implements OnInit {
     this.router.navigate(["/metradomon/"+element.n_idpl_linea+"/"+element.n_idpl_tipolinea]);
   }  
 
+  showMapa(element): void {      
+    this.router.navigate(["/mapalinea/"+element.n_idpl_linea]);
+  }  
   getPantallaRol() {
     let request = {
       n_idseg_userprofile: this.usuarioLog.n_idseg_userprofile

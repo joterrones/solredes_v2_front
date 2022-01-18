@@ -11,10 +11,10 @@
         </mat-form-field>
         <br />
         <input type="file" style="display: inline-block;" (change)="incomingfile($event)" placeholder="Upload file"
-            accept=".xlsx" #fileInput [hidden]="true" *ngIf="permisoEdit">
+            accept=".xlsx" #fileInput *ngIf="permisoEdit">
 
 
-        <button mat-raised-button color="primary" (click)="fileInput.click()" class="boton" [disabled]="procesando" *ngIf="permisoEdit">(0)Subir Archivo</button>
+      <!--  <button mat-raised-button color="primary" (click)="fileInput.click()" class="boton" [disabled]="procesando" *ngIf="permisoEdit">(0)Subir Archivo</button>-->
         <button mat-raised-button color="primary" (click)="conexionapi(1)" class="boton" [disabled]="procesando" *ngIf="permisoEdit">(1)Estructuras</button>
         <button mat-raised-button color="primary" (click)="conexionapi(2)" class="boton" [disabled]="procesando" *ngIf="permisoEdit">(2)Vanos</button>
         <button mat-raised-button color="primary" (click)="creargeom()" class="boton" [disabled]="procesando" *ngIf="permisoEdit">(3)GEOM</button>
