@@ -27,7 +27,8 @@ export class AdmiArchivosComponent extends BaseComponent implements OnInit {
   textfilter = '';
   archivos: [];
   n_iddoc_archivopadre: number = 0;
-  retorno: number = 0;
+  i: number = -1;
+  retorno= [];
   public tablaCarpetas: MatTableDataSource<any>;
   public confirmar: Confirmar;
 
@@ -161,14 +162,19 @@ export class AdmiArchivosComponent extends BaseComponent implements OnInit {
       });
   }
 
-  showArchivos(element): void {    
+  showArchivos(element): void {   
+    this.i++; 
     this.n_iddoc_archivopadre = element.n_iddoc_archivo;
-    this.retorno = element.n_iddoc_archivopadre;
+    this.retorno[this.i] = element.n_iddoc_archivopadre;
     this.getTablaArchivos()
   }
 
   showArchivosBack(): void {    
-    this.n_iddoc_archivopadre = this.retorno;
+    this.n_iddoc_archivopadre = this.retorno[this.i];  
+    this.i --;
+    if(this.i < 0){
+      this.i = 0;
+    }
     this.getTablaArchivos()
   }
 

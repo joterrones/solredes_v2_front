@@ -30,6 +30,7 @@ table {
   min-width: 0;
 }
 .navega3{
+  width: 265px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -44,6 +45,9 @@ table {
 .cont{
   margin: 7px;
   cursor: pointer;
+}
+.cont2{
+  margin: 7px;
 }
 
 .example-card {  

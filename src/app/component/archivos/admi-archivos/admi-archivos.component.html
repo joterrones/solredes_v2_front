@@ -54,8 +54,7 @@
               </mat-card-header> 
               <button #afr mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
                 <mat-icon>more_vert</mat-icon>
-              </button> 
-              
+              </button>               
             </mat-card>  
           </div>
         </div>      
@@ -67,18 +66,15 @@
       
       <div class="navega2">        
         <div *ngFor="let element of archivos" >           
-          <div *ngIf=" element.c_tipo == 2" class="cont">             
+          <div *ngIf=" element.c_tipo == 2" class="cont2">             
             <mat-card class="example-card">   
               <mat-card-header class="navega3">                 
                 <div mat-card-avatar class="example-header-image">                 
                   <mat-icon aria-label="Example icon-button with a heart icon" >insert_drive_file</mat-icon>   
                   <div class="label">{{element.c_nombre}}</div>                              
                 </div>                                                         
-                <div>  
-                  <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
-                    <mat-icon>more_vert</mat-icon>
-                  </button>
-                  <mat-menu #menu >
+                <div>
+                  <mat-menu #menu="matMenu" >
                     <button mat-menu-item (click)="editArchivo(element)" *ngIf="permisoEdit">
                       <mat-icon aria-label="Example icon-button with a heart icon">edit</mat-icon>
                       <span>Editar</span>
@@ -91,9 +87,12 @@
                       <mat-icon aria-label="Example icon-button with a heart icon">delete</mat-icon>
                       <span>Eliminar</span>
                     </button>  
-                  </mat-menu>                                 
-                </div>        
-              </mat-card-header>          
+                  </mat-menu>
+                </div>
+              </mat-card-header> 
+              <button #afr mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+                <mat-icon>more_vert</mat-icon>
+              </button>         
             </mat-card>  
           </div>
         </div>
