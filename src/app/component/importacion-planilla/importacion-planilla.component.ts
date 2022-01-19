@@ -20,7 +20,7 @@ import { AppSettings } from 'src/app/common/appsettings';
 })
 export class ImportacionPlanillaComponent extends BaseComponent implements OnInit {
 
-  pantallaRol= [];
+  pantallaRol = [];
   permisoEdit: boolean = false;
 
   tit = 'Carga de datos';
@@ -63,7 +63,7 @@ export class ImportacionPlanillaComponent extends BaseComponent implements OnIni
   }
 
   ngOnInit() {
-    this.usuarioLog = this.getUser().data;  
+    this.usuarioLog = this.getUser().data;
     this.getPantallaRol();
     this.versiones = this._version_service.get();
   }
@@ -195,6 +195,7 @@ export class ImportacionPlanillaComponent extends BaseComponent implements OnIni
     this._importacion_service.creargeom().subscribe(
       result => {
         console.log("creargeom response", result);
+        this.openSnackBar("Objetos geográficos creados", 200);
         this.procesando = false;
       }, error => {
         console.log(<any>error);
@@ -203,11 +204,30 @@ export class ImportacionPlanillaComponent extends BaseComponent implements OnIni
       });
   }
 
+  orientacion() {
+    if (this.idversion > 0) {
+      this.procesando = true;
+      let req = { idversion: this.idversion }
+      this._importacion_service.orientacionautomatica(req).subscribe(
+        result => {
+          console.log("orientacion response", result);
+          this.openSnackBar("Retenidas orientadas", 200);
+          this.procesando = false;
+        }, error => {
+          console.log(<any>error);
+          //this.openSnackBar(<any>error, 99);
+          this.procesando = false;
+        });
+    } else {
+      this.openSnackBar("Seleccione una versión", 200);
+    }
+  }
+
   deleteEstructuras(): void {
-    if(this.idversion){
+    if (this.idversion) {
       const dialogRef = this.dialog.open(ImportacionPlanillaEliminarComponent, {
-        width: '1250px', 
-        data: { idversion: this.idversion}
+        width: '1250px',
+        data: { idversion: this.idversion }
       });
       dialogRef.afterClosed().subscribe(result => {
         try {
@@ -215,13 +235,13 @@ export class ImportacionPlanillaComponent extends BaseComponent implements OnIni
           console.log(error);
         }
       });
-    }else{
+    } else {
       this.openSnackBar("Seleccione una versión", 200);
     }
-    
+
   }
 
-  download(){
+  download() {
     this._importacion_service.downloadPlantillaRedes().subscribe(
       result => {
         saveAs(result, "Plantilla_Redes");
@@ -239,11 +259,11 @@ export class ImportacionPlanillaComponent extends BaseComponent implements OnIni
         let resultado = <ResultadoApi>result;
         if (resultado.estado) {
           this.pantallaRol = resultado.data;
-          this.pantallaRol.forEach(element => {            
-            if(element.c_codigo === 'imp-imppl'){
+          this.pantallaRol.forEach(element => {
+            if (element.c_codigo === 'imp-imppl') {
               console.log(element);
               console.log(element.c_codigo);
-              if(element.c_permiso === 'MO'){
+              if (element.c_permiso === 'MO') {
                 this.permisoEdit = true;
               }
             }

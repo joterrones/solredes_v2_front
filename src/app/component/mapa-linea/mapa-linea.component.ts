@@ -9,6 +9,7 @@ import { MapaService } from 'src/app/service/mapa.service';
 import { VersionService } from 'src/app/service/version.service';
 import { SeguridadService } from 'src/app/service/seguridad.service';
 import { ResultadoApi } from 'src/app/interface/common.interface';
+import { MapaDetalleComponent } from '../mapa/mapa-detalle/mapa-detalle.component';
 
 
 @Component({
@@ -68,10 +69,7 @@ export class MapaLineaComponent extends BaseComponent implements OnInit {
     this.actualizar();
   }
 
-  clicked(clickEvent, marker) {
-    this.data = marker.data;
-    // this.openDialog();
-  }
+
 
   getPuntos() {
     let request = {
@@ -172,18 +170,14 @@ export class MapaLineaComponent extends BaseComponent implements OnInit {
 
 
   openDialog(item): void {
-  /*  let data = {
-      item: item,
-      n_idpl_linea: this.idlinea,
-      n_version: this.idversion
-    };
 
-    const dialogRef = this.dialog.open(OrientacionComponent, {
-      width: '60%',
-      height: '600px',
-      data: data
-    });*/
+    const dialogRef = this.dialog.open(MapaDetalleComponent, {
+      width: '30%',
+      height: 'auto',
+      data: item
+    });
   }
+
 
 
 }

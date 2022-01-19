@@ -21,4 +21,8 @@ export class MapaService {
     getlineas(req): Observable<any> {
         return this._http.post(this.url + 'mapa/getlineas', req);
     }
+
+    getdetalle(req): Observable<any> {
+        return this._http.post(this.url + 'mapa/getdetalle', req);
+    }
 }
