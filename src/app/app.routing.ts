@@ -66,7 +66,7 @@ const appRoutes:Routes=[
     {path:'almacen',component:AlmacenComponent},
     {path:'importacionplanilla',component:ImportacionPlanillaComponent},
     {path:'importacionlinea',component:ImportacionLineaComponent},
-    {path:'mapalinea',component:MapaLineaComponent},
+    {path:'mapalinea/:n_idpl_linea',component:MapaLineaComponent},
     {path:'mapageneral',component:MapaGeneralComponent},
     {path:'proyectoseleccion',component:ProyectoSeleccionComponent},
     {path:'guia/:n_idalm_almacen/:c_nombre',component:GuiaComponent},

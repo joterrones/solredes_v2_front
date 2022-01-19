@@ -4,7 +4,7 @@ import { MatDialog, MatSnackBar } from '@angular/material';
 import { BaseComponent } from '../base/base.component';
 
 //import { OrientacionComponent } from '../orientacion/orientacion.component';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MapaService } from 'src/app/service/mapa.service';
 import { VersionService } from 'src/app/service/version.service';
 import { SeguridadService } from 'src/app/service/seguridad.service';
@@ -29,7 +29,7 @@ export class MapaLineaComponent extends BaseComponent implements OnInit {
   data: any;
   polilineas: [];
 
-  idlinea: number = 1024;
+  idlinea: string="";
   idversion: number = 0;
 
   versiones = [
@@ -45,11 +45,13 @@ export class MapaLineaComponent extends BaseComponent implements OnInit {
     public _mapa_service: MapaService,
     public _version_service:VersionService,
     public _seguridad_service: SeguridadService,
+    private _Activatedroute: ActivatedRoute, 
   ) {
     super(snackBar, _router)
   }
 
   ngOnInit() {
+    this.idlinea = this._Activatedroute.snapshot.paramMap.get("n_idpl_linea");
     this.usuarioLog = this.getUser().data;  
     this.getPantallaRol();
     this.versiones = this._version_service.get();
