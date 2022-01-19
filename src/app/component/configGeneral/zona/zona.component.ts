@@ -55,6 +55,7 @@ export class ZonaComponent extends BaseComponent implements OnInit {
   getTablaZona() {
     let request = {
       n_idpl_zona: this.idzona,      
+      n_idpro_proyecto: this.proyecto.n_idpro_proyecto,     
     }
     console.log(this.idzona);
     

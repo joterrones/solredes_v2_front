@@ -1,8 +1,8 @@
 <app-menu>
   <div class="contenedorBody" id="printSectionId">
 
-  <!--  <h2>REPORTE ESTADISTICO</h2>
-    <mat-accordion>
+    <h2>REPORTE ESTADISTICO</h2>
+    <!-- <mat-accordion>
       <mat-expansion-panel>
         <mat-expansion-panel-header>
           <mat-panel-title>
@@ -57,19 +57,25 @@
         </mat-action-row>
       </mat-expansion-panel>
 
-    </mat-accordion>
-
+    </mat-accordion> -->
 
     <div class="contenedorChart">
 
       <div class="elementoChart">
         <mat-card>
-          <h3>CANTIDAD DE PROYECTOS POR DEPARTAMENTO</h3>
-          <canvas id="beneficiearioproyecto">{{myChartBenefiario}}</canvas>
+          <h3>CANTIDAD DE ESTRUCTURAS POR LINEA</h3>
+          <canvas id="Lineas_estructuras">{{myChartLineas}}</canvas>
         </mat-card>
       </div>
 
       <div class="elementoChart">
+        <mat-card>
+          <h3>CANTIDAD DE LINEAS POR ZONA</h3>
+          <canvas id="linealp">{{MyCharLineaPrimaria}}</canvas>          
+        </mat-card>
+      </div>
+      
+      <!-- <div class="elementoChart">
         <mat-card>
           <h3>CANTIDAD DE PROYECTO POR FASE</h3>
           <canvas id="fase">{{MyCharFase}}</canvas>
@@ -127,9 +133,9 @@
         </mat-card>
       </div>
       <div class="elementoChart">
-      </div>
+      </div>-->
     </div>
-
+    <!--
     <h3>
       <p>Información de Proyectos asignados a la HSP (Total de Proyectos)</p>
     </h3>
@@ -279,7 +285,7 @@
           </mat-card-content>
         </mat-card>
       </div>
-    </div>
-    -->
+    </div>-->
+
   </div>
 </app-menu>

@@ -46,4 +46,13 @@ export class DashboardService {
         });
         return this._http.post(this.url + 'dashboard/getdashboardbolsa', rq, { headers: reqHeader });
     }
+
+    /*-------------------------------------------------------- */
+    getLineas(token): Observable<any> {
+        var reqHeader = new HttpHeaders({
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
+        });
+        return this._http.post(this.url + 'dashboard/getLineas', { headers: reqHeader });
+    }
 }
