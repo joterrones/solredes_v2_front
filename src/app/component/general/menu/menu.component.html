@@ -173,7 +173,19 @@
                         <mat-icon>keyboard_arrow_right</mat-icon>
                         <span>Administración de almacén y guías</span>
                     </a>
-                </mat-expansion-panel>                
+                </mat-expansion-panel>     
+                <mat-expansion-panel>
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            <mat-icon>bar_chart</mat-icon>
+                            Reporte
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <a mat-list-item [routerLink]="['/grafico']" *ngIf="al_adalm">
+                        <mat-icon>bar_chart</mat-icon>
+                        <span>Reporte</span>
+                    </a>
+                </mat-expansion-panel>              
             </mat-accordion>
         </mat-nav-list>
         <div class="logo">

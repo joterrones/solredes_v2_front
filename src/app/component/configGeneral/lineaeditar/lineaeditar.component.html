@@ -10,8 +10,8 @@
 
     <mat-form-field>
       <input matInput type="Codigo" placeholder="Codigo" name="c_codigo" #c_clave="ngModel"  
-        [(ngModel)]="linea.c_codigo" minlength="6" required/>
-      <mat-hint class="error" *ngIf="linea.c_codigo.length<6">debe tener mínimo de 6 dígitos</mat-hint>
+        [(ngModel)]="linea.c_codigo" minlength="3" required/>
+      <mat-hint class="error" *ngIf="linea.c_codigo.length<3">debe tener mínimo de 3 dígitos</mat-hint>
     </mat-form-field>
       
     <mat-form-field>

@@ -2,40 +2,41 @@
 <form class="example-container" #newForm="ngForm" (ngSubmit)="guardar(newForm)">
   <div mat-dialog-content class="contenedor">
     <mat-form-field>
-      <input matInput placeholder="Código" name="c_codigo" #c_codigo="ngModel"
-        [(ngModel)]="data.item.c_codigo" required>
+      <input matInput placeholder="Código" name="c_codigo" #c_codigo="ngModel" [(ngModel)]="data.item.c_codigo"
+        required>
     </mat-form-field>
     <mat-form-field>
-        <input matInput placeholder="Nombre" name="c_nombre" #c_nombre="ngModel"
-          [(ngModel)]="data.item.c_nombre" required>
-      </mat-form-field>
+      <input matInput placeholder="Nombre" name="c_nombre" #c_nombre="ngModel" [(ngModel)]="data.item.c_nombre"
+        required>
+    </mat-form-field>
     <mat-form-field>
-        <input matInput placeholder="Código Corto" name="c_codigocorto" #c_codigocorto="ngModel"
-          [(ngModel)]="data.item.c_codigo_corto" required>
-      </mat-form-field>
-      <mat-form-field>
-          <input matInput placeholder="Ícono Mapa" name="c_iconomapa" #c_iconomapa="ngModel"
-            [(ngModel)]="data.item.c_iconomapa" required>
-        </mat-form-field>
-        <mat-form-field>
-            <input matInput placeholder="Lámina" name="c_rutaimg" #c_rutaimg="ngModel"
-              [(ngModel)]="data.item.c_rutaimg" required>
-          </mat-form-field>
-          <mat-form-field>
-            <mat-select placeholder="Tipo de Armados" [(value)]="data.item.n_idpl_tipoarmado">
-              <mat-option *ngFor="let item of tipoarmado" [value]="item.n_idpl_tipoarmado" 
-             >
-                {{item.c_nombre}}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-          <mat-form-field>
-            <input matInput placeholder="Versión" name="n_version" #n_version="ngModel"
-              [(ngModel)]="data.item.n_version" required>
-          </mat-form-field>
+      <input matInput placeholder="Código Corto" name="c_codigocorto" #c_codigocorto="ngModel"
+        [(ngModel)]="data.item.c_codigo_corto" maxlength="5">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Ícono Mapa" name="c_iconomapa" #c_iconomapa="ngModel"
+        [(ngModel)]="data.item.c_iconomapa">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Lámina" name="c_rutaimg" #c_rutaimg="ngModel" [(ngModel)]="data.item.c_rutaimg">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-select placeholder="Tipo de Armados" [(value)]="data.item.n_idpl_tipoarmado">
+        <mat-option *ngFor="let item of tipoarmado" [value]="item.n_idpl_tipoarmado">
+          {{item.c_nombre}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Versión" name="n_version" #n_version="ngModel" [(ngModel)]="data.item.n_version"
+        required>
+    </mat-form-field>    
   </div>
+  <label style="opacity: 80%; margin-left: 25px;" > 
+    *Los campos icono mapa, codigo corto y lamina no son requeridos 
+  </label>  
   <div mat-dialog-actions>
-
+    <br>
     <button mat-button type="submit" cdkFocusInitial [disabled]="!newForm.form.valid">
       <mat-icon>save</mat-icon>
       <span>Guardar</span>

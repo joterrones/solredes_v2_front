@@ -41,4 +41,10 @@
     background-color: #e65100;
   }
 
-  
+  mat-icon{
+    margin-right: 7px;
+  }
+
+  mat-panel-title{
+    align-items: center;
+  }
