@@ -6,26 +6,27 @@
         </button>
         <br />
         <mat-form-field>
-            <mat-select placeholder="Versiones" >
-              <mat-option *ngFor="let item of versiones" [value]="item.id"  (click)="selecVersion(item.id)">
-                {{item.nombre}}
-              </mat-option>
+            <mat-select placeholder="Versiones">
+                <mat-option *ngFor="let item of versiones" [value]="item.id" (click)="selecVersion(item.id)">
+                    {{item.nombre}}
+                </mat-option>
             </mat-select>
-          </mat-form-field>
+        </mat-form-field>
 
         <br />
-        <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" [mapTypeControl]='true' [mapTypeId]="'hybrid'" *ngIf="permisoEdit">
+        <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" [mapTypeControl]='true' [mapTypeId]="'hybrid'"
+            *ngIf="permisoEdit">
             <agm-marker-cluster [maxZoom]="12" imagePath="http://35.184.146.235/Multimedia/Nama/images/m">
                 <agm-marker *ngFor="let marker of markers " [latitude]="marker.lat" [longitude]="marker.lng"
                     [markerDraggable]="true" [opacity]="marker.alpha" [iconUrl]="
               {
                 url:  './assets/mapa/'+marker.data.c_iconomapa+'.png' 
-            }" (markerClick)="clicked($event,marker)" >
+            }" (markerClick)="openDialog(marker.data)">
                 </agm-marker>
                 <ng-container>
-                <!-- <agm-polyline *ngFor="let polyline of polilineas;let i = index;" [strokeColor]="black">-->   
-                    <agm-polyline *ngFor="let polyline of polilineas;let i = index;" >
-                    <agm-polyline-point *ngFor="let point of polyline.path" [latitude]="point.c_latitud"
+                    <!-- <agm-polyline *ngFor="let polyline of polilineas;let i = index;" [strokeColor]="black">-->
+                    <agm-polyline *ngFor="let polyline of polilineas;let i = index;">
+                        <agm-polyline-point *ngFor="let point of polyline.path" [latitude]="point.c_latitud"
                             [longitude]="point.c_longitud">
                         </agm-polyline-point>
                     </agm-polyline>

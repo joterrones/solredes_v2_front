@@ -24,6 +24,11 @@ export class ImportacionService {
         let req = {};
         return this._http.post(this.url + 'importacion/creargeom',req);
     }
+
+    orientacionautomatica(req): Observable<any> {
+        return this._http.post(this.url + 'importacion/orientacionautomatica',req);
+    }
+    
     
     insertplanillaacometida(request, proyecto): Observable<any> {
         request.proyecto = proyecto;

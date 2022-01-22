@@ -1,0 +1,19 @@
+<table mat-table [dataSource]="tabla" matSort class="mat-elevation-z8">
+
+    <ng-container matColumnDef="NombreArmado">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre de armado </th>
+        <td mat-cell *matCellDef="let element"> {{element.c_nombre}} </td>
+    </ng-container>
+    <ng-container matColumnDef="Cantidad">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Cantidad </th>
+        <td mat-cell *matCellDef="let element"> {{element.n_cantidad}} </td>
+    </ng-container>
+    <ng-container matColumnDef="Orientacion">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Orientación </th>
+        <td mat-cell *matCellDef="let element"> {{element.n_orientacion}} </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <ng-template let-row matRowDef cdkVirtualFor [matRowDefColumns]="displayedColumns">
+        <tr mat-row></tr>
+    </ng-template>
+</table>

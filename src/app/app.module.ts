@@ -7,7 +7,7 @@ import { DatePipe } from '@angular/common';
 import { AuthInterceptorService } from './auth-interceptor.service';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common'
 import { routing1, appRoutingProviders } from './app.routing';
-import {ObserversModule} from '@angular/cdk/observers';
+import { ObserversModule } from '@angular/cdk/observers';
 import { AgmCoreModule } from '@agm/core';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -53,7 +53,7 @@ import { ProyectousuarioComponent } from './component/seguridad/proyectousuario/
 import { ExportperfilxlsComponent } from './component/exportar/exportperfilxls/exportperfilxls.component';
 import { ProgramaComponent } from './component/general/programa/programa.component';
 import { ExportControlObraXlsComponent } from './component/exportar/export-control-obra-xls/export-control-obra-xls.component';
-import {MatChipsModule} from '@angular/material/chips';
+import { MatChipsModule } from '@angular/material/chips';
 import { ExportControlSupervisorComponent } from './component/exportar/export-control-supervisor/export-control-supervisor.component';;
 import { ExportalldataComponent } from './component/exportar/exportalldata/exportalldata.component';
 import { Exportalldata2Component } from './component/exportar/exportalldata2/exportalldata2.component';
@@ -87,7 +87,7 @@ import { ProyectoSeleccionComponent } from './component/proyecto-seleccion/proye
 import { AdmiArchivosComponent } from './component/archivos/admi-archivos/admi-archivos.component';
 import { AdmiArchivosEditarComponent } from './component/archivos/admi-archivos-editar/admi-archivos-editar.component';
 import { ArchivosEditarComponent } from './component/archivos/archivos-editar/archivos-editar.component';
-import {MatTooltipModule} from '@angular/material/tooltip';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { ImportacionLineaComponent } from './component/importacion-linea/importacion-linea.component';
 import { MapaLineaComponent } from './component/mapa-linea/mapa-linea.component';
 import { MapaGeneralComponent } from './component/mapa-general/mapa-general.component';
@@ -119,6 +119,8 @@ import { DetallemetradoComponent } from './component/detallemetrado/detallemetra
 import { ImportacionPlanillaEliminarComponent } from './component/importacion-planilla-eliminar/importacion-planilla-eliminar.component';
 import { RolpermisosComponent } from './component/seguridad/rolpermisos/rolpermisos.component';
 import { FichaComponent } from './component/ficha/ficha.component';
+import { MapaDetalleComponent } from './component/mapa/mapa-detalle/mapa-detalle.component';
+
 
 @NgModule({
   declarations: [
@@ -153,26 +155,27 @@ import { FichaComponent } from './component/ficha/ficha.component';
     TipolineaComponent,
     TipolineaeditarComponent,
     ZonaComponent,
-    ZonaeditComponent,       
-    ConfproyectoComponent, 
-    ConfproyectoeditarComponent, 
+    ZonaeditComponent,
+    ConfproyectoComponent,
+    ConfproyectoeditarComponent,
     TipofotoComponent,
-    TipofotoeditarComponent, 
-    TipoempresaComponent, 
-    TipoempresaeditarComponent, 
-    AlmacenComponent, 
-    AlmaceneditarComponent, 
-    GuiaComponent, 
-    GuiaeditarComponent, 
-    GuiadetalleComponent, 
-    GuiadetalleeditarComponent, 
-    ImportacionPlanillaComponent, 
-    ProyectoSeleccionComponent,   
-    GuiadetalleeditarComponent, 
-    AdmiArchivosComponent, 
-    AdmiArchivosEditarComponent, 
-    ArchivosEditarComponent, 
+    TipofotoeditarComponent,
+    TipoempresaComponent,
+    TipoempresaeditarComponent,
+    AlmacenComponent,
+    AlmaceneditarComponent,
+    GuiaComponent,
+    GuiaeditarComponent,
+    GuiadetalleComponent,
+    GuiadetalleeditarComponent,
+    ImportacionPlanillaComponent,
+    ProyectoSeleccionComponent,
+    GuiadetalleeditarComponent,
+    AdmiArchivosComponent,
+    AdmiArchivosEditarComponent,
+    ArchivosEditarComponent,
     ImportacionLineaComponent,
+
      MapaLineaComponent, 
      MapaGeneralComponent, 
      MapaBaseComponent,   
@@ -203,6 +206,38 @@ import { FichaComponent } from './component/ficha/ficha.component';
     DetallemetradoComponent, 
     ImportacionPlanillaEliminarComponent, 
     RolpermisosComponent, FichaComponent, 
+    MapaLineaComponent,
+    MapaGeneralComponent,
+    MapaBaseComponent,
+    ArchivosEditarComponent,
+    UsuarioproyectoComponent,
+    ValoresGeneralesComponent,
+    ValoresGeneralesEditarComponent,
+    TragrupoComponent,
+    TragrupoEditarComponent,
+    ProyectousuaioComponent,
+    PrincipalComponent,
+    LineausuarioComponent,
+    ImportacionSuministrosComponent,
+    TipoelementoComponent,
+    TipoelementoeditarComponent,
+    ImportacionMontajeComponent,
+    CategoriatipomontajeComponent,
+    CategoriatipomontajeeditarComponent,
+    ConfproyectoimgComponent,
+    ConfproyectoimglogoComponent,
+    ConfproyectocolorComponent,
+    ElementoComponent,
+    ArmadoComponent,
+    DetallearmadoComponent,
+    ArmadoconfigmontajeComponent,
+    MetradoComponent,
+    MetradomontajeComponent,
+    DetallemetradoComponent,
+    ImportacionPlanillaEliminarComponent,
+    RolpermisosComponent,
+    MapaDetalleComponent,
+
   ],
   imports: [
     FormsModule,
@@ -253,10 +288,10 @@ import { FichaComponent } from './component/ficha/ficha.component';
     TipolineaeditarComponent,
     ZonaeditComponent,
     ConfproyectoeditarComponent,
-    EmpresaeditarComponent,    
+    EmpresaeditarComponent,
     TipofotoeditarComponent,
     TipoempresaeditarComponent,
-    ProyectousuarioComponent,    
+    ProyectousuarioComponent,
     TragrupoEditarComponent,
     ValoresGeneralesEditarComponent,
     ProyectousuaioComponent,
@@ -277,14 +312,15 @@ import { FichaComponent } from './component/ficha/ficha.component';
     DetallemetradoComponent,
     ImportacionPlanillaEliminarComponent,
     MetradomontajeComponent,
-    RolpermisosComponent
+    RolpermisosComponent,
+    MapaDetalleComponent
   ],
   providers: [
-    MatDatepickerModule, 
+    MatDatepickerModule,
     DatePipe,
     appRoutingProviders,
-    { provide: LocationStrategy, useClass: HashLocationStrategy  },
-    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService ,multi: true }
+    { provide: LocationStrategy, useClass: HashLocationStrategy },
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true }
   ],
   bootstrap: [AppComponent]
 })
