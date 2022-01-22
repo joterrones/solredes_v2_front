@@ -118,6 +118,7 @@ import { MetradomontajeComponent } from './component/metradomontaje/metradomonta
 import { DetallemetradoComponent } from './component/detallemetrado/detallemetrado.component';
 import { ImportacionPlanillaEliminarComponent } from './component/importacion-planilla-eliminar/importacion-planilla-eliminar.component';
 import { RolpermisosComponent } from './component/seguridad/rolpermisos/rolpermisos.component';
+import { FichaComponent } from './component/ficha/ficha.component';
 
 @NgModule({
   declarations: [
@@ -201,7 +202,7 @@ import { RolpermisosComponent } from './component/seguridad/rolpermisos/rolpermi
     MetradomontajeComponent, 
     DetallemetradoComponent, 
     ImportacionPlanillaEliminarComponent, 
-    RolpermisosComponent, 
+    RolpermisosComponent, FichaComponent, 
   ],
   imports: [
     FormsModule,

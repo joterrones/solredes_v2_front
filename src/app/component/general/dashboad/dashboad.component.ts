@@ -229,9 +229,11 @@ export class DashboadComponent extends BaseComponent implements OnInit {
       });
   }
 
-  getLineas(){
-   
-    this.dashboardServices.getLineas( this.getToken().token).subscribe(
+  getLineas(){    
+    let request = {
+      n_idpro_proyecto: this.proyecto.n_idpro_proyecto
+    }
+    this.dashboardServices.getLineas(request, this.getToken().token).subscribe(
       result => {
         let resultado = <ResultadoApi>result;
         if(resultado.estado){

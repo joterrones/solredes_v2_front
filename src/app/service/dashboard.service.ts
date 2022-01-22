@@ -48,11 +48,11 @@ export class DashboardService {
     }
 
     /*-------------------------------------------------------- */
-    getLineas(token): Observable<any> {
+    getLineas(request, token): Observable<any> {
         var reqHeader = new HttpHeaders({
             'Content-Type': 'application/json',
             'Authorization': 'Bearer ' + token
         });
-        return this._http.post(this.url + 'dashboard/getLineas', { headers: reqHeader });
+        return this._http.post(this.url + 'dashboard/getLineas', request,{ headers: reqHeader });
     }
 }
