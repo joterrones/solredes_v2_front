@@ -24,11 +24,18 @@ export class AdmiArchivosComponent extends BaseComponent implements OnInit {
 
   pantallaRol= [];
   permisoEdit: boolean = false;
+
+  boolCarpeta: boolean = false;
+  boolArchivo: boolean = false;
+
   textfilter = '';
-  archivos: [];
+  archivos= [];
   n_iddoc_archivopadre: number = 0;
   i: number = -1;
+
   retorno= [];
+  nameRetorno=[];
+
   public tablaCarpetas: MatTableDataSource<any>;
   public confirmar: Confirmar;
 
@@ -50,8 +57,7 @@ export class AdmiArchivosComponent extends BaseComponent implements OnInit {
     this.getTablaArchivos();
   }
 
-  getTablaArchivos(){
-
+  getTablaArchivos(){    
     let request = {
       n_iddoc_archivopadre: this.n_iddoc_archivopadre
     }
@@ -60,8 +66,19 @@ export class AdmiArchivosComponent extends BaseComponent implements OnInit {
         try {
           if (result.estado) {     
             console.log(result.data)
-            this.archivos = result.data;           
-            
+            this.archivos = result.data;   
+            this.boolArchivo = false;
+            this.boolCarpeta = false;         
+            this.archivos.forEach(element => {
+              if(element.c_tipo == 1){
+                this.boolCarpeta = true;
+                console.log(this.boolCarpeta)
+              }
+              if(element.c_tipo == 2){
+                this.boolArchivo = true;
+                console.log(this.boolArchivo)
+              }
+            });
           } else {
             this.openSnackBar(result.mensaje, 99);
           }
@@ -163,19 +180,55 @@ export class AdmiArchivosComponent extends BaseComponent implements OnInit {
   }
 
   showArchivos(element): void {   
+    
     this.i++; 
     this.n_iddoc_archivopadre = element.n_iddoc_archivo;
-    this.retorno[this.i] = element.n_iddoc_archivopadre;
-    this.getTablaArchivos()
+    this.retorno[this.i] = element.n_iddoc_archivopadre;    
+    this.nameRetorno[this.i] = {c_nombre: element.c_nombre, n_iddoc_archivo: element.n_iddoc_archivo}; 
+    this.getTablaArchivos();
+  }
+  
+  showArchivosBarra(element): void {
+    
+    if(element == 0){      
+      for(let r = 0; r <= this.retorno.length; r++){
+        this.nameRetorno.pop();
+        this.retorno.pop();
+      }
+      this.nameRetorno.pop();
+      this.retorno.pop();
+      this.i= -1;
+      console.log(this.i);
+      this.n_iddoc_archivopadre = element;
+      this.getTablaArchivos();
+    }else{
+      this.n_iddoc_archivopadre = element.n_iddoc_archivo;
+
+      for(let f = this.nameRetorno.length-1; f >= 0; f--){     
+        if(element.n_iddoc_archivo == this.nameRetorno[f].n_iddoc_archivo){
+          f = 0;
+        }else{
+          this.nameRetorno.pop();
+          this.retorno.pop();
+          this.i--; 
+        }
+      }
+    }
+    
+    this.getTablaArchivos();
   }
 
   showArchivosBack(): void {    
+    
+    console.log(this.nameRetorno);
     this.n_iddoc_archivopadre = this.retorno[this.i];  
+    this.nameRetorno.pop();
     this.i --;
     if(this.i < 0){
       this.i = 0;
+      this.n_iddoc_archivopadre = 0;
     }
-    this.getTablaArchivos()
+    this.getTablaArchivos();
   }
 
   download(element) {
@@ -198,8 +251,8 @@ export class AdmiArchivosComponent extends BaseComponent implements OnInit {
           this.pantallaRol = resultado.data;
           this.pantallaRol.forEach(element => {            
             if(element.c_codigo === 'as-adarc'){
-              console.log(element);
-              console.log(element.c_codigo);
+              //console.log(element);
+              //console.log(element.c_codigo);
               if(element.c_permiso === 'MO'){
                 this.permisoEdit = true;
               }

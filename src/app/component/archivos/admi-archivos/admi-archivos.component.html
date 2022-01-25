@@ -16,23 +16,37 @@
             <mat-icon aria-label="Example icon-button with a heart icon">arrow_back</mat-icon>                
           </button> 
         </div>
-      </div>
+      </div>    
     </mat-card>
-    
+
+    <div class="barr">
+      <mat-card class="barrNav items">
+        <div (click)="showArchivosBarra(0)">
+          <label class="cursor"> Raíz </label>
+        </div>
+        <div *ngFor="let element of nameRetorno">
+            <div *ngIf="element" class="items" (click)="showArchivosBarra(element)">
+              <mat-icon>keyboard_arrow_right</mat-icon>
+              <label class="cursor"> {{element.c_nombre}} </label> 
+            </div>                 
+        </div>
+      </mat-card>
+    </div>  
+
     <div class="contenedorArchivos">
-      <div class="subtitulo">
+      <div class="subtitulo" *ngIf="boolCarpeta">
         Carpetas
         <hr>
       </div>
       <div class="navega2">        
         <div *ngFor="let element of archivos"> 
-          <div *ngIf=" element.c_tipo == 1" class="cont" >
+          <div *ngIf=" element.c_tipo == 1" class="cont">
             <mat-card class="example-card">
               <mat-card-header class="navega3" (click)="showArchivos(element)" (contextmenu)="afr">    
-                <div mat-card-avatar class="example-header-image" >
-                  <button mat-icon-button> 
+                <div mat-card-avatar class="example-header-image" [matTooltip]="element.c_nombre">
+                  
                     <mat-icon aria-label="Example icon-button with a heart icon">folder</mat-icon>                     
-                  </button>     
+                    
                   <div class="label">{{element.c_nombre}}</div>              
                 </div>
                 <div>
@@ -59,7 +73,7 @@
           </div>
         </div>      
       </div>
-      <div class="subtitulo">
+      <div class="subtitulo" *ngIf="boolArchivo">
         Archivos
         <hr>
       </div>
@@ -69,7 +83,7 @@
           <div *ngIf=" element.c_tipo == 2" class="cont2">             
             <mat-card class="example-card">   
               <mat-card-header class="navega3">                 
-                <div mat-card-avatar class="example-header-image">                 
+                <div mat-card-avatar class="example-header-image" [matTooltip]="element.c_nombre">                 
                   <mat-icon aria-label="Example icon-button with a heart icon" >insert_drive_file</mat-icon>   
                   <div class="label">{{element.c_nombre}}</div>                              
                 </div>                                                         

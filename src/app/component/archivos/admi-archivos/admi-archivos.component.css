@@ -51,7 +51,7 @@ table {
 }
 
 .example-card {  
-  width: 325px;
+  width: 305px;
   padding-top: 9px;
   padding-right: 9px;
   padding-bottom: 9px;
@@ -75,15 +75,38 @@ table {
 
 .mat-card-avatar {
   
-  width: 165px;
+  width: 230px;
   flex-shrink: 0;
   object-fit: cover;
 }
 
 .label{
-  width: 265px;
+  width: 230px;
   overflow:hidden;
   white-space:nowrap;
   text-overflow: ellipsis;
   margin-left: 5px;
+}
+
+.barr{
+  margin-top: 10px;
+}
+
+.barrNav{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;  
+}
+
+.items{
+  display: flex;
+  align-items: center;
+}
+
+label{
+  margin-bottom: 2px;
+}
+
+.cursor{
+  cursor: pointer;
 }

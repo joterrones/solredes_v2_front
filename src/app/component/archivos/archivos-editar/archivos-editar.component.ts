@@ -1,5 +1,5 @@
-import { Component, Inject, OnInit } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
+import { Component, Inject, OnInit, ViewChild } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA, MatSnackBar, MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 import { Router } from "@angular/router";
 import { AppSettings } from 'src/app/common/appsettings';
 import { Archivo, ArchivoEditar } from 'src/app/interface/archivos.interface';
@@ -17,9 +17,13 @@ export class ArchivosEditarComponent extends BaseComponent implements OnInit {
   archivo: Archivo;
   editar: boolean;
   carpetas: [];
-
+  rutas = [];
+  nombres = [];
+  checksums = [];
   procesando: boolean = false;
   editNomArchivo: boolean = false;
+  list: boolean = false;
+  
   constructor(
     public dialogRef: MatDialogRef<ArchivosEditarComponent>,    
     public _archivos_service: ArchivosServices,  
@@ -76,52 +80,85 @@ export class ArchivosEditarComponent extends BaseComponent implements OnInit {
       });
   }
 
-  uploadfile(files: FileList) {
-    this.procesando = true;
-    this.file = files.item(0);  
-    console.log("CARGA ARC",this.file)
-    this.uploadFileToActivity();
+  uploadfile= async (files: FileList) =>{
+    console.log("inicia");
+    
+    for(let i = 0; i < files.length; i++){
+      this.procesando = true;
+      this.file = files.item(i);  
+      console.log("CARGA ARC",this.file)      
+      this.uploadFileToActivity();
+    }
+    this.procesando = false;
+    this.list = true;    
+    this.editNomArchivo = false; 
   }
 
   guardar(newForm) {    
+   
     console.log("entra a saveArchivo",this.archivo)
     this.archivo.n_id_usermodi= this.usuarioLog.n_idseg_userprofile
-    this._archivos_service.saveArchivo(this.archivo, this.getToken().token).subscribe(
-      result => {
-        try {
-          if (result.estado) {
-            
-            this.dialogRef.close({ flag: true, data: this.archivo });
-          } else {
-            this.openSnackBar(result.mensaje, 99);
+    if(this.editar){
+      this._archivos_service.saveArchivo(this.archivo, this.getToken().token).subscribe(
+        result => {
+          try {
+            if (result.estado) {              
+              this.dialogRef.close({ flag: true, data: this.archivo });
+            } else {
+              this.openSnackBar(result.mensaje, 99);
+            }
+          } catch (error) {
+            this.openSnackBar(AppSettings.SERVICE_NO_CONECT_SERVER, 99);
           }
-        } catch (error) {
-          this.openSnackBar(AppSettings.SERVICE_NO_CONECT_SERVER, 99);
-        }
-      }, error => {
-        console.error(error);
-        try {
-          this.openSnackBar(error.error.Detail, error.error.StatusCode);
-        } catch (error) {
-          this.openSnackBar(AppSettings.SERVICE_NO_CONECT_SERVER, 99);
-        }
-      });
+        }, error => {
+          console.error(error);
+          try {
+            this.openSnackBar(error.error.Detail, error.error.StatusCode);
+          } catch (error) {
+            this.openSnackBar(AppSettings.SERVICE_NO_CONECT_SERVER, 99);
+          }
+        });
+    }else{
+      for(let i = 0; i < this.nombres.length; i++) {  
+        this.archivo.c_ruta =this.rutas[i];
+        this.archivo.c_nombre =this.nombres[i];
+        this.archivo.c_checksum =this.checksums[i];
+      this._archivos_service.saveArchivo(this.archivo, this.getToken().token).subscribe(
+        result => {
+          try {
+            if (result.estado) {              
+              this.dialogRef.close({ flag: true, data: this.archivo });
+            } else {
+              this.openSnackBar(result.mensaje, 99);
+            }
+          } catch (error) {
+            this.openSnackBar(AppSettings.SERVICE_NO_CONECT_SERVER, 99);
+          }
+        }, error => {
+          console.error(error);
+          try {
+            this.openSnackBar(error.error.Detail, error.error.StatusCode);
+          } catch (error) {
+            this.openSnackBar(AppSettings.SERVICE_NO_CONECT_SERVER, 99);
+          }
+        });
+    }
+    }
+
   } 
   
   uploadFileToActivity() {
     let extension = this.file.name;
-    console.log(this.file.type);
-    
+    //console.log(this.file.type);
     this._archivos_service.uploadfile(extension, this.proyecto.n_idpro_proyecto+"_Proyecto", this.file, this.getToken().token).subscribe(
       result => {
-        console.log("uploadFileToActivity",result)
+        //console.log("uploadFileToActivity",result)
         if (result.estado) {
-          this.archivo.c_ruta = result.c_ruta;
-          this.archivo.c_nombre = result.c_nombre;
-          this.archivo.c_checksum = result.c_checksum;
-          this.procesando = false;
-          this.editNomArchivo = false;
-          console.log("CHECKSUM: ",this.archivo.c_checksum);
+          this.rutas.push(result.c_ruta);
+          this.nombres.push(result.c_nombre);
+          this.checksums.push(result.c_checksum);    
+          this.archivo.c_nombre = result.c_nombre;                   
+          //console.log("CHECKSUM: ",this.archivo.c_checksum);
           /* */
         } else {
           this.openSnackBar(result.mensaje, 99);
