@@ -138,7 +138,7 @@ export class ImportacionMontajeComponent extends BaseComponent implements OnInit
   download(){
     this._importacion_service.downloadPlantillaMontaje().subscribe(
       result => {
-        saveAs(result, "Plantilla_Montaje");
+        saveAs(result, "Plantilla_Montaje.xlsx");
       }, error => {
         this.openSnackBar(<any>error, 99);
       });

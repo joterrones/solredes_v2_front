@@ -58,7 +58,8 @@ export class LineausuarioComponent extends BaseComponent implements OnInit {
     let request = {
       n_idtra_grupo: this.data.n_idtra_grupo,
       n_idpl_zona: this.idzona,
-      n_idpl_tipolinea: this.idtipolinea
+      n_idpl_tipolinea: this.idtipolinea,
+      n_idpro_proyecto: this.proyecto.n_idpro_proyecto
     }
     console.log(request);
     this._confiGeneral_service.getLineaUser(request,this.getToken().token).subscribe(
@@ -114,16 +115,18 @@ export class LineausuarioComponent extends BaseComponent implements OnInit {
       });
   }
 
-  resetLineaUser(){
+  noAsignarLineaUser(newForm){
     let request = {
-      n_idtra_grupo: this.data.n_idtra_grupo
+      n_idtra_grupo: this.data.n_idtra_grupo,
+      n_idpl_linea: newForm.n_idpl_linealn
     }
     console.log(this.data.n_idtra_grupo);
     
-    this._confiGeneral_service.resetLineaUser(request,this.getToken().token).subscribe(
+    this._confiGeneral_service.noAsignarLineaUser(request,this.getToken().token).subscribe(
       result => {
         if (result.estado) {
-          this.dialogAsigPro.close({ flag: true });
+          //this.dialogAsigPro.close({ flag: true });
+          this.getLineaUser();
         } else {
           this.openSnackBar(result.mensaje, 99);
         }
@@ -138,25 +141,26 @@ export class LineausuarioComponent extends BaseComponent implements OnInit {
 
   
   guardar(newForm) {
-    if(this.lineaUser.length){
-      this.resetLineaUser();
-    }
     console.log(newForm);
+    console.log(newForm.n_borrado);
     console.log(this.data.n_idtra_grupo);
-    console.log(this.lineaUser.length);
-    
-    for(let i = 0; i < newForm.length; i++ ){
+
+    if( newForm.n_borrado == 0 ){
+      //QUITAR ASIGANCIÓN
+      this.noAsignarLineaUser(newForm);
+    }else{
       let request  ={ 
         n_idtra_grupo: this.data.n_idtra_grupo,
-        n_idpl_linea: newForm[i]
+        n_idpl_linea: newForm.n_idpl_linealn
       }
       console.log("Envio datos lineaUser",request);
       
-      this._confiGeneral_service.saveLineaUser(request, this.getToken().token).subscribe(
+      this._confiGeneral_service.asignarLineaUser(request, this.getToken().token).subscribe(
         result => {
           try {
             if (result.estado) {
-              this.dialogAsigPro.close({ flag: true });
+              //this.dialogAsigPro.close({ flag: true });
+              this.getLineaUser();
             } else {
               this.openSnackBar(result.mensaje, 99);
             }
@@ -171,10 +175,9 @@ export class LineausuarioComponent extends BaseComponent implements OnInit {
             this.openSnackBar(AppSettings.SERVICE_NO_CONECT_SERVER, 99);
           }
         });
-
-    }
-    
+    }    
   }
+
   applyFilter(filterValue: String) {
     this.tablalineaUser.filter = filterValue.trim().toLowerCase();
   }

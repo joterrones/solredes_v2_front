@@ -1,64 +1,56 @@
+<h2 mat-dialog-title>Asignar Lineas o Localidades</h2>
 <mat-card>
-    <form class="example-container" #newForm="ngForm" (ngSubmit)="guardar(shoes._value)">
-        <h2 mat-dialog-title>Asignar Lineas o Localidades</h2>
-        <div class="contenido">
-            <mat-form-field>
-                <input matInput placeholder="Buscar"  (keyup)="applyFilter($event.target.value)">
-                <mat-icon matSuffix>search</mat-icon>
-            </mat-form-field>
-            <mat-form-field>
-                <mat-select placeholder="Zona">
-                    <mat-option value="0" (click)='selectZona(0)'>
+    <div class="contenido">
+        <mat-form-field>
+            <input matInput placeholder="Buscar" (keyup)="applyFilter($event.target.value)">
+            <mat-icon matSuffix>search</mat-icon>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-select placeholder="Zona">
+                <mat-option value="0" (click)='selectZona(0)'>
                     -TODOS-
-                    </mat-option>
-                    <mat-option *ngFor="let zo of zonas" [value]="zo.n_idpl_zona" (click)='selectZona(zo.n_idpl_zona)'>
+                </mat-option>
+                <mat-option *ngFor="let zo of zonas" [value]="zo.n_idpl_zona" (click)='selectZona(zo.n_idpl_zona)'>
                     {{zo.c_nombre}}
-                    </mat-option>
-                </mat-select>
-            </mat-form-field>    
-            <mat-form-field>
-                <mat-select placeholder="Tipo Linea">
-                    <mat-option value="0" (click)='selectTipoLinea(0)'>
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-select placeholder="Tipo Linea">
+                <mat-option value="0" (click)='selectTipoLinea(0)'>
                     -TODOS-
-                    </mat-option>
-                    <mat-option *ngFor="let tpl of tipolinea" [value]="tpl.n_idpl_tipolinea" (click)='selectTipoLinea(tpl.n_idpl_tipolinea)'>
+                </mat-option>
+                <mat-option *ngFor="let tpl of tipolinea" [value]="tpl.n_idpl_tipolinea"
+                    (click)='selectTipoLinea(tpl.n_idpl_tipolinea)'>
                     {{tpl.c_nombre}}
-                    </mat-option>
-                </mat-select>
-            </mat-form-field>         
-        </div>    
-
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <div class="tamano">
         <table mat-table [dataSource]="tablalineaUser" matSort class="mat-elevation-z8">
-
             <ng-container matColumnDef="c_nombre">
                 <th mat-header-cell *matHeaderCellDef color="error"> Nombre </th>
                 <td mat-cell *matCellDef="let element" style="max-width: 500px;"> {{element.c_nombre}} </td>
             </ng-container>
-
+        
             <ng-container matColumnDef="select">
                 <th mat-header-cell *matHeaderCellDef color="error"> Asignar </th>
                 <td mat-cell *matCellDef="let element">
-                    <mat-checkbox name="b_partidanueva" #b_partidanueva="ngModel"
-                        [(ngModel)]="element.b_partidanueva"></mat-checkbox>
+        
+                    <mat-selection-list #shoes>
+                        <mat-list-option [value]="element.n_idpl_linealn" [selected]="element.n_borrado == 0"
+                            (click)="guardar(element)">
+        
+                        </mat-list-option>
+                    </mat-selection-list>
                 </td>
-            </ng-container>       
+            </ng-container>
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
             <ng-template let-row matRowDef cdkVirtualFor [matRowDefColumns]="displayedColumns">
                 <tr mat-row></tr>
             </ng-template>
         </table>
-
-        <mat-selection-list #shoes class="tamano">
-            <mat-list-option *ngFor="let shoe of lineaUser" [value]="shoe.n_idpl_linealn" [selected]="shoe.n_borrado == 0">
-                {{shoe.c_nombre}}
-            </mat-list-option>
-        </mat-selection-list>
-        
-        <div mat-dialog-actions>
-            <button mat-button type="submit" cdkFocusInitial [disabled]="!newForm.form.valid">
-                <mat-icon>save</mat-icon>
-                <span>Guardar</span>
-            </button>
-        </div>
-    </form>
+    </div>
 </mat-card>
+

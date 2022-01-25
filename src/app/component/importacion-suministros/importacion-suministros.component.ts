@@ -138,7 +138,7 @@ export class ImportacionSuministrosComponent extends BaseComponent implements On
   download(){
     this._importacion_service.downloadPlantillaSuministro().subscribe(
       result => {
-        saveAs(result, "Plantilla_Suministro");
+        saveAs(result, "Plantilla_Suministro.xlsx");
       }, error => {
         this.openSnackBar(<any>error, 99);
       });

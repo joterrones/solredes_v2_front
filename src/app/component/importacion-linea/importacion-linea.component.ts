@@ -139,7 +139,7 @@ export class ImportacionLineaComponent extends BaseComponent implements OnInit {
   download(){
     this._importacion_service.downloadPlantillaLinea().subscribe(
       result => {
-        saveAs(result, "Plantilla_linea");
+        saveAs(result, "Plantilla_linea.xlsx");
       }, error => {
         this.openSnackBar(<any>error, 99);
       });

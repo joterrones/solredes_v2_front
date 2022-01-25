@@ -303,22 +303,22 @@ export class confGeneralService{
         return this._http.post(this.url + 'configuracionGeneral/getLineaUser', data, { headers: reqHeader });
     }
 
-    resetLineaUser(data, token): Observable<any> {
+    noAsignarLineaUser(data, token): Observable<any> {
         var reqHeader = new HttpHeaders({
             'Content-Type': 'application/json',
             'Authorization': 'Bearer ' + token
         });
         console.log(data)
-        return this._http.post(this.url + 'configuracionGeneral/resetLineaUser', data, { headers: reqHeader });
+        return this._http.post(this.url + 'configuracionGeneral/noAsignarLineaUser', data, { headers: reqHeader });
     }
 
-    saveLineaUser(data, token): Observable<any> {
+    asignarLineaUser(data, token): Observable<any> {
         var reqHeader = new HttpHeaders({
             'Content-Type': 'application/json',
             'Authorization': 'Bearer ' + token
         });        
         console.log(data)
-        return this._http.post(this.url + 'configuracionGeneral/saveLineaUser', data, { headers: reqHeader });
+        return this._http.post(this.url + 'configuracionGeneral/asignarLineaUser', data, { headers: reqHeader });
     }
 
     getTipoElemento(token): Observable<any> {

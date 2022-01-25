@@ -244,7 +244,7 @@ export class ImportacionPlanillaComponent extends BaseComponent implements OnIni
   download() {
     this._importacion_service.downloadPlantillaRedes().subscribe(
       result => {
-        saveAs(result, "Plantilla_Redes");
+        saveAs(result, "Plantilla_Redes.xlsx");
       }, error => {
         this.openSnackBar(<any>error, 99);
       });
