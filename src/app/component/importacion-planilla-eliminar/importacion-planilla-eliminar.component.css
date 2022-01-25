@@ -3,8 +3,9 @@ table {
 }
 
 .btnborrar{
+    
     background-color: red;
-    height: 40px;
+    /*height: 40px;*/
 }
 
 .contenido{
@@ -12,4 +13,5 @@ table {
   flex-direction: row;
   justify-content: space-between;
   flex-wrap: wrap;  
+  align-items: center;
 }

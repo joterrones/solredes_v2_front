@@ -1,6 +1,6 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 
-import { MatDialogRef, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA, MatSnackBar, MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 import { BaseComponent } from '../../base/base.component';
 import { Router } from "@angular/router";
 import { AppSettings } from '../../../common/appsettings';
@@ -16,9 +16,18 @@ import { TraGrupos } from 'src/app/interface/configGeneral.interface';
   providers: [confGeneralService]
 })
 export class LineausuarioComponent extends BaseComponent implements OnInit {
-
+  textfilter = '';
+  zonas = [];
+  tipolinea = [];
+  idtipolinea = 0;
+  idzona= 0;
   lineaUser: [];
 
+  displayedColumns: string[] = ['c_nombre','select'];
+  public tablalineaUser: MatTableDataSource<any>;
+  @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
+  @ViewChild(MatSort, { static: false }) sort: MatSort;
+  
   constructor(
     public dialogAsigPro: MatDialogRef<LineausuarioComponent>,
     private _confiGeneral_service: confGeneralService,
@@ -31,29 +40,77 @@ export class LineausuarioComponent extends BaseComponent implements OnInit {
 
   ngOnInit() {
     this.getLineaUser();
+    this.getTablaTipolinea();
+    this.getTablaZona();
   }
 
+  selectTipoLinea(element) {
+    this.idtipolinea = element;
+    this.getLineaUser();
+  }
 
-  getLineaUser(){
-    console.log(this.data.n_idtra_grupo);
+  selectZona(element) {
+    this.idzona = element;
+    this.getLineaUser();
+  }
+
+  getLineaUser(){    
     let request = {
-      n_idtra_grupo: this.data.n_idtra_grupo
+      n_idtra_grupo: this.data.n_idtra_grupo,
+      n_idpl_zona: this.idzona,
+      n_idpl_tipolinea: this.idtipolinea
     }
+    console.log(request);
     this._confiGeneral_service.getLineaUser(request,this.getToken().token).subscribe(
-      result => {
-        let resultado = <ResultadoApi>result;
-        if (resultado.estado) {
-          console.log("ProUser",resultado.data);
-          this.lineaUser = resultado.data;
-        } else {
-          this.openSnackBar(resultado.mensaje, 99);
-        }
-      }, error => {
+      result => { 
         try {
-          this.openSnackBar(error.error.Detail, error.error.StatusCode);
+          if (result.estado) {
+            console.log("ProUser",result.data);
+            this.lineaUser = result.data;
+            this.tablalineaUser = new MatTableDataSource<any>(result.data);
+            this.tablalineaUser.sort = this.sort;
+            this.tablalineaUser.paginator = this.paginator;
+          } else {
+            this.openSnackBar(result.mensaje, 99);
+          }
         } catch (error) {
           this.openSnackBar(AppSettings.SERVICE_NO_CONECT_SERVER, 99);
+        } finally {
+          this.applyFilter(this.textfilter);
         }
+      }, error => {
+        this.openSnackBar(error.error, 99);
+      });
+  }
+
+  getTablaTipolinea() {  
+    let request = {
+      n_idpl_tipolinea: this.idtipolinea      
+    }
+    this._confiGeneral_service.gettipolinea(request,this.getToken().token).subscribe(
+      result => {                
+        console.log(result.data);
+        this.tipolinea = result.data;
+      }, error => {
+        this.openSnackBar(error.error, 99);
+      });
+  } 
+
+  getTablaZona() {
+    let request = {
+      n_idpl_zona: this.idzona,      
+      n_idpro_proyecto: this.proyecto.n_idpro_proyecto,     
+    }    
+    this._confiGeneral_service.getZona(request, this.getToken().token).subscribe(
+      result => {        
+        if (result.estado) {
+          console.log(result.data);
+          this.zonas = result.data;
+        } else {
+          this.openSnackBar(result.mensaje, 99);
+        }
+      }, error => {
+        this.openSnackBar(error.error, 99);
       });
   }
 
@@ -117,6 +174,9 @@ export class LineausuarioComponent extends BaseComponent implements OnInit {
 
     }
     
+  }
+  applyFilter(filterValue: String) {
+    this.tablalineaUser.filter = filterValue.trim().toLowerCase();
   }
 
 }

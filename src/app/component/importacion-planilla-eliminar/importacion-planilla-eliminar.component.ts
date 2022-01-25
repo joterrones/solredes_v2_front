@@ -19,6 +19,10 @@ export class ImportacionPlanillaEliminarComponent extends BaseComponent implemen
   public tablaLineas: MatTableDataSource<any>;
   public confirmar: Confirmar;
   textfilter = '';
+  zonas = [];
+  tipolinea = [];
+  idtipolinea = 0;
+  idzona= 0;
 
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: false }) sort: MatSort;
@@ -37,13 +41,28 @@ export class ImportacionPlanillaEliminarComponent extends BaseComponent implemen
   ngOnInit() {  
     this.usuarioLog = this.getUser().data;
     this.getTablaLinea();
+    this.getTablaTipolinea();
+    this.getTablaZona();
+  }
+
+  selectTipoLinea(element) {
+    this.idtipolinea = element;
+    this.getTablaLinea();
+  }
+
+  selectZona(element) {
+    this.idzona = element;
+    this.getTablaLinea();
   }
 
   getTablaLinea() {
     let request = {
-      n_idpl_tipolinea: 0,     
-      n_idpl_zona: 0
+      n_idpl_tipolinea: this.idtipolinea,     
+      n_idpl_zona: this.idzona,
+      n_idpro_proyecto: this.proyecto.n_idpro_proyecto
     }
+    console.log(request);
+    
     this._confiGeneral_service.getLinea(request, this.getToken().token).subscribe(
       result => {
 
@@ -60,6 +79,37 @@ export class ImportacionPlanillaEliminarComponent extends BaseComponent implemen
           this.openSnackBar(AppSettings.SERVICE_NO_CONECT_SERVER, 99);
         } finally {
           this.applyFilter(this.textfilter);
+        }
+      }, error => {
+        this.openSnackBar(error.error, 99);
+      });
+  }
+
+  getTablaTipolinea() {  
+    let request = {
+      n_idpl_tipolinea: this.idtipolinea      
+    }
+    this._confiGeneral_service.gettipolinea(request,this.getToken().token).subscribe(
+      result => {                
+        console.log(result.data);
+        this.tipolinea = result.data;
+      }, error => {
+        this.openSnackBar(error.error, 99);
+      });
+  } 
+
+  getTablaZona() {
+    let request = {
+      n_idpl_zona: this.idzona,      
+      n_idpro_proyecto: this.proyecto.n_idpro_proyecto,     
+    }    
+    this._confiGeneral_service.getZona(request, this.getToken().token).subscribe(
+      result => {        
+        if (result.estado) {
+          console.log(result.data);
+          this.zonas = result.data;
+        } else {
+          this.openSnackBar(result.mensaje, 99);
         }
       }, error => {
         this.openSnackBar(error.error, 99);
@@ -112,24 +162,37 @@ export class ImportacionPlanillaEliminarComponent extends BaseComponent implemen
       });
   }
 
-  eliminarAll(item?): void {
+  eliminarAll(tablaLineas): void {
+    
+    let array = tablaLineas.filteredData;
+    console.log(array);
+    
     const dialogRef = this.dialog.open(ConfirmComponent, {
       width: '500px',
-      data: { titulo: "¿ Seguro que desea eliminar todas las estructuras ?" }
+      data: { titulo: "¿ Seguro que desea eliminar todas las estructuras ? \n\r"+ 
+                      "Se eliminaran las estructuras de "+array.length+ " registros"
+            }
     });
     dialogRef.afterClosed().subscribe(result => {
-
+            
       if (result) {
-        this.deleteEstructuras(item);
+        array.forEach(element => {
+          console.log(element);          
+          this.deleteEstructuras(element);
+        });
+        
       }
     });
   }  
 
-  deleteEstructuras(item){
+  deleteEstructuras(element){
     let request = {
       idversion: this.data.idversion,
-      n_id_usermodi: this.usuarioLog.n_idseg_userprofile
+      n_id_usermodi: this.usuarioLog.n_idseg_userprofile,
+      n_idpl_linea: element.n_idpl_linea
     }
+    console.log(request);
+    
     this._importacion_service.deleteAllEstructLinea(request).subscribe(
       result => {
         try {

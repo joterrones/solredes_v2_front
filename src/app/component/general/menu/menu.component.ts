@@ -27,7 +27,7 @@ export class MenuComponent extends BaseComponent implements OnInit {
   public username: string = "Logearse";
   public role: any;
   public menu: any;
-  public rol = '';
+  public rol: string;
 
   public se_adusu: boolean = false;
   public se_adrol: boolean = false;
@@ -86,8 +86,7 @@ export class MenuComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.colorPro = this.proyecto.c_color
-
+    this.colorPro = this.proyecto.c_color    
     this.urlImagen = AppSettings.URL_IMG_PROYECTO + this.proyecto.c_rutalogo;
     if (this.bLogin) {
       this.username = this.getToken().data.c_username;
@@ -95,6 +94,7 @@ export class MenuComponent extends BaseComponent implements OnInit {
       console.log('Usuario Menu');
       console.log(this.usuario);
       this.getPantallaRol();
+      this.getRolUser();
 
       //this.rol = this.usuario.c_rolename;
 
@@ -113,6 +113,27 @@ export class MenuComponent extends BaseComponent implements OnInit {
             break;
         }*/
     }
+  }
+
+  getRolUser() {
+    let request = {
+      n_idseg_userprofile: this.usuario.n_idseg_userprofile      
+    }
+     
+    this._seguridad_service.getRolUser(request,this.getToken().token).subscribe(
+      result => {        
+        if (result.estado) {
+          console.log(result.data);
+          let arr =  result.data;
+          arr.forEach(element => {
+            this.rol = element.c_nombre
+          });
+        } else {
+          this.openSnackBar(result.mensaje, 99);
+        }        
+      }, error => {
+        this.openSnackBar(error.error, 99);
+      });
   }
 
   getPantallaRol() {

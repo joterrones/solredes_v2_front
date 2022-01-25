@@ -74,7 +74,8 @@ export class LineaComponent extends BaseComponent implements OnInit {
   getTablaLinea() {
     let request = {
       n_idpl_tipolinea: this.idtipolinea,     
-      n_idpl_zona: this.idzona 
+      n_idpl_zona: this.idzona,
+      n_idpro_proyecto: this.proyecto.n_idpro_proyecto
     }
     this._confiGeneral_service.getLinea(request, this.getToken().token).subscribe(
       result => {
