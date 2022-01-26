@@ -87,7 +87,7 @@ export class MenuComponent extends BaseComponent implements OnInit {
 
   ngOnInit() {
     this.colorPro = this.proyecto.c_color    
-    this.urlImagen = AppSettings.URL_IMG_PROYECTO + this.proyecto.c_rutalogo;
+    this.urlImagen = AppSettings.URL_ARCHIVO + this.proyecto.c_rutalogo;
     if (this.bLogin) {
       this.username = this.getToken().data.c_username;
       this.usuario = this.getToken().data;

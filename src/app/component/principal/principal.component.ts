@@ -21,7 +21,7 @@ export class PrincipalComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.urlImagen = AppSettings.URL_IMG_PROYECTO+this.proyecto.c_rutaimg;
+    this.urlImagen = AppSettings.URL_ARCHIVO+this.proyecto.c_rutaimg;
     console.log(this.proyecto);
     
   }

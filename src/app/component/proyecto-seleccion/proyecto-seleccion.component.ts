@@ -21,7 +21,7 @@ export class ProyectoSeleccionComponent extends BaseComponent implements OnInit 
   }
 
   ngOnInit() {
-    this.urlImagen = AppSettings.URL_IMG_PROYECTO;
+    this.urlImagen = AppSettings.URL_ARCHIVO;
     this.getProyectos();
   }
 

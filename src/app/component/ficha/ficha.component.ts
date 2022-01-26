@@ -187,7 +187,7 @@ export class FichaComponent extends BaseComponent implements OnInit {
     var i = 0;
 
     this.datos.forEach( async element => { 
-      let imageSrcString = await this.toDataURL(AppSettings.URL_IMG_FICHA+element.c_rutafoto);    
+      let imageSrcString = await this.toDataURL(AppSettings.URL_ARCHIVO+element.c_rutafoto);    
       doc.addImage(imageSrcString,'JPEG',i + 27, espacio, 45, 45);    
       doc.text(marker.nfoto,i + 27, espacio-0.5, null, null);
       i+=55;
@@ -376,7 +376,7 @@ export class FichaComponent extends BaseComponent implements OnInit {
     var i = 0;
 
     this.datos.forEach( async element => { 
-      let imageSrcString = await this.toDataURL(AppSettings.URL_IMG_FICHA+element.c_rutafoto);    
+      let imageSrcString = await this.toDataURL(AppSettings.URL_ARCHIVO+element.c_rutafoto);    
       doc.addImage(imageSrcString,'JPEG',i + 27, espacio, 45, 45);    
       doc.text(marker.nfoto,i + 27, espacio-0.5, null, null);
       i+=55;

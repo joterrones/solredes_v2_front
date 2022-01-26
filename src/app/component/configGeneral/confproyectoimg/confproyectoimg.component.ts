@@ -38,7 +38,7 @@ export class ConfproyectoimgComponent extends BaseComponent implements OnInit {
     this.usuarioLog = this.getUser().data;
     this.editar = true;
     this.proyecto = this.data.proyecto;
-    this.urlImagen = AppSettings.URL_IMG_PROYECTO+this.proyecto.c_rutaimg;    
+    this.urlImagen = AppSettings.URL_ARCHIVO+this.proyecto.c_rutaimg;    
     this.showImgDefault = "assets/images/imgDefault.jpg";
     console.log(this.urlImagen);
     console.log('Contenido de Detalle Proyecto');

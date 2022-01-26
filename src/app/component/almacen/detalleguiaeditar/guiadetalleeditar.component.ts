@@ -52,7 +52,7 @@ export class GuiadetalleeditarComponent extends BaseComponent implements OnInit 
     } else {
       this.editar = true;
       this.detalleguia = this.data.detalleguia;
-      this.urlImagen = AppSettings.URL_IMG_DETALLE_GUIA+this.detalleguia.c_ruta;
+      this.urlImagen = AppSettings.URL_ARCHIVO+this.detalleguia.c_ruta;
     }
     
     this.elemento = this.data.elemento;  
