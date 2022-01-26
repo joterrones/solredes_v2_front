@@ -12,6 +12,7 @@ import { saveAs } from 'file-saver';
 import { AppSettings } from 'src/app/common/appsettings';
 import { SeguridadService } from 'src/app/service/seguridad.service';
 import { ResultadoApi } from 'src/app/interface/common.interface';
+import { environment } from 'src/environments/environment';
 @Component({
   selector: 'app-menu',
   templateUrl: './menu.component.html',
@@ -87,7 +88,7 @@ export class MenuComponent extends BaseComponent implements OnInit {
 
   ngOnInit() {
     this.colorPro = this.proyecto.c_color    
-    this.urlImagen = AppSettings.URL_ARCHIVO + this.proyecto.c_rutalogo;
+    this.urlImagen = environment.urlArchivo + this.proyecto.c_rutalogo;
     if (this.bLogin) {
       this.username = this.getToken().data.c_username;
       this.usuario = this.getToken().data;

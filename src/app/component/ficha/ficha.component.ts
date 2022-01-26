@@ -6,6 +6,7 @@ import * as JsPDF from 'jspdf';
 import { AppSettings } from 'src/app/common/appsettings';
 import { ResultadoApi } from 'src/app/interface/common.interface';
 import { FichaService } from 'src/app/service/ficha.service';
+import { environment } from 'src/environments/environment';
 import { BaseComponent } from '../base/base.component';
 
 @Component({
@@ -187,7 +188,7 @@ export class FichaComponent extends BaseComponent implements OnInit {
     var i = 0;
 
     this.datos.forEach( async element => { 
-      let imageSrcString = await this.toDataURL(AppSettings.URL_ARCHIVO+element.c_rutafoto);    
+      let imageSrcString = await this.toDataURL(environment.urlArchivo+element.c_rutafoto);    
       doc.addImage(imageSrcString,'JPEG',i + 27, espacio, 45, 45);    
       doc.text(marker.nfoto,i + 27, espacio-0.5, null, null);
       i+=55;
@@ -376,7 +377,7 @@ export class FichaComponent extends BaseComponent implements OnInit {
     var i = 0;
 
     this.datos.forEach( async element => { 
-      let imageSrcString = await this.toDataURL(AppSettings.URL_ARCHIVO+element.c_rutafoto);    
+      let imageSrcString = await this.toDataURL(environment.urlArchivo+element.c_rutafoto);    
       doc.addImage(imageSrcString,'JPEG',i + 27, espacio, 45, 45);    
       doc.text(marker.nfoto,i + 27, espacio-0.5, null, null);
       i+=55;

@@ -7,6 +7,7 @@ import { AppSettings } from '../../../common/appsettings';
 
 import { DetalleGuia, DetalleGuiaEditar, Elementos, Guias } from '../../../interface/almacen.interface';
 import { AlmacenService } from 'src/app/service/almacen.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-guiadetalleeditar',
@@ -52,7 +53,7 @@ export class GuiadetalleeditarComponent extends BaseComponent implements OnInit 
     } else {
       this.editar = true;
       this.detalleguia = this.data.detalleguia;
-      this.urlImagen = AppSettings.URL_ARCHIVO+this.detalleguia.c_ruta;
+      this.urlImagen = environment.urlArchivo+this.detalleguia.c_ruta;
     }
     
     this.elemento = this.data.elemento;  

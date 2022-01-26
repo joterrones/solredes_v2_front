@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from "rxjs";
 import { AppSettings } from '../common/appsettings';
 import { Photo } from '../interface/almacen.interface';
+import { environment } from 'src/environments/environment';
 
 
 @Injectable()
@@ -14,7 +15,7 @@ export class AlmacenService{
 
 
     constructor(public _http: HttpClient) {
-        this.url = AppSettings.URL;
+        this.url = environment.url;
     }
 
     getAlmacen(data,token): Observable<any> {

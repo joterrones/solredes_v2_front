@@ -2,6 +2,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from "rxjs";
 import { AppSettings } from '../common/appsettings';
+import { environment } from 'src/environments/environment';
 
 @Injectable()
 export class GeneralService {
@@ -12,7 +13,7 @@ export class GeneralService {
 
 
     constructor(public _http: HttpClient) {
-        this.url = AppSettings.URL;
+        this.url =  environment.url;
     }
 
     get(proyecto):Observable<any>{

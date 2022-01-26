@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from "rxjs";
 import { AppSettings } from '../common/appsettings';
+import { environment } from 'src/environments/environment.prod';
 
 @Injectable()
 export class ProgramaService {
@@ -11,7 +12,7 @@ export class ProgramaService {
     public basic: any;
 
     constructor(public _http: HttpClient) {
-        this.url = AppSettings.URL;
+        this.url =  environment.url;
     }
 
     getversion(rq): Observable<any> {

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
 import { AppSettings } from 'src/app/common/appsettings';
+import { environment } from 'src/environments/environment';
 import { BaseComponent } from '../base/base.component';
 
 @Component({
@@ -21,7 +22,7 @@ export class PrincipalComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.urlImagen = AppSettings.URL_ARCHIVO+this.proyecto.c_rutaimg;
+    this.urlImagen = environment.urlArchivo+this.proyecto.c_rutaimg;
     console.log(this.proyecto);
     
   }

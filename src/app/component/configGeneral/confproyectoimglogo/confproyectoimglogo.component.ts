@@ -10,6 +10,7 @@ import { BaseComponent } from '../../base/base.component';
 import { confGeneralService } from '../../../service/confGeneral.service';
 
 import { EditarProyecto, Proyecto } from 'src/app/interface/configGeneral.interface';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-confproyectoimglogo',
@@ -39,7 +40,7 @@ export class ConfproyectoimglogoComponent extends BaseComponent implements OnIni
     this.showImgDefault = "assets/images/imgDefault.jpg";
     this.editar = true;
     this.proyecto = this.data.proyecto;
-    this.urlImagen = AppSettings.URL_ARCHIVO+this.proyecto.c_rutalogo;
+    this.urlImagen = environment.urlArchivo+this.proyecto.c_rutalogo;
     console.log(this.urlImagen);
     console.log('Contenido de Detalle Proyecto');
     console.log(this.proyecto);

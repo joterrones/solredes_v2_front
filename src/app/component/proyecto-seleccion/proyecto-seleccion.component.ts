@@ -3,6 +3,7 @@ import { MatSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
 import { AppSettings } from 'src/app/common/appsettings';
 import { ProyectoService } from 'src/app/service/proyecto.service';
+import { environment } from 'src/environments/environment';
 import { BaseComponent } from '../base/base.component';
 
 @Component({
@@ -21,7 +22,7 @@ export class ProyectoSeleccionComponent extends BaseComponent implements OnInit 
   }
 
   ngOnInit() {
-    this.urlImagen = AppSettings.URL_ARCHIVO;
+    this.urlImagen = environment.urlArchivo;
     this.getProyectos();
   }
 

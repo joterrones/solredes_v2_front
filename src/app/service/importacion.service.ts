@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from "rxjs";
 import { AppSettings } from '../common/appsettings';
+import { environment } from 'src/environments/environment';
 
 @Injectable()
 export class ImportacionService {
@@ -13,7 +14,7 @@ export class ImportacionService {
 
 
     constructor(public _http: HttpClient) {
-        this.url = AppSettings.URL;
+        this.url =  environment.url;
     }
 
     insertplanilla(request): Observable<any> {

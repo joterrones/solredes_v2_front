@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from "rxjs";
 import { AppSettings } from '../common/appsettings';
+import { environment } from 'src/environments/environment';
 
 @Injectable()
 export class DashboardService {
@@ -12,7 +13,7 @@ export class DashboardService {
 
 
     constructor(public _http: HttpClient) {
-        this.url = AppSettings.URL;
+        this.url =  environment.url;
     }
 
     getDepartamento(rq,token): Observable<any> {
