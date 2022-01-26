@@ -10,30 +10,27 @@
                         <span>{{proyecto.c_nombre}}</span>
                     </label>
                 </button>
-             
-
             </label></mat-toolbar>
         <mat-nav-list>
             <mat-accordion>
-
-                <mat-expansion-panel>
+                <mat-expansion-panel [expanded]="idPanel == 1">
                     <mat-expansion-panel-header>
                         <mat-panel-title>
                             <mat-icon>supervisor_account</mat-icon>
                             Seguridad
                         </mat-panel-title>
                     </mat-expansion-panel-header>
-                    <a mat-list-item [routerLink]="['/usuario']" *ngIf="se_adusu">
+                    <a mat-list-item [routerLink]="['/usuario']" *ngIf="se_adusu" (click)="panel(1,1)">
                         <mat-icon>keyboard_arrow_right</mat-icon>
                         <span>Administración de Usuario</span>
                     </a>
 
-                    <a mat-list-item [routerLink]="['/rol']" *ngIf="se_adrol">
+                    <a mat-list-item [routerLink]="['/rol']" *ngIf="se_adrol" (click)="panel(1,2)">
                         <mat-icon>keyboard_arrow_right</mat-icon>
                         <span>Administración de Roles</span>
                     </a>
                 </mat-expansion-panel>
-                <mat-expansion-panel [expanded]="step === 1">
+                <mat-expansion-panel [expanded]="idPanel == 2" >
                     <mat-expansion-panel-header>
                         <mat-panel-title>
                             <mat-icon>settings</mat-icon>
@@ -41,147 +38,145 @@
                         </mat-panel-title>
                     </mat-expansion-panel-header>
 
-                    <a mat-list-item [routerLink]="['/tipolinea']" *ngIf="ma_adtil ">
+                    <a mat-list-item [routerLink]="['/tipolinea']" *ngIf="ma_adtil" (click)="panel(2,3)">
                         <mat-icon>keyboard_arrow_right</mat-icon>
                         <span>Administración de Tipo Linea</span>
                     </a>
-                    <a mat-list-item [routerLink]="['/zonas']" *ngIf="ma_adzon">
+                    <a mat-list-item [routerLink]="['/zonas']" *ngIf="ma_adzon" (click)="panel(2,4)">
                         <mat-icon>keyboard_arrow_right</mat-icon>
                         <span>Administración de Zona</span>
                     </a>
 
-                    <a mat-list-item [routerLink]="['/confproyecto']" *ngIf="ma_adpro">
+                    <a mat-list-item [routerLink]="['/confproyecto']" *ngIf="ma_adpro" (click)="panel(2,5)">
                         <mat-icon>keyboard_arrow_right</mat-icon>
                         <span>Administración de Proyecto</span>
                     </a>
-                    <a mat-list-item [routerLink]="['/empresa']" *ngIf="ma_ademp">
+                    <a mat-list-item [routerLink]="['/empresa']" *ngIf="ma_ademp" (click)="panel(2,6)">
                         <mat-icon>keyboard_arrow_right</mat-icon>
                         <span>Administración de Empresa</span>
                     </a>
-                    <a mat-list-item [routerLink]="['/tipofoto']" *ngIf="ma_adtfo">
+                    <a mat-list-item [routerLink]="['/tipofoto']" *ngIf="ma_adtfo" (click)="panel(2,7)">
                         <mat-icon>keyboard_arrow_right</mat-icon>
                         <span>Administración de Tipo Foto</span>
                     </a>
 
-                    <a mat-list-item [routerLink]="['/tipoempresa']" *ngIf="ma_adtie">
+                    <a mat-list-item [routerLink]="['/tipoempresa']" *ngIf="ma_adtie" (click)="panel(2,8)">
                         <mat-icon>keyboard_arrow_right</mat-icon>
                         <span>Administración de Tipo Empresa</span>
                     </a>
-                    <a mat-list-item [routerLink]="['/tipoelemento']" *ngIf="ma_adtel">
+                    <a mat-list-item [routerLink]="['/tipoelemento']" *ngIf="ma_adtel" (click)="panel(2,9)">
                         <mat-icon>keyboard_arrow_right</mat-icon>
                         <span>Administración de Tipo Elemento</span>
                     </a>
-                    <a mat-list-item [routerLink]="['/tipomontaje']" *ngIf="ma_adtmo">
+                    <a mat-list-item [routerLink]="['/tipomontaje']" *ngIf="ma_adtmo" (click)="panel(2,10)">
                         <mat-icon>keyboard_arrow_right</mat-icon>
                         <span>Administración de Tipo Montaje</span>
                     </a>
-                    <a mat-list-item [routerLink]="['/valoresGenerales']" *ngIf="ma_advag">
+                    <a mat-list-item [routerLink]="['/valoresGenerales']" *ngIf="ma_advag" (click)="panel(2,11)">
                         <mat-icon>keyboard_arrow_right</mat-icon>
                         <span>Administración de Valores Generales</span>
                     </a>
-                    <a mat-list-item [routerLink]="['/elemento']" *ngIf="ma_adele">
+                    <a mat-list-item [routerLink]="['/elemento']" *ngIf="ma_adele" (click)="panel(2,12)">
                         <mat-icon>keyboard_arrow_right</mat-icon>
                         <span>Administración de Elemento</span>
                     </a>
-                    <a mat-list-item [routerLink]="['/armado']" *ngIf="ma_adarm">
+                    <a mat-list-item [routerLink]="['/armado']" *ngIf="ma_adarm" (click)="panel(2,13)">
                         <mat-icon>keyboard_arrow_right</mat-icon>
                         <span>Administración de Armado</span>
                     </a>
 
                 </mat-expansion-panel>
 
-                <mat-expansion-panel>
+                <mat-expansion-panel [expanded]="idPanel == 3" >
                     <mat-expansion-panel-header>
                         <mat-panel-title>
                             <mat-icon>group_work</mat-icon>
                             Asignación
                         </mat-panel-title>
                     </mat-expansion-panel-header>
-                    <a mat-list-item [routerLink]="['/tragrupos']" *ngIf="as_adgru">
+                    <a mat-list-item [routerLink]="['/tragrupos']" *ngIf="as_adgru" (click)="panel(3,14)">
                         <mat-icon>keyboard_arrow_right</mat-icon>
                         <span>Administración de Grupos</span>
                     </a>
                 </mat-expansion-panel>
 
-                <mat-expansion-panel>
+                <mat-expansion-panel [expanded]="idPanel == 4">
                     <mat-expansion-panel-header>
                         <mat-panel-title>
                             <mat-icon>file_copy</mat-icon>
                             Documentos
                         </mat-panel-title>
                     </mat-expansion-panel-header>
-                    <a mat-list-item [routerLink]="['/AdmArchivos']" *ngIf="as_adarc">
+                    <a mat-list-item [routerLink]="['/AdmArchivos']" *ngIf="as_adarc" (click)="panel(4,15)">
                         <mat-icon>keyboard_arrow_right</mat-icon>
                         <span>Administración de Archivos</span>
                     </a>
                 </mat-expansion-panel>
-                <mat-expansion-panel>
+                <mat-expansion-panel [expanded]="idPanel == 5" >
                     <mat-expansion-panel-header>
                         <mat-panel-title>
                             <mat-icon>cloud_upload</mat-icon>
                             Importación
                         </mat-panel-title>
                     </mat-expansion-panel-header>
-                    <a mat-list-item [routerLink]="['/importacionsuministros']" *ngIf="imp_impsu">
+                    <a mat-list-item [routerLink]="['/importacionsuministros']" *ngIf="imp_impsu" (click)="panel(5,16)">
                         <mat-icon>keyboard_arrow_right</mat-icon>
                         <span>Importación de Suministro</span>
                     </a>
-                    <a mat-list-item [routerLink]="['/importacionmontaje']" *ngIf="imp_impmo">
+                    <a mat-list-item [routerLink]="['/importacionmontaje']" *ngIf="imp_impmo" (click)="panel(5,17)">
                         <mat-icon>keyboard_arrow_right</mat-icon>
                         <span>Importación de Montaje</span>
                     </a>
-                    <a mat-list-item [routerLink]="['/linea']" *ngIf="ma_adlin ">
+                    <a mat-list-item [routerLink]="['/linea']" *ngIf="ma_adlin " (click)="panel(5,18)">
                         <mat-icon>keyboard_arrow_right</mat-icon>
                         <span>Administración de Linea</span>
                     </a>
-                    <a mat-list-item [routerLink]="['/importacionlinea']" *ngIf="imp_impli">
+                    <a mat-list-item [routerLink]="['/importacionlinea']" *ngIf="imp_impli" (click)="panel(5,19)">
                         <mat-icon>keyboard_arrow_right</mat-icon>
                         <span>Importación de linea</span>
                     </a>
-                    <a mat-list-item [routerLink]="['/importacionplanilla']" *ngIf="imp_imppl">
+                    <a mat-list-item [routerLink]="['/importacionplanilla']" *ngIf="imp_imppl" (click)="panel(5,20)">
                         <mat-icon>keyboard_arrow_right</mat-icon>
                         <span>Importación de planilla</span>
                     </a>
 
                 </mat-expansion-panel>
-                <mat-expansion-panel>
+                <mat-expansion-panel [expanded]="idPanel == 6" >
                     <mat-expansion-panel-header>
                         <mat-panel-title>
                             <mat-icon>add_location</mat-icon>
                             Mapa
                         </mat-panel-title>
                     </mat-expansion-panel-header>
-                    <a mat-list-item [routerLink]="['/mapageneral']" *ngIf="ma_mapge">
+                    <a mat-list-item [routerLink]="['/mapageneral']" *ngIf="ma_mapge" (click)="panel(6,21)">
                         <mat-icon>keyboard_arrow_right</mat-icon>
                         <span>Mapa General</span>
                     </a>
                 </mat-expansion-panel>
-                <mat-expansion-panel>
+                <mat-expansion-panel [expanded]="idPanel == 7">
                     <mat-expansion-panel-header>
                         <mat-panel-title>
                             <mat-icon>home</mat-icon>
                             Almacén
                         </mat-panel-title>
                     </mat-expansion-panel-header>
-                    <a mat-list-item [routerLink]="['/almacen']" *ngIf="al_adalm">
+                    <a mat-list-item [routerLink]="['/almacen']" *ngIf="al_adalm" (click)="panel(7,22)">
                         <mat-icon>keyboard_arrow_right</mat-icon>
                         <span>Administración de almacén y guía</span>
                     </a>
-
-                </mat-expansion-panel>     
-                <mat-expansion-panel>
+                </mat-expansion-panel>
+                <mat-expansion-panel [expanded]="idPanel == 8" >
                     <mat-expansion-panel-header>
                         <mat-panel-title>
                             <mat-icon>bar_chart</mat-icon>
                             Reporte
                         </mat-panel-title>
                     </mat-expansion-panel-header>
-                    <a mat-list-item [routerLink]="['/grafico']" *ngIf="al_adalm">
+                    <a mat-list-item [routerLink]="['/grafico']" *ngIf="al_adalm" (click)="panel(8,23)">
                         <mat-icon>bar_chart</mat-icon>
                         <span>Reporte</span>
                     </a>
-                </mat-expansion-panel>              
-
+                </mat-expansion-panel>
             </mat-accordion>
         </mat-nav-list>
         <div class="logo">

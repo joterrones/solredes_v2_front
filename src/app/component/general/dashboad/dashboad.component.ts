@@ -38,10 +38,10 @@ export class DashboadComponent extends BaseComponent implements OnInit {
   rowspan = 1;
   public myChartLineas: any;
   public MyCharTipoEjecucion: any;
-  public MyCharFase: any;
+  public MyCharProgreso: any;
   public MyCharFaseMonto: any;
   public MyCharMontoValorizado: any;
-  public MyCharLineaPrimaria: any;
+  public MyCharLineaZona: any;
   public MyCharRedPrimaria: any;
   public MyCharRedSecundaria: any;
   public MyCharLuminaria: any;
@@ -241,8 +241,8 @@ export class DashboadComponent extends BaseComponent implements OnInit {
           if (this.myChartLineas != undefined) {
             this.myChartLineas.destroy();
           }            
-          if (this.MyCharFase != undefined) {
-            this.MyCharFase.destroy();
+          if (this.MyCharProgreso != undefined) {
+            this.MyCharProgreso.destroy();
           }
 
           this.myChartLineas = new Chart('Lineas_estructuras', {
@@ -251,57 +251,8 @@ export class DashboadComponent extends BaseComponent implements OnInit {
               labels: resultado.data.graficolineas.claves,
               datasets: [{
                 data: resultado.data.graficolineas.cantidades,
-                backgroundColor: [
-                  'rgba(255, 235, 59,1.0)',
-                  'rgba(255, 193, 7,1.0)',
-                  'rgba(255, 152, 0,1.0)',
-                  'rgba(255, 87, 34,1.0)',
-                  'rgba(121, 85, 72,1.0)',
-                  'rgba(136, 14, 79,1.0)',
-                  'rgba(74, 20, 140,1.0)',
-                  'rgba(49, 27, 146,1.0)',
-                  'rgba(26, 35, 126,1.0)',
-                  'rgba(51, 105, 30,1.0)',
-                  'rgba(255, 99, 132)',
-                  'rgba(244, 67, 54,1.0)',
-                  'rgba(156, 39, 176,1.0)',
-                  'rgba(103, 58, 183,1.0)',
-                  'rgba(63, 81, 181,1.0)',
-                  'rgba(33, 150, 243,1.0)',
-                  'rgba(3, 169, 244,1.0)',
-                  'rgba(0, 188, 212,1.0)',
-                  'rgba(0, 150, 136,1.0)',
-                  'rgba(76, 175, 80,1.0)',
-                  'rgba(139, 195, 74,1.0)',
-                  'rgba(205, 220, 57,1.0)',
-                  'rgba(62, 39, 35,1.0)',
-                ],
-                borderColor: [
-                  'rgba(255, 235, 59,1.0)',
-                  'rgba(255, 193, 7,1.0)',
-                  'rgba(255, 152, 0,1.0)',
-                  'rgba(255, 87, 34,1.0)',
-                  'rgba(121, 85, 72,1.0)',
-                  'rgba(136, 14, 79,1.0)',
-                  'rgba(74, 20, 140,1.0)',
-                  'rgba(49, 27, 146,1.0)',
-                  'rgba(26, 35, 126,1.0)',
-                  'rgba(51, 105, 30,1.0)',
-                  'rgba(255, 99, 132)',
-                  'rgba(244, 67, 54,1.0)',
-                  'rgba(156, 39, 176,1.0)',
-                  'rgba(103, 58, 183,1.0)',
-                  'rgba(63, 81, 181,1.0)',
-                  'rgba(33, 150, 243,1.0)',
-                  'rgba(3, 169, 244,1.0)',
-                  'rgba(0, 188, 212,1.0)',
-                  'rgba(0, 150, 136,1.0)',
-                  'rgba(76, 175, 80,1.0)',
-                  'rgba(139, 195, 74,1.0)',
-                  'rgba(205, 220, 57,1.0)',
-                  'rgba(62, 39, 35,1.0)',
-
-                ],
+                backgroundColor: AppSettings.COLOR,
+                borderColor: AppSettings.COLOR_BORDER,
                 borderWidth: 1
               }]
             },
@@ -317,7 +268,7 @@ export class DashboadComponent extends BaseComponent implements OnInit {
             }
           });
 
-          this.MyCharLineaPrimaria = new Chart('linealp', {
+          this.MyCharLineaZona = new Chart('lineaZona', {
             type: 'bar',
             data: {
               labels: resultado.data.graficozonas.claves,
@@ -385,6 +336,41 @@ export class DashboadComponent extends BaseComponent implements OnInit {
                     beginAtZero: true
                   }
                 }]
+              }
+            }
+          });
+
+          this.MyCharProgreso = new Chart('fase', {
+            type: 'line',
+            data: {
+              labels: resultado.data.graficolineas.claves,
+              datasets: [
+                {
+                  label: 'ACTUAL',                  
+                  data: resultado.data.graficolineas.cantidades,
+                  borderColor: 'rgba(255, 0, 51)',
+                  backgroundColor: 'rgba(255, 0, 51)',  
+                  fill: false                
+                },
+                {
+                  label: 'PROGRESO IDEAL',                  
+                  data: resultado.data.graficolineas.cantidadesmon,
+                  borderColor: 'rgba(51, 51, 255)',
+                  backgroundColor: 'rgba(51, 51, 255)',   
+                  fill: false                   
+                }
+              ]
+            },
+            options: {
+              responsive: true,
+              plugins: {
+                legend: {
+                  position: 'top',
+                },
+                title: {
+                  display: true,
+                  text: 'Chart.js Line Chart'
+                }
               }
             }
           });
@@ -466,10 +452,6 @@ export class DashboadComponent extends BaseComponent implements OnInit {
             this.myChartBenefiario.destroy();
           }*/
 
-          if (this.MyCharFase != undefined) {
-            this.MyCharFase.destroy();
-          }
-
           if (this.MyCharFaseMonto != undefined) {
             this.MyCharFaseMonto.destroy();
           }
@@ -478,8 +460,8 @@ export class DashboadComponent extends BaseComponent implements OnInit {
             this.MyCharMontoValorizado.destroy();
           }
 
-          if (this.MyCharLineaPrimaria != undefined) {
-            this.MyCharLineaPrimaria.destroy();
+          if (this.MyCharLineaZona != undefined) {
+            this.MyCharLineaZona.destroy();
           }
           if (this.MyCharRedPrimaria != undefined) {
             this.MyCharRedPrimaria.destroy();
@@ -575,7 +557,7 @@ export class DashboadComponent extends BaseComponent implements OnInit {
             }
           });
           */
-          this.MyCharLineaPrimaria = new Chart('linealp', {
+          this.MyCharLineaZona = new Chart('linealp', {
             type: 'bar',
             data: {
               labels: resultado.data.graficolinea.claves,
@@ -932,79 +914,7 @@ export class DashboadComponent extends BaseComponent implements OnInit {
               }]
             }
           });
-          this.MyCharFase = new Chart('fase', {
-            type: 'bar',
-            data: {
-              labels: resultado.data.graficofase.claves,
-              datasets: [{
-                label: '',
-                data: resultado.data.graficofase.cantidades,
-                backgroundColor: [
-                  'rgba(0, 188, 212,1.0)',
-                  'rgba(0, 150, 136,1.0)',
-                  'rgba(76, 175, 80,1.0)',
-                  'rgba(139, 195, 74,1.0)',
-                  'rgba(205, 220, 57,1.0)',
-                  'rgba(62, 39, 35,1.0)',
-                  'rgba(255, 235, 59,1.0)',
-                  'rgba(255, 193, 7,1.0)',
-                  'rgba(255, 152, 0,1.0)',
-                  'rgba(255, 87, 34,1.0)',
-                  'rgba(121, 85, 72,1.0)',
-                  'rgba(136, 14, 79,1.0)',
-                  'rgba(74, 20, 140,1.0)',
-                  'rgba(49, 27, 146,1.0)',
-                  'rgba(26, 35, 126,1.0)',
-                  'rgba(51, 105, 30,1.0)',
-                  'rgba(255, 99, 132)',
-                  'rgba(244, 67, 54,1.0)',
-                  'rgba(156, 39, 176,1.0)',
-                  'rgba(103, 58, 183,1.0)',
-                  'rgba(63, 81, 181,1.0)',
-                  'rgba(33, 150, 243,1.0)',
-                  'rgba(3, 169, 244,1.0)',
-
-                ],
-                borderColor: [
-                  'rgba(0, 188, 212,1.0)',
-                  'rgba(0, 150, 136,1.0)',
-                  'rgba(76, 175, 80,1.0)',
-                  'rgba(139, 195, 74,1.0)',
-                  'rgba(205, 220, 57,1.0)',
-                  'rgba(62, 39, 35,1.0)',
-                  'rgba(255, 235, 59,1.0)',
-                  'rgba(255, 193, 7,1.0)',
-                  'rgba(255, 152, 0,1.0)',
-                  'rgba(255, 87, 34,1.0)',
-                  'rgba(121, 85, 72,1.0)',
-                  'rgba(136, 14, 79,1.0)',
-                  'rgba(74, 20, 140,1.0)',
-                  'rgba(49, 27, 146,1.0)',
-                  'rgba(26, 35, 126,1.0)',
-                  'rgba(51, 105, 30,1.0)',
-                  'rgba(255, 99, 132)',
-                  'rgba(244, 67, 54,1.0)',
-                  'rgba(156, 39, 176,1.0)',
-                  'rgba(103, 58, 183,1.0)',
-                  'rgba(63, 81, 181,1.0)',
-                  'rgba(33, 150, 243,1.0)',
-                  'rgba(3, 169, 244,1.0)',
-
-                ],
-                borderWidth: 1
-              }]
-            },
-            options: {
-              legend: { display: false },
-              scales: {
-                yAxes: [{
-                  ticks: {
-                    beginAtZero: true
-                  }
-                }]
-              }
-            }
-          });
+          
           this.MyCharTipoEjecucion = new Chart('fasemonto', {
             type: 'doughnut',
             data: {

@@ -37,7 +37,8 @@ export class ProyectousuaioComponent extends BaseComponent implements OnInit {
   getProUser(){
     console.log(this.data.n_idtra_grupo);
     let request = {
-      n_idtra_grupo: this.data.n_idtra_grupo
+      n_idtra_grupo: this.data.n_idtra_grupo,
+      n_idpro_proyecto: this.proyecto.n_idpro_proyecto
     }
     this._confiGeneral_service.getProUser(request,this.getToken().token).subscribe(
       result => {

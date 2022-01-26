@@ -55,19 +55,12 @@ export class MenuComponent extends BaseComponent implements OnInit {
   public al_adalm: boolean = false;
   public ma_mapli: boolean = false;
 
-  /*public maestros: boolean = false;
-  public asignacion: boolean = false;
-  public documentos: boolean = false;
-  public importacion: boolean = false;
-  public mapa: boolean = false;
-  public almacen: boolean = false;
-  public proyectos: boolean = false;*/
-
   colorPro: string;
   pantallaRol: [];
   date: Date;
   urlImagen: string;
-
+  idPanel: number = 0;
+  iditem: number = 0;
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
       map(result => result.matches)
@@ -96,24 +89,9 @@ export class MenuComponent extends BaseComponent implements OnInit {
       console.log(this.usuario);
       this.getPantallaRol();
       this.getRolUser();
-
-      //this.rol = this.usuario.c_rolename;
-
-      /*  switch (this.usuario.n_idseg_role) {
-          case 1:
-            this.setearMenu(true, true, true, true, true, true, true, true);
-            break;
-          case 2:
-            this.setearMenu(false, true, true, true, true, true, true, true);
-            break;
-          case 3:
-            this.setearMenu(false, false, true, true, true, true, true, true);
-            break;
-          case 5:
-            this.setearMenu(false, false, false, true, true, true, false, true);
-            break;
-        }*/
     }
+    this.idPanel = parseInt(localStorage.getItem('panelMenu'));
+    this.iditem = parseInt(localStorage.getItem('itemMenu'));
   }
 
   getRolUser() {
@@ -238,8 +216,21 @@ export class MenuComponent extends BaseComponent implements OnInit {
         }
       });
   }
+  seguridad: boolean = false;
+  maestros: boolean = false;
+  asignacion: boolean = false;
+  documentos: boolean = false;
+  importacion: boolean = false;
+  mapa: boolean = false;
+  almacen: boolean = false;
+  reporte: boolean = false;
+   
+  panel(panel, item){
+    localStorage.setItem('panelMenu',panel);
+    localStorage.setItem('itemMenu',item);
+  }
 
-  /*setearMenu(b_seguridad, b_maestros, b_asignacion, b_documentos, b_importacion, b_mapa, b_almacen, b_proyectos) {
+  /*setearMenu(b_seguridad, b_maestros, b_asignacion, b_documentos, b_importacion, b_mapa, b_almacen, b_reporte) {
     this.seguridad = b_seguridad;
     this.maestros = b_maestros;
     this.asignacion = b_asignacion;
@@ -247,7 +238,7 @@ export class MenuComponent extends BaseComponent implements OnInit {
     this.importacion = b_importacion;
     this.mapa = b_mapa;
     this.almacen = b_almacen;
-    this.proyectos = b_proyectos;
+    this.reporte = b_reporte;
   }*/
 
   logoff() {
