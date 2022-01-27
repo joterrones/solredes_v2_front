@@ -59,8 +59,10 @@ export class MenuComponent extends BaseComponent implements OnInit {
   pantallaRol: [];
   date: Date;
   urlImagen: string;
+
   idPanel: number = 0;
   iditem: number = 0;
+  
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
       map(result => result.matches)

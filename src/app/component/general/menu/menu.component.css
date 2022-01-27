@@ -48,3 +48,7 @@
   mat-panel-title{
     align-items: center;
   }
+
+  .select{
+    background-color: #e0e0e0;
+  }
