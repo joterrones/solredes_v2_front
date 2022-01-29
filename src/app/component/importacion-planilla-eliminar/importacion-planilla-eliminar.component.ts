@@ -166,7 +166,8 @@ export class ImportacionPlanillaEliminarComponent extends BaseComponent implemen
     
     let array = tablaLineas.filteredData;
     console.log(array);
-    
+    let elementArray = [];
+
     const dialogRef = this.dialog.open(ConfirmComponent, {
       width: '500px',
       data: { titulo: "¿ Seguro que desea eliminar todas las estructuras ? \n\r"+ 
@@ -174,22 +175,28 @@ export class ImportacionPlanillaEliminarComponent extends BaseComponent implemen
             }
     });
     dialogRef.afterClosed().subscribe(result => {
-            
+      
       if (result) {
-        array.forEach(element => {
+        /*array.forEach(element => {
           console.log(element);          
           this.deleteEstructuras(element);
+        });*/
+
+        array.forEach(element => {
+          elementArray.push(element.n_idpl_linea);
         });
+
+        this.deleteEstructuras(elementArray);
         
       }
     });
   }  
 
-  deleteEstructuras(element){
+  deleteEstructuras(elementArray){
     let request = {
       idversion: this.data.idversion,
       n_id_usermodi: this.usuarioLog.n_idseg_userprofile,
-      n_idpl_linea: element.n_idpl_linea
+      array_idpl_linea: elementArray
     }
     console.log(request);
     

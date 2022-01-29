@@ -94,9 +94,8 @@ export class ArchivosEditarComponent extends BaseComponent implements OnInit {
     this.editNomArchivo = false; 
   }
 
-  guardar(newForm) {    
-   
-    console.log("entra a saveArchivo",this.archivo)
+  guardar(newForm) {   
+    
     this.archivo.n_id_usermodi= this.usuarioLog.n_idseg_userprofile
     if(this.editar){
       this._archivos_service.saveArchivo(this.archivo, this.getToken().token).subscribe(

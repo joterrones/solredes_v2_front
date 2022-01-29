@@ -35,7 +35,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import { DashboadComponent } from './component/general/dashboad/dashboad.component';
+import { DashboadComponent } from './component/general/dashboard/dashboad/dashboad.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { SnackComponent } from './component/generico/snack/snack.component';
@@ -120,6 +120,11 @@ import { ImportacionPlanillaEliminarComponent } from './component/importacion-pl
 import { RolpermisosComponent } from './component/seguridad/rolpermisos/rolpermisos.component';
 import { FichaComponent } from './component/ficha/ficha.component';
 import { MapaDetalleComponent } from './component/mapa/mapa-detalle/mapa-detalle.component';
+import { DashboardProgresoComponent } from './component/general/dashboard/dashboard-progreso/dashboard-progreso.component';
+import { DashboardLineasEstructurasComponent } from './component/general/dashboard/dashboard-lineas-estructuras/dashboard-lineas-estructuras.component';
+import { DashboardLineaZonaComponent } from './component/general/dashboard/dashboard-linea-zona/dashboard-linea-zona.component';
+import { DashboardPeriodoComponent } from './component/general/dashboard/dashboard-periodo/dashboard-periodo.component';
+import { DashboardZonaComponent } from './component/general/dashboard/dashboard-zona/dashboard-zona.component';
 
 
 @NgModule({
@@ -237,6 +242,11 @@ import { MapaDetalleComponent } from './component/mapa/mapa-detalle/mapa-detalle
     ImportacionPlanillaEliminarComponent,
     RolpermisosComponent,
     MapaDetalleComponent,
+    DashboardProgresoComponent,
+    DashboardLineasEstructurasComponent,
+    DashboardLineaZonaComponent,
+    DashboardPeriodoComponent,
+    DashboardZonaComponent,
 
   ],
   imports: [
@@ -313,7 +323,12 @@ import { MapaDetalleComponent } from './component/mapa/mapa-detalle/mapa-detalle
     ImportacionPlanillaEliminarComponent,
     MetradomontajeComponent,
     RolpermisosComponent,
-    MapaDetalleComponent
+    MapaDetalleComponent,
+    DashboardProgresoComponent,
+    DashboardLineaZonaComponent,
+    DashboardLineasEstructurasComponent,
+    DashboardPeriodoComponent,
+    DashboardZonaComponent
   ],
   providers: [
     MatDatepickerModule,

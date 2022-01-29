@@ -1,0 +1,37 @@
+.contenedorChart{
+    width: 100%; 
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap:wrap
+  }
+  .elementoChart{
+    flex-grow: 1;
+    margin: 0.5%;
+    height: 100%;
+    width: 400px;
+  }
+  .contenedorBody {
+    margin: 1%;
+  }
+  
+  .elementoTotal{
+    flex-grow: 1;
+    margin: 0.5%;
+    width: 150px;
+  }
+  .contenedorfiltro {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    flex-wrap: wrap;
+  }
+
+  .contCard{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }

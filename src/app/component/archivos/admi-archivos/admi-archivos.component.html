@@ -55,7 +55,7 @@
                       <mat-icon aria-label="Example icon-button with a heart icon">edit</mat-icon>
                       <span>Editar</span>
                     </button>  
-                    <button mat-menu-item (click)="download(element)" *ngIf="permisoEdit">
+                    <button mat-menu-item (click)="download(element)" *ngIf="permisoEdit" [disabled]="boolCarpeta">
                       <mat-icon aria-label="Example icon-button with a heart icon">cloud_download</mat-icon>
                       <span>Descargar</span>
                     </button> 

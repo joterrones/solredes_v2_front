@@ -71,6 +71,7 @@ table {
 .example-header-image{
   display: flex;
   align-items: center;
+  padding-left: 3%;
 }
 
 .mat-card-avatar {

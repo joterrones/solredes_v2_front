@@ -6,7 +6,7 @@ import {Routes,RouterModule} from '@angular/router';
 //import
 import {LoginComponent} from './component/seguridad/login/login.component';
 import { AppComponent } from './app.component';
-import { DashboadComponent} from './component/general/dashboad/dashboad.component';
+import { DashboadComponent} from './component/general/dashboard/dashboad/dashboad.component';
 import { UsuarioComponent } from './component/seguridad/usuario/usuario.component';
 import { ExportperfilxlsComponent } from './component/exportar/exportperfilxls/exportperfilxls.component';
 import { ExportControlObraXlsComponent } from './component/exportar/export-control-obra-xls/export-control-obra-xls.component';
