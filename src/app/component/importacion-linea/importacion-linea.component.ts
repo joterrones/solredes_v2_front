@@ -9,17 +9,19 @@ import { saveAs } from 'file-saver';
 import { SeguridadService } from 'src/app/service/seguridad.service';
 import { ResultadoApi } from 'src/app/interface/common.interface';
 import { AppSettings } from 'src/app/common/appsettings';
+import { confGeneralService } from 'src/app/service/confGeneral.service';
 
 @Component({
   selector: 'app-importacion-linea',
   templateUrl: './importacion-linea.component.html',
   styleUrls: ['./importacion-linea.component.css'],
-  providers: [ImportacionService,SeguridadService]
+  providers: [ImportacionService,SeguridadService, confGeneralService]
 })
 export class ImportacionLineaComponent extends BaseComponent implements OnInit {
 
   pantallaRol= [];
   permisoEdit: boolean = false;
+  idzona = 0;
 
   tit = 'Carga de datos';
   datos;
@@ -27,6 +29,9 @@ export class ImportacionLineaComponent extends BaseComponent implements OnInit {
   value = 0;
   acum = 0;
   procesando:boolean = false;
+
+  arrZonas = [];
+  arrTipoLi = [];
 
   tabla: MatTableDataSource<any>;
   displayedColumns: string[] = [
@@ -43,6 +48,7 @@ export class ImportacionLineaComponent extends BaseComponent implements OnInit {
   constructor(
     public _importacion_service: ImportacionService,
     public _seguridad_service: SeguridadService,
+    public _confiGeneral_service: confGeneralService,    
     public dialog: MatDialog,
     public snack_1: MatSnackBar,
     public _router: Router,
@@ -138,12 +144,28 @@ export class ImportacionLineaComponent extends BaseComponent implements OnInit {
   }
 
   download(){
-    this._importacion_service.downloadPlantillaLinea().subscribe(
-      result => {
-        saveAs(result, "Plantilla_linea.xlsx");
+    let request = {
+      n_idpl_zona: this.idzona,      
+      n_idpro_proyecto: this.proyecto.n_idpro_proyecto,     
+    }    
+    this._confiGeneral_service.getZona(request, this.getToken().token).subscribe(
+      result => {        
+          if (result.estado) {
+            this.arrZonas = result.data;            
+            this._importacion_service.gettipolinea(this.getToken().token).subscribe(
+              result=>{
+                if(result.estado){
+                  this.arrTipoLi = result.data;
+                  this._importacion_service.downloadPlantillaLinea(this.arrZonas, this.arrTipoLi,"Plantilla_linea");
+                }
+              });            
+          } else {
+            this.openSnackBar(result.mensaje, 99);
+          }        
       }, error => {
-        this.openSnackBar(<any>error, 99);
+        this.openSnackBar(error.error, 99);
       });
+    
   }
 
   getPantallaRol() {
