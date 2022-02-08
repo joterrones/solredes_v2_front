@@ -30,3 +30,9 @@ table {
     flex: 0 0 5% !important;
   }
   
+  .cont{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;  
+  }

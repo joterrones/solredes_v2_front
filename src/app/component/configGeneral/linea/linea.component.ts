@@ -218,7 +218,7 @@ export class LineaComponent extends BaseComponent implements OnInit {
   }  
 
   showMapa(element): void {      
-    this.router.navigate(["/mapalinea/"+element.n_idpl_linea]);
+    this.router.navigate(["/mapalinea/"+element.n_idpl_linea+"/"+element.c_nombre+"/"+element.c_nombrez+"/"+element.c_nombret]);
   }  
   getPantallaRol() {
     let request = {

@@ -1,12 +1,18 @@
 <app-menu>
     <div class="body">
-        <mat-form-field>
-            <mat-select placeholder="Versiones">
-                <mat-option *ngFor="let item of versiones" [value]="item.id" (click)="selecVersion(item.id)">
-                    {{item.nombre}}
-                </mat-option>
-            </mat-select>
-        </mat-form-field>
+        <div class="cont">
+            <mat-form-field>
+                <mat-select placeholder="Versiones">
+                    <mat-option *ngFor="let item of versiones" [value]="item.id" (click)="selecVersion(item.id)">
+                        {{item.nombre}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+    
+            <button mat-icon-button color="accent" [routerLink]="['/linea/']">                 
+                <mat-icon aria-label="Example icon-button with a heart icon">arrow_back</mat-icon>                
+            </button>
+        </div>        
 
         <mat-table [dataSource]="tabla2" class="mat-elevation-z8">
             <ng-container matColumnDef="c_codigo">

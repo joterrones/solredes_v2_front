@@ -1,6 +1,7 @@
 <app-menu>
     <div class="contenedorbody">
         <h4>{{tit}}</h4>
+        
         <button mat-icon-button color="primary" (click)="actualizar()"> Actualizar
             <mat-icon aria-label="Example icon-button with a heart icon">loop</mat-icon>
         </button>
@@ -13,7 +14,15 @@
             </mat-select>
         </mat-form-field>
 
-        <br />
+        <div class="cont">
+            <h4> Linea: {{nombreLinea}}</h4>
+            <h4> Zona: {{nombreZona}}</h4>
+            <h4> Tipo Linea: {{nombreTipoLinea}}</h4>
+
+            <button mat-icon-button color="accent" [routerLink]="['/linea/']">                 
+                <mat-icon aria-label="Example icon-button with a heart icon">arrow_back</mat-icon>                
+            </button>
+        </div>
         <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" [mapTypeControl]='true' [mapTypeId]="'hybrid'"
             *ngIf="permisoEdit">
             <agm-marker-cluster [maxZoom]="12" imagePath="http://35.184.146.235/Multimedia/Nama/images/m">

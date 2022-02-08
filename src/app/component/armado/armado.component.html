@@ -1,6 +1,7 @@
 <app-menu>
     <div class="contenedorBody">
         <div *ngIf="!config">
+            <h2>{{tit}}</h2>
             <mat-accordion>
                 <mat-expansion-panel>
                     <mat-expansion-panel-header class="back-expansion">
@@ -12,15 +13,17 @@
                         </mat-panel-description>
                     </mat-expansion-panel-header>
                     <div class="contenedor">
-                        <mat-form-field>
+                        <mat-form-field>                            
                             <mat-select placeholder="Tipo de Armados">
+                                <mat-option value="0" (click)='onSelectTipoArmado(0)'>
+                                    -TODOS-
+                                </mat-option>
                                 <mat-option *ngFor="let item of tipoarmado" [value]="item.n_idpl_tipoarmado"
                                     (click)='onSelectTipoArmado(item.n_idpl_tipoarmado)'>
                                     {{item.c_nombre}}
                                 </mat-option>
                             </mat-select>
                         </mat-form-field>
-
                     </div>
                 </mat-expansion-panel>
             </mat-accordion>
@@ -30,7 +33,7 @@
                     <input matInput placeholder="Buscar" (keyup)="applyFilter($event.target.value)">
                     <mat-icon matSuffix>search</mat-icon>
                 </mat-form-field>
-                <table mat-table [dataSource]="tabla" matSort class="mat-elevation-z8">
+                <table mat-table [dataSource]="tabla" matSort class="mat-elevation-z8"> 
 
                     <!-- Button Editar -->
                     <ng-container matColumnDef="ver">
@@ -45,43 +48,45 @@
                         </td>
                     </ng-container>
                     <ng-container matColumnDef="c_codigo">
-                        <th mat-header-cell *matHeaderCellDef color="error"> Código </th>
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Código </th>
                         <td mat-cell *matCellDef="let element"> {{element.c_codigo}} </td>
                     </ng-container>
                     <ng-container matColumnDef="c_nombre">
-                        <th mat-header-cell *matHeaderCellDef color="error"> Nombre </th>
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </th>
                         <td mat-cell *matCellDef="let element"> {{element.c_nombre}} </td>
                     </ng-container>
                     <ng-container matColumnDef="c_codigo_corto">
-                        <th mat-header-cell *matHeaderCellDef color="error"> Código Corto </th>
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Código Corto </th>
                         <td mat-cell *matCellDef="let element"> {{element.c_codigo_corto}} </td>
                     </ng-container>
                     <ng-container matColumnDef="c_iconomapa">
-                        <th mat-header-cell *matHeaderCellDef color="error"> Ícono Mapa </th>
-                        <td mat-cell *matCellDef="let element">
-                            <!-- <div *ngIf="element.c_iconomapa!=null">
-                      <img src="assets/noimage.png" height="20"
-                        width="20" />
-                    </div>-->
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Ícono Mapa </th>
+                        <td mat-cell *matCellDef="let element"><!-- {{element.c_iconomapa}} -->
+                            <div *ngIf="element.c_iconomapa!=null">
+                                <img [src]="srcimg+ element.c_iconomapa+'.png'" height="20" width="20" />
+                            </div>
+                            <div *ngIf="element.c_iconomapa==null">
+                                <img src="assets/images/imgDefault.jpg" height="20" width="20" />
+                            </div>
                         </td>
                     </ng-container>
-                    <ng-container matColumnDef="c_rutaimg">
-                        <th mat-header-cell *matHeaderCellDef color="error"> Lámina </th>
-                        <td mat-cell *matCellDef="let element">
-                            <!--<div *ngIf="element.c_rutaimg!=null">
-                      <img src="assets/noimage.png" height="20" width="20" />
-          
-                    </div>-->
+                    <ng-container matColumnDef="c_nombrelamina">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Lámina </th>
+                        <td mat-cell *matCellDef="let element"> 
+                            <a [href]="urlPdf+element.c_rutaimg" target="_blank"> {{element.c_nombrelamina}} </a>
                         </td>
-                    </ng-container>
+                    </ng-container>                   
+                    
                     <ng-container matColumnDef="n_version">
-                        <th mat-header-cell *matHeaderCellDef color="error"> Versión </th>
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Versión </th>
                         <td mat-cell *matCellDef="let element"> {{element.n_version}} </td>
                     </ng-container>
+
                     <ng-container matColumnDef="tipo_armado">
-                        <th mat-header-cell *matHeaderCellDef color="error"> Tipo Armado </th>
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Tipo Armado </th>
                         <td mat-cell *matCellDef="let element"> {{element.c_codigotipoarmado}} </td>
                     </ng-container>
+                    
                     <!-- Button Config -->
                     <ng-container matColumnDef="config">
                         <th mat-header-cell *matHeaderCellDef mat-sort-header> Conf. Sum. </th>

@@ -3,7 +3,7 @@
   <div mat-dialog-content class="contenedor">
 
     <mat-form-field>
-        <input matInput placeholder="Nombre" name="c_codigo" #c_username="ngModel" [(ngModel)]="valoresGnr.c_codigo"
+        <input matInput placeholder="Código" name="c_codigo" #c_username="ngModel" [(ngModel)]="valoresGnr.c_codigo"
           minlength="3" required />
         <mat-hint class="error" *ngIf="valoresGnr.c_codigo.length<3">debe tener mínimo de 3 dígitos</mat-hint>
       </mat-form-field> 

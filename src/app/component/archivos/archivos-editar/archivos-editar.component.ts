@@ -89,8 +89,7 @@ export class ArchivosEditarComponent extends BaseComponent implements OnInit {
       console.log("CARGA ARC",this.file)      
       this.uploadFileToActivity();
     }
-    this.procesando = false;
-    this.list = true;    
+      
     this.editNomArchivo = false; 
   }
 
@@ -153,6 +152,8 @@ export class ArchivosEditarComponent extends BaseComponent implements OnInit {
       result => {
         //console.log("uploadFileToActivity",result)
         if (result.estado) {
+          this.procesando = false;
+          this.list = true;  
           this.rutas.push(result.c_ruta);
           this.nombres.push(result.c_nombre);
           this.checksums.push(result.c_checksum);    
@@ -166,6 +167,8 @@ export class ArchivosEditarComponent extends BaseComponent implements OnInit {
         this.procesando = false;
         this.openSnackBar(<any>error, 99);
         alert(error.error);
+        console.log(error);
+        
       });
   }
 

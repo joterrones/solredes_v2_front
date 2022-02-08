@@ -56,5 +56,12 @@ export class ArmadoService{
             request.proyecto=proyecto;
             return this._http.post(this.url+'armado/insertarmadoconfigmontaje',request);
         }
+
+        uploadfile(extension,archivo,fileToUpload,token):Observable<any>{
+            
+            const formData: FormData = new FormData();
+            formData.append('DA', fileToUpload, fileToUpload.name);
+            return this._http.post(this.url+'armado/uploadfile?extension='+extension+'&archivo='+archivo,formData);
+        }
         
 }

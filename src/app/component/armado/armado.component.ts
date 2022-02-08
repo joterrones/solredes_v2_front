@@ -10,6 +10,7 @@ import { ArmadoconfigmontajeComponent } from '../armadoconfigmontaje/armadoconfi
 import { BaseComponent } from '../base/base.component';
 import { DetallearmadoComponent } from '../detallearmado/detallearmado.component';
 import { ConfirmComponent } from '../general/confirm/confirm.component';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-armado',
@@ -19,14 +20,14 @@ import { ConfirmComponent } from '../general/confirm/confirm.component';
 })
 export class ArmadoComponent extends BaseComponent implements OnInit {
 
-  tit = 'ARMADOS';
+  tit = 'ADMINISTRACIÓN DE ARMADOS';
 
   pantallaRol= [];
   permisoEdit: boolean = false;
 
   tabla: MatTableDataSource<any>;
   tablaconfig: MatTableDataSource<any>;
-  displayedColumns: string[] = ['ver', 'c_codigo','c_nombre','c_codigo_corto','c_iconomapa','c_rutaimg','n_version','tipo_armado','config','configmont','eliminar'];
+  displayedColumns: string[] = ['ver', 'c_codigo','c_nombre','c_codigo_corto','c_iconomapa','c_nombrelamina','n_version','tipo_armado','config','configmont','eliminar'];
   displayedColumnsConfig: string[] = [ 'c_codigo','c_nombre','c_unidad','n_cantidad'];
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: false }) sort: MatSort;
@@ -43,6 +44,8 @@ export class ArmadoComponent extends BaseComponent implements OnInit {
   general: Array<any>;
   url_lamina:String;
   url_iconomapa:String;
+  urlPdf: string =""
+  srcimg: string = "assets/mapa/";
 
   constructor(
     public _armado_service: ArmadoService,
@@ -58,8 +61,9 @@ export class ArmadoComponent extends BaseComponent implements OnInit {
   ngOnInit() {
     this.usuarioLog = this.getUser().data;    
     this.getPantallaRol();
-    this.getGeneral();
+    //this.getGeneral();
     this.getTipoArmado();
+    this.urlPdf = environment.urlArchivo;
     this.getTabla();
   }
 
@@ -91,7 +95,7 @@ export class ArmadoComponent extends BaseComponent implements OnInit {
       });
   }
 
-  getGeneral(){
+  /*getGeneral(){
 
     this._general_service.get(this.getProyect()).subscribe(
       result => {
@@ -117,7 +121,7 @@ export class ArmadoComponent extends BaseComponent implements OnInit {
     
       }, error => {
       });
-  }
+  }*/
   
   applyFilter(filterValue: string) {
     
@@ -137,6 +141,8 @@ export class ArmadoComponent extends BaseComponent implements OnInit {
     this._armado_service.get(request,this.getProyect()).subscribe(
       result => {
         if(result.estado){
+          console.log(result.data);
+          
           this.tabla = new MatTableDataSource<any>(result.data);
           this.tabla.sort = this.sort;
           this.tabla.paginator = this.paginator;

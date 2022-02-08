@@ -26,4 +26,8 @@ export class MapaService {
     getdetalle(req): Observable<any> {
         return this._http.post(this.url + 'mapa/getdetalle', req);
     }
+
+    getestructura(req): Observable<any> {
+        return this._http.post(this.url + 'mapa/getestructura', req);
+    }
 }

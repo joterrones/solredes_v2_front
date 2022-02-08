@@ -31,6 +31,9 @@ export class MapaLineaComponent extends BaseComponent implements OnInit {
   polilineas: [];
 
   idlinea: string="";
+  nombreLinea: string="";
+  nombreZona: string="";
+  nombreTipoLinea: string="";
   idversion: number = 0;
 
   versiones = [
@@ -53,6 +56,9 @@ export class MapaLineaComponent extends BaseComponent implements OnInit {
 
   ngOnInit() {
     this.idlinea = this._Activatedroute.snapshot.paramMap.get("n_idpl_linea");
+    this.nombreLinea = this._Activatedroute.snapshot.paramMap.get("c_nombre");
+    this.nombreZona = this._Activatedroute.snapshot.paramMap.get("c_nombrez");
+    this.nombreTipoLinea = this._Activatedroute.snapshot.paramMap.get("c_nombret");
     this.usuarioLog = this.getUser().data;  
     this.getPantallaRol();
     this.versiones = this._version_service.get();
@@ -170,7 +176,8 @@ export class MapaLineaComponent extends BaseComponent implements OnInit {
 
 
   openDialog(item): void {
-
+    console.log(item);
+    
     const dialogRef = this.dialog.open(MapaDetalleComponent, {
       width: '30%',
       height: 'auto',

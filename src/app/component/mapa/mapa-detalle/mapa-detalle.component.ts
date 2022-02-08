@@ -21,6 +21,9 @@ export class MapaDetalleComponent extends BaseComponent implements OnInit  {
   public confirmar: Confirmar;
   c_nombre:string="";
 
+  nombreEstruct: string="";
+  codigoEstruct: string="";
+
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: false }) sort: MatSort;
 
@@ -40,19 +43,26 @@ export class MapaDetalleComponent extends BaseComponent implements OnInit  {
 
     
   get() {
-
     let request = {
       n_idpl_estructura: this.data.n_idpl_estructura,   
     }
     this._mapa_service.getdetalle(request).subscribe(
       result => {
-
         try {
           if (result.estado) {
             console.log(result.data);
             this.tabla = new MatTableDataSource<any>(result.data);
             this.tabla.sort = this.sort;
             this.tabla.paginator = this.paginator;
+
+            this._mapa_service.getestructura(request).subscribe(
+              result =>{
+                if(result.estado){
+                  console.log(result.data);
+                  this.nombreEstruct = result.data[0].c_nombre;
+                  this.codigoEstruct = result.data[0].c_codigo;
+                }
+              });
           } else {
             this.openSnackBar(result.mensaje, 99);
           }

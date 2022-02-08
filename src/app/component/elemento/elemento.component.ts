@@ -17,7 +17,7 @@ export class ElementoComponent extends BaseComponent implements OnInit {
   pantallaRol= [];
   permisoEdit: boolean = false;
 
-  tit = 'ELEMENTO';
+  tit = 'ADMINISTRACIÓN DE ELEMENTO';
 
   tabla: MatTableDataSource<any>;
   displayedColumns: string[] = [/*'n_idpl_elemento',*/ 'c_codigo', 'c_nombre', 'b_partidanueva', 'c_material', 'c_esfuerzo', 'c_altura', 'c_seccionconductor'];

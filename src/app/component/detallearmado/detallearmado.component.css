@@ -8,4 +8,17 @@
   .error{
     color: red;
   }
+
+  .cont{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+  .icon{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    align-items: center;
+  }
  
