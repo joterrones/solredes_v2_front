@@ -227,6 +227,7 @@ export class ImportacionPlanillaComponent extends BaseComponent implements OnIni
     if (this.idversion) {
       const dialogRef = this.dialog.open(ImportacionPlanillaEliminarComponent, {
         width: '1250px',
+        height: '600px',
         data: { idversion: this.idversion }
       });
       dialogRef.afterClosed().subscribe(result => {

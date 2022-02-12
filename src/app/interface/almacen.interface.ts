@@ -25,12 +25,19 @@ export interface Guia{
     c_ruc: String,
     c_nroguia: String,
     c_observacion: String,
-    n_id_usermodi: number
+    n_id_usermodi: number,
+    annio: number,
+    n_mes: number,
+    
 }
 
 export interface Periodos{
     n_idgen_periodo: number,
-    c_descripcion: String
+    c_descripcion: String,
+    annio: number,
+    mes: string,
+    n_mes: number,
+    n_id_usermodi: number,
 }
 
 export interface GuiaEditar{

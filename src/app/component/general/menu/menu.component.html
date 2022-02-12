@@ -84,6 +84,10 @@
                         <mat-icon>keyboard_arrow_right</mat-icon>
                         <span>Administración de Armado</span>
                     </a>
+                    <a mat-list-item [routerLink]="['/periodo']" *ngIf="true" (click)="panel(0,0)" [ngClass]="{'select':iditem == 0}">
+                        <mat-icon>keyboard_arrow_right</mat-icon>
+                        <span>Administración de Periodo</span>
+                    </a>
 
                 </mat-expansion-panel>
 

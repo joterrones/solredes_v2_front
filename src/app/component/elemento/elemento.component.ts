@@ -97,7 +97,6 @@ export class ElementoComponent extends BaseComponent implements OnInit {
           this.tabla.sort = this.sort;
           this.tabla.paginator = this.paginator;
         } else {
-
           this.openSnackBar(result.mensaje, 99);
         }
       }, error => {

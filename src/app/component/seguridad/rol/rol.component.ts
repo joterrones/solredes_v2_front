@@ -144,14 +144,15 @@ export class RolComponent extends BaseComponent implements OnInit {
   deleteRol(item) {
     let request = {
       n_idseg_rol: item.n_idseg_rol,
-      n_id_usermodi: this.usuarioLog.n_idseg_userprofile
+      n_id_usermodi: this.usuarioLog.n_idseg_userprofile,
+      c_nombre: item.c_nombre
     }
     this._seguridad_service.deleteRol(request).subscribe(
       result => {
         try {
           if (result.estado) {
             this.getTablaRol();
-            this.openSnackBar("Rol Eliminado", 200);
+            this.openSnackBar(result.mensaje, 200);
           } else {
             this.openSnackBar(result.mensaje, 99);
           }

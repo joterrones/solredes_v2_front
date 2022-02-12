@@ -161,4 +161,20 @@ export class AlmacenService{
         formData.append('DA', fileToUpload, fileToUpload.name);
         return this._http.post(this.url+'almacen/uploadimagen?extension='+extension+'&detalleguia='+detalleguia,formData);
     }  
+
+    savePeriodo(data, token): Observable<any> {
+        var reqHeader = new HttpHeaders({
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
+        });
+        console.log('enviando datos Periodo')
+        console.log(data)
+        return this._http.post(this.url + 'almacen/savePeriodo', data, { headers: reqHeader });
+    }
+
+    deletePeriodo(data): Observable<any> {
+        console.log(data)
+        console.log('borrando')
+        return this._http.post(this.url + 'almacen/deletePeriodo', data);
+    }
 }

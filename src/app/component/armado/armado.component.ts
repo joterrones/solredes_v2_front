@@ -63,6 +63,7 @@ export class ArmadoComponent extends BaseComponent implements OnInit {
     this.getPantallaRol();
     //this.getGeneral();
     this.getTipoArmado();
+    this.getversion();
     this.urlPdf = environment.urlArchivo;
     this.getTabla();
   }
@@ -83,6 +84,24 @@ export class ArmadoComponent extends BaseComponent implements OnInit {
         if (result.estado) {
           this.tipoarmado= new Array<any>();
           this.tipoarmado=result.data;
+        } else {
+          this.openSnackBar(result.data.mensaje, 99);
+        }
+      }, error => {
+        try {
+          this.openSnackBar(error, 99);
+        } catch (error) {
+          this.openSnackBar(AppSettings.SERVICE_NO_CONECT_SERVER, 99);
+        }
+      });
+  }
+
+  getversion() {
+    this._armado_service.getversion(this.getProyect()).subscribe(
+      result => {
+        if (result.estado) {
+          this.version= new Array<any>();
+          this.version=result.data;
         } else {
           this.openSnackBar(result.data.mensaje, 99);
         }
@@ -134,7 +153,8 @@ export class ArmadoComponent extends BaseComponent implements OnInit {
   getTabla() {
     var request = {
       n_idpl_tipoarmado:this.idtipoarmado,
-      n_version:this.idversion
+      n_version:this.idversion,
+      n_idpro_proyecto: this.proyecto.n_idpro_proyecto
     }
     console.log(request);
     

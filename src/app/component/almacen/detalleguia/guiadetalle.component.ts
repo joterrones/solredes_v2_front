@@ -34,7 +34,7 @@ export class GuiadetalleComponent extends BaseComponent implements OnInit {
   
   textfilter = '';
 
-  displayedColumns: string[] = ['editar', 'c_nombreel','c_cantidad','eliminar'];
+  displayedColumns: string[] = ['editar', 'c_cantidad','c_nombreel','eliminar'];
   public tablaAlmacen: MatTableDataSource<any>;
   public confirmar: Confirmar;
 

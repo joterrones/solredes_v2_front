@@ -17,7 +17,7 @@
                         <mat-option value="0" (click)='selectPeriodos(0)'>
                         -TODOS-
                         </mat-option>
-                        <mat-option *ngFor="let per of periodos" [value]="per.n_idgen_periodo" (click)='selectPeriodos(per.n_idgen_periodo)'>
+                        <mat-option *ngFor="let per of _selectPeriodos" [value]="per.n_idgen_periodo" (click)='selectPeriodos(per.n_idgen_periodo)'>
                         {{per.c_descripcion}}
                         </mat-option>
                     </mat-select>
@@ -71,7 +71,9 @@
           </ng-container>  
           <ng-container matColumnDef="c_observacion">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Observacion </th>
-            <td mat-cell *matCellDef="let element"> {{element.c_observacion}} </td>
+            <td mat-cell *matCellDef="let element" style="max-width: 300px;"> 
+              <textarea matInput>{{element.c_observacion}}</textarea>
+            </td>
           </ng-container> 
 
           <ng-container matColumnDef="detalle">

@@ -1,0 +1,30 @@
+<h1 mat-dialog-title>Edición de guia: {{periodo.c_descripcion}}</h1>
+<form class="example-container" #newForm="ngForm" (ngSubmit)="guardar(newForm)">
+  <div mat-dialog-content class="contenedor"> 
+
+    <mat-form-field>
+        <input matInput type="number" placeholder="Año" name="annio" #c_annio="ngModel"  
+          [(ngModel)]="periodo.annio" minlength="4" required/>
+        <mat-hint class="error" *ngIf="periodo.annio < 0">Ingrese año</mat-hint>
+      </mat-form-field>  
+
+    <mat-form-field>
+      <mat-select placeholder="Mes" [(value)]="periodo.n_mes" required>
+        <mat-option *ngFor="let per of mes" [value]="per.n_mes">
+          {{per.mes}}
+        </mat-option>
+      </mat-select>      
+    </mat-form-field>
+  </div>
+
+  <div mat-dialog-actions>
+    <br>
+    <button mat-button type="submit" cdkFocusInitial
+      [disabled]="!newForm.form.valid">
+      <mat-icon>save</mat-icon>
+      <span>Guardar</span>
+    </button>
+  </div>
+</form>
+
+

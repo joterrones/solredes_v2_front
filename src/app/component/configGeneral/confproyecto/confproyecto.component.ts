@@ -60,8 +60,7 @@ export class ConfproyectoComponent extends BaseComponent implements OnInit {
       n_idpro_proyecto: this.idproyecto      
     }
     this._confiGeneral_service.getProyecto(request,this.getToken().token).subscribe(
-      result => {                
-        console.log(result);
+      result => {                        
         this.tablaProyecto = new MatTableDataSource<any>(result.data);
         console.log(result.data);        
         this.tablaProyecto.sort = this.sort;

@@ -6,15 +6,19 @@
                 <mat-card-title-group>
                     <mat-card-title> {{item.c_nombre}}</mat-card-title>
                     <mat-card-subtitle></mat-card-subtitle>
-                    <img mat-card-sm-image [src]=" urlImagen+item.c_rutalogo ">
+                    
                 </mat-card-title-group>
                 <mat-card-content>
-         
+                    <img [src]=" urlImagen+item.c_rutalogo" style="width: 100%; height: auto;">
                 </mat-card-content>
                 <mat-card-actions>
-                    <button mat-raised-button color="primary" (click)="irProyecto(item)">Ingresar<mat-icon>open_in_new</mat-icon></button>
+                    <div class="btn">
+                        <button mat-raised-button color="primary" (click)="irProyecto(item)">Ingresar <mat-icon>open_in_new</mat-icon></button>
+                        <button mat-raised-button color="primary">Detalle <mat-icon>info</mat-icon></button>
+                    </div>                    
                 </mat-card-actions>
-            </mat-card>
+            </mat-card>            
         </div>
+        
     </div>
 </div>

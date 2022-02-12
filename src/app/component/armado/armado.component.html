@@ -24,6 +24,17 @@
                                 </mat-option>
                             </mat-select>
                         </mat-form-field>
+                        <mat-form-field>                            
+                            <mat-select placeholder="Version">
+                                <mat-option value="0" (click)='onSelectVersion(0)'>
+                                    -TODOS-
+                                </mat-option>
+                                <mat-option *ngFor="let item of version" [value]="item.n_version"
+                                    (click)='onSelectVersion(item.n_version)'>
+                                    {{item.n_version}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
                     </div>
                 </mat-expansion-panel>
             </mat-accordion>
@@ -33,8 +44,7 @@
                     <input matInput placeholder="Buscar" (keyup)="applyFilter($event.target.value)">
                     <mat-icon matSuffix>search</mat-icon>
                 </mat-form-field>
-                <table mat-table [dataSource]="tabla" matSort class="mat-elevation-z8"> 
-
+                <table mat-table [dataSource]="tabla" matSort  class="mat-elevation-z8"> 
                     <!-- Button Editar -->
                     <ng-container matColumnDef="ver">
                         <th mat-header-cell *matHeaderCellDef> <button mat-icon-button color="primary"

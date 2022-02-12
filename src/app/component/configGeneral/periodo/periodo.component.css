@@ -13,13 +13,9 @@ table {
   flex-wrap: wrap;
 }
 
-
-.contenedor2 {
-  margin-top: 15px;
-  margin-bottom: 15px;
+.navega{
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: space-between;
   flex-wrap: wrap;
-  align-items: center;
 }

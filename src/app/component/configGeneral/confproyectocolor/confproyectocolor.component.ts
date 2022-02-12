@@ -39,6 +39,8 @@ export class ConfproyectocolorComponent extends BaseComponent implements OnInit 
     }
 
   ngOnInit() {
+    console.log(this.data);
+    
     this.usuarioLog = this.getUser().data;
     this.proyecto.n_idpro_proyecto = this.data.proyecto.n_idpro_proyecto;    
   }
@@ -46,17 +48,16 @@ export class ConfproyectocolorComponent extends BaseComponent implements OnInit 
   guardar(newForm) {
     console.log(newForm);
       let request  ={ 
-        c_color: newForm[0],
+        c_color: newForm,
         n_idpro_proyecto: this.proyecto.n_idpro_proyecto,        
         n_id_usermodi: this.usuarioLog.n_idseg_userprofile
-      }
-      console.log("Envio datos saveColorPro",request);
-      
+      }      
       this._confiGeneral_service.saveColorPro(request, this.getToken().token).subscribe(
         result => {
           try {
             if (result.estado) {
               this.dialogAsigPro.close({ flag: true });
+              this.openSnackBar("GUARDADO! Vuelva a ingresar al Proyecto", 99);
             } else {
               this.openSnackBar(result.mensaje, 99);
             }
@@ -71,8 +72,6 @@ export class ConfproyectocolorComponent extends BaseComponent implements OnInit 
             this.openSnackBar(AppSettings.SERVICE_NO_CONECT_SERVER, 99);
           }
         });
-
-    
     
   }
 

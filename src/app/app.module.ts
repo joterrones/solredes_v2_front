@@ -16,6 +16,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BaseComponent } from './component/base/base.component';
 import { LoginComponent } from './component/seguridad/login/login.component';
 
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -125,6 +126,8 @@ import { DashboardLineasEstructurasComponent } from './component/general/dashboa
 import { DashboardLineaZonaComponent } from './component/general/dashboard/dashboard-linea-zona/dashboard-linea-zona.component';
 import { DashboardPeriodoComponent } from './component/general/dashboard/dashboard-periodo/dashboard-periodo.component';
 import { DashboardZonaComponent } from './component/general/dashboard/dashboard-zona/dashboard-zona.component';
+import { PeriodoComponent } from './component/configGeneral/periodo/periodo.component';
+import { PeriodoeditarComponent } from './component/configGeneral/periodoeditar/periodoeditar.component';
 
 
 @NgModule({
@@ -247,9 +250,12 @@ import { DashboardZonaComponent } from './component/general/dashboard/dashboard-
     DashboardLineaZonaComponent,
     DashboardPeriodoComponent,
     DashboardZonaComponent,
+    PeriodoComponent,
+    PeriodoeditarComponent,
 
   ],
   imports: [
+    MatSlideToggleModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
@@ -328,7 +334,8 @@ import { DashboardZonaComponent } from './component/general/dashboard/dashboard-
     DashboardLineaZonaComponent,
     DashboardLineasEstructurasComponent,
     DashboardPeriodoComponent,
-    DashboardZonaComponent
+    DashboardZonaComponent,
+    PeriodoeditarComponent
   ],
   providers: [
     MatDatepickerModule,

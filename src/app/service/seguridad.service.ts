@@ -87,6 +87,10 @@ export class SeguridadService {
         return this._http.post(this.url + 'seguridad/saveRol', data, { headers: reqHeader });
     }
 
+    estadoUser(data): Observable<any> {
+        console.log(data)
+        return this._http.post(this.url + 'seguridad/estadoUser', data);
+    }
     
 
     delete(data): Observable<any> {

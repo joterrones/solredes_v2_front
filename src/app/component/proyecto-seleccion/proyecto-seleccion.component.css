@@ -2,8 +2,18 @@
     width: 400px;
     margin-bottom: 8px;
     margin: 10px;
+    box-shadow: 3px 3px 7px 0px rgba(0,0,0,0.5);
   }
 
   .contenedor{
-      display:flex;
+    display:flex;
+    flex-direction: row;
+    flex-wrap:wrap;
+  }
+
+  .btn{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    flex-wrap:wrap;
   }

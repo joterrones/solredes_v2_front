@@ -15,11 +15,15 @@
         </mat-option>
       </mat-select>
     </mat-form-field>  
-    <input id="file" #fileInput hidden type='file' (change)="uploadfile($event.target.files)">
-    <button type="button" mat-mini-fab color="accent" (click)="fileInput.click()" style="margin-left: 10px;">
-      <mat-icon>attach_file</mat-icon>
-    </button>
-    <img [src]="showImg || urlImagen ||'assets/images/imgDefault.jpg'" alt="img" style="min-width: 400px; max-width: 500px;">
+    
+    <div class="contenedor2">      
+      <img [src]="showImg || urlImagen ||'assets/images/imgDefault.jpg'" alt="img" style="min-width: 300px; max-width: 400px;">
+      <input id="file" #fileInput hidden type='file' (change)="uploadfile($event.target.files)">
+      <button type="button" mat-mini-fab color="accent" (click)="fileInput.click()" style="margin-left: 10px;">
+        <mat-icon>attach_file</mat-icon>
+      </button>
+      
+    </div>
     
   </div>
   

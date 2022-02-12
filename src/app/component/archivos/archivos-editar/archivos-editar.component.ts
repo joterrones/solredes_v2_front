@@ -80,7 +80,7 @@ export class ArchivosEditarComponent extends BaseComponent implements OnInit {
       });
   }
 
-  uploadfile= async (files: FileList) =>{
+  uploadfile = async (files: FileList) =>{
     console.log("inicia");
     
     for(let i = 0; i < files.length; i++){

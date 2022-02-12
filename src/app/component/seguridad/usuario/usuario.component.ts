@@ -27,7 +27,7 @@ export class UsuarioComponent extends BaseComponent implements OnInit {
   idroles = 0;
   textfilter = '';
 
-  displayedColumns: string[] = ['editar', 'username', 'c_nombre1','c_nombre2', 'c_appaterno','c_apmaterno','c_dni', 'c_rol', 'asigProyecto','resetear', 'eliminar'];
+  displayedColumns: string[] = ['editar', 'username', 'c_nombreApellido','c_dni', 'c_rol', 'asigProyecto','resetear', 'activo'];
   public tablaUsuarios: MatTableDataSource<any>;
   public confirmar: Confirmar;
 
@@ -150,6 +150,41 @@ export class UsuarioComponent extends BaseComponent implements OnInit {
     });
     dialogRefClave.afterClosed().subscribe(result => {
     });
+  }
+  estadoUser(item): void {
+    console.log(item);
+    
+    let request = {
+      n_idseg_userprofile: item.n_idseg_userprofile,
+      b_activo: !item.b_activo,
+      n_id_usermodi: this.usuarioLog.n_idseg_userprofile
+    }
+    console.log(request);
+    
+    this._seguridad_service.estadoUser(request).subscribe(
+      result => {
+        try {
+          if (result.estado) {
+            this.getTablaUsuario();
+            if(item.b_activo){
+              this.openSnackBar("Usuario Activado", 99);
+            }else{
+              this.openSnackBar("Usuario Desactivado", 99);
+            }
+            
+          } else {
+            this.openSnackBar(result.mensaje, 99);
+          }
+        } catch (error) {
+          this.openSnackBar(AppSettings.SERVICE_NO_CONECT_SERVER, 99);
+        }
+      }, error => {
+        try {
+          this.openSnackBar(error.error.Detail, error.error.StatusCode);
+        } catch (error) {
+          this.openSnackBar(AppSettings.SERVICE_NO_CONECT_SERVER, 99);
+        }
+      });
   }
 
   eliminar(item): void {

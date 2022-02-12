@@ -2,12 +2,22 @@
 
     <h2 mat-dialog-title>Asignar Proyectos</h2>
 
-    <mat-selection-list #shoes>
-        <mat-list-option *ngFor="let shoe of typesOfShoes" [value]="shoe.hex" disableRipple>
+   <!-- <mat-selection-list #shoes>
+        <mat-list-option *ngFor="let shoe of typesOfShoes" [value]="shoe.hex" >
           {{shoe.color}}
         </mat-list-option>
     </mat-selection-list>
+    -->
+
+    <mat-select #shoes placeholder="Color" [(value)]="data.proyecto.c_color">
+        <mat-option *ngFor="let shoe of typesOfShoes" [value]="shoe.hex" >
+          {{shoe.color}}
+        </mat-option>
+    </mat-select>
+
+    
     <div mat-dialog-actions>
+        <br>
         <button mat-button type="submit" cdkFocusInitial [disabled]="!newForm.form.valid">
             <mat-icon>save</mat-icon>
             <span>Guardar</span>

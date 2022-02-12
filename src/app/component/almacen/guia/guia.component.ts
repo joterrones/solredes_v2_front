@@ -26,7 +26,8 @@ export class GuiaComponent extends BaseComponent implements OnInit {
 
   
   idalmacen = 0;  
-  periodos:[];
+  periodos: any;
+  _selectPeriodos: any;
   idperiodo = 0;
   
   textfilter = '';
@@ -99,13 +100,16 @@ export class GuiaComponent extends BaseComponent implements OnInit {
 
   getPeriodos() {
     let request = {
-      n_idgen_periodo: this.periodos      
+      n_idgen_periodo: 0
     }
     this._almacen_service.getPeriodos(request,this.getToken().token).subscribe(
       result => {
         let resultado = <ResultadoApi>result;
         if (resultado.estado) {
-          this.periodos = resultado.data;          
+          console.log(resultado.data);
+          this._selectPeriodos = resultado.data.periodos;
+          this.periodos = resultado.data;
+                
         } else {
           this.openSnackBar(resultado.mensaje, 99);
         }

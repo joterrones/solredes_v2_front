@@ -15,17 +15,25 @@
     </mat-form-field>      
       
     <mat-form-field>
-      <mat-select placeholder="Periodo" [(value)]="guia.n_idgen_periodo" required>
-        <mat-option *ngFor="let per of periodos" [value]="per.n_idgen_periodo">
-          {{per.c_descripcion}}
+      <mat-select placeholder="Annio" [(value)]="guia.annio" required>
+        <mat-option *ngFor="let per of annio" [value]="per.n_annio">
+          {{per.n_annio}}
         </mat-option>
       </mat-select>
+    </mat-form-field>   
+
+    <mat-form-field>
+      <mat-select placeholder="Mes" [(value)]="guia.n_mes" required>
+        <mat-option *ngFor="let per of mes" [value]="per.n_mes">
+          {{per.n_mes}}
+        </mat-option>
+      </mat-select>      
     </mat-form-field>   
     
     <mat-form-field>
         <input matInput placeholder="RUC" name="c_ruc" #c_username="ngModel" [(ngModel)]="guia.c_ruc"
-          minlength="3" required />
-        <mat-hint class="error" *ngIf="guia.c_ruc.length<3">debe tener mínimo de 3 dígitos</mat-hint>
+          minlength="11" maxlength="11" required type="number"/>
+        <mat-hint class="error" *ngIf="guia.c_ruc.length<3">debe tener 11 dígitos</mat-hint>
     </mat-form-field>
 
     <mat-form-field>
@@ -34,13 +42,13 @@
         <mat-hint class="error" *ngIf="guia.c_nroguia.length<3">debe tener mínimo de 3 dígitos</mat-hint>
     </mat-form-field>
     <mat-form-field>
-        <input matInput placeholder="Observacion" name="c_observacion" #c_username="ngModel" [(ngModel)]="guia.c_observacion"
-          minlength="3" required />
-        <mat-hint class="error" *ngIf="guia.c_observacion.length<3">debe tener mínimo de 3 dígitos</mat-hint>
+        <textarea  matInput placeholder="Observacion" name="c_observacion" #c_username="ngModel" [(ngModel)]="guia.c_observacion" maxlength="250" ></textarea>
+        <mat-hint class="" *ngIf="guia.c_ruc.length==0">*Observacion no es requerida</mat-hint>
     </mat-form-field>
   </div>
-  <div mat-dialog-actions>
 
+  <div mat-dialog-actions>
+    <br>
     <button mat-button type="submit" cdkFocusInitial
       [disabled]="!newForm.form.valid">
       <mat-icon>save</mat-icon>

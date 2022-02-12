@@ -91,9 +91,10 @@ export class MenuComponent extends BaseComponent implements OnInit {
       console.log(this.usuario);
       this.getPantallaRol();
       this.getRolUser();
+      this.idPanel = parseInt(localStorage.getItem('panelMenu'));
+      this.iditem = parseInt(localStorage.getItem('itemMenu'));
     }
-    this.idPanel = parseInt(localStorage.getItem('panelMenu'));
-    this.iditem = parseInt(localStorage.getItem('itemMenu'));
+    
   }
 
   getRolUser() {
