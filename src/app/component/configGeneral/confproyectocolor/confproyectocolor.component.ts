@@ -46,9 +46,9 @@ export class ConfproyectocolorComponent extends BaseComponent implements OnInit 
   }
 
   guardar(newForm) {
-    console.log(newForm);
+    console.log(newForm._value);
       let request  ={ 
-        c_color: newForm,
+        c_color: newForm._value,
         n_idpro_proyecto: this.proyecto.n_idpro_proyecto,        
         n_id_usermodi: this.usuarioLog.n_idseg_userprofile
       }      
