@@ -48,11 +48,14 @@ export class CategoriatipomontajeComponent extends BaseComponent implements OnIn
   ngOnInit() {       
     this.usuarioLog = this.getUser().data;
     this.getPantallaRol();
-    this.getTablaTipoMontaje();
+    this.getTablaCateTipoMontaje();
   }  
   
-  getTablaTipoMontaje() {  
-    this._confiGeneral_service.getTipoMontaje(this.getToken().token).subscribe(
+  getTablaCateTipoMontaje() {  
+    let request = {
+      n_idpro_proyecto: this.proyecto.n_idpro_proyecto
+    }
+    this._confiGeneral_service.getTablaCateTipoMontaje(request,this.getToken().token).subscribe(
       result => {      
         console.log('retorna del node a tablatipoMontaje')  
         console.log(result);
@@ -77,11 +80,11 @@ export class CategoriatipomontajeComponent extends BaseComponent implements OnIn
     });
     dialogRef.afterClosed().subscribe(result => {
       try {
-        this.getTablaTipoMontaje();
+        this.getTablaCateTipoMontaje();
 
       } catch (error) {
         console.log(error);
-        this.getTablaTipoMontaje();
+        this.getTablaCateTipoMontaje();
       }
     });
   }
@@ -104,11 +107,11 @@ export class CategoriatipomontajeComponent extends BaseComponent implements OnIn
       n_idmon_categoriatipomontaje: elemento.n_idmon_categoriatipomontaje,
       n_id_usermodi: this.usuarioLog.n_idseg_userprofile
     }
-    this._confiGeneral_service.deleteTipoMontaje(request).subscribe(
+    this._confiGeneral_service.deleteCateTipoMontaje(request).subscribe(
       result => {
         try {
           if (result.estado) {
-            this.getTablaTipoMontaje();
+            this.getTablaCateTipoMontaje();
             this.openSnackBar("Tipo Montaje Eliminado", 200);
           } else {
             this.openSnackBar(result.mensaje, 99);

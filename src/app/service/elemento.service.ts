@@ -15,8 +15,8 @@ export class ElementoService{
     constructor(public _http: HttpClient) {
         this.url =  environment.url;
     }
-        get(proyecto):Observable<any>{
-            let request={proyecto:proyecto};
+        get(request,proyecto):Observable<any>{
+            
             console.log(request);
             
             return this._http.post(this.url+'elemento/get',request);
@@ -27,6 +27,11 @@ export class ElementoService{
             console.log(request);
             
             return this._http.post(this.url+'elemento/updateconfig',request);
+        }
+
+        getTipoElemento(request, proyecto):Observable<any>{            
+            console.log(request);            
+            return this._http.post(this.url+'elemento/getTipoElemento',request);
         }
       
 }

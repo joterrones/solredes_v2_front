@@ -128,6 +128,9 @@ import { DashboardPeriodoComponent } from './component/general/dashboard/dashboa
 import { DashboardZonaComponent } from './component/general/dashboard/dashboard-zona/dashboard-zona.component';
 import { PeriodoComponent } from './component/configGeneral/periodo/periodo.component';
 import { PeriodoeditarComponent } from './component/configGeneral/periodoeditar/periodoeditar.component';
+import { PartidamontajeComponent } from './component/configGeneral/partidamontaje/partidamontaje.component';
+import { PartidamontajeeditarComponent } from './component/configGeneral/partidamontajeeditar/partidamontajeeditar.component';
+import { ProyectoDetalleComponent } from './component/proyecto-detalle/proyecto-detalle.component';
 
 
 @NgModule({
@@ -252,6 +255,9 @@ import { PeriodoeditarComponent } from './component/configGeneral/periodoeditar/
     DashboardZonaComponent,
     PeriodoComponent,
     PeriodoeditarComponent,
+    PartidamontajeComponent,
+    PartidamontajeeditarComponent,
+    ProyectoDetalleComponent,
 
   ],
   imports: [
@@ -335,7 +341,9 @@ import { PeriodoeditarComponent } from './component/configGeneral/periodoeditar/
     DashboardLineasEstructurasComponent,
     DashboardPeriodoComponent,
     DashboardZonaComponent,
-    PeriodoeditarComponent
+    PeriodoeditarComponent,
+    PartidamontajeeditarComponent,
+    ProyectoDetalleComponent
   ],
   providers: [
     MatDatepickerModule,

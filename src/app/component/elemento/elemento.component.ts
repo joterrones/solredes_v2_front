@@ -27,6 +27,8 @@ export class ElementoComponent extends BaseComponent implements OnInit {
 
   tipoarmado: Array<any>;
   idtipoarmado: number;
+  tipoelemento: Array<any>;
+  idtipoelemento: number = 0;
 
   version: Array<any>;
   idversion: number;
@@ -81,15 +83,45 @@ export class ElementoComponent extends BaseComponent implements OnInit {
     this.usuarioLog = this.getUser().data;    
     this.getPantallaRol();
     this.getTabla();
+    this.getTipoElemento()
   }
 
   applyFilter(filterValue: string) {
     this.tabla.filter = filterValue.trim().toLowerCase();
   }
 
-  getTabla() {
+  selectTipoElement(id){
+    this.idtipoelemento = id;
+    this.getTabla();
+  }
 
-    this._elemento_service.get(this.getProyect()).subscribe(
+  getTipoElemento() {
+    let request = {
+      n_idpro_proyecto: this.proyecto.n_idpro_proyecto
+    }
+    
+    this._elemento_service.getTipoElemento(request,this.getProyect()).subscribe(
+      result => {
+        if (result.estado) {
+          this.tipoelemento =  result.data;
+          console.log(this.tipoelemento);
+           
+        } else {
+          this.openSnackBar(result.mensaje, 99);
+        }
+      }, error => {
+        this.openSnackBar(<any>error, 99);
+      });
+  }
+
+  getTabla() {
+    let request = {
+      n_idpl_tipoelemento:  this.idtipoelemento,
+      n_idpro_proyecto: this.proyecto.n_idpro_proyecto
+    }
+    console.log(request);
+    
+    this._elemento_service.get(request,this.getProyect()).subscribe(
       result => {
         if (result.estado) {
           this.tabla = new MatTableDataSource<any>(result.data);

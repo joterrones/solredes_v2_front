@@ -44,6 +44,7 @@ import { MetradoComponent } from './component/metrado/metrado.component';
 import { MetradomontajeComponent } from './component/metradomontaje/metradomontaje.component';
 import { FichaComponent } from './component/ficha/ficha.component';
 import { PeriodoComponent } from './component/configGeneral/periodo/periodo.component';
+import { PartidamontajeComponent } from './component/configGeneral/partidamontaje/partidamontaje.component';
 //Array de rutas
 const appRoutes:Routes=[
     {path:'',component:LoginComponent},
@@ -87,6 +88,7 @@ const appRoutes:Routes=[
     {path:'metradomon/:n_idpl_linea/:n_idpl_tipolinea',component:MetradomontajeComponent},
     {path:'ficha',component:FichaComponent},
     {path:'periodo',component:PeriodoComponent},
+    {path:'partidamontaje',component:PartidamontajeComponent},
     {path:'**',component:LoginComponent},    
      
 ]

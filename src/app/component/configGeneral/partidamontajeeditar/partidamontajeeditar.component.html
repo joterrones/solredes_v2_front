@@ -1,0 +1,48 @@
+<h1 mat-dialog-title>Edición {{tipoMontaje.c_nombre}}</h1>
+<form class="example-container" #newForm="ngForm" (ngSubmit)="guardar(newForm)">
+    <div mat-dialog-content class="contenedor">
+
+        <mat-form-field>
+            <input matInput placeholder="Nombre" name="c_nombre" #c_username="ngModel"
+                [(ngModel)]="tipoMontaje.c_nombre" minlength="3" required />
+            <mat-hint class="error" *ngIf="tipoMontaje.c_nombre.length<3">debe tener mínimo de 3 dígitos</mat-hint>
+        </mat-form-field>
+
+        <mat-form-field>
+            <input matInput type="Codigo" placeholder="Codigo" name="c_codigo" #c_clave="ngModel"
+                [(ngModel)]="tipoMontaje.c_codigo" minlength="3" required />
+            <mat-hint class="error" *ngIf="tipoMontaje.c_codigo.length<3">debe tener mínimo de 3 dígitos</mat-hint>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-select placeholder="Tipo Linea" [(value)]="tipoMontaje.n_idpl_tipolinea" required>
+                <mat-option *ngFor="let tlinea of tipolinea" [value]="tlinea.n_idpl_tipolinea">
+                    {{tlinea.c_nombre}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-select placeholder="Tipo Montaje" [(value)]="tipoMontaje.n_idmon_categoriatipomontaje" required>
+                <mat-option *ngFor="let ct of categoriaMon" [value]="ct.n_idmon_categoriatipomontaje">
+                    {{ct.c_codigo+" "+ct.c_nombre}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field>
+            <input matInput type="Unidad Medida" placeholder="Unidad Medida" name="c_unidadmedida" #c_clave="ngModel"  
+              [(ngModel)]="tipoMontaje.c_unidadmedida" minlength="1" required/>
+            <mat-hint class="error" *ngIf="tipoMontaje.c_unidadmedida.length<1">debe tener mínimo de 1 dígitos</mat-hint>
+          </mat-form-field>
+
+    </div>
+    <div mat-dialog-actions>
+
+
+        <button mat-button type="submit" cdkFocusInitial [disabled]="!newForm.form.valid">
+            <mat-icon>save</mat-icon>
+            <span>Guardar</span>
+        </button>
+    </div>
+</form>

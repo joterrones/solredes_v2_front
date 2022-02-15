@@ -346,28 +346,28 @@ export class confGeneralService{
         return this._http.post(this.url + 'configuracionGeneral/deleteTipoElemento', data);
     }
 
-    getTipoMontaje(token): Observable<any> {
+    getTablaCateTipoMontaje(request,token): Observable<any> {
         var reqHeader = new HttpHeaders({
             'Content-Type': 'application/json',
             'Authorization': 'Bearer ' + token
         });
-        return this._http.post(this.url + 'configuracionGeneral/getTipoMontaje', { headers: reqHeader });
+        return this._http.post(this.url + 'configuracionGeneral/getTablaCateTipoMontaje', request,{ headers: reqHeader });
     } 
 
-    saveTipoMontaje(data, token): Observable<any> {
+    saveCateTipoMontaje(data, token): Observable<any> {
         var reqHeader = new HttpHeaders({
             'Content-Type': 'application/json',
             'Authorization': 'Bearer ' + token
         });
         console.log('enviando datos a node')
         console.log(data)
-        return this._http.post(this.url + 'configuracionGeneral/saveTipoMontaje', data, { headers: reqHeader });
+        return this._http.post(this.url + 'configuracionGeneral/saveCateTipoMontaje', data, { headers: reqHeader });
     }
 
-    deleteTipoMontaje(data): Observable<any> {
+    deleteCateTipoMontaje(data): Observable<any> {
         console.log(data)
         console.log('borrando tipo montaje')
-        return this._http.post(this.url + 'configuracionGeneral/deleteTipoMontaje', data);
+        return this._http.post(this.url + 'configuracionGeneral/deleteCateTipoMontaje', data);
     }
 
     uploadfile(extension,archivo,fileToUpload,token):Observable<any>{
@@ -404,5 +404,29 @@ export class confGeneralService{
         });
         console.log(data)
         return this._http.post(this.url + 'configuracionGeneral/saveColorPro', data, { headers: reqHeader });
+    }
+
+    getTipoMontaje(request,token): Observable<any> {
+        var reqHeader = new HttpHeaders({
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
+        });
+        return this._http.post(this.url + 'configuracionGeneral/getTipoMontaje', request,{ headers: reqHeader });
+    } 
+
+    saveTipoMontaje(data, token): Observable<any> {
+        var reqHeader = new HttpHeaders({
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
+        });
+        console.log('enviando datos a node')
+        console.log(data)
+        return this._http.post(this.url + 'configuracionGeneral/saveTipoMontaje', data, { headers: reqHeader });
+    }
+
+    deleteTipoMontaje(data): Observable<any> {
+        console.log(data)
+        console.log('borrando tipo montaje')
+        return this._http.post(this.url + 'configuracionGeneral/deleteTipoMontaje', data);
     }
 }

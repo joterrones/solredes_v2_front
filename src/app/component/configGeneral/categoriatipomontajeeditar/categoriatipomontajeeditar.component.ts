@@ -52,7 +52,7 @@ export class CategoriatipomontajeeditarComponent extends BaseComponent implement
   
   guardar(newForm) {
     this.tipomontaje.n_id_usermodi= this.usuarioLog.n_idseg_userprofile;
-    this._configGeneralservice.saveTipoMontaje(this.tipomontaje, this.getToken().token).subscribe(
+    this._configGeneralservice.saveCateTipoMontaje(this.tipomontaje, this.getToken().token).subscribe(
       result => {
         try {
           if (result.estado) {

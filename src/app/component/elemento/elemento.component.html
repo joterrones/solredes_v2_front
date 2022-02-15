@@ -1,7 +1,34 @@
 <app-menu>
     <div class="contenedorBody">
         <h2>{{tit}}</h2>
-        <br />
+        
+        <mat-accordion>
+            <mat-expansion-panel>
+              <mat-expansion-panel-header class="back-expansion">
+                <mat-panel-title>
+                  <mat-icon matSuffix>filter_list</mat-icon> Filtros
+                </mat-panel-title>
+                <mat-panel-description>
+                  Filtrado de datos en la lista
+                </mat-panel-description>
+              </mat-expansion-panel-header>
+              <div class="contenedor">
+      
+                <mat-form-field>
+                  <mat-select placeholder="Tipo Elemento">
+                    <mat-option value="0" (click)='selectTipoElement(0)'>
+                      -TODOS-
+                    </mat-option>
+                    <mat-option *ngFor="let tp of tipoelemento" [value]="tp.n_idpl_tipoelemento" (click)='selectTipoElement(tp.n_idpl_tipoelemento)'>
+                      {{tp.c_codigo+" "+tp.c_nombre}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+      
+            </mat-expansion-panel>
+          </mat-accordion>
+          <br />
         <mat-card>
             <mat-form-field>
                 <input matInput placeholder="Buscar" (keyup)="applyFilter($event.target.value)">

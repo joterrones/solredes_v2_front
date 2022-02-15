@@ -5,6 +5,7 @@ import { AppSettings } from 'src/app/common/appsettings';
 import { ResultadoApi } from 'src/app/interface/common.interface';
 import { Confirmar } from 'src/app/interface/confirmar.interface';
 import { AlmacenService } from 'src/app/service/almacen.service';
+import { SeguridadService } from 'src/app/service/seguridad.service';
 import { BaseComponent } from '../../base/base.component';
 import { ConfirmComponent } from '../../general/confirm/confirm.component';
 import { PeriodoeditarComponent } from '../periodoeditar/periodoeditar.component';
@@ -13,13 +14,16 @@ import { PeriodoeditarComponent } from '../periodoeditar/periodoeditar.component
   selector: 'app-periodo',
   templateUrl: './periodo.component.html',
   styleUrls: ['./periodo.component.css'],
-  providers: [AlmacenService]
+  providers: [AlmacenService, SeguridadService]
 })
 export class PeriodoComponent extends BaseComponent implements OnInit {
 
   displayedColumns: string[] = ['editar','periodo','eliminar'];
   public tabla: MatTableDataSource<any>;
   public confirmar: Confirmar;
+
+  pantallaRol= [];
+  permisoEdit: boolean = false;
 
   periodoAll: any;
 
@@ -30,6 +34,7 @@ export class PeriodoComponent extends BaseComponent implements OnInit {
     public snackBar: MatSnackBar,
     public router: Router,
     public _almacen_service: AlmacenService,   
+    public _seguridad_service: SeguridadService,
     public dialog: MatDialog
   ) {
     super(snackBar, router);
@@ -38,6 +43,7 @@ export class PeriodoComponent extends BaseComponent implements OnInit {
   ngOnInit() {
     this.usuarioLog = this.getUser().data;
     this.getPeriodos();  
+    //this.getPantallaRol();
   }
 
   getPeriodos() {
@@ -125,4 +131,35 @@ export class PeriodoComponent extends BaseComponent implements OnInit {
         }
       });
   }
+
+  getPantallaRol() {
+    let request = {
+      n_idseg_userprofile: this.usuarioLog.n_idseg_userprofile
+    }
+    this._seguridad_service.getPantallaRol(request, this.getToken().token).subscribe(
+      result => {
+        let resultado = <ResultadoApi>result;
+        if (resultado.estado) {
+          this.pantallaRol = resultado.data;
+          this.pantallaRol.forEach(element => {            
+            if(element.c_codigo === 'se-adusu'){
+              console.log(element);
+              console.log(element.c_codigo);
+              if(element.c_permiso === 'MO'){
+                this.permisoEdit = true;
+              }
+            }
+          });
+        } else {
+          this.openSnackBar(resultado.mensaje, 99);
+        }
+      }, error => {
+        try {
+          this.openSnackBar(error.error.Detail, error.error.StatusCode);
+        } catch (error) {
+          this.openSnackBar(AppSettings.SERVICE_NO_CONECT_SERVER, 99);
+        }
+      });
+  }
+
 }

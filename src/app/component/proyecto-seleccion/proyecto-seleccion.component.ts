@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { MatSnackBar } from '@angular/material';
+import { MatDialog, MatSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
 import { AppSettings } from 'src/app/common/appsettings';
 import { ProyectoService } from 'src/app/service/proyecto.service';
 import { environment } from 'src/environments/environment';
 import { BaseComponent } from '../base/base.component';
+import { ProyectoDetalleComponent } from '../proyecto-detalle/proyecto-detalle.component';
 
 @Component({
   selector: 'app-proyecto-seleccion',
@@ -17,7 +18,9 @@ export class ProyectoSeleccionComponent extends BaseComponent implements OnInit 
   urlImagen: string;
   constructor(public _proyecto_service: ProyectoService,
     public _router: Router,
-    public snackBar: MatSnackBar) {
+    public snackBar: MatSnackBar,
+    public dialog: MatDialog
+    ) {
     super(snackBar, _router)
   }
 
@@ -53,5 +56,20 @@ export class ProyectoSeleccionComponent extends BaseComponent implements OnInit 
     this.setProyecto(item);
     this.router.navigate(['/principal']);
   }
+
+  openDialog(item): void {
+    console.log(item);
+    
+    const dialogRef = this.dialog.open(ProyectoDetalleComponent, {
+      width: '750px', height: '600px',
+      data: { item: item }
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      try {                
+      } catch (error) {
+        console.log(error);        
+      }
+    });
+  } 
 
 }

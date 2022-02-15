@@ -118,7 +118,8 @@ export class ImportacionSuministrosComponent extends BaseComponent implements On
   enviardatos(estructuras) {
     this.procesando = true;
     let rq= {
-      estructuras: estructuras
+      estructuras: estructuras,
+      n_idpro_proyecto: this.proyecto.n_idpro_proyecto
     };
     console.log("enviardatos request",rq) 
     this._importacion_service.insertSuministro(rq).subscribe(
