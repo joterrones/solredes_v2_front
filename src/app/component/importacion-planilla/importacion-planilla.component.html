@@ -21,6 +21,7 @@
         <button mat-raised-button color="primary" (click)="orientacion()" class="boton" [disabled]="procesando" *ngIf="permisoEdit">(4)Orientación</button>
         <button mat-raised-button color="primary" (click)="download()" class="boton" *ngIf="permisoEdit">Descargar</button>
         <button mat-raised-button color="primary" (click)="deleteEstructuras()" class="btnborrar" *ngIf="permisoEdit"> Borrar</button>
+        <button mat-raised-button color="primary" (click)="exportar()" class="boton" *ngIf="permisoEdit" disabled> Exportar Data</button>
 
         <mat-progress-bar class="example-margin" mode="indeterminate" *ngIf="procesando">
         </mat-progress-bar>

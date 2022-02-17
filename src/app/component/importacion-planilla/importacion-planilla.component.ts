@@ -11,12 +11,13 @@ import { saveAs } from 'file-saver';
 import { SeguridadService } from 'src/app/service/seguridad.service';
 import { ResultadoApi } from 'src/app/interface/common.interface';
 import { AppSettings } from 'src/app/common/appsettings';
+import { ExportarService } from 'src/app/service/exportar.service';
 
 @Component({
   selector: 'app-importacion-planilla',
   templateUrl: './importacion-planilla.component.html',
   styleUrls: ['./importacion-planilla.component.css'],
-  providers: [ImportacionService, VersionService, SeguridadService]
+  providers: [ImportacionService, VersionService, SeguridadService, ExportarService]
 })
 export class ImportacionPlanillaComponent extends BaseComponent implements OnInit {
 
@@ -54,6 +55,7 @@ export class ImportacionPlanillaComponent extends BaseComponent implements OnIni
     public _importacion_service: ImportacionService,
     public _version_service: VersionService,
     public _seguridad_service: SeguridadService,
+    public _exportar_service: ExportarService,
     public dialog: MatDialog,
     public _router: Router,
     public snackBar: MatSnackBar
@@ -172,7 +174,8 @@ export class ImportacionPlanillaComponent extends BaseComponent implements OnIni
   enviardatos(estructuras) {
     this.procesando = true;
     let rq = {
-      estructuras: estructuras
+      estructuras: estructuras,
+      n_idpro_proyecto: this.proyecto.n_idpro_proyecto
     };
     console.log("enviardatos request", rq)
     this._importacion_service.insertplanilla(rq).subscribe(
@@ -240,6 +243,19 @@ export class ImportacionPlanillaComponent extends BaseComponent implements OnIni
       this.openSnackBar("Seleccione una versión", 200);
     }
 
+  }
+
+  exportar() {
+    let request = {
+      n_idpro_proyecto: this.proyecto.n_idpro_proyecto
+    }
+    this._exportar_service.exportar(request, this.getToken().token).subscribe(
+      result => {       
+        
+        this._exportar_service.exportarExcelPlanilla(result.data.datos, result.data.datos2);
+      }, error => {
+        this.openSnackBar(<any>error, 99);
+      });
   }
 
   download() {

@@ -13,7 +13,7 @@
 
         <input id="file" #fileInput hidden type='file' multiple (change)="uploadfile($event.target.files)">
         <button type="button" mat-mini-fab color="accent" (click)="fileInput.click()" style="margin-left: 10px;"
-            [disabled]="editar">
+            [disabled]="editar" *ngIf="!procesando">
             <mat-icon>cloud_upload</mat-icon>
         </button>
 

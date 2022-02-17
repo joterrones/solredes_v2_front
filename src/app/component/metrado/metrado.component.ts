@@ -27,6 +27,7 @@ export class MetradoComponent extends BaseComponent implements OnInit {
   n_idpl_linea="";
   n_idpl_tipolinea="";
   idversion="";
+  procesando: boolean = false;
 
   filtro = [{ id: 1, nombre: "Suministro" },
   { id: 2, nombre: "Montaje" }];
@@ -52,10 +53,12 @@ export class MetradoComponent extends BaseComponent implements OnInit {
   onSelectTipo(id) {
     switch (id) {
       case 1:
-        this.getTabla();
+        this.procesando = true;
+        this.getTabla();        
         break;
       case 2:
-        this.getTablaMontaje();
+        this.procesando = true;
+        this.getTablaMontaje();        
         break;
     }
   }
@@ -78,6 +81,7 @@ export class MetradoComponent extends BaseComponent implements OnInit {
         console.log("Metrado");
         console.log(result.data);
         if (result.estado) {
+          this.procesando = false;
           this.tabla = new MatTableDataSource<any>(result.data);
           this.tabla.sort = this.sort;
           this.tabla.paginator = this.paginator;
@@ -100,6 +104,7 @@ export class MetradoComponent extends BaseComponent implements OnInit {
     this._metrado_montaje_service.getmontaje(request, this.getProyect()).subscribe(
       result => {
         if (result.estado) {
+          this.procesando = false;
           this.tabla = new MatTableDataSource<any>(result.data);
           this.tabla.sort = this.sort;
           this.tabla.paginator = this.paginator;

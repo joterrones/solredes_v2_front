@@ -11,6 +11,7 @@
                     </label>
                 </button>
             </label></mat-toolbar>
+        <!--último iditem = 25 -->
         <mat-nav-list>
             <mat-accordion>
                 <mat-expansion-panel [expanded]="idPanel == 1" >
@@ -72,7 +73,7 @@
                         <mat-icon>keyboard_arrow_right</mat-icon>
                         <span>Administración de Tipo Montaje</span>
                     </a>
-                    <a mat-list-item [routerLink]="['/partidamontaje']" *ngIf="ma_adtmo" (click)="panel(0,0)" [ngClass]="{'select':iditem == 0}">
+                    <a mat-list-item [routerLink]="['/partidamontaje']" *ngIf="ma_adpmo" (click)="panel(2,25)" [ngClass]="{'select':iditem == 25}">
                         <mat-icon>keyboard_arrow_right</mat-icon>
                         <span>Administración de Partidas de Montaje</span>
                     </a>
@@ -88,7 +89,7 @@
                         <mat-icon>keyboard_arrow_right</mat-icon>
                         <span>Administración de Armado</span>
                     </a>
-                    <a mat-list-item [routerLink]="['/periodo']" *ngIf="true" (click)="panel(0,0)" [ngClass]="{'select':iditem == 0}">
+                    <a mat-list-item [routerLink]="['/periodo']" *ngIf="ma_adper" (click)="panel(2,24)" [ngClass]="{'select':iditem == 24}">
                         <mat-icon>keyboard_arrow_right</mat-icon>
                         <span>Administración de Periodo</span>
                     </a>
@@ -180,7 +181,7 @@
                             Reporte
                         </mat-panel-title>
                     </mat-expansion-panel-header>
-                    <a mat-list-item [routerLink]="['/grafico']" *ngIf="al_adalm" (click)="panel(8,23)" [ngClass]="{'select':iditem == 23}">
+                    <a mat-list-item [routerLink]="['/grafico']" *ngIf="re_repor" (click)="panel(8,23)" [ngClass]="{'select':iditem == 23}">
                         <mat-icon>bar_chart</mat-icon>
                         <span>Reporte</span>
                     </a>

@@ -43,7 +43,7 @@ export class PeriodoComponent extends BaseComponent implements OnInit {
   ngOnInit() {
     this.usuarioLog = this.getUser().data;
     this.getPeriodos();  
-    //this.getPantallaRol();
+    this.getPantallaRol();
   }
 
   getPeriodos() {
@@ -142,7 +142,7 @@ export class PeriodoComponent extends BaseComponent implements OnInit {
         if (resultado.estado) {
           this.pantallaRol = resultado.data;
           this.pantallaRol.forEach(element => {            
-            if(element.c_codigo === 'se-adusu'){
+            if(element.c_codigo === 'ma-adper'){
               console.log(element);
               console.log(element.c_codigo);
               if(element.c_permiso === 'MO'){

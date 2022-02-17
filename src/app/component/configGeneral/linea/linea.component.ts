@@ -32,7 +32,17 @@ export class LineaComponent extends BaseComponent implements OnInit {
   idzona = 0;
   textfilter = '';
 
-  displayedColumns: string[] = ['editar', 'c_nombre', 'c_codigo', 'tipolinea', 'zona','Metrado','MetradoMon','mapa','eliminar'];
+  estadoLinea = [
+    {id: 1, nombre: 'Validado'},
+    {id: 2, nombre: 'No Validado'}
+  ]; 
+
+  estadoSelectb_expediente: boolean = null; 
+  estadoSelectb_replanteo: boolean = null; 
+  estadoSelectb_montaje: boolean = null; 
+  estadoSelectb_cierre: boolean = null; 
+
+  displayedColumns: string[] = ['editar', 'c_nombre', 'c_codigo', 'tipolinea', 'zona','Metrado','MetradoMon','mapa','expediente','replanteo','montaje','cierre','eliminar'];
   public tablaLineas: MatTableDataSource<any>;
   public confirmar: Confirmar;
 
@@ -70,12 +80,66 @@ export class LineaComponent extends BaseComponent implements OnInit {
     this.idzona = n_idpl_zona;
     this.getTablaLinea();
   }
+
+  selectEstado(colum, id){
+    if(colum == 1){      
+      if(id == 1){        
+        this.estadoSelectb_expediente = true;
+        this.getTablaLinea();
+      }else if(id == 2){
+        this.estadoSelectb_expediente = false;
+        this.getTablaLinea();
+      }else if(id == 0){
+        this.estadoSelectb_expediente = null;
+        this.getTablaLinea();
+      }
+
+    }else if(colum == 2){      
+      if(id == 1){        
+        this.estadoSelectb_replanteo = true;
+        this.getTablaLinea();
+      }else if(id == 2){
+        this.estadoSelectb_replanteo = false;
+        this.getTablaLinea();
+      }else if(id == 0){
+        this.estadoSelectb_replanteo = null;
+        this.getTablaLinea();
+      }
+    }else if(colum == 3){      
+      if(id == 1){        
+        this.estadoSelectb_montaje = true;
+        this.getTablaLinea();
+      }else if( id == 2){
+        this.estadoSelectb_montaje = false;
+        this.getTablaLinea();
+      }else if(id == 0){
+        this.estadoSelectb_montaje = null;
+        this.getTablaLinea();
+      }
+    }else if(colum == 4){      
+      if(id == 1){        
+        this.estadoSelectb_cierre = true;
+        this.getTablaLinea();
+      }else if(id == 2){
+        this.estadoSelectb_cierre = false;
+        this.getTablaLinea();
+      }
+      else if(id == 0){
+        this.estadoSelectb_cierre = null;
+        this.getTablaLinea();
+      }
+    }
+  }
   
-  getTablaLinea() {
-    let request = {
+  getTablaLinea() {    
+    var request = {
       n_idpl_tipolinea: this.idtipolinea,     
       n_idpl_zona: this.idzona,
-      n_idpro_proyecto: this.proyecto.n_idpro_proyecto
+      n_idpro_proyecto: this.proyecto.n_idpro_proyecto,
+      estadoSelectb_expediente: this.estadoSelectb_expediente,
+      estadoSelectb_replanteo: this.estadoSelectb_replanteo,
+      estadoSelectb_montaje: this.estadoSelectb_montaje,
+      estadoSelectb_cierre: this.estadoSelectb_cierre
     }
     console.log(request);
     
@@ -220,6 +284,35 @@ export class LineaComponent extends BaseComponent implements OnInit {
   showMapa(element): void {      
     this.router.navigate(["/mapalinea/"+element.n_idpl_linea+"/"+element.c_nombre+"/"+element.c_nombrez+"/"+element.c_nombret]);
   }  
+
+  estado(element,estado, id): void {
+    let request = {
+      n_idpl_linea: element.n_idpl_linea,
+      estado : estado,
+      id: id,
+      n_id_usermodi: this.usuarioLog.n_idseg_userprofile
+    }
+    console.log(request);
+    
+    this._confiGeneral_service.estadoLinea(request, this.getToken().token).subscribe(
+      result => {
+        try {
+          if (result.estado) {
+            
+            this.openSnackBar("Estado Actualizado", 99);
+          } else {
+            this.openSnackBar(result.mensaje, 99);
+          }
+        } catch (error) {
+          this.openSnackBar(AppSettings.SERVICE_NO_CONECT_SERVER, 99);
+        } finally {
+          this.applyFilter(this.textfilter);
+        }
+      }, error => {
+        this.openSnackBar(error.error, 99);
+      });
+  }
+
   getPantallaRol() {
     let request = {
       n_idseg_userprofile: this.usuarioLog.n_idseg_userprofile

@@ -54,6 +54,9 @@ export class MenuComponent extends BaseComponent implements OnInit {
   public ma_mapge: boolean = false;
   public al_adalm: boolean = false;
   public ma_mapli: boolean = false;
+  public ma_adper: boolean = false;
+  public re_repor: boolean = false; 
+  public ma_adpmo: boolean = false;
 
   colorPro: string;
   pantallaRol: [];
@@ -202,6 +205,15 @@ export class MenuComponent extends BaseComponent implements OnInit {
                   break;
                 case 'ma-mapli':
                   this.ma_mapli = true;
+                  break;
+                case 'ma-adper':
+                  this.ma_adper = true;
+                  break;
+                case 're-repor':
+                  this.re_repor = true;
+                  break; 
+                case 'ma-adpmo':
+                  this.ma_adpmo = true;
                   break;
               }
             }

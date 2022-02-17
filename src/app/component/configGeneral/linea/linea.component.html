@@ -35,6 +35,46 @@
               </mat-option>
             </mat-select>
           </mat-form-field>
+          <mat-form-field>
+            <mat-select placeholder="Expediente">
+              <mat-option value="0" (click)='selectEstado(1,0)'>
+                -TODOS-
+              </mat-option>
+              <mat-option *ngFor="let element of estadoLinea" [value]="element.id" (click)='selectEstado(1,element.id)'>
+                {{element.nombre}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-select placeholder="Replanteo">
+              <mat-option value="0" (click)='selectEstado(2,0)'>
+                -TODOS-
+              </mat-option>
+              <mat-option *ngFor="let element of estadoLinea" [value]="element.id" (click)='selectEstado(2,element.id)'>
+                {{element.nombre}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-select placeholder="Montaje">
+              <mat-option value="0" (click)='selectEstado(3,0)'>
+                -TODOS-
+              </mat-option>
+              <mat-option *ngFor="let element of estadoLinea" [value]="element.id" (click)='selectEstado(3,element.id)'>
+                {{element.nombre}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-select placeholder="Cierre">
+              <mat-option value="0" (click)='selectEstado(4,0)'>
+                -TODOS-
+              </mat-option>
+              <mat-option *ngFor="let element of estadoLinea" [value]="element.id" (click)='selectEstado(4,element.id)'>
+                {{element.nombre}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
         </div>
 
       </mat-expansion-panel>
@@ -99,6 +139,31 @@
             <button mat-icon-button color="accent" (click)="showMapa(element)">
               <mat-icon aria-label="Example icon-button with a heart icon">map</mat-icon>
             </button>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="expediente">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Expediente </th>
+          <td mat-cell *matCellDef="let element">            
+            <mat-slide-toggle [(ngModel)]="element.b_expediente" (click)="estado(element,!element.b_expediente, 1)" ></mat-slide-toggle>
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="replanteo">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Replanteo </th>
+          <td mat-cell *matCellDef="let element">            
+            <mat-slide-toggle [(ngModel)]="element.b_replanteo" (click)="estado(element,!element.b_replanteo,2)" ></mat-slide-toggle>
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="montaje">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Montaje </th>
+          <td mat-cell *matCellDef="let element">            
+            <mat-slide-toggle [(ngModel)]="element.b_montaje" (click)="estado(element,!element.b_montaje, 3)" ></mat-slide-toggle>
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="cierre">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Cierre </th>
+          <td mat-cell *matCellDef="let element">            
+            <mat-slide-toggle [(ngModel)]="element.b_cierre" (click)="estado(element,!element.b_cierre, 4)" ></mat-slide-toggle>
           </td>
         </ng-container>
 

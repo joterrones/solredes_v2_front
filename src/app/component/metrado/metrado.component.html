@@ -24,10 +24,12 @@
         <mat-icon aria-label="Example icon-button with a heart icon">arrow_back</mat-icon>                
       </button>
     </div>    
+    <mat-progress-bar class="example-margin" mode="indeterminate" *ngIf="procesando"></mat-progress-bar>
 
-    <mat-table [dataSource]="tabla" class="mat-elevation-z8">
+    <mat-table [dataSource]="tabla" class="mat-elevation-z8">      
       <ng-container matColumnDef="c_codigo">
         <mat-header-cell *matHeaderCellDef> No. </mat-header-cell>
+       
         <mat-cell *matCellDef="let element"><label [ngClass]="(element.isGroupBy == true)?'group':''">
             <!--    {{element.c_codigo.replace('RS_','').replace('RP_','').replace('LP_','')}} -->
             {{element.c_codigo}}

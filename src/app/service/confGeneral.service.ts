@@ -60,6 +60,16 @@ export class confGeneralService{
         return this._http.post(this.url + 'configuracionGeneral/getLinea', data, { headers: reqHeader });
     }
 
+    estadoLinea(data, token): Observable<any> {
+        var reqHeader = new HttpHeaders({
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
+        });
+        console.log('enviando datos a node linea')
+        console.log(data)
+        return this._http.post(this.url + 'configuracionGeneral/estadoLinea', data, { headers: reqHeader });
+    }
+
     deleteLinea(data): Observable<any> {
         console.log('borrando linea')
         console.log(data)        

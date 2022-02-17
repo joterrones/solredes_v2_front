@@ -1,4 +1,5 @@
 <h4 mat-dialog-title>Edición [{{data.item.c_codigo}}] {{data.item.c_nombre}}</h4>
+<mat-progress-bar class="example-margin" mode="indeterminate" *ngIf="procesando"></mat-progress-bar>
 <mat-accordion>
   <mat-expansion-panel *ngFor="let item of estructuras">
     <mat-expansion-panel-header>

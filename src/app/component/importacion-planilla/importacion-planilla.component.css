@@ -35,5 +35,6 @@ table{
 }
 
 .btnborrar{
+  margin: 10px;
   background-color: red;
 }

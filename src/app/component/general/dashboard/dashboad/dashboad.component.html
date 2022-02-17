@@ -121,7 +121,24 @@
         </mat-card>        
       </div>
       
-      
+      <div class="elementoChart">
+        <mat-card>          
+          <div class="contCard">
+            <h3>ESTADO DE LINEAS</h3>
+            <mat-form-field>
+              <mat-select placeholder="Versiones">
+                  <mat-option *ngFor="let item of versiones" [value]="item.id" (click)="selecVersion(item.id)">
+                      {{item.nombre}}
+                  </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <button mat-icon-button color="accent" (click)="openLineaEstado()">            
+              <mat-icon> zoom_out_map</mat-icon>            
+            </button>
+          </div>          
+          <canvas id="LineasEstado">{{myChartLineasEstado}}</canvas>
+        </mat-card>
+      </div>
 
       <!-- 
       <div class="elementoChart">

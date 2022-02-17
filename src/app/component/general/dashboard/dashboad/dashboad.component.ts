@@ -16,6 +16,8 @@ import { DashboardLineasEstructurasComponent } from '../dashboard-lineas-estruct
 import { DashboardLineaZonaComponent } from '../dashboard-linea-zona/dashboard-linea-zona.component';
 import { DashboardPeriodoComponent } from '../dashboard-periodo/dashboard-periodo.component';
 import { DashboardZonaComponent } from '../dashboard-zona/dashboard-zona.component';
+import { DashboardLineaEstadoComponent } from '../dashboard-linea-estado/dashboard-linea-estado.component';
+
 
 @Component({
   selector: 'app-dashboad',
@@ -44,13 +46,28 @@ export class DashboadComponent extends BaseComponent implements OnInit {
   widthdetail = 1;
   widthdash = 2;
   rowspan = 1;
+  selected: number = 0;
 
+  versiones =[
+    { id: 1, nombre: "Expediente" },
+    { id: 2, nombre: "Replanteo" },
+    { id: 3, nombre: "Montaje" },
+    { id: 4, nombre: "Cierre" },
+  ];
+  tplinea = [];
+  expediente = [];
+  replanteo = [];
+  montaje = [];
+  cierre = [];
+  selectedArr = [];
+  total = [];
 
   public myChartLineas: any;
   public MyCharProgreso: any;
   public MyCharPeriodo: any;
   public MyCharLineaZona: any;
   public MyCharZona: any;
+  public myChartLineasEstado: any;
 
 
   public MyCharTipoEjecucion: any;
@@ -149,6 +166,55 @@ export class DashboadComponent extends BaseComponent implements OnInit {
     this.idproyecto = id;
     this.getTotales();
     this.getDepartamento_dash();
+  }
+
+  selecVersion(id) {
+    console.log("Slecet ID", id);   
+    
+    if(id == 1){
+      this.selectedArr = this.expediente
+      console.log(this.selectedArr);            
+    }else if(id == 2){
+      this.selectedArr = this.replanteo      
+    }else if(id == 3){
+      this.selectedArr = this.montaje     
+    }else if(id == 4){
+      this.selectedArr = this.cierre
+    }
+          
+    this.getEstadoLineas();
+  }
+
+  getEstadoLineas(){
+    this.myChartLineasEstado = new Chart('LineasEstado', {
+      type: 'bar',
+      data: {
+        labels: this.tplinea,
+        datasets: [{
+          label: 'Total',
+          data: this.total,
+          backgroundColor: ['rgba(21, 101, 192)','rgba(21, 101, 192)','rgba(21, 101, 192)','rgba(21, 101, 192)','rgba(21, 101, 192)','rgba(21, 101, 192)','rgba(21, 101, 192)','rgba(21, 101, 192)','rgba(21, 101, 192)','rgba(21, 101, 192)'],
+          borderColor: ['rgba(21, 101, 192)','rgba(21, 101, 192)','rgba(21, 101, 192)','rgba(21, 101, 192)','rgba(21, 101, 192)','rgba(21, 101, 192)','rgba(21, 101, 192)','rgba(21, 101, 192)','rgba(21, 101, 192)','rgba(21, 101, 192)'],
+          borderWidth: 1
+        },{
+          label: 'Validado',
+          data: this.selectedArr,
+          backgroundColor: ['rgba(255, 143, 0)','rgba(255, 143, 0)','rgba(255, 143, 0)','rgba(255, 143, 0)','rgba(255, 143, 0)','rgba(255, 143, 0)','rgba(255, 143, 0)','rgba(255, 143, 0)','rgba(255, 143, 0)','rgba(255, 143, 0)','rgba(255, 143, 0)'],
+          borderColor: ['rgba(255, 143, 0)','rgba(255, 143, 0)','rgba(255, 143, 0)','rgba(255, 143, 0)','rgba(255, 143, 0)','rgba(255, 143, 0)','rgba(255, 143, 0)','rgba(255, 143, 0)','rgba(255, 143, 0)','rgba(255, 143, 0)','rgba(255, 143, 0)'],
+          borderWidth: 1
+        }]
+      },
+      options: {
+        legend: {  display: true },
+        scales: {
+          yAxes: [{
+            ticks: {
+              beginAtZero: true
+            }
+          }]
+        }
+      }
+    });
   }
 
   getFase() {
@@ -261,6 +327,20 @@ export class DashboadComponent extends BaseComponent implements OnInit {
           if (this.MyCharProgreso != undefined) {
             this.MyCharProgreso.destroy();
           }
+
+          this.expediente = resultado.data.graficoLineaEstado.expediente
+          
+          this.replanteo = resultado.data.graficoLineaEstado.replanteo
+          
+          this.montaje = resultado.data.graficoLineaEstado.montaje
+          
+          this.cierre = resultado.data.graficoLineaEstado.cierre
+
+          this.tplinea = resultado.data.graficoLineaEstado.tplinea
+
+          this.total = resultado.data.graficoLineaEstado.total
+
+          this.getEstadoLineas();
 
           this.myChartLineas = new Chart('Lineas_estructuras', {
             type: 'bar',
@@ -391,7 +471,8 @@ export class DashboadComponent extends BaseComponent implements OnInit {
                 }]
               }
             }
-          });
+          });          
+          
           
         }else {
           this.openSnackBar(resultado.mensaje, 99);
@@ -459,6 +540,19 @@ export class DashboadComponent extends BaseComponent implements OnInit {
 
   openDialogZona(): void {        
     const dialogRef = this.dialog.open(DashboardZonaComponent, {
+      width: '950px', 
+      data:  this.dataResultado
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      try {       
+      } catch (error) {
+        console.log(error);
+      }
+    });
+  }  
+
+  openLineaEstado(): void { 
+    const dialogRef = this.dialog.open(DashboardLineaEstadoComponent, {
       width: '950px', 
       data:  this.dataResultado
     });

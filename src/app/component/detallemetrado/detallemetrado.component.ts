@@ -14,6 +14,7 @@ export class DetallemetradoComponent extends BaseComponent implements OnInit {
 
   displayedColumns: string[] = ['c_tipo','c_codigo','c_nombreelemento','c_unidadmedida','n_cantidad'];
     estructuras = [];
+    procesando: boolean =  false;
     constructor(
         public dialogRef: MatDialogRef<any>,
         @Inject(MAT_DIALOG_DATA) public data: any,
@@ -25,6 +26,7 @@ export class DetallemetradoComponent extends BaseComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.procesando = true;
         this.getEstructuras();
     }
 
@@ -37,6 +39,7 @@ export class DetallemetradoComponent extends BaseComponent implements OnInit {
         this._metrado_service.getestructurametrado(request,this.getProyect()).subscribe(
             result => {
                 if (result.estado) {
+                    this.procesando = false;
                     this.estructuras = result.data;
                 } else {
 

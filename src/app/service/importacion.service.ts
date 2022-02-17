@@ -87,7 +87,7 @@ export class ImportacionService {
           fgColor: { argb: fg_color },
           color: { argb: bg_color }
         };
-      }
+    }
 
     downloadPlantillaLinea(dataZona: any[], dataTipoLi: any[],excelFileName: string): void{        
 

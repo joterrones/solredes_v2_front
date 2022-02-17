@@ -9,9 +9,7 @@ import { ResultadoApi } from '../../../interface/common.interface';
 import { Confirmar } from '../../../interface/confirmar.interface';
 import { confGeneralService } from '../../../service/confGeneral.service';
 import { ConfirmComponent } from '../../general/confirm/confirm.component';
-import { LineaeditarComponent } from '../lineaeditar/lineaeditar.component';
 import { SeguridadService } from 'src/app/service/seguridad.service';
-import { extend } from 'ol/array';
 import { PartidamontajeeditarComponent } from '../partidamontajeeditar/partidamontajeeditar.component';
 
 @Component({
@@ -215,7 +213,7 @@ export class PartidamontajeComponent extends BaseComponent implements OnInit {
         if (resultado.estado) {
           this.pantallaRol = resultado.data;
           this.pantallaRol.forEach(element => {            
-            if(element.c_codigo === 'ma-adlin'){
+            if(element.c_codigo === 'ma-adpmo'){
               console.log(element);
               console.log(element.c_codigo);
               if(element.c_permiso === 'MO'){
