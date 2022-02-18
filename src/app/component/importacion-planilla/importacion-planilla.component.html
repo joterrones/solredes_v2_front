@@ -19,9 +19,9 @@
         <button mat-raised-button color="primary" (click)="conexionapi(2)" class="boton" [disabled]="procesando" *ngIf="permisoEdit">(2)Vanos</button>
         <button mat-raised-button color="primary" (click)="creargeom()" class="boton" [disabled]="procesando" *ngIf="permisoEdit">(3)GEOM</button>
         <button mat-raised-button color="primary" (click)="orientacion()" class="boton" [disabled]="procesando" *ngIf="permisoEdit">(4)Orientación</button>
-        <button mat-raised-button color="primary" (click)="download()" class="boton" *ngIf="permisoEdit">Descargar</button>
-        <button mat-raised-button color="primary" (click)="deleteEstructuras()" class="btnborrar" *ngIf="permisoEdit"> Borrar</button>
-        <button mat-raised-button color="primary" (click)="exportar()" class="boton" *ngIf="permisoEdit" disabled> Exportar Data</button>
+        <button mat-raised-button color="primary" (click)="download()" class="boton" [disabled]="procesando" *ngIf="permisoEdit">Descargar</button>
+        <button mat-raised-button color="primary" (click)="deleteEstructuras()" [disabled]="procesando" class="btnborrar" *ngIf="permisoEdit"> Borrar</button>
+        <button mat-raised-button color="primary" (click)="exportar()" class="boton" [disabled]="procesando" *ngIf="permisoEdit" > Exportar Data</button>
 
         <mat-progress-bar class="example-margin" mode="indeterminate" *ngIf="procesando">
         </mat-progress-bar>
