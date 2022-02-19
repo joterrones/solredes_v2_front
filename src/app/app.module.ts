@@ -132,6 +132,7 @@ import { PartidamontajeComponent } from './component/configGeneral/partidamontaj
 import { PartidamontajeeditarComponent } from './component/configGeneral/partidamontajeeditar/partidamontajeeditar.component';
 import { ProyectoDetalleComponent } from './component/proyecto-detalle/proyecto-detalle.component';
 import { DashboardLineaEstadoComponent } from './component/general/dashboard/dashboard-linea-estado/dashboard-linea-estado.component';
+import { ImportacionPlanillaDescargarComponent } from './component/importacion-planilla-descargar/importacion-planilla-descargar.component';
 
 
 
@@ -261,6 +262,7 @@ import { DashboardLineaEstadoComponent } from './component/general/dashboard/das
     PartidamontajeeditarComponent,
     ProyectoDetalleComponent,
     DashboardLineaEstadoComponent,
+    ImportacionPlanillaDescargarComponent,
 
   ],
   imports: [
@@ -347,7 +349,8 @@ import { DashboardLineaEstadoComponent } from './component/general/dashboard/das
     PeriodoeditarComponent,
     PartidamontajeeditarComponent,
     ProyectoDetalleComponent,
-    DashboardLineaEstadoComponent
+    DashboardLineaEstadoComponent,
+    ImportacionPlanillaDescargarComponent
   ],
   providers: [
     MatDatepickerModule,

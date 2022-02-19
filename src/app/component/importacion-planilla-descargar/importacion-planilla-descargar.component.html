@@ -1,0 +1,30 @@
+<h1 mat-dialog-title>Exportar Datos</h1>
+
+<form class="example-container" #newForm="ngForm" (ngSubmit)="guardar(newForm)">
+
+    <div mat-dialog-content class="contenedor">
+        <mat-form-field>
+            <mat-select placeholder="Tipo Linea" [(value)]="idtipolinea">              
+              <mat-option *ngFor="let lineat of tipolinea" [value]="lineat.n_idpl_tipolinea">
+                {{lineat.c_nombre}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+      
+          <mat-form-field>
+            <mat-select placeholder="Zonas" [(value)]="idzona">              
+              <mat-option *ngFor="let z of zona" [value]="z.n_idpl_zona">
+                {{z.c_nombre}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+    </div>    
+    <div mat-dialog-actions>  
+      <button mat-button type="submit" cdkFocusInitial
+        [disabled]="!newForm.form.valid || procesando" style="align-content: center;">
+        <mat-icon>cloud_download</mat-icon>
+        <span style="padding-left: 5px;">Descargar</span>
+      </button>
+    </div>
+  </form>
+  <mat-progress-bar class="example-margin" mode="indeterminate" *ngIf="procesando"></mat-progress-bar>
