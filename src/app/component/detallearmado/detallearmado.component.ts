@@ -37,7 +37,8 @@ export class DetallearmadoComponent extends BaseComponent implements OnInit {
     
     this.iconoMapa = [
       {c_iconomapa:'CAC'},{c_iconomapa:'MD'},{c_iconomapa:'PEX'},{c_iconomapa:'PAT'},
-      {c_iconomapa:'RI'},{c_iconomapa:'RV'},{c_iconomapa:'vivienda'},{c_iconomapa:'AP'}
+      {c_iconomapa:'RI'},{c_iconomapa:'RV'},{c_iconomapa:'vivienda'},{c_iconomapa:'AP'},
+      {c_iconomapa:'SE'}
     ]
 
     if(this.data.item==null){

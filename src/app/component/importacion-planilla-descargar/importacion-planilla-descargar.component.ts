@@ -998,7 +998,8 @@ export class ImportacionPlanillaDescargarComponent extends BaseComponent impleme
             };*/
 
         });
-        
+        worksheet.autoFilter = 'A1:AW1';
+
         worksheet.getColumn(1).width = 50;
         worksheet.getColumn(2).width = 15;
         worksheet.getColumn(3).width = 15;

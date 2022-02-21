@@ -15,12 +15,13 @@ import { ExportarService } from 'src/app/service/exportar.service';
 import { Workbook } from 'exceljs';
 import * as fs from 'file-saver';
 import { ImportacionPlanillaDescargarComponent } from '../importacion-planilla-descargar/importacion-planilla-descargar.component';
+import { confGeneralService } from 'src/app/service/confGeneral.service';
 
 @Component({
   selector: 'app-importacion-planilla',
   templateUrl: './importacion-planilla.component.html',
   styleUrls: ['./importacion-planilla.component.css'],
-  providers: [ImportacionService, VersionService, SeguridadService, ExportarService]
+  providers: [ImportacionService, VersionService, SeguridadService, ExportarService, confGeneralService]
 })
 export class ImportacionPlanillaComponent extends BaseComponent implements OnInit {
 
@@ -33,6 +34,10 @@ export class ImportacionPlanillaComponent extends BaseComponent implements OnIni
   idversion: number = 0;
 
   procesando: boolean = false;
+
+  arrZonas = [];
+  arrTipoLi = [];
+  arrLineas = [];
 
   tabla: MatTableDataSource<any>;
   displayedColumns: string[] = [
@@ -58,6 +63,7 @@ export class ImportacionPlanillaComponent extends BaseComponent implements OnIni
     public _importacion_service: ImportacionService,
     public _version_service: VersionService,
     public _seguridad_service: SeguridadService,
+    public _confiGeneral_service: confGeneralService,    
     public _exportar_service: ExportarService,
     public dialog: MatDialog,
     public _router: Router,
@@ -283,12 +289,58 @@ openDialog(): void {
   }
 
   download() {
-    this._importacion_service.downloadPlantillaRedes().subscribe(
+    let request = {
+      n_idpl_zona: 0,      
+      n_idpro_proyecto: this.proyecto.n_idpro_proyecto,     
+    }    
+    this._confiGeneral_service.getZona(request, this.getToken().token).subscribe(
+      result => {        
+          if (result.estado) {
+            this.arrZonas = result.data;            
+            this._importacion_service.gettipolinea(this.getToken().token).subscribe(
+              result=>{
+                if(result.estado){
+                  this.arrTipoLi = result.data;
+                  var req = {
+                    n_idpl_tipolinea: 0,     
+                    n_idpl_zona: 0,
+                    n_idpro_proyecto: this.proyecto.n_idpro_proyecto,
+                    estadoSelectb_expediente: null,
+                    estadoSelectb_replanteo: null,
+                    estadoSelectb_montaje: null,
+                    estadoSelectb_cierre: null
+                  }
+                  this._confiGeneral_service.getLinea(req, this.getToken().token).subscribe(
+                    result => {   
+                      if(result.estado){
+                        this.arrLineas = result.data;
+                        this._importacion_service.downloadPlantillaRedes2(this.arrZonas, this.arrTipoLi, this.arrLineas);
+                      }else {
+                        this.openSnackBar(result.mensaje, 99);
+                      }          
+                    }, error => {
+                      this.openSnackBar(error.error, 99);
+                    });
+                  
+                  
+                }else {
+                  this.openSnackBar(result.mensaje, 99);
+                }  
+              }, error => {
+                this.openSnackBar(error.error, 99);
+              });          
+          } else {
+            this.openSnackBar(result.mensaje, 99);
+          }        
+      }, error => {
+        this.openSnackBar(error.error, 99);
+      });
+    /*this._importacion_service.downloadPlantillaRedes().subscribe(
       result => {
         saveAs(result, "Plantilla_Redes.xlsx");
       }, error => {
         this.openSnackBar(<any>error, 99);
-      });
+      });*/
   }
 
   getPantallaRol() {
