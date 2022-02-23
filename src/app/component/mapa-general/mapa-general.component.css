@@ -15,7 +15,7 @@ main {
     flex-grow: 1;
 }
 .left-bar {
-    width: 20em;
+    width: 15em;
     background-color: var(--sidebar-color);
 }
 .map-container {

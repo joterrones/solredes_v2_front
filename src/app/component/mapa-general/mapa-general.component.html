@@ -1,10 +1,9 @@
 <app-menu>
-    <header>
-        <div class="title">Map Viewer - Openlayers & Angular</div>
-    </header>
-    <main>
-        <app-map [map]="map" ></app-map>
-        <div class="left-bar"></div>
-        <div id="ol-map" class="map-container">  </div>
-    </main>
+
+    <button mat-icon-button color="primary" (click)="openDialog();">
+        <mat-icon>filter</mat-icon>
+      </button>
+        <app-map [map]="map" style="width: 100%;"></app-map>
+  
+
 </app-menu>
