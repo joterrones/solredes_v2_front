@@ -40,13 +40,13 @@
                     [markerDraggable]="false" [opacity]="marker.alpha" [iconUrl]="
               {
                 url:  './assets/mapa/'+marker.data.c_iconomapa+'.png' 
-            }" (markerClick)="openDialog(marker.data)" >
+            }" (markerClick)="openDialog(marker.data)" [zIndex]="2">
                 </agm-marker>                
                 <ng-container>  
-                    <agm-circle *ngFor="let marker of markersCir " [latitude]="marker.lat" [longitude]="marker.lng" [radius]="15" [fillColor]="'green'">
+                    <agm-circle *ngFor="let marker of markersCir " [latitude]="marker.lat" [longitude]="marker.lng" [radius]="15" [fillColor]="'PaleGreen'" [fillOpacity]="0.1" [zIndex]="1">
                     </agm-circle>         
                     <!-- <agm-polyline *ngFor="let polyline of polilineas;let i = index;" [strokeColor]="black">-->
-                    <agm-polyline *ngFor="let polyline of polilineas;let i = index;">
+                    <agm-polyline *ngFor="let polyline of polilineas;let i = index;" [zIndex]="2">
                         <agm-polyline-point *ngFor="let point of polyline.path" [latitude]="point.c_latitud"
                             [longitude]="point.c_longitud">
                         </agm-polyline-point>
