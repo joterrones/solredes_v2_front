@@ -1,0 +1,46 @@
+<div mat-dialog-content>
+    <div class="vertical">
+        <div *ngFor="let item of data">
+            <mat-checkbox class="example-margin" [(ngModel)]="item.checked">{{item.nombre}}</mat-checkbox>
+        </div>
+
+    </div>
+</div>
+<div mat-dialog-actions>
+    <button mat-button cdkFocusInitial (click)="aceptar()">
+        <mat-icon>save</mat-icon>
+        <span>Aceptar</span>
+    </button>
+</div>
+<!--<div class="vertical">
+    <label>Expediente técnico</label>
+    <div class="vertical-item">
+        <mat-checkbox class="example-margin">Linea Primaria</mat-checkbox>
+        <mat-checkbox class="example-margin">Red Primaria</mat-checkbox>
+        <mat-checkbox class="example-margin">Red Secundaria</mat-checkbox>
+    </div>
+</div>
+<div class="vertical">
+    <label>Replanteo</label>
+    <div class="vertical-item">
+        <mat-checkbox class="example-margin">Linea Primaria</mat-checkbox>
+        <mat-checkbox class="example-margin">Red Primaria</mat-checkbox>
+        <mat-checkbox class="example-margin">Red Secundaria</mat-checkbox>
+    </div>
+</div>
+<div class="vertical">
+    <label>Montaje</label>
+    <div class="vertical-item">
+        <mat-checkbox class="example-margin">Linea Primaria</mat-checkbox>
+        <mat-checkbox class="example-margin">Red Primaria</mat-checkbox>
+        <mat-checkbox class="example-margin">Red Secundaria</mat-checkbox>
+    </div>
+</div>
+<div class="vertical">
+    <label>Conforme a obra</label>
+    <div class="vertical-item">
+        <mat-checkbox class="example-margin">Linea Primaria</mat-checkbox>
+        <mat-checkbox class="example-margin">Red Primaria</mat-checkbox>
+        <mat-checkbox class="example-margin">Red Secundaria</mat-checkbox>
+    </div>
+</div>-->
