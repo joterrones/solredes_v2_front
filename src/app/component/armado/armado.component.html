@@ -5,7 +5,7 @@
             <mat-accordion>
                 <mat-expansion-panel>
                     <mat-expansion-panel-header class="back-expansion">
-                        <mat-panel-title>
+                        <mat-panel-title class="cont">
                             <mat-icon matSuffix>filter_list</mat-icon> Filtros
                         </mat-panel-title>
                         <mat-panel-description>
@@ -163,7 +163,7 @@
                     <ng-container matColumnDef="n_cantidad">
                         <th mat-header-cell *matHeaderCellDef color="error" mat-sort-header> Cantidad </th>
                         <td mat-cell *matCellDef="let element">
-                            <input matInput placeholder="Catidad" name="n_cantidad" #n_cantidad="ngModel"
+                            <input matInput placeholder="Cantidad" name="n_cantidad" #n_cantidad="ngModel"
                                 [(ngModel)]="element.n_cantidad" (keypress)="keyPress($event,element)"
                                 (focus)="onFocus(element)">
                         </td>

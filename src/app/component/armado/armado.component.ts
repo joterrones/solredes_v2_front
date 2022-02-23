@@ -216,7 +216,7 @@ export class ArmadoComponent extends BaseComponent implements OnInit {
 
   keyPress(event: any,item) {
     if(event.key==="Enter"){
-        if(item.n_cantidad!=""){
+        if(!(isNaN(item.n_cantidad))){
           let request ={
             n_idpl_armado:this.armado.n_idpl_armado,
             n_idpl_elemento:item.n_idpl_elemento,

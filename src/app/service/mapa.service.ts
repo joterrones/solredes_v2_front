@@ -30,4 +30,13 @@ export class MapaService {
     getestructura(req): Observable<any> {
         return this._http.post(this.url + 'mapa/getestructura', req);
     }
+
+    buscarLinea(req): Observable<any> {
+        return this._http.post(this.url + 'mapa/buscarLinea', req);
+    }
+
+    insertOrientacion(req): Observable<any> {
+        return this._http.post(this.url + 'mapa/insertOrientacion', req);
+    }
+    
 }
