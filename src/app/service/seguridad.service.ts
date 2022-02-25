@@ -127,7 +127,7 @@ export class SeguridadService {
             'Content-Type': 'application/json',
             'Authorization': 'Bearer ' + token
         });
-        console.log(data)
+        
         return this._http.post(this.url + 'seguridad/saveUserPro', data, { headers: reqHeader });
     }
 

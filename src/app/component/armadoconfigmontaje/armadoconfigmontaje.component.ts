@@ -35,7 +35,8 @@ export class ArmadoconfigmontajeComponent extends BaseComponent implements OnIni
   }
 
   ngOnInit() {
-      this.getTabla();
+    this.usuarioLog = this.getUser().data;
+    this.getTabla();
   }
 
   public getTabla() {
@@ -65,7 +66,8 @@ export class ArmadoconfigmontajeComponent extends BaseComponent implements OnIni
       let request= {
           n_idpl_armado : this.data.item.n_idpl_armado,
           n_idmon_tipomontaje: item.n_idmon_tipomontaje,
-          estado: !item.estado
+          estado: !item.estado,
+          n_id_usermodi: this.usuarioLog.n_idseg_userprofile
       }
       this._armado_service.insertarmadoconfigmontaje(request,this.getProyect()).subscribe(
           result => {

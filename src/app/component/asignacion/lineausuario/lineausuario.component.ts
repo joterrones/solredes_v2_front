@@ -39,6 +39,7 @@ export class LineausuarioComponent extends BaseComponent implements OnInit {
     }
 
   ngOnInit() {
+    this.usuarioLog = this.getUser().data;
     this.getLineaUser();
     this.getTablaTipolinea();
     this.getTablaZona();
@@ -118,7 +119,8 @@ export class LineausuarioComponent extends BaseComponent implements OnInit {
   noAsignarLineaUser(newForm){
     let request = {
       n_idtra_grupo: this.data.n_idtra_grupo,
-      n_idpl_linea: newForm.n_idpl_linealn
+      n_idpl_linea: newForm.n_idpl_linealn,
+      n_id_usermodi: this.usuarioLog.n_idseg_userprofile
     }
     console.log(this.data.n_idtra_grupo);
     
@@ -151,7 +153,8 @@ export class LineausuarioComponent extends BaseComponent implements OnInit {
     }else{
       let request  ={ 
         n_idtra_grupo: this.data.n_idtra_grupo,
-        n_idpl_linea: newForm.n_idpl_linealn
+        n_idpl_linea: newForm.n_idpl_linealn,
+        n_id_usermodi: this.usuarioLog.n_idseg_userprofile
       }
       console.log("Envio datos lineaUser",request);
       

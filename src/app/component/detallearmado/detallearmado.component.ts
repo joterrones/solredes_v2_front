@@ -32,7 +32,7 @@ export class DetallearmadoComponent extends BaseComponent implements OnInit {
 
   ngOnInit() {    
     console.log(this.data.item);
-    
+    this.usuarioLog = this.getUser().data;
     this.tipoarmado = this.data.combo; 
     
     this.iconoMapa = [
@@ -47,13 +47,15 @@ export class DetallearmadoComponent extends BaseComponent implements OnInit {
         c_codigo:"",
         c_nombre:"",
         c_codigo_corto:"",
-        n_idpro_proyecto: this.proyecto.n_idpro_proyecto
+        n_idpro_proyecto: this.proyecto.n_idpro_proyecto,
+        n_id_usermodi: this.usuarioLog.n_idseg_userprofile
       }
     }
     if(this.data.item.c_nombrelamina == null){
       this.editLamina = false;
     }
     this.data.item.n_idpro_proyecto = this.proyecto.n_idpro_proyecto;
+    this.data.item.n_id_usermodi= this.usuarioLog.n_idseg_userprofile
     
   }
 
