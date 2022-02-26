@@ -1,6 +1,7 @@
 <app-menu>
     <div class="body">
         <h4>{{tit}}</h4>
+        <p>*Para completar la plantilla usar los siguientes prefijos: Linea primaria 'LP', Red primaria 'RP' y Red secundaria 'RS'</p>
         <input type="file" style="display: inline-block;" (change)="incomingfile($event)" placeholder="Upload file"
             accept=".xlsx" #fileInput  *ngIf="permisoEdit">
 

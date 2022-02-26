@@ -59,7 +59,8 @@ export class AdmiArchivosComponent extends BaseComponent implements OnInit {
 
   getTablaArchivos(){    
     let request = {
-      n_iddoc_archivopadre: this.n_iddoc_archivopadre
+      n_iddoc_archivopadre: this.n_iddoc_archivopadre,
+      n_idpro_proyecto: this.proyecto.n_idpro_proyecto
     }
     this._archivos_service.getArchivo(request,this.getToken().token).subscribe(
       result => {

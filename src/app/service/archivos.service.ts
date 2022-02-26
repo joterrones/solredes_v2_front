@@ -54,11 +54,11 @@ export class ArchivosServices{
         return this._http.get(this.url+'AdmArchivos/downloadArchivo?c_ruta='+c_ruta,{responseType:'blob'});
     }  
 
-    getCarpetas(token): Observable<any> {        
+    getCarpetas(request,token): Observable<any> {        
         var reqHeader = new HttpHeaders({
             'Content-Type': 'application/json',
             'Authorization': 'Bearer ' + token
         });        
-        return this._http.post(this.url + 'AdmArchivos/getCarpetas', { headers: reqHeader });
+        return this._http.post(this.url + 'AdmArchivos/getCarpetas',request, { headers: reqHeader });
     }
 }
