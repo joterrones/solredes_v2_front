@@ -33,7 +33,7 @@ export class MapaGeneralComponent extends BaseComponent implements OnInit {
   lat: number = -12.088898333333335;
   lng: number = -77.00707333333334;
   zoom: number = 6;
-  url = "http://35.184.146.235:8080/geoserver/sol_redes_2mayo/wms";
+  url = "http://35.184.146.235:8080/geoserver/solredes/wms";
   urlUbideo = "http://35.184.146.235:8080/geoserver/Candwi/wms";
 
   data = [];
@@ -152,7 +152,7 @@ export class MapaGeneralComponent extends BaseComponent implements OnInit {
       source: new TileWMS({
         url: this.url,
         params: {
-          'LAYERS': 'sol_redes_2mayo:lineas_estructuras',
+          'LAYERS': 'solredes:linea',
           'CQL_FILTER': "n_version =1",
           'TILED': true
         },
@@ -166,7 +166,7 @@ export class MapaGeneralComponent extends BaseComponent implements OnInit {
       source: new TileWMS({
         url: this.url,
         params: {
-          'LAYERS': 'sol_redes_2mayo:atributos',
+          'LAYERS': 'solredes:punto',
           'CQL_FILTER': "n_version =1",
           'TILED': true
         },
@@ -180,7 +180,7 @@ export class MapaGeneralComponent extends BaseComponent implements OnInit {
       source: new TileWMS({
         url: this.url,
         params: {
-          'LAYERS': 'sol_redes_2mayo:lineas_estructuras',
+          'LAYERS': 'solredes:linea',
           'CQL_FILTER': "n_version =2",
           'TILED': true
         },
@@ -194,7 +194,7 @@ export class MapaGeneralComponent extends BaseComponent implements OnInit {
       source: new TileWMS({
         url: this.url,
         params: {
-          'LAYERS': 'sol_redes_2mayo:atributos',
+          'LAYERS': 'solredes:punto',
           'CQL_FILTER': "n_version =2",
           'TILED': true
         },
@@ -208,7 +208,7 @@ export class MapaGeneralComponent extends BaseComponent implements OnInit {
       source: new TileWMS({
         url: this.url,
         params: {
-          'LAYERS': 'sol_redes_2mayo:lineas_estructuras',
+          'LAYERS': 'solredes:linea',
           'CQL_FILTER': "n_version =3",
           'TILED': true
         },
@@ -222,7 +222,7 @@ export class MapaGeneralComponent extends BaseComponent implements OnInit {
       source: new TileWMS({
         url: this.url,
         params: {
-          'LAYERS': 'sol_redes_2mayo:atributos',
+          'LAYERS': 'solredes:punto',
           'CQL_FILTER': "n_version =3",
           'TILED': true
         },
@@ -236,7 +236,7 @@ export class MapaGeneralComponent extends BaseComponent implements OnInit {
       source: new TileWMS({
         url: this.url,
         params: {
-          'LAYERS': 'sol_redes_2mayo:lineas_estructuras',
+          'LAYERS': 'solredes:linea',
           'CQL_FILTER': "n_version =4",
           'TILED': true
         },
@@ -250,7 +250,7 @@ export class MapaGeneralComponent extends BaseComponent implements OnInit {
       source: new TileWMS({
         url: this.url,
         params: {
-          'LAYERS': 'sol_redes_2mayo:atributos',
+          'LAYERS': 'solredes:punto',
           'CQL_FILTER': "n_version =4",
           'TILED': true
         },
@@ -260,7 +260,7 @@ export class MapaGeneralComponent extends BaseComponent implements OnInit {
       })
     });
 
-    this.tileDepartamento = new TileLayer({
+   /* this.tileDepartamento = new TileLayer({
       source: new TileWMS({
         url: this.urlUbideo,
         params: {
@@ -271,7 +271,7 @@ export class MapaGeneralComponent extends BaseComponent implements OnInit {
         serverType: 'geoserver',
         transition: 0,
       })
-    });
+    });*/
 
     this.mostarCapas(this.data);
 
