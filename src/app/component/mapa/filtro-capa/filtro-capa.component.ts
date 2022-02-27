@@ -25,8 +25,31 @@ export class FiltroCapaComponent extends BaseComponent implements OnInit {
   ngOnInit() {
   }
 
-  aceptar(){
+  aceptar() {
     this.dialogRef.close(this.data);
+  }
+
+
+
+  //allComplete: boolean = false;
+
+  updateAllComplete(task) {
+    task.completed = task.subtasks != null && task.subtasks.every(t => t.completed);
+  }
+
+  someComplete(task): boolean {
+    if (task.subtasks == null) {
+      return false;
+    }
+    return task.subtasks.filter(t => t.completed).length > 0 && !task.completed;
+  }
+
+  setAll(completed: boolean, task) {
+    task.completed = completed;
+    if (task.subtasks == null) {
+      return;
+    }
+    task.subtasks.forEach(t => (t.completed = completed));
   }
 
 

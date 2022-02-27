@@ -1,10 +1,28 @@
+<h1>Filtros</h1>
 <div mat-dialog-content>
-    <div class="vertical">
-        <div *ngFor="let item of data">
-            <mat-checkbox class="example-margin" [(ngModel)]="item.checked">{{item.nombre}}</mat-checkbox>
-        </div>
+<section class="example-section">
+    <ul>
+        <li *ngFor="let task of data">
+            <span class="example-list-section">
 
-    </div>
+                <mat-checkbox class="example-margin" [checked]="task.completed" [color]="task.color"
+                    [indeterminate]="someComplete(task)" (change)="setAll($event.checked,task)">
+                    {{task.name}}
+                </mat-checkbox>
+            </span>
+            <span class="example-list-section">
+                <ul>
+                    <li *ngFor="let subtask of task.subtasks">
+                        <mat-checkbox [(ngModel)]="subtask.completed" [color]="subtask.color"
+                            (ngModelChange)="updateAllComplete(task)">
+                            {{subtask.name}}
+                        </mat-checkbox>
+                    </li>
+                </ul>
+            </span>
+        </li>
+    </ul>
+</section>
 </div>
 <div mat-dialog-actions>
     <button mat-button cdkFocusInitial (click)="aceptar()">
@@ -12,35 +30,3 @@
         <span>Aceptar</span>
     </button>
 </div>
-<!--<div class="vertical">
-    <label>Expediente técnico</label>
-    <div class="vertical-item">
-        <mat-checkbox class="example-margin">Linea Primaria</mat-checkbox>
-        <mat-checkbox class="example-margin">Red Primaria</mat-checkbox>
-        <mat-checkbox class="example-margin">Red Secundaria</mat-checkbox>
-    </div>
-</div>
-<div class="vertical">
-    <label>Replanteo</label>
-    <div class="vertical-item">
-        <mat-checkbox class="example-margin">Linea Primaria</mat-checkbox>
-        <mat-checkbox class="example-margin">Red Primaria</mat-checkbox>
-        <mat-checkbox class="example-margin">Red Secundaria</mat-checkbox>
-    </div>
-</div>
-<div class="vertical">
-    <label>Montaje</label>
-    <div class="vertical-item">
-        <mat-checkbox class="example-margin">Linea Primaria</mat-checkbox>
-        <mat-checkbox class="example-margin">Red Primaria</mat-checkbox>
-        <mat-checkbox class="example-margin">Red Secundaria</mat-checkbox>
-    </div>
-</div>
-<div class="vertical">
-    <label>Conforme a obra</label>
-    <div class="vertical-item">
-        <mat-checkbox class="example-margin">Linea Primaria</mat-checkbox>
-        <mat-checkbox class="example-margin">Red Primaria</mat-checkbox>
-        <mat-checkbox class="example-margin">Red Secundaria</mat-checkbox>
-    </div>
-</div>-->
