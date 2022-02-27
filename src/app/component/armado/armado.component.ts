@@ -216,11 +216,12 @@ export class ArmadoComponent extends BaseComponent implements OnInit {
 
   keyPress(event: any,item) {
     if(event.key==="Enter"){
-        if(item.n_cantidad!=""){
+        if(!(isNaN(item.n_cantidad))){
           let request ={
             n_idpl_armado:this.armado.n_idpl_armado,
             n_idpl_elemento:item.n_idpl_elemento,
-            n_cantidad:parseFloat(item.n_cantidad)
+            n_cantidad:parseFloat(item.n_cantidad),
+            n_id_usermodi: this.usuarioLog.n_idseg_userprofile
           }
           try {
             this._armado_service.insertconfigarmado(request,this.getProyect()).subscribe(
@@ -277,7 +278,11 @@ export class ArmadoComponent extends BaseComponent implements OnInit {
   }
 
   deleteArmado(item) {
-    this._armado_service.deleteArmado(item).subscribe(
+    let request = {
+      n_idpl_armado: item.n_idpl_armado,
+      n_id_usermodi: this.usuarioLog.n_idseg_userprofile
+    }
+    this._armado_service.deleteArmado(request).subscribe(
       result => {
         try {
           if (result.estado) {

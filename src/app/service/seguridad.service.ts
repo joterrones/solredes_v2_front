@@ -64,9 +64,12 @@ export class SeguridadService {
         return this._http.post(this.url + 'seguridad/resetearclave', data, { headers: reqHeader });
     } 
 
-    valDni(data): Observable<any> {        
-        console.log(data)
-        return this._http.post(this.url + 'seguridad/valDni', data);
+    validarDatos(token): Observable<any> {        
+        var reqHeader = new HttpHeaders({
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
+        });
+        return this._http.post(this.url + 'seguridad/validarDatos',{ headers: reqHeader });
     }
 
     saveUser(data, token): Observable<any> {
@@ -124,7 +127,7 @@ export class SeguridadService {
             'Content-Type': 'application/json',
             'Authorization': 'Bearer ' + token
         });
-        console.log(data)
+        
         return this._http.post(this.url + 'seguridad/saveUserPro', data, { headers: reqHeader });
     }
 

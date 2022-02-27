@@ -24,6 +24,8 @@ export class MapaLineaComponent extends BaseComponent implements OnInit {
   pantallaRol= [];
   permisoEdit: boolean = false;
 
+  buscar: string = '';
+
   lat: number = -12.088898333333335;
   lng: number = -77.00707333333334;
   zoom: number = 6;
@@ -41,6 +43,8 @@ export class MapaLineaComponent extends BaseComponent implements OnInit {
 
   geoJsonObject: Object;
   markers = [];
+  markersCir = [];
+  markersB = [];
 
   constructor(
     public dialog: MatDialog,
@@ -66,6 +70,8 @@ export class MapaLineaComponent extends BaseComponent implements OnInit {
   }
 
   actualizar(){
+    this.buscar = "";
+    this.markersCir = [];
     this.getPuntos();
     this.getLineas();
   }
@@ -74,8 +80,6 @@ export class MapaLineaComponent extends BaseComponent implements OnInit {
     this.idversion = id;
     this.actualizar();
   }
-
-
 
   getPuntos() {
     let request = {
@@ -86,21 +90,22 @@ export class MapaLineaComponent extends BaseComponent implements OnInit {
       result => {
         console.log(result);
         try {
-          if (result.estado) {
+          if (result.estado) {            
+            
             this.markers = [];
             result.data.forEach(element => {
               let marker = {
-                lat: element.c_latitud,
-                lng: element.c_longitud,
+                c_codigoestructura: element.c_codigoestructura,
+                lat : parseFloat(element.c_latitud),
+                lng: parseFloat(element.c_longitud),
                 label: "A",
                 alpha: 1,
                 data: element,
                 url: "./assets/" + element.c_iconomapa
               };
-
               this.markers.push(marker);
-
             });
+            console.log(this.markers);
 
           } else {
             this.openSnackBar(result.mensaje, 99);
@@ -142,6 +147,63 @@ export class MapaLineaComponent extends BaseComponent implements OnInit {
     this.idversion = n_version;
     this.getPuntos();
     this.getLineas();
+  }
+
+  buscarLinea(dato){
+    if(this.idversion > 0){
+      if(dato == ''){
+        this.markers.forEach(element => {
+          element.alpha = 1;
+        });
+        this.markersCir = [];
+      }else{
+        let request = {
+          n_idpl_linea: this.idlinea,
+          n_version: this.idversion,
+          nomBuscar: dato
+        }
+        console.log(request);
+        
+        this._mapa_service.buscarLinea(request).subscribe(
+          result => {
+            console.log(result);
+            try {
+              if (result.estado) {
+                this.markersB = result.data;
+
+                this.markers.forEach(element => {
+                  element.alpha = 0.3;
+                });
+
+                this.markers.forEach(element => {
+                  this.markersB.forEach(e =>{
+                    if(element.c_codigoestructura == e.c_codigoestructura){
+                      element.alpha = 1;
+                      let marker = {                        
+                        lat : parseFloat(e.c_latitud),
+                        lng: parseFloat(e.c_longitud),                  
+                        alpha: 1                        
+                      };
+                      this.markersCir.push(marker);
+                    }
+                  });
+                });
+                
+    
+              } else {
+                this.openSnackBar(result.mensaje, 99);
+              }
+            } catch (error) {
+              this.openSnackBar(AppSettings.SERVICE_NO_CONECT_SERVER, 999);
+            }
+          }, error => {
+            this.openSnackBar(error.error, 99);
+          });
+      }
+    }else{
+      this.openSnackBar("Seleccione una versión", 200);
+    }
+    
   }
 
   getPantallaRol() {

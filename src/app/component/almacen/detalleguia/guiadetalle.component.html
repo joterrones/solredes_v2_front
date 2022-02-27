@@ -8,7 +8,7 @@
             <input matInput placeholder="Buscar" [(ngModel)]="textfilter" (keyup)="applyFilter($event.target.value)">
             <mat-icon matSuffix>search</mat-icon>           
           </mat-form-field>          
-          <button mat-icon-button color="accent" [routerLink]="['/guia/'+this.n_idalm_almacen+'/'+this.c_nombreAlmacen]">                 
+          <button mat-mini-fab color="accent" [routerLink]="['/guia/'+this.n_idalm_almacen+'/'+this.c_nombreAlmacen]">                 
             <mat-icon aria-label="Example icon-button with a heart icon">arrow_back</mat-icon>                
           </button>            
         </div>

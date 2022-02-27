@@ -28,9 +28,8 @@
     </mat-form-field>
 
     <mat-form-field>
-      <input matInput placeholder="2° Nombre" name="c_name" #c_name="ngModel" [(ngModel)]="usuario.c_nombre2" 
-        required />
-      <mat-hint class="error"></mat-hint>
+      <input matInput placeholder="2° Nombre" name="c_name2" #c_name="ngModel" [(ngModel)]="usuario.c_nombre2"/>
+      <mat-hint class="error" *ngIf="usuario.c_nombre2.length>0 && usuario.c_nombre2.length<3">debe tener mínimo de 3 dígitos</mat-hint>
     </mat-form-field>
 
     <mat-form-field>
@@ -40,7 +39,7 @@
     </mat-form-field>
 
     <mat-form-field>
-      <input matInput placeholder="Apellido Materno" name="lastName" #c_lastname="ngModel" [(ngModel)]="usuario.c_apmaterno"
+      <input matInput placeholder="Apellido Materno" name="lastName2" #c_lastname="ngModel" [(ngModel)]="usuario.c_apmaterno"
         minlength="3" required />
       <mat-hint class="error" *ngIf="usuario.c_apmaterno.length<3">debe tener mínimo de 3 dígitos</mat-hint>
     </mat-form-field>

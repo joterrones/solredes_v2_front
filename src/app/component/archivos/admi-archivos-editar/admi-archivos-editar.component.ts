@@ -56,7 +56,10 @@ export class AdmiArchivosEditarComponent extends BaseComponent implements OnInit
   }
 
   getCarpetas(){    
-    this._archivos_service.getCarpetas(this.getToken().token).subscribe(
+    let request = {
+      n_idpro_proyecto: this.proyecto.n_idpro_proyecto
+    }
+    this._archivos_service.getCarpetas(request,this.getToken().token).subscribe(
       result => {
         try {
           if (result.estado) {     

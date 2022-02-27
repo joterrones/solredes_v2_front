@@ -13,8 +13,11 @@
     </ng-container>
     <ng-container matColumnDef="Orientacion">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Orientación </th>
-        <td mat-cell *matCellDef="let element"> {{element.n_orientacion}} </td>
-    </ng-container>
+        <td mat-cell *matCellDef="let element">
+            <input matInput placeholder="Orientación" #n_orientacion="ngModel"
+                [(ngModel)]="element.n_orientacion" (keypress)="keyPress($event,element)">
+        </td>
+    </ng-container>    
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <ng-template let-row matRowDef cdkVirtualFor [matRowDefColumns]="displayedColumns">
         <tr mat-row></tr>

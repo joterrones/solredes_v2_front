@@ -19,3 +19,7 @@ table {
   justify-content: space-between;
   flex-wrap: wrap;
 }
+
+.cont{
+  align-items: center;
+}

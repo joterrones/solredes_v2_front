@@ -2,7 +2,7 @@
     <div class="contenedorbody">
         <h4>{{tit}}</h4>
         
-        <button mat-icon-button color="primary" (click)="actualizar()"> Actualizar
+        <button mat-icon-button color="accent" (click)="actualizar()"> Actualizar
             <mat-icon aria-label="Example icon-button with a heart icon">loop</mat-icon>
         </button>
         <br />
@@ -11,36 +11,50 @@
                 <mat-option *ngFor="let item of versiones" [value]="item.id" (click)="selecVersion(item.id)">
                     {{item.nombre}}
                 </mat-option>
-            </mat-select>
-        </mat-form-field>
+            </mat-select>            
+        </mat-form-field>        
 
         <div class="cont">
             <h4> Linea: {{nombreLinea}}</h4>
             <h4> Zona: {{nombreZona}}</h4>
             <h4> Tipo Linea: {{nombreTipoLinea}}</h4>
+            
+            <div class="cont">
+                <mat-form-field>        
+                    <input matInput type="Codigo" placeholder="Buscar" [(ngModel)]="buscar" />
+                </mat-form-field>
+                <button type="button" mat-mini-fab color="accent"  (click)="buscarLinea(buscar)" >
+                    <mat-icon>search</mat-icon>
+                </button> 
+            </div>   
 
-            <button mat-icon-button color="accent" [routerLink]="['/linea/']">                 
+            <button mat-mini-fab color="accent"  [routerLink]="['/linea/']">                 
                 <mat-icon aria-label="Example icon-button with a heart icon">arrow_back</mat-icon>                
             </button>
         </div>
         <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" [mapTypeControl]='true' [mapTypeId]="'hybrid'"
-            *ngIf="permisoEdit">
-            <agm-marker-cluster [maxZoom]="12" imagePath="http://35.184.146.235/Multimedia/Nama/images/m">
-                <agm-marker *ngFor="let marker of markers " [latitude]="marker.lat" [longitude]="marker.lng"
-                    [markerDraggable]="true" [opacity]="marker.alpha" [iconUrl]="
+            *ngIf="permisoEdit">     
+            
+            <agm-marker-cluster [maxZoom]="12" imagePath="http://35.184.146.235/Multimedia/Nama/images/m">                
+               <agm-marker *ngFor="let marker of markers " [latitude]="marker.lat" [longitude]="marker.lng"
+                    [markerDraggable]="false" [opacity]="marker.alpha" [iconUrl]="
               {
                 url:  './assets/mapa/'+marker.data.c_iconomapa+'.png' 
-            }" (markerClick)="openDialog(marker.data)">
-                </agm-marker>
-                <ng-container>
+            }" (markerClick)="openDialog(marker.data)" [zIndex]="2">
+                </agm-marker>                
+                <ng-container>  
+                    <agm-circle *ngFor="let marker of markersCir " [latitude]="marker.lat" [longitude]="marker.lng" [radius]="15" [fillColor]="'PaleGreen'" [fillOpacity]="0.1" [zIndex]="1">
+                    </agm-circle>         
                     <!-- <agm-polyline *ngFor="let polyline of polilineas;let i = index;" [strokeColor]="black">-->
-                    <agm-polyline *ngFor="let polyline of polilineas;let i = index;">
+                    <agm-polyline *ngFor="let polyline of polilineas;let i = index;" [zIndex]="2">
                         <agm-polyline-point *ngFor="let point of polyline.path" [latitude]="point.c_latitud"
                             [longitude]="point.c_longitud">
                         </agm-polyline-point>
+                          
                     </agm-polyline>
                 </ng-container>
             </agm-marker-cluster>
+            
         </agm-map>
 
     </div>

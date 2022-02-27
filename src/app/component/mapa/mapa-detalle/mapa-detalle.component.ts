@@ -75,6 +75,39 @@ export class MapaDetalleComponent extends BaseComponent implements OnInit  {
       });
   }
 
+  keyPress(event: any,item) {
+    if(event.key==="Enter"){
+      
+      if(!(isNaN(item.n_orientacion))){
+        let request ={
+          n_idpl_estructuraarmado: item.n_idpl_estructuraarmado,
+          n_orientacion: parseFloat(item.n_orientacion)
+        }
+        console.log(request);
+        
+        try {
+          this._mapa_service.insertOrientacion(request).subscribe(
+            result => {
+              if(result.estado){
+                this.openSnackBar("Dato Guardado",200);
+              }else{
+                this.openSnackBar(result.mensaje, 99);
+              }
+            }, error => {
+              console.log(<any>error);
+          
+                this.openSnackBar(<any>error, 99);
+            
+            });
+        } catch (error) {
+          this.openSnackBar(AppSettings.SERVICE_NO_CONECT_SERVER, 99);
+        }
+      } else{
+        this.openSnackBar("Solo números", 99);        
+      }
+    }
+  }
+
 }
 
 

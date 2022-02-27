@@ -5,14 +5,14 @@
         <mat-card-title>   
           ADMINISTRACIÓN DE ARCHIVOS            
         </mat-card-title>
-        <div>
-          <button mat-icon-button color="accent" (click)="openDialogCarpeta(null)" *ngIf="permisoEdit">
+        <div class="contenedor2">
+          <button mat-mini-fab color="accent" (click)="openDialogCarpeta(null)" *ngIf="permisoEdit">
             <mat-icon aria-label="Example icon-button with a heart icon">create_new_folder</mat-icon>
           </button> 
-          <button mat-icon-button color="accent" (click)="openDialogArchivo(null)" *ngIf="permisoEdit">
+          <button mat-mini-fab color="accent" (click)="openDialogArchivo(null)" *ngIf="permisoEdit">
             <mat-icon aria-label="Example icon-button with a heart icon">note_add</mat-icon>
           </button> 
-          <button mat-icon-button color="accent" (click)="showArchivosBack()">                 
+          <button mat-mini-fab color="accent" (click)="showArchivosBack()">                 
             <mat-icon aria-label="Example icon-button with a heart icon">arrow_back</mat-icon>                
           </button> 
         </div>
@@ -21,8 +21,8 @@
 
     <div class="barr">
       <mat-card class="barrNav items">
-        <div (click)="showArchivosBarra(0)">
-          <label class="cursor"> Raíz </label>
+        <div (click)="showArchivosBarra(0)">          
+          <mat-icon class="cursor">home</mat-icon>
         </div>
         <div *ngFor="let element of nameRetorno">
             <div *ngIf="element" class="items" (click)="showArchivosBarra(element)">

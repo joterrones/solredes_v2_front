@@ -30,6 +30,7 @@ export class ProyectousuaioComponent extends BaseComponent implements OnInit {
     }
 
   ngOnInit() {
+    this.usuarioLog = this.getUser().data;
     this.getProUser();
   }
 
@@ -92,7 +93,8 @@ export class ProyectousuaioComponent extends BaseComponent implements OnInit {
     for(let i = 0; i < newForm.length; i++ ){
       let request  ={ 
         n_idtra_grupo: this.data.n_idtra_grupo,
-        n_idseg_userprofile: newForm[i]
+        n_idseg_userprofile: newForm[i],
+        n_id_usermodi: this.usuarioLog.n_idseg_userprofile
       }
       console.log("Envio datos ProUser",request);
       

@@ -19,7 +19,10 @@ export class UsuarioeditarComponent extends BaseComponent implements OnInit {
   usuario: Usuario;
   editar: boolean;
   roles: Role[];
+  array: any;
 
+  usernameVal;
+  dniVal;
   constructor(
     public dialogRef: MatDialogRef<UsuarioeditarComponent>,
     private _seguridadservice: SeguridadService,
@@ -49,6 +52,10 @@ export class UsuarioeditarComponent extends BaseComponent implements OnInit {
     } else {
       this.editar = true;
       this.usuario = this.data.usuario;
+
+      this.dniVal = this.data.usuario.c_dni
+      this.usernameVal = this.data.usuario.c_username
+      
       this.usuario.c_clave = "0000000";
       this.usuario.c_reclave = "0000000";
       
@@ -56,35 +63,84 @@ export class UsuarioeditarComponent extends BaseComponent implements OnInit {
     this.roles = this.data.roles;
     console.log('Contenido de usuario');
     console.log(this.usuario);
+    this.validarDatos();
+  }
+
+  validarDatos(){
+    this._seguridadservice.validarDatos(this.getToken().token).subscribe(
+      result =>{
+        try {
+          console.log(result.data);
+                    
+          this.array = result.data;    
+        } catch (error) {
+          this.openSnackBar(AppSettings.SERVICE_NO_CONECT_SERVER, 99);
+        }
+    }, error => {
+      console.error(error);
+      try {
+        this.openSnackBar(error.error.Detail, error.error.StatusCode);
+      } catch (error) {
+        this.openSnackBar(AppSettings.SERVICE_NO_CONECT_SERVER, 99);
+      }
+    });
   }
 
   guardar(newForm) {
-    console.log(this.editar);
-    
+    console.log(this.usuario);
+
     if(!this.editar){
-      this.usuario;
-      this._seguridadservice.valDni(this.usuario).subscribe(
-      result => {
-        try {
-          console.log(result.data);          
-          if (result.data.length == 0) {
-            this.guardarUser(newForm);             
-          } else {
-            this.openSnackBar(result.mensaje, 200); 
+
+      let userExist = 0;
+      let dniExist = 0;
+      
+      this.array.forEach(element => {
+        if(element.c_username == this.usuario.c_username){
+          userExist += 1;
+        }else{
+          if(element.c_dni == this.usuario.c_dni){
+            dniExist += 1;
           }
-        } catch (error) {
-          this.openSnackBar(AppSettings.SERVICE_NO_CONECT_SERVER, 99);
-        }
-      }, error => {
-        console.error(error);
-        try {
-          this.openSnackBar(error.error.Detail, error.error.StatusCode);
-        } catch (error) {
-          this.openSnackBar(AppSettings.SERVICE_NO_CONECT_SERVER, 99);
         }
       });
+
+      if(userExist == 0 && dniExist == 0){
+        this.guardarUser(newForm); 
+      }else if( userExist != 0){
+        this.openSnackBar("El usuario existe", 200);
+      }else if( dniExist != 0 ){
+        this.openSnackBar("El DNI existe", 200);
+      }
+
     }else{
-      this.guardarUser(newForm); 
+      let u = 0;
+      let d = 0;
+      if( this.usernameVal != this.usuario.c_username || this.dniVal != this.usuario.c_dni ){
+        if(this.usernameVal != this.usuario.c_username){
+          this.array.forEach(element => {
+            if(element.c_username == this.usuario.c_username){
+              u += 1;
+            }
+          });
+        }
+        if(this.dniVal != this.usuario.c_dni){
+          this.array.forEach(element => {
+            if(element.c_dni == this.usuario.c_dni){
+              d += 1;
+            }
+          });
+        }
+
+        if( u != 0){
+          this.openSnackBar("El usuario existe", 200);
+        }else if( d != 0 ){
+          this.openSnackBar("El DNI existe", 200);
+        }
+
+      }else{
+        this.guardarUser(newForm); 
+      }
+      
     }
     
   }

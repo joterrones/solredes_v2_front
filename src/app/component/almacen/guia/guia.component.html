@@ -4,7 +4,7 @@
       <mat-accordion>
         <mat-expansion-panel>
             <mat-expansion-panel-header class="back-expansion">
-                <mat-panel-title>
+                <mat-panel-title class="cont">
                 <mat-icon matSuffix>filter_list</mat-icon> Filtros
                 </mat-panel-title>
                 <mat-panel-description>
@@ -33,7 +33,7 @@
             <input matInput placeholder="Buscar" [(ngModel)]="textfilter" (keyup)="applyFilter($event.target.value)">
             <mat-icon matSuffix>search</mat-icon>           
           </mat-form-field>          
-          <button mat-icon-button color="accent" [routerLink]="['/almacen']">                 
+          <button mat-mini-fab color="accent" [routerLink]="['/almacen']">                 
             <mat-icon aria-label="Example icon-button with a heart icon">arrow_back</mat-icon>                
           </button>            
         </div>
