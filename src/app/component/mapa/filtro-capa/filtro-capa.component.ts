@@ -10,9 +10,6 @@ import { BaseComponent } from '../../base/base.component';
 })
 export class FiltroCapaComponent extends BaseComponent implements OnInit {
 
-
-
-
   constructor(
     public dialogRef: MatDialogRef<FiltroCapaComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -23,14 +20,12 @@ export class FiltroCapaComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.dialogRef.disableClose = true;
   }
 
   aceptar() {
     this.dialogRef.close(this.data);
   }
-
-
-
   //allComplete: boolean = false;
 
   updateAllComplete(task) {
@@ -51,6 +46,5 @@ export class FiltroCapaComponent extends BaseComponent implements OnInit {
     }
     task.subtasks.forEach(t => (t.completed = completed));
   }
-
 
 }

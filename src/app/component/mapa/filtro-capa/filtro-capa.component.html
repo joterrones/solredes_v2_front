@@ -1,28 +1,28 @@
 <h1>Filtros</h1>
 <div mat-dialog-content>
-<section class="example-section">
-    <ul>
-        <li *ngFor="let task of data">
-            <span class="example-list-section">
+    <section class="example-section">
+        <ul>
+            <li *ngFor="let task of data">
+                <span class="example-list-section">
 
-                <mat-checkbox class="example-margin" [checked]="task.completed" [color]="task.color"
-                    [indeterminate]="someComplete(task)" (change)="setAll($event.checked,task)">
-                    {{task.name}}
-                </mat-checkbox>
-            </span>
-            <span class="example-list-section">
-                <ul>
-                    <li *ngFor="let subtask of task.subtasks">
-                        <mat-checkbox [(ngModel)]="subtask.completed" [color]="subtask.color"
-                            (ngModelChange)="updateAllComplete(task)">
-                            {{subtask.name}}
-                        </mat-checkbox>
-                    </li>
-                </ul>
-            </span>
-        </li>
-    </ul>
-</section>
+                    <mat-checkbox class="example-margin" [checked]="task.completed" [color]="task.color"
+                        [indeterminate]="someComplete(task)" (change)="setAll($event.checked,task)">
+                        {{task.name}}
+                    </mat-checkbox>
+                </span>
+                <span class="example-list-section">
+                    <ul>
+                        <li *ngFor="let subtask of task.subtasks">
+                            <mat-checkbox [(ngModel)]="subtask.completed" [color]="subtask.color"
+                                (ngModelChange)="updateAllComplete(task)">
+                                {{subtask.name}}
+                            </mat-checkbox>
+                        </li>
+                    </ul>
+                </span>
+            </li>
+        </ul>
+    </section>
 </div>
 <div mat-dialog-actions>
     <button mat-button cdkFocusInitial (click)="aceptar()">

@@ -38,5 +38,13 @@ export class MapaService {
     insertOrientacion(req): Observable<any> {
         return this._http.post(this.url + 'mapa/insertOrientacion', req);
     }
+
+    buscarEstruct(req, token): Observable<any> {
+        var reqHeader = new HttpHeaders({
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
+        });
+        return this._http.post(this.url + 'mapa/buscarEstruct', req, { headers: reqHeader });
+    }
     
 }

@@ -17,16 +17,26 @@ import { SeguridadService } from 'src/app/service/seguridad.service';
 import { ResultadoApi } from 'src/app/interface/common.interface';
 import { AppSettings } from 'src/app/common/appsettings';
 import { FiltroCapaComponent } from '../mapa/filtro-capa/filtro-capa.component';
+import { confGeneralService } from 'src/app/service/confGeneral.service';
+import { MapaService } from 'src/app/service/mapa.service';
+import Select from 'ol/interaction/Select';
 
 @Component({
   selector: 'app-mapa-general',
   templateUrl: './mapa-general.component.html',
   styleUrls: ['./mapa-general.component.css'],
-  providers: [SeguridadService]
+  providers: [SeguridadService, confGeneralService, MapaService]
 })
 export class MapaGeneralComponent extends BaseComponent implements OnInit {
   pantallaRol = [];
   permisoEdit: boolean = false;
+
+  tipolinea = []
+  zona = [];
+  idtipolinea = 0;
+  idzona = 0;
+  buscar = '';
+  idversion = 0;
 
   map: Map;
   mapexample: Map
@@ -35,7 +45,7 @@ export class MapaGeneralComponent extends BaseComponent implements OnInit {
   zoom: number = 6;
   url = "http://35.184.146.235:8080/geoserver/solredes/wms";
   //urlUbideo = "http://35.184.146.235:8080/geoserver/Candwi/wms";
-
+  
   data = [];
   tileBase;
 
@@ -69,6 +79,27 @@ export class MapaGeneralComponent extends BaseComponent implements OnInit {
   tileAtributosConRP;
   tileAtributosConRS;
 
+  tileLineasMonInspReplantLP;
+  tileLineasMonInspReplantRP;
+  tileLineasMonInspReplantRS;
+  tileAtributosMonInspReplantLP;
+  tileAtributosMonInspReplantRP;
+  tileAtributosMonInspReplantRS;
+
+  tileLineasMonInspMontLP;
+  tileLineasMonInspMontRP;
+  tileLineasMonInspMontRS;
+  tileAtributosMonInspMontLP;
+  tileAtributosMonInspMontRP;
+  tileAtributosMonInspMontRS;
+
+  tileLineasMonInspConfObraLP;
+  tileLineasMonInspConfObraRP;
+  tileLineasMonInspConfObraRS;
+  tileAtributosMonInspConfObraLP;
+  tileAtributosMonInspConfObraRP;
+  tileAtributosMonInspConfObraRS;
+
 
   tileDepartamento;
   textoVersiones = "0";
@@ -77,6 +108,8 @@ export class MapaGeneralComponent extends BaseComponent implements OnInit {
     public _router: Router,
     public snackBar: MatSnackBar,
     public _seguridad_service: SeguridadService,
+    public _confiGeneral_service: confGeneralService,
+    public _mapa_service: MapaService,
     public dialog: MatDialog
   ) {
 
@@ -86,7 +119,7 @@ export class MapaGeneralComponent extends BaseComponent implements OnInit {
 
   openDialog(): void {
     const dialogRef = this.dialog.open(FiltroCapaComponent, {
-      width: 'auto',
+      width: 'auto', height: '600px',
       data: this.data
     });
     dialogRef.afterClosed().subscribe(result => {
@@ -125,7 +158,28 @@ export class MapaGeneralComponent extends BaseComponent implements OnInit {
     this.tileAtributosConRS.setVisible(false);
     this.tileLineasConRS.setVisible(false);
 
+    this.tileLineasMonInspReplantLP.setVisible(false);
+    this.tileLineasMonInspReplantRP.setVisible(false);
+    this.tileLineasMonInspReplantRS.setVisible(false);
+    this.tileAtributosMonInspReplantLP.setVisible(false);
+    this.tileAtributosMonInspReplantRP.setVisible(false);
+    this.tileAtributosMonInspReplantRS.setVisible(false);
 
+    this.tileLineasMonInspMontLP.setVisible(false);
+    this.tileLineasMonInspMontRP.setVisible(false);
+    this.tileLineasMonInspMontRS.setVisible(false);
+    this.tileAtributosMonInspMontLP.setVisible(false);
+    this.tileAtributosMonInspMontRP.setVisible(false);
+    this.tileAtributosMonInspMontRS.setVisible(false);
+
+    this.tileLineasMonInspConfObraLP.setVisible(false);
+    this.tileLineasMonInspConfObraRP.setVisible(false);
+    this.tileLineasMonInspConfObraRS.setVisible(false);
+    this.tileAtributosMonInspConfObraLP.setVisible(false);
+    this.tileAtributosMonInspConfObraRP.setVisible(false);
+    this.tileAtributosMonInspConfObraRS.setVisible(false);
+
+    
     this.textoVersiones = "0";
     console.log("data", data)
     data.forEach(element => {
@@ -139,6 +193,7 @@ export class MapaGeneralComponent extends BaseComponent implements OnInit {
             this.tileLineasExpRP.setVisible(checkOk.filter(o => o.completed && o.id == 2).length > 0);
             this.tileAtributosExpRS.setVisible(checkOk.filter(o => o.completed && o.id == 3).length > 0);
             this.tileLineasExpRS.setVisible(checkOk.filter(o => o.completed && o.id == 3).length > 0);
+            this.idversion = element.version;
             break;
           case 2:
             this.tileAtributosRepLP.setVisible(checkOk.filter(o => o.completed && o.id == 1).length > 0);
@@ -147,6 +202,7 @@ export class MapaGeneralComponent extends BaseComponent implements OnInit {
             this.tileLineasRepRP.setVisible(checkOk.filter(o => o.completed && o.id == 2).length > 0);
             this.tileAtributosRepRS.setVisible(checkOk.filter(o => o.completed && o.id == 3).length > 0);
             this.tileLineasRepRS.setVisible(checkOk.filter(o => o.completed && o.id == 3).length > 0);
+            this.idversion = element.version;
             break;
           case 3:
             this.tileAtributosMonLP.setVisible(checkOk.filter(o => o.completed && o.id == 1).length > 0);
@@ -155,6 +211,7 @@ export class MapaGeneralComponent extends BaseComponent implements OnInit {
             this.tileLineasMonRP.setVisible(checkOk.filter(o => o.completed && o.id == 2).length > 0);
             this.tileAtributosMonRS.setVisible(checkOk.filter(o => o.completed && o.id == 3).length > 0);
             this.tileLineasMonRS.setVisible(checkOk.filter(o => o.completed && o.id == 3).length > 0);
+            this.idversion = element.version;
             break;
           case 4:
             this.tileAtributosConLP.setVisible(checkOk.filter(o => o.completed && o.id == 1).length > 0);
@@ -163,9 +220,31 @@ export class MapaGeneralComponent extends BaseComponent implements OnInit {
             this.tileLineasConRP.setVisible(checkOk.filter(o => o.completed && o.id == 2).length > 0);
             this.tileAtributosConRS.setVisible(checkOk.filter(o => o.completed && o.id == 3).length > 0);
             this.tileLineasConRS.setVisible(checkOk.filter(o => o.completed && o.id == 3).length > 0);
-            break;
+            this.idversion = element.version;
+            break; 
         }
+        this.tileLineasMonInspReplantLP.setVisible(checkOk.filter(o => o.completed && o.id == 1).length > 0);
+        this.tileLineasMonInspReplantRP.setVisible(checkOk.filter(o => o.completed && o.id == 2).length > 0);
+        this.tileLineasMonInspReplantRS.setVisible(checkOk.filter(o => o.completed && o.id == 3).length > 0);
+        this.tileAtributosMonInspReplantLP.setVisible(checkOk.filter(o => o.completed && o.id == 1).length > 0);
+        this.tileAtributosMonInspReplantRP.setVisible(checkOk.filter(o => o.completed && o.id == 2).length > 0);
+        this.tileAtributosMonInspReplantRS.setVisible(checkOk.filter(o => o.completed && o.id == 3).length > 0);
+
+        this.tileLineasMonInspMontLP.setVisible(checkOk.filter(o => o.completed && o.id == 1).length > 0);
+        this.tileLineasMonInspMontRP.setVisible(checkOk.filter(o => o.completed && o.id == 2).length > 0);
+        this.tileLineasMonInspMontRS.setVisible(checkOk.filter(o => o.completed && o.id == 3).length > 0);
+        this.tileAtributosMonInspMontLP.setVisible(checkOk.filter(o => o.completed && o.id == 1).length > 0);
+        this.tileAtributosMonInspMontRP.setVisible(checkOk.filter(o => o.completed && o.id == 2).length > 0);
+        this.tileAtributosMonInspMontRS.setVisible(checkOk.filter(o => o.completed && o.id == 3).length > 0);
+
+        this.tileLineasMonInspConfObraLP.setVisible(checkOk.filter(o => o.completed && o.id == 1).length > 0);
+        this.tileLineasMonInspConfObraRP.setVisible(checkOk.filter(o => o.completed && o.id == 2).length > 0);
+        this.tileLineasMonInspConfObraRS.setVisible(checkOk.filter(o => o.completed && o.id == 3).length > 0);
+        this.tileAtributosMonInspConfObraLP.setVisible(checkOk.filter(o => o.completed && o.id == 1).length > 0);
+        this.tileAtributosMonInspConfObraRP.setVisible(checkOk.filter(o => o.completed && o.id == 2).length > 0);
+        this.tileAtributosMonInspConfObraRS.setVisible(checkOk.filter(o => o.completed && o.id == 3).length > 0);
       }
+      
     });
 
     console.log("textoVersiones", this.textoVersiones)
@@ -176,6 +255,9 @@ export class MapaGeneralComponent extends BaseComponent implements OnInit {
 
 
   ngOnInit(): void {
+    this.getzona();
+    this.gettipolinea();   
+
     this.data = [
       {
         name: 'Expediente',
@@ -218,7 +300,39 @@ export class MapaGeneralComponent extends BaseComponent implements OnInit {
           { id: 2, name: 'Red primaria', completed: false, color: 'accent' },
           { id: 3, name: 'Red secudaria', completed: false, color: 'warn' },
         ],
+      },{
+        name: 'Inspeccion Replanteo',
+        version: 0,
+        completed: false,
+        color: 'primary',
+        subtasks: [
+          { id: 1, name: 'Linea primaria', completed: false, color: 'primary' },
+          { id: 2, name: 'Red primaria', completed: false, color: 'accent' },
+          { id: 3, name: 'Red secudaria', completed: false, color: 'warn' },
+        ],
+      },{
+        name: 'Inspeccion Montaje',
+        version: 0,
+        completed: false,
+        color: 'primary',
+        subtasks: [
+          { id: 1, name: 'Linea primaria', completed: false, color: 'primary' },
+          { id: 2, name: 'Red primaria', completed: false, color: 'accent' },
+          { id: 3, name: 'Red secudaria', completed: false, color: 'warn' },
+        ],
+      },{
+        name: 'Inspeccion Conforme a obra',
+        version: 0,
+        completed: false,
+        color: 'primary',
+        subtasks: [
+          { id: 1, name: 'Linea primaria', completed: false, color: 'primary' },
+          { id: 2, name: 'Red primaria', completed: false, color: 'accent' },
+          { id: 3, name: 'Red secudaria', completed: false, color: 'warn' },
+        ],
       }
+      
+
     ];
 
     this.cargarCapas();
@@ -308,6 +422,27 @@ export class MapaGeneralComponent extends BaseComponent implements OnInit {
     this.tileLineasConRS = this.customTileLayer('solredes:linea', "n_version =4 and n_idpl_tipolinea = 3 and n_idpro_proyecto = " + this.proyecto.n_idpro_proyecto);
     this.tileAtributosConRS = this.customTileLayer('solredes:punto', "n_version =4 and n_idpl_tipolinea = 3 and n_idpro_proyecto = " + this.proyecto.n_idpro_proyecto);
 
+    this.tileLineasMonInspReplantLP = this.customTileLayer('solredes:lineaMonInsp', "n_tipoapp = 2 and n_idpl_tipolinea = 1 and n_idpro_proyecto = " + this.proyecto.n_idpro_proyecto);
+    this.tileAtributosMonInspReplantLP = this.customTileLayer('solredes:puntoMonInsp', "n_tipoapp = 2 and n_idpl_tipolinea = 1 and n_idpro_proyecto = " + this.proyecto.n_idpro_proyecto);
+    this.tileLineasMonInspReplantRP = this.customTileLayer('solredes:lineaMonInsp', "n_tipoapp = 2 and n_idpl_tipolinea = 2 and n_idpro_proyecto = " + this.proyecto.n_idpro_proyecto);
+    this.tileAtributosMonInspReplantRP = this.customTileLayer('solredes:puntoMonInsp', "n_tipoapp = 2 and n_idpl_tipolinea = 2 and n_idpro_proyecto = " + this.proyecto.n_idpro_proyecto);
+    this.tileLineasMonInspReplantRS = this.customTileLayer('solredes:lineaMonInsp', "n_tipoapp = 2 and n_idpl_tipolinea = 3 and n_idpro_proyecto = " + this.proyecto.n_idpro_proyecto);
+    this.tileAtributosMonInspReplantRS = this.customTileLayer('solredes:puntoMonInsp', "n_tipoapp = 2 and n_idpl_tipolinea = 3 and n_idpro_proyecto = " + this.proyecto.n_idpro_proyecto);
+
+    this.tileLineasMonInspMontLP = this.customTileLayer('solredes:lineaMonInsp', "n_tipoapp = 3 and n_idpl_tipolinea = 1 and n_idpro_proyecto = " + this.proyecto.n_idpro_proyecto);
+    this.tileLineasMonInspMontRP = this.customTileLayer('solredes:lineaMonInsp', "n_tipoapp = 3 and n_idpl_tipolinea = 2 and n_idpro_proyecto = " + this.proyecto.n_idpro_proyecto);
+    this.tileLineasMonInspMontRS = this.customTileLayer('solredes:lineaMonInsp', "n_tipoapp = 3 and n_idpl_tipolinea = 3 and n_idpro_proyecto = " + this.proyecto.n_idpro_proyecto);
+    this.tileAtributosMonInspMontLP = this.customTileLayer('solredes:puntoMonInsp', "n_tipoapp = 3 and n_idpl_tipolinea = 1 and n_idpro_proyecto = " + this.proyecto.n_idpro_proyecto);
+    this.tileAtributosMonInspMontRP = this.customTileLayer('solredes:puntoMonInsp', "n_tipoapp = 3 and n_idpl_tipolinea = 2 and n_idpro_proyecto = " + this.proyecto.n_idpro_proyecto);
+    this.tileAtributosMonInspMontRS = this.customTileLayer('solredes:puntoMonInsp', "n_tipoapp = 3 and n_idpl_tipolinea = 3 and n_idpro_proyecto = " + this.proyecto.n_idpro_proyecto);
+
+    this.tileLineasMonInspConfObraLP = this.customTileLayer('solredes:lineaMonInsp', "n_tipoapp = 4 and n_idpl_tipolinea = 1 and n_idpro_proyecto = " + this.proyecto.n_idpro_proyecto);
+    this.tileLineasMonInspConfObraRP = this.customTileLayer('solredes:lineaMonInsp', "n_tipoapp = 4 and n_idpl_tipolinea = 2 and n_idpro_proyecto = " + this.proyecto.n_idpro_proyecto);
+    this.tileLineasMonInspConfObraRS = this.customTileLayer('solredes:lineaMonInsp', "n_tipoapp = 4 and n_idpl_tipolinea = 3 and n_idpro_proyecto = " + this.proyecto.n_idpro_proyecto);
+    this.tileAtributosMonInspConfObraLP = this.customTileLayer('solredes:puntoMonInsp', "n_tipoapp = 4 and n_idpl_tipolinea = 1 and n_idpro_proyecto = " + this.proyecto.n_idpro_proyecto);
+    this.tileAtributosMonInspConfObraRP = this.customTileLayer('solredes:puntoMonInsp', "n_tipoapp = 4 and n_idpl_tipolinea = 2 and n_idpro_proyecto = " + this.proyecto.n_idpro_proyecto);
+    this.tileAtributosMonInspConfObraRS = this.customTileLayer('solredes:puntoMonInsp', "n_tipoapp = 4 and n_idpl_tipolinea = 3 and n_idpro_proyecto = " + this.proyecto.n_idpro_proyecto);
+
     /* this.tileDepartamento = new TileLayer({
        source: new TileWMS({
          url: this.urlUbideo,
@@ -326,8 +461,7 @@ export class MapaGeneralComponent extends BaseComponent implements OnInit {
     this.usuarioLog = this.getUser().data;
 
     this.getPantallaRol();
-
-
+    
     this.map = new Map({
       target: 'ol-map',
       layers: [
@@ -359,19 +493,124 @@ export class MapaGeneralComponent extends BaseComponent implements OnInit {
         this.tileAtributosConRP,
         this.tileLineasConRS,
         this.tileAtributosConRS,
+
+        this.tileLineasMonInspReplantLP,
+        this.tileLineasMonInspReplantRP,
+        this.tileLineasMonInspReplantRS,
+        this.tileAtributosMonInspReplantLP,
+        this.tileAtributosMonInspReplantRP,
+        this.tileAtributosMonInspReplantRS,
       ],
       view: new View({
         center: [this.lng, this.lat],
-        zoom: 6,
+        zoom: this.zoom,
         projection: 'EPSG:4326'
       }),
       controls: defaultControls({ attribution: true, zoom: true }).extend([])
     });
 
+    /*this.map.on('singleclick', function(evt) {
+      console.log("CLICK-------------");
+      console.log(evt.target);  
+      const selectSingleClick = new Select({style: selectStyle});
+      var feature = this.map.forEachFeatureAtPixel(evt.pixel, function(feature, layer) {
+          // Aquí se puede filtrar la feature
+          return feature;
+      });
+      if (feature) {
+          console.log("Click en: ", feature);
+      }
+    });   */ 
+  }
+  /*click(event: any){
+    this.map.forEachLayerAtPixel(this.map.getEventPixel(event))
+  }*/
+  
+
+  selectTipolinea(n_idpl_tipolinea) {
+    this.idtipolinea = n_idpl_tipolinea;
+  }
+
+  selectZona(n_idpl_zona) {
+    this.idzona = n_idpl_zona;
+  }
+
+  buscarEstruct(dato){
+    let request = {
+      n_version: this.idversion,
+      n_idpl_tipolinea: this.idtipolinea,
+      n_idpro_proyecto: this.proyecto.n_idpro_proyecto,
+      c_nombre: dato
+    }
+    console.log(request);
+    
+    this._mapa_service.buscarEstruct(request,this.getToken().token).subscribe(
+      result =>{
+        console.log(result.data.length);
+        if(result.data.length > 0 && result.estado){
+          console.log(result.data);
+          this.lat = parseFloat(result.data[0].c_latitud);
+          this.lng = parseFloat(result.data[0].c_longitud);        
+          const view = this.map.getView();
+          view.setZoom(13);
+          view.setCenter([this.lng, this.lat]);
+        }
+        
+    }, error =>{
+      try {
+        this.openSnackBar(error.error.Detail, error.error.StatusCode);
+      } catch (error) {
+        this.openSnackBar(AppSettings.SERVICE_NO_CONECT_SERVER, 99);
+      }
+    });
+  }
 
 
+  getzona(){
+    let request = {
+      n_idpl_tipolinea: 0,
+      n_idpro_proyecto: this.proyecto.n_idpro_proyecto      
+    }
+    this._confiGeneral_service.getZonas(request,this.getToken().token).subscribe(
+      result => {
+        let resultado = <ResultadoApi>result;
+        if (resultado.estado) {
+          //console.log(resultado.data);          
+          this.zona = resultado.data;
+          //console.log(this.zona);
+        } else {
+          this.openSnackBar(resultado.mensaje, 99);
+        }
+      }, error => {
+        try {
+          this.openSnackBar(error.error.Detail, error.error.StatusCode);
+        } catch (error) {
+          this.openSnackBar(AppSettings.SERVICE_NO_CONECT_SERVER, 99);
+        }
+      });
+  }
 
-
+  gettipolinea() {
+    let request = {
+      n_idpl_tipolinea: 0,    
+      n_idpro_proyecto: this.proyecto.n_idpro_proyecto  
+    }
+    this._confiGeneral_service.gettipolinea(request,this.getToken().token).subscribe(
+      result => {
+        let resultado = <ResultadoApi>result;
+        if (resultado.estado) {
+          this.tipolinea = resultado.data;
+          //console.log(this.tipolinea);
+        } else {
+          this.openSnackBar(resultado.mensaje, 99);
+        }
+      }, error => {
+        try {
+          this.openSnackBar(error.error.Detail, error.error.StatusCode);
+        } catch (error) {
+          this.openSnackBar(AppSettings.SERVICE_NO_CONECT_SERVER, 99);
+        }
+      });
   }
 
 }
