@@ -540,6 +540,7 @@ export class MapaGeneralComponent extends BaseComponent implements OnInit {
       n_version: this.idversion,
       n_idpl_tipolinea: this.idtipolinea,
       n_idpro_proyecto: this.proyecto.n_idpro_proyecto,
+      n_idpl_zona: this.idzona,
       c_nombre: dato
     }
     console.log(request);
