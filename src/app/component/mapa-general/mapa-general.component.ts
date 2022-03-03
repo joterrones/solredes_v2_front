@@ -20,6 +20,7 @@ import { FiltroCapaComponent } from '../mapa/filtro-capa/filtro-capa.component';
 import { confGeneralService } from 'src/app/service/confGeneral.service';
 import { MapaService } from 'src/app/service/mapa.service';
 import Select from 'ol/interaction/Select';
+import { FiltroBuscarComponent } from '../mapa/filtro-buscar/filtro-buscar.component';
 
 @Component({
   selector: 'app-mapa-general',
@@ -35,8 +36,7 @@ export class MapaGeneralComponent extends BaseComponent implements OnInit {
   zona = [];
   idtipolinea = 0;
   idzona = 0;
-  buscar = '';
-  idversion = 0;
+  buscar = '';  
 
   map: Map;
   mapexample: Map
@@ -192,8 +192,7 @@ export class MapaGeneralComponent extends BaseComponent implements OnInit {
             this.tileAtributosExpRP.setVisible(checkOk.filter(o => o.completed && o.id == 2).length > 0);
             this.tileLineasExpRP.setVisible(checkOk.filter(o => o.completed && o.id == 2).length > 0);
             this.tileAtributosExpRS.setVisible(checkOk.filter(o => o.completed && o.id == 3).length > 0);
-            this.tileLineasExpRS.setVisible(checkOk.filter(o => o.completed && o.id == 3).length > 0);
-            this.idversion = element.version;
+            this.tileLineasExpRS.setVisible(checkOk.filter(o => o.completed && o.id == 3).length > 0);            
             break;
           case 2:
             this.tileAtributosRepLP.setVisible(checkOk.filter(o => o.completed && o.id == 1).length > 0);
@@ -201,8 +200,7 @@ export class MapaGeneralComponent extends BaseComponent implements OnInit {
             this.tileAtributosRepRP.setVisible(checkOk.filter(o => o.completed && o.id == 2).length > 0);
             this.tileLineasRepRP.setVisible(checkOk.filter(o => o.completed && o.id == 2).length > 0);
             this.tileAtributosRepRS.setVisible(checkOk.filter(o => o.completed && o.id == 3).length > 0);
-            this.tileLineasRepRS.setVisible(checkOk.filter(o => o.completed && o.id == 3).length > 0);
-            this.idversion = element.version;
+            this.tileLineasRepRS.setVisible(checkOk.filter(o => o.completed && o.id == 3).length > 0);            
             break;
           case 3:
             this.tileAtributosMonLP.setVisible(checkOk.filter(o => o.completed && o.id == 1).length > 0);
@@ -210,8 +208,7 @@ export class MapaGeneralComponent extends BaseComponent implements OnInit {
             this.tileAtributosMonRP.setVisible(checkOk.filter(o => o.completed && o.id == 2).length > 0);
             this.tileLineasMonRP.setVisible(checkOk.filter(o => o.completed && o.id == 2).length > 0);
             this.tileAtributosMonRS.setVisible(checkOk.filter(o => o.completed && o.id == 3).length > 0);
-            this.tileLineasMonRS.setVisible(checkOk.filter(o => o.completed && o.id == 3).length > 0);
-            this.idversion = element.version;
+            this.tileLineasMonRS.setVisible(checkOk.filter(o => o.completed && o.id == 3).length > 0);            
             break;
           case 4:
             this.tileAtributosConLP.setVisible(checkOk.filter(o => o.completed && o.id == 1).length > 0);
@@ -219,8 +216,7 @@ export class MapaGeneralComponent extends BaseComponent implements OnInit {
             this.tileAtributosConRP.setVisible(checkOk.filter(o => o.completed && o.id == 2).length > 0);
             this.tileLineasConRP.setVisible(checkOk.filter(o => o.completed && o.id == 2).length > 0);
             this.tileAtributosConRS.setVisible(checkOk.filter(o => o.completed && o.id == 3).length > 0);
-            this.tileLineasConRS.setVisible(checkOk.filter(o => o.completed && o.id == 3).length > 0);
-            this.idversion = element.version;
+            this.tileLineasConRS.setVisible(checkOk.filter(o => o.completed && o.id == 3).length > 0);            
             break; 
         }
         this.tileLineasMonInspReplantLP.setVisible(checkOk.filter(o => o.completed && o.id == 1).length > 0);
@@ -255,9 +251,6 @@ export class MapaGeneralComponent extends BaseComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.getzona();
-    this.gettipolinea();   
-
     this.data = [
       {
         name: 'Expediente',
@@ -536,82 +529,25 @@ export class MapaGeneralComponent extends BaseComponent implements OnInit {
   }
 
   buscarEstruct(dato){
-    let request = {
-      n_version: this.idversion,
-      n_idpl_tipolinea: this.idtipolinea,
-      n_idpro_proyecto: this.proyecto.n_idpro_proyecto,
-      n_idpl_zona: this.idzona,
-      c_nombre: dato
-    }
-    console.log(request);
-    
-    this._mapa_service.buscarEstruct(request,this.getToken().token).subscribe(
-      result =>{
-        console.log(result.data.length);
-        if(result.data.length > 0 && result.estado){
-          console.log(result.data);
-          this.lat = parseFloat(result.data[0].c_latitud);
-          this.lng = parseFloat(result.data[0].c_longitud);        
-          const view = this.map.getView();
-          view.setZoom(13);
-          view.setCenter([this.lng, this.lat]);
-        }
-        
-    }, error =>{
-      try {
-        this.openSnackBar(error.error.Detail, error.error.StatusCode);
-      } catch (error) {
-        this.openSnackBar(AppSettings.SERVICE_NO_CONECT_SERVER, 99);
+    const dialogRef = this.dialog.open(FiltroBuscarComponent, {
+      width: '600px',
+      data: this.data
+    });
+    dialogRef.afterClosed().subscribe(result => {      
+      if(result){
+        this.lng = result.lng;
+        this.lat = result.lat;
+        const view = this.map.getView();
+        view.setZoom(18);
+        view.setCenter([this.lng, this.lat]);
+        //this.mostarCapas(result);
       }
     });
+
+    
   }
 
 
-  getzona(){
-    let request = {
-      n_idpl_tipolinea: 0,
-      n_idpro_proyecto: this.proyecto.n_idpro_proyecto      
-    }
-    this._confiGeneral_service.getZonas(request,this.getToken().token).subscribe(
-      result => {
-        let resultado = <ResultadoApi>result;
-        if (resultado.estado) {
-          //console.log(resultado.data);          
-          this.zona = resultado.data;
-          //console.log(this.zona);
-        } else {
-          this.openSnackBar(resultado.mensaje, 99);
-        }
-      }, error => {
-        try {
-          this.openSnackBar(error.error.Detail, error.error.StatusCode);
-        } catch (error) {
-          this.openSnackBar(AppSettings.SERVICE_NO_CONECT_SERVER, 99);
-        }
-      });
-  }
-
-  gettipolinea() {
-    let request = {
-      n_idpl_tipolinea: 0,    
-      n_idpro_proyecto: this.proyecto.n_idpro_proyecto  
-    }
-    this._confiGeneral_service.gettipolinea(request,this.getToken().token).subscribe(
-      result => {
-        let resultado = <ResultadoApi>result;
-        if (resultado.estado) {
-          this.tipolinea = resultado.data;
-          //console.log(this.tipolinea);
-        } else {
-          this.openSnackBar(resultado.mensaje, 99);
-        }
-      }, error => {
-        try {
-          this.openSnackBar(error.error.Detail, error.error.StatusCode);
-        } catch (error) {
-          this.openSnackBar(AppSettings.SERVICE_NO_CONECT_SERVER, 99);
-        }
-      });
-  }
+  
 
 }

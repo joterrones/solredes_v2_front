@@ -134,6 +134,7 @@ import { ProyectoDetalleComponent } from './component/proyecto-detalle/proyecto-
 import { DashboardLineaEstadoComponent } from './component/general/dashboard/dashboard-linea-estado/dashboard-linea-estado.component';
 import { ImportacionPlanillaDescargarComponent } from './component/importacion-planilla-descargar/importacion-planilla-descargar.component';
 import { FiltroCapaComponent } from './component/mapa/filtro-capa/filtro-capa.component';
+import { FiltroBuscarComponent } from './component/mapa/filtro-buscar/filtro-buscar.component';
 
 
 
@@ -265,6 +266,7 @@ import { FiltroCapaComponent } from './component/mapa/filtro-capa/filtro-capa.co
     DashboardLineaEstadoComponent,
     ImportacionPlanillaDescargarComponent,
     FiltroCapaComponent,
+    FiltroBuscarComponent,
 
   ],
   imports: [
@@ -354,6 +356,7 @@ import { FiltroCapaComponent } from './component/mapa/filtro-capa/filtro-capa.co
     DashboardLineaEstadoComponent,
     ImportacionPlanillaDescargarComponent,
     FiltroCapaComponent,
+    FiltroBuscarComponent,
   ],
   providers: [
     MatDatepickerModule,

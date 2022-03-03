@@ -1,37 +1,11 @@
 <app-menu>  
-  <div class="cont">
+  <div class="cont">    
     <button mat-icon-button color="primary" (click)="openDialog();">
       <mat-icon>filter_list</mat-icon>
-    </button>
-    <mat-form-field>
-      <mat-select placeholder="Tipo Linea">
-        <mat-option value="0" (click)='selectTipolinea(0)'>
-          -TODOS-
-        </mat-option>
-        <mat-option *ngFor="let lineat of tipolinea" [value]="lineat.n_idpl_tipolinea"
-          (click)='selectTipolinea(lineat.n_idpl_tipolinea)'>
-          {{lineat.c_nombre}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-    <mat-form-field>
-      <mat-select placeholder="Zonas">
-        <mat-option value="0" (click)='selectZona(0)'>
-          -TODOS-
-        </mat-option>
-        <mat-option *ngFor="let z of zona" [value]="z.n_idpl_zona" (click)='selectZona(z.n_idpl_zona)'>
-          {{z.c_nombre}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-    
-      <mat-form-field>        
-        <input matInput type="Codigo" placeholder="Buscar" [(ngModel)]="buscar" />
-      </mat-form-field>
-      <button type="button" mat-mini-fab color="accent"  (click)="buscarEstruct(buscar)" >
-        <mat-icon>search</mat-icon>
-      </button> 
-    
+    </button>    
+    <button type="button" mat-mini-fab color="accent"  (click)="buscarEstruct(buscar)" >
+      <mat-icon>search</mat-icon>
+    </button>     
   </div>  
   <app-map [map]="map" style="width: 100%;"></app-map>
 </app-menu>
