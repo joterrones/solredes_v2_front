@@ -18,11 +18,13 @@ export class FiltroBuscarComponent extends BaseComponent implements OnInit {
   zona = [];
   tipolinea = [];
   linea = [];
+  estructura = [];
 
-  idtipolinea = 0;
+  c_tipolinea = '';
   idversion = 0;      
-  idzona = 0;
-  idlinea = 0;
+  c_zona = '';
+  c_linea = '';
+  c_estructura = '';
   buscar = '';
 
   lat: number;
@@ -34,14 +36,14 @@ export class FiltroBuscarComponent extends BaseComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<FiltroBuscarComponent>,
     public _router: Router,
-    public snackBar: MatSnackBar,
-    public _confiGeneral_service: confGeneralService,
+    public snackBar: MatSnackBar,    
     public _mapa_service: MapaService,
   ) { super(snackBar, _router); }
 
   ngOnInit() {
     this.getzona();
     this.gettipolinea();
+    this.getLinea();
   }
 
 
@@ -49,10 +51,10 @@ export class FiltroBuscarComponent extends BaseComponent implements OnInit {
     this.viewBar = true;
     let request = {
       n_version: this.idversion,
-      n_idpl_tipolinea: this.idtipolinea,
+      c_tipolinea: this.c_tipolinea,
       n_idpro_proyecto: this.proyecto.n_idpro_proyecto,
-      n_idpl_zona: this.idzona,
-      n_idpl_linea: this.idlinea,
+      c_zona: this.c_zona,
+      c_linea: this.c_linea,
       c_nombre: this.buscar
     }    
     console.log(request);
@@ -82,40 +84,11 @@ export class FiltroBuscarComponent extends BaseComponent implements OnInit {
     });
   }
 
-  getLinea() {    
-    this.viewBar = true;
-    var request = {
-      n_idpl_tipolinea: this.idtipolinea,     
-      n_idpl_zona: this.idzona,
-      n_idpro_proyecto: this.proyecto.n_idpro_proyecto,
-      estadoSelectb_expediente: null,
-      estadoSelectb_replanteo: null,
-      estadoSelectb_montaje: null,
-      estadoSelectb_cierre: null
-    }
-    console.log(request);
-    
-    this._confiGeneral_service.getLinea(request, this.getToken().token).subscribe(
-      result => {        
-          if (result.estado) {
-            console.log(result.data);   
-            this.linea = result.data;
-            this.viewBar = false;
-            this.viewLinea = true;         
-          } else {
-            this.openSnackBar(result.mensaje, 99);
-          }        
-      }, error => {
-        this.openSnackBar(error.error, 99);
-      });
-  }
-
   getzona(){
-    let request = {
-      n_idpl_tipolinea: 0,
+    let request = {      
       n_idpro_proyecto: this.proyecto.n_idpro_proyecto      
     }
-    this._confiGeneral_service.getZonas(request,this.getToken().token).subscribe(
+    this._mapa_service.getZona(request,this.getToken().token).subscribe(
       result => {
         let resultado = <ResultadoApi>result;
         if (resultado.estado) {
@@ -135,11 +108,8 @@ export class FiltroBuscarComponent extends BaseComponent implements OnInit {
   }
 
   gettipolinea() {
-    let request = {
-      n_idpl_tipolinea: 0,    
-      n_idpro_proyecto: this.proyecto.n_idpro_proyecto  
-    }
-    this._confiGeneral_service.gettipolinea(request,this.getToken().token).subscribe(
+    
+    this._mapa_service.gettipolinea(this.getToken().token).subscribe(
       result => {
         let resultado = <ResultadoApi>result;
         if (resultado.estado) {
@@ -154,6 +124,48 @@ export class FiltroBuscarComponent extends BaseComponent implements OnInit {
         } catch (error) {
           this.openSnackBar(AppSettings.SERVICE_NO_CONECT_SERVER, 99);
         }
+      });
+  }
+
+  getLinea() {        
+    var request = {      
+      n_idpro_proyecto: this.proyecto.n_idpro_proyecto,
+    }
+    console.log(request);
+    
+    this._mapa_service.getLinea(request, this.getToken().token).subscribe(
+      result => {        
+          if (result.estado) {
+            console.log(result.data);   
+            this.linea = result.data;                    
+          } else {
+            this.openSnackBar(result.mensaje, 99);
+          }        
+      }, error => {
+        this.openSnackBar(error.error, 99);
+      });
+  }
+
+  getestructura() {    
+    this.viewBar = true;
+    var request = {      
+      n_idpro_proyecto: this.proyecto.n_idpro_proyecto,
+      c_nombreLinea: this.c_linea
+    }
+    console.log(request);
+    
+    this._mapa_service.getestructura2(request, this.getToken().token).subscribe(
+      result => {        
+          if (result.estado) {
+            console.log(result.data);   
+            this.estructura = result.data;
+            this.viewBar = false;
+            this.viewLinea = true;         
+          } else {
+            this.openSnackBar(result.mensaje, 99);
+          }        
+      }, error => {
+        this.openSnackBar(error.error, 99);
       });
   }
 }

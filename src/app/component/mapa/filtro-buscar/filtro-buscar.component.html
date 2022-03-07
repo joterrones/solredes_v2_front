@@ -3,28 +3,37 @@
     <div mat-dialog-content class="contenedor">
 
         <mat-form-field>
-            <mat-select placeholder="Tipo Linea" [(value)]="idtipolinea" required>
-                <mat-option *ngFor="let tlinea of tipolinea" [value]="tlinea.n_idpl_tipolinea">
+            <mat-select placeholder="Tipo Linea" [(value)]="c_tipolinea" required>
+                <mat-option *ngFor="let tlinea of tipolinea" [value]="tlinea.c_nombre">
                     {{tlinea.c_nombre}}
                 </mat-option>
             </mat-select>
         </mat-form-field>
 
         <mat-form-field>
-            <mat-select placeholder="zona" [(value)]="idzona" required>
-                <mat-option *ngFor="let z of zona" [value]="z.n_idpl_zona" (click)="getLinea()">
+            <mat-select placeholder="zona" [(value)]="c_zona" required>
+                <mat-option *ngFor="let z of zona" [value]="z.c_nombre" >
                     {{z.c_nombre}}
                 </mat-option>
             </mat-select>
         </mat-form-field>
 
         <mat-form-field>
-            <mat-select placeholder="Linea" [(value)]="idlinea" required [disabled]="!viewLinea">
-                <mat-option *ngFor="let l of linea" [value]="l.n_idpl_linea">
-                    {{l.c_codigo+' - '+l.c_nombre}}
+            <mat-select placeholder="Linea" [(value)]="c_linea" required>
+                <mat-option *ngFor="let l of linea" [value]="l.c_nombre" (click)="getestructura()">
+                    {{l.c_nombre}}
                 </mat-option>
             </mat-select>
         </mat-form-field>
+
+        <mat-form-field>
+            <mat-select placeholder="Estructura" [(value)]="c_estructura" required [disabled]="!viewLinea">
+                <mat-option *ngFor="let e of estructura" [value]="e.c_nombre">
+                    {{e.c_nombre}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+
         <mat-form-field>
             <input matInput placeholder="Buscar" name="c_buscar" #c_username="ngModel" [(ngModel)]="buscar"/>            
         </mat-form-field>
@@ -34,7 +43,7 @@
     <div mat-dialog-actions>
 
         <button mat-button type="submit" cdkFocusInitial
-            [disabled]="(!newForm.form.valid || idlinea == 0) && (idzona == 0 || idtipolinea == 0)">
+            [disabled]="!newForm.form.valid ">
             <mat-icon>search</mat-icon>
             <span>Buscar</span>
         </button>

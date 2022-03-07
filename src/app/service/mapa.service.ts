@@ -46,5 +46,43 @@ export class MapaService {
         });
         return this._http.post(this.url + 'mapa/buscarEstruct', req, { headers: reqHeader });
     }
+
+    getZona(data, token): Observable<any> {
+        var reqHeader = new HttpHeaders({
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
+        });
+        console.log('enviando datos a node zona')
+        console.log(data)
+        return this._http.post(this.url + 'mapa/getZona', data, { headers: reqHeader });
+    }
+
+    gettipolinea(token): Observable<any> {
+        var reqHeader = new HttpHeaders({
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
+        });
+        return this._http.post(this.url + 'mapa/gettipolinea', { headers: reqHeader });
+    }
+
+    getLinea(data, token): Observable<any> {
+        var reqHeader = new HttpHeaders({
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
+        });
+        console.log('enviando datos a node linea')
+        console.log(data)
+        return this._http.post(this.url + 'mapa/getLinea', data, { headers: reqHeader });
+    }
+
+    getestructura2(data, token): Observable<any> {
+        var reqHeader = new HttpHeaders({
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
+        });
+        console.log('enviando datos a node linea')
+        console.log(data)
+        return this._http.post(this.url + 'mapa/getestructura2', data, { headers: reqHeader });
+    }
     
 }

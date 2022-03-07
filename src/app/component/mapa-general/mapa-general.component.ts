@@ -22,6 +22,12 @@ import { MapaService } from 'src/app/service/mapa.service';
 import Select from 'ol/interaction/Select';
 import { FiltroBuscarComponent } from '../mapa/filtro-buscar/filtro-buscar.component';
 
+import VectorSource from 'ol/source/vector';
+import Vector from 'ol/layer/vector';
+import GeoJSON from 'ol/format/geojson';
+
+
+
 @Component({
   selector: 'app-mapa-general',
   templateUrl: './mapa-general.component.html',
@@ -48,6 +54,8 @@ export class MapaGeneralComponent extends BaseComponent implements OnInit {
   
   data = [];
   tileBase;
+
+  myVectorLayer;
 
   tileLineasExpLP;
   tileLineasExpRP;
@@ -436,6 +444,7 @@ export class MapaGeneralComponent extends BaseComponent implements OnInit {
     this.tileAtributosMonInspConfObraRP = this.customTileLayer('solredes:puntoMonInsp', "n_tipoapp = 4 and n_idpl_tipolinea = 2 and n_idpro_proyecto = " + this.proyecto.n_idpro_proyecto);
     this.tileAtributosMonInspConfObraRS = this.customTileLayer('solredes:puntoMonInsp', "n_tipoapp = 4 and n_idpl_tipolinea = 3 and n_idpro_proyecto = " + this.proyecto.n_idpro_proyecto);
 
+    
     /* this.tileDepartamento = new TileLayer({
        source: new TileWMS({
          url: this.urlUbideo,
@@ -449,12 +458,13 @@ export class MapaGeneralComponent extends BaseComponent implements OnInit {
        })
      });*/
 
-    this.mostarCapas(this.data);
+    
+    //console.log("tileLineasExpLP---------------------------"+this.tileLineasExpLP.getSource());
 
     this.usuarioLog = this.getUser().data;
 
-    this.getPantallaRol();
-    
+    this.getPantallaRol();    
+
     this.map = new Map({
       target: 'ol-map',
       layers: [
@@ -502,18 +512,34 @@ export class MapaGeneralComponent extends BaseComponent implements OnInit {
       controls: defaultControls({ attribution: true, zoom: true }).extend([])
     });
 
-    /*this.map.on('singleclick', function(evt) {
+    /*this.map.on('singleclick', function(event){
+      console.log(this.tileLineasExpLP.getData(event.pixel));
+    });*/
+    
+    /*this.myVectorLayer = new Vector({
+      source : new VectorSource({      
+        url: this.url,          
+        //overlaps: true,
+        format : new GeoJSON(),               
+      }),
+      visible: true,
+      
+    });*/
+    //console.log("-------------------------------------"+this.myVectorLayer.on());
+    //this.map.addLayer(this.myVectorLayer);
+
+    this.map.on('singleclick', function(evt) {
       console.log("CLICK-------------");
-      console.log(evt.target);  
-      const selectSingleClick = new Select({style: selectStyle});
-      var feature = this.map.forEachFeatureAtPixel(evt.pixel, function(feature, layer) {
+      console.log(evt);  
+      //const selectSingleClick = new Select({style: selectStyle});
+      /*var feature = this.map.forEachFeatureAtPixel(evt.pixel, function(feature, layer) {
           // Aquí se puede filtrar la feature
           return feature;
       });
       if (feature) {
           console.log("Click en: ", feature);
-      }
-    });   */ 
+      }*/
+    });
   }
   /*click(event: any){
     this.map.forEachLayerAtPixel(this.map.getEventPixel(event))
@@ -542,8 +568,7 @@ export class MapaGeneralComponent extends BaseComponent implements OnInit {
         view.setCenter([this.lng, this.lat]);
         //this.mostarCapas(result);
       }
-    });
-
+    });   
     
   }
 
