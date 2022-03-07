@@ -73,6 +73,9 @@ export class FiltroBuscarComponent extends BaseComponent implements OnInit {
           console.log(this.data); 
           this.viewBar = false;             
           this.dialogRef.close(this.data);
+        }else if(result.data.length == 0){          
+          this.dialogRef.close();
+          this.openSnackBar("No se encontro resultados", 99);
         }
         
     }, error =>{
