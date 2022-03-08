@@ -25,6 +25,10 @@ import { FiltroBuscarComponent } from '../mapa/filtro-buscar/filtro-buscar.compo
 import VectorSource from 'ol/source/vector';
 import Vector from 'ol/layer/vector';
 import GeoJSON from 'ol/format/geojson';
+import Fill from 'ol/style/Fill';
+import Style from 'ol/style/Style';
+import Geometry from 'ol/geom/Geometry';
+import {bbox} from 'ol/loadingstrategy';
 
 
 
@@ -459,7 +463,6 @@ export class MapaGeneralComponent extends BaseComponent implements OnInit {
      });*/
 
     
-    //console.log("tileLineasExpLP---------------------------"+this.tileLineasExpLP.getSource());
 
     this.usuarioLog = this.getUser().data;
 
@@ -517,29 +520,32 @@ export class MapaGeneralComponent extends BaseComponent implements OnInit {
     });*/
     
     /*this.myVectorLayer = new Vector({
-      source : new VectorSource({      
-        url: this.url,          
-        //overlaps: true,
-        format : new GeoJSON(),               
+      source: new VectorSource({     
+        url: this.url,               
+        //url: 'http://35.184.146.235:8080/geoserver/solredes/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=solredes%3Alinea&outputFormat=application%2Fjson',          
+        format: new GeoJSON(), 
+        //overlaps: true,             
       }),
       visible: true,
-      
     });*/
-    //console.log("-------------------------------------"+this.myVectorLayer.on());
+
     //this.map.addLayer(this.myVectorLayer);
+
+    //const selectSingleClick = new Select({hitTolerance:10});
+
+    //this.map.addInteraction(selectSingleClick);
+
+
+    /*selectSingleClick.on('select', function(e) {
+        console.log(e.target)
+    })*/
 
     this.map.on('singleclick', function(evt) {
       console.log("CLICK-------------");
-      console.log(evt);  
-      //const selectSingleClick = new Select({style: selectStyle});
-      /*var feature = this.map.forEachFeatureAtPixel(evt.pixel, function(feature, layer) {
-          // Aquí se puede filtrar la feature
-          return feature;
-      });
-      if (feature) {
-          console.log("Click en: ", feature);
-      }*/
-    });
+      //console.log(evt);  
+     // var a = selectSingleClick.getFeatures();
+      //console.log(a);
+    })
   }
   /*click(event: any){
     this.map.forEachLayerAtPixel(this.map.getEventPixel(event))
