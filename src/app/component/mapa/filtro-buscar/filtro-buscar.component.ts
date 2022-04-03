@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialogRef, MatSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
+import { transformWithProjections } from 'ol/proj';
+import { textHeights } from 'ol/render/canvas';
 import { AppSettings } from 'src/app/common/appsettings';
 import { ResultadoApi } from 'src/app/interface/common.interface';
 import { confGeneralService } from 'src/app/service/confGeneral.service';
+import { GeneralService } from 'src/app/service/general.service';
 import { MapaService } from 'src/app/service/mapa.service';
 import { BaseComponent } from '../../base/base.component';
 
@@ -11,7 +14,7 @@ import { BaseComponent } from '../../base/base.component';
   selector: 'app-filtro-buscar',
   templateUrl: './filtro-buscar.component.html',
   styleUrls: ['./filtro-buscar.component.css'],
-  providers: [confGeneralService, MapaService]
+  providers: [confGeneralService, MapaService,GeneralService]
 })
 export class FiltroBuscarComponent extends BaseComponent implements OnInit {
 
@@ -20,10 +23,10 @@ export class FiltroBuscarComponent extends BaseComponent implements OnInit {
   linea = [];
   estructura = [];
 
-  c_tipolinea = '';
+  n_idpl_tipolinea = 0;
   idversion = 0;      
-  c_zona = '';
-  c_linea = '';
+  n_idpl_zona = 0;
+  n_idpl_linea = 0;
   c_estructura = '';
   buscar = '';
 
@@ -38,12 +41,29 @@ export class FiltroBuscarComponent extends BaseComponent implements OnInit {
     public _router: Router,
     public snackBar: MatSnackBar,    
     public _mapa_service: MapaService,
+    public _general_service:GeneralService,
+    public _confiGeneral_service: confGeneralService,    
   ) { super(snackBar, _router); }
 
   ngOnInit() {
     this.getzona();
     this.gettipolinea();
+   // this.getLinea();
+  }
+
+  
+  seleccionarTipoLinea(id){
+    this.n_idpl_tipolinea = id;
     this.getLinea();
+  }
+
+  seleccionarZona(id){
+    this.n_idpl_zona = id;
+    this.getLinea();
+  }
+
+  seleccionarLinea(id){
+    this.n_idpl_linea = id;
   }
 
 
@@ -51,14 +71,14 @@ export class FiltroBuscarComponent extends BaseComponent implements OnInit {
     this.viewBar = true;
     let request = {
       n_version: this.idversion,
-      c_tipolinea: this.c_tipolinea,
+      n_idpl_tipolinea: this.n_idpl_tipolinea,
       n_idpro_proyecto: this.proyecto.n_idpro_proyecto,
-      c_zona: this.c_zona,
-      c_linea: this.c_linea,
+      n_idpl_zona: this.n_idpl_zona,
+      n_idpl_linea: this.n_idpl_linea,
       c_nombre: this.buscar
     }    
     console.log(request);
-    
+    ///Cambiar
     this._mapa_service.buscarEstruct(request,this.getToken().token).subscribe(
       result =>{
         console.log(result.data.length);
@@ -88,10 +108,11 @@ export class FiltroBuscarComponent extends BaseComponent implements OnInit {
   }
 
   getzona(){
-    let request = {      
+    let request = {
+      n_idpl_zona: 0,
       n_idpro_proyecto: this.proyecto.n_idpro_proyecto      
     }
-    this._mapa_service.getZona(request,this.getToken().token).subscribe(
+    this._confiGeneral_service.getZona(request,this.getToken().token).subscribe(
       result => {
         let resultado = <ResultadoApi>result;
         if (resultado.estado) {
@@ -112,7 +133,7 @@ export class FiltroBuscarComponent extends BaseComponent implements OnInit {
 
   gettipolinea() {
     
-    this._mapa_service.gettipolinea(this.getToken().token).subscribe(
+    this._general_service.gettipolinea(this.getToken().token).subscribe(
       result => {
         let resultado = <ResultadoApi>result;
         if (resultado.estado) {
@@ -133,10 +154,12 @@ export class FiltroBuscarComponent extends BaseComponent implements OnInit {
   getLinea() {        
     var request = {      
       n_idpro_proyecto: this.proyecto.n_idpro_proyecto,
+      n_idpl_zona: this.n_idpl_zona,
+      n_idpl_tipolinea: this.n_idpl_tipolinea
     }
     console.log(request);
     
-    this._mapa_service.getLinea(request, this.getToken().token).subscribe(
+    this._mapa_service.getLineaFiltro(request, this.getToken().token).subscribe(
       result => {        
           if (result.estado) {
             console.log(result.data);   
@@ -149,26 +172,4 @@ export class FiltroBuscarComponent extends BaseComponent implements OnInit {
       });
   }
 
-  getestructura() {    
-    this.viewBar = true;
-    var request = {      
-      n_idpro_proyecto: this.proyecto.n_idpro_proyecto,
-      c_nombreLinea: this.c_linea
-    }
-    console.log(request);
-    
-    this._mapa_service.getestructura2(request, this.getToken().token).subscribe(
-      result => {        
-          if (result.estado) {
-            console.log(result.data);   
-            this.estructura = result.data;
-            this.viewBar = false;
-            this.viewLinea = true;         
-          } else {
-            this.openSnackBar(result.mensaje, 99);
-          }        
-      }, error => {
-        this.openSnackBar(error.error, 99);
-      });
-  }
 }

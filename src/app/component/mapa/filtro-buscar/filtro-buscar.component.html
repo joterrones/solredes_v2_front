@@ -3,33 +3,34 @@
     <div mat-dialog-content class="contenedor">
 
         <mat-form-field>
-            <mat-select placeholder="Tipo Linea" [(value)]="c_tipolinea" required>
-                <mat-option *ngFor="let tlinea of tipolinea" [value]="tlinea.c_nombre">
+            <mat-select placeholder="Tipo Linea"  required>
+                <mat-option  value="0" (click)="seleccionarTipoLinea(0)">
+                    -TODOS-
+                </mat-option>
+                <mat-option *ngFor="let tlinea of tipolinea" [value]="tlinea.n_idpl_tipolinea" (click)="seleccionarTipoLinea(tlinea.n_idpl_tipolinea)">
                     {{tlinea.c_nombre}}
                 </mat-option>
             </mat-select>
         </mat-form-field>
 
         <mat-form-field>
-            <mat-select placeholder="zona" [(value)]="c_zona" required>
-                <mat-option *ngFor="let z of zona" [value]="z.c_nombre" >
+            <mat-select placeholder="zona"  required>
+                <mat-option  value ="0"  (click)="seleccionarZona(0)">
+                    -TODOS-
+                </mat-option>
+                <mat-option *ngFor="let z of zona" [value]="z.n_idpl_zona"  (click)="seleccionarZona(z.n_idpl_zona)">
                     {{z.c_nombre}}
                 </mat-option>
             </mat-select>
         </mat-form-field>
 
         <mat-form-field>
-            <mat-select placeholder="Linea" [(value)]="c_linea" required>
-                <mat-option *ngFor="let l of linea" [value]="l.c_nombre" (click)="getestructura()">
-                    {{l.c_nombre}}
+            <mat-select placeholder="Linea"  required>
+                <mat-option  value="0" (click)="seleccionarLinea(0)">
+                    -TODOS-
                 </mat-option>
-            </mat-select>
-        </mat-form-field>
-
-        <mat-form-field>
-            <mat-select placeholder="Estructura" [(value)]="c_estructura" required [disabled]="!viewLinea">
-                <mat-option *ngFor="let e of estructura" [value]="e.c_nombre">
-                    {{e.c_nombre}}
+                <mat-option *ngFor="let l of linea" [value]="l.n_idpl_linea" (click)="seleccionarLinea(l.n_idpl_linea)">
+                    {{l.c_nombre}}
                 </mat-option>
             </mat-select>
         </mat-form-field>

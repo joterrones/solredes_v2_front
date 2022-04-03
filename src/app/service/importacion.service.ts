@@ -347,16 +347,18 @@ export class ImportacionService {
             bottom: { style: 'thin' },
         };
 
+        
         worksheet.getCell('S' + row).alignment = { vertical: 'middle', horizontal: 'center' };
-        this.setdatogeneral(worksheet, 'S' + row, 'TIPO_CONDUCTOR', 10, true, '002060');
+        this.setdatogeneral(worksheet, 'S' + row, 'ZONA_UTM', 10, true, '002060');
         worksheet.getCell('S' + row).font = { color: { argb: 'FFFFFF' }, bold: true };
         worksheet.getCell('S' + row).border = {
             right: { style: 'thin' },
             bottom: { style: 'thin' },
         };
 
+
         worksheet.getCell('T' + row).alignment = { vertical: 'middle', horizontal: 'center' };
-        this.setdatogeneral(worksheet, 'T' + row, 'CANTIDAD_CONDUCTOR', 10, true, '002060');
+        this.setdatogeneral(worksheet, 'T' + row, 'TIPO_CONDUCTOR', 10, true, '002060');
         worksheet.getCell('T' + row).font = { color: { argb: 'FFFFFF' }, bold: true };
         worksheet.getCell('T' + row).border = {
             right: { style: 'thin' },
@@ -364,7 +366,7 @@ export class ImportacionService {
         };
 
         worksheet.getCell('U' + row).alignment = { vertical: 'middle', horizontal: 'center' };
-        this.setdatogeneral(worksheet, 'U' + row, 'AISLADOR_56_3', 10, true, '002060');
+        this.setdatogeneral(worksheet, 'Y' + row, 'CANTIDAD_CONDUCTOR', 10, true, '002060');
         worksheet.getCell('U' + row).font = { color: { argb: 'FFFFFF' }, bold: true };
         worksheet.getCell('U' + row).border = {
             right: { style: 'thin' },
@@ -372,7 +374,7 @@ export class ImportacionService {
         };
 
         worksheet.getCell('V' + row).alignment = { vertical: 'middle', horizontal: 'center' };
-        this.setdatogeneral(worksheet, 'V' + row, 'AISLADOR_POLIMERICO', 10, true, '002060');
+        this.setdatogeneral(worksheet, 'V' + row, 'AISLADOR_56_3', 10, true, '002060');
         worksheet.getCell('V' + row).font = { color: { argb: 'FFFFFF' }, bold: true };
         worksheet.getCell('V' + row).border = {
             right: { style: 'thin' },
@@ -380,23 +382,23 @@ export class ImportacionService {
         };
 
         worksheet.getCell('W' + row).alignment = { vertical: 'middle', horizontal: 'center' };
-        this.setdatogeneral(worksheet, 'W' + row, 'AMOR_35', 10, true, '002060');
+        this.setdatogeneral(worksheet, 'W' + row, 'AISLADOR_POLIMERICO', 10, true, '002060');
         worksheet.getCell('W' + row).font = { color: { argb: 'FFFFFF' }, bold: true };
         worksheet.getCell('W' + row).border = {
             right: { style: 'thin' },
             bottom: { style: 'thin' },
         };
-        
+
         worksheet.getCell('X' + row).alignment = { vertical: 'middle', horizontal: 'center' };
-        this.setdatogeneral(worksheet, 'X' + row, 'AMOR_70', 10, true, '002060');
+        this.setdatogeneral(worksheet, 'X' + row, 'AMOR_35', 10, true, '002060');
         worksheet.getCell('X' + row).font = { color: { argb: 'FFFFFF' }, bold: true };
         worksheet.getCell('X' + row).border = {
             right: { style: 'thin' },
             bottom: { style: 'thin' },
         };
-
+        
         worksheet.getCell('Y' + row).alignment = { vertical: 'middle', horizontal: 'center' };
-        this.setdatogeneral(worksheet, 'Y' + row, 'RI_A', 10, true, '002060');
+        this.setdatogeneral(worksheet, 'Y' + row, 'AMOR_70', 10, true, '002060');
         worksheet.getCell('Y' + row).font = { color: { argb: 'FFFFFF' }, bold: true };
         worksheet.getCell('Y' + row).border = {
             right: { style: 'thin' },
@@ -404,7 +406,7 @@ export class ImportacionService {
         };
 
         worksheet.getCell('Z' + row).alignment = { vertical: 'middle', horizontal: 'center' };
-        this.setdatogeneral(worksheet, 'Z' + row, 'RV_A', 10, true, '002060');
+        this.setdatogeneral(worksheet, 'Z' + row, 'RI_A', 10, true, '002060');
         worksheet.getCell('Z' + row).font = { color: { argb: 'FFFFFF' }, bold: true };
         worksheet.getCell('Z' + row).border = {
             right: { style: 'thin' },
@@ -412,24 +414,24 @@ export class ImportacionService {
         };
 
         worksheet.getCell('AA' + row).alignment = { vertical: 'middle', horizontal: 'center' };
-        this.setdatogeneral(worksheet, 'AA' + row, 'RI_MT', 10, true, '002060');
+        this.setdatogeneral(worksheet, 'AA' + row, 'RV_A', 10, true, '002060');
         worksheet.getCell('AA' + row).font = { color: { argb: 'FFFFFF' }, bold: true };
         worksheet.getCell('AA' + row).border = {
             right: { style: 'thin' },
             bottom: { style: 'thin' },
         };
-        
 
         worksheet.getCell('AB' + row).alignment = { vertical: 'middle', horizontal: 'center' };
-        this.setdatogeneral(worksheet, 'AB' + row, 'RV_MT', 10, true, '002060');
+        this.setdatogeneral(worksheet, 'AB' + row, 'RI_MT', 10, true, '002060');
         worksheet.getCell('AB' + row).font = { color: { argb: 'FFFFFF' }, bold: true };
         worksheet.getCell('AB' + row).border = {
             right: { style: 'thin' },
             bottom: { style: 'thin' },
         };
+        
 
         worksheet.getCell('AC' + row).alignment = { vertical: 'middle', horizontal: 'center' };
-        this.setdatogeneral(worksheet, 'AC' + row, 'RI', 10, true, '002060');
+        this.setdatogeneral(worksheet, 'AC' + row, 'RV_MT', 10, true, '002060');
         worksheet.getCell('AC' + row).font = { color: { argb: 'FFFFFF' }, bold: true };
         worksheet.getCell('AC' + row).border = {
             right: { style: 'thin' },
@@ -437,7 +439,7 @@ export class ImportacionService {
         };
 
         worksheet.getCell('AD' + row).alignment = { vertical: 'middle', horizontal: 'center' };
-        this.setdatogeneral(worksheet, 'AD' + row, 'RV', 10, true, '002060');
+        this.setdatogeneral(worksheet, 'AD' + row, 'RI', 10, true, '002060');
         worksheet.getCell('AD' + row).font = { color: { argb: 'FFFFFF' }, bold: true };
         worksheet.getCell('AD' + row).border = {
             right: { style: 'thin' },
@@ -445,7 +447,7 @@ export class ImportacionService {
         };
 
         worksheet.getCell('AE' + row).alignment = { vertical: 'middle', horizontal: 'center' };
-        this.setdatogeneral(worksheet, 'AE' + row, 'RIY', 10, true, '002060');
+        this.setdatogeneral(worksheet, 'AE' + row, 'RV', 10, true, '002060');
         worksheet.getCell('AE' + row).font = { color: { argb: 'FFFFFF' }, bold: true };
         worksheet.getCell('AE' + row).border = {
             right: { style: 'thin' },
@@ -453,7 +455,7 @@ export class ImportacionService {
         };
 
         worksheet.getCell('AF' + row).alignment = { vertical: 'middle', horizontal: 'center' };
-        this.setdatogeneral(worksheet, 'AF' + row, 'RVY', 10, true, '002060');
+        this.setdatogeneral(worksheet, 'AF' + row, 'RIY', 10, true, '002060');
         worksheet.getCell('AF' + row).font = { color: { argb: 'FFFFFF' }, bold: true };
         worksheet.getCell('AF' + row).border = {
             right: { style: 'thin' },
@@ -461,7 +463,7 @@ export class ImportacionService {
         };
 
         worksheet.getCell('AG' + row).alignment = { vertical: 'middle', horizontal: 'center' };
-        this.setdatogeneral(worksheet, 'AG' + row, 'PAT_1', 10, true, '002060');
+        this.setdatogeneral(worksheet, 'AG' + row, 'RVY', 10, true, '002060');
         worksheet.getCell('AG' + row).font = { color: { argb: 'FFFFFF' }, bold: true };
         worksheet.getCell('AG' + row).border = {
             right: { style: 'thin' },
@@ -469,7 +471,7 @@ export class ImportacionService {
         };
 
         worksheet.getCell('AH' + row).alignment = { vertical: 'middle', horizontal: 'center' };
-        this.setdatogeneral(worksheet, 'AH' + row, 'PAT_1C', 10, true, '002060');
+        this.setdatogeneral(worksheet, 'AH' + row, 'PAT_1', 10, true, '002060');
         worksheet.getCell('AH' + row).font = { color: { argb: 'FFFFFF' }, bold: true };
         worksheet.getCell('AH' + row).border = {
             right: { style: 'thin' },
@@ -477,41 +479,41 @@ export class ImportacionService {
         };
 
         worksheet.getCell('AI' + row).alignment = { vertical: 'middle', horizontal: 'center' };
-        this.setdatogeneral(worksheet, 'AI' + row, 'PAT_2', 10, true, '002060');
+        this.setdatogeneral(worksheet, 'AI' + row, 'PAT_1C', 10, true, '002060');
         worksheet.getCell('AI' + row).font = { color: { argb: 'FFFFFF' }, bold: true };
         worksheet.getCell('AI' + row).border = {
             right: { style: 'thin' },
             bottom: { style: 'thin' },
         };
 
-
         worksheet.getCell('AJ' + row).alignment = { vertical: 'middle', horizontal: 'center' };
-        this.setdatogeneral(worksheet, 'AJ' + row, 'PAT_3', 10, true, '002060');
+        this.setdatogeneral(worksheet, 'AJ' + row, 'PAT_2', 10, true, '002060');
         worksheet.getCell('AJ' + row).font = { color: { argb: 'FFFFFF' }, bold: true };
         worksheet.getCell('AJ' + row).border = {
             right: { style: 'thin' },
             bottom: { style: 'thin' },
         };
 
+
         worksheet.getCell('AK' + row).alignment = { vertical: 'middle', horizontal: 'center' };
-        this.setdatogeneral(worksheet, 'AK' + row, 'PAT_1CS', 10, true, '002060');
+        this.setdatogeneral(worksheet, 'AK' + row, 'PAT_3', 10, true, '002060');
         worksheet.getCell('AK' + row).font = { color: { argb: 'FFFFFF' }, bold: true };
         worksheet.getCell('AK' + row).border = {
+            right: { style: 'thin' },
+            bottom: { style: 'thin' },
+        };
+
+        worksheet.getCell('AL' + row).alignment = { vertical: 'middle', horizontal: 'center' };
+        this.setdatogeneral(worksheet, 'AL' + row, 'PAT_1CS', 10, true, '002060');
+        worksheet.getCell('AL' + row).font = { color: { argb: 'FFFFFF' }, bold: true };
+        worksheet.getCell('AL' + row).border = {
             right: { style: 'thin' },
             bottom: { style: 'thin' },
             left: { style: 'thin' },
         };
 
-        worksheet.getCell('AL' + row).alignment = { vertical: 'middle', horizontal: 'center' };
-        this.setdatogeneral(worksheet, 'AL' + row, 'PAT_2S', 10, true, '002060');
-        worksheet.getCell('AL' + row).font = { color: { argb: 'FFFFFF' }, bold: true };
-        worksheet.getCell('AL' + row).border = {
-            right: { style: 'thin' },
-            bottom: { style: 'thin' },
-        };
-
         worksheet.getCell('AM' + row).alignment = { vertical: 'middle', horizontal: 'center' };
-        this.setdatogeneral(worksheet, 'AM' + row, 'PAT_3S', 10, true, '002060');
+        this.setdatogeneral(worksheet, 'AM' + row, 'PAT_2S', 10, true, '002060');
         worksheet.getCell('AM' + row).font = { color: { argb: 'FFFFFF' }, bold: true };
         worksheet.getCell('AM' + row).border = {
             right: { style: 'thin' },
@@ -519,7 +521,7 @@ export class ImportacionService {
         };
 
         worksheet.getCell('AN' + row).alignment = { vertical: 'middle', horizontal: 'center' };
-        this.setdatogeneral(worksheet, 'AN' + row, 'PAT_1S', 10, true, '002060');
+        this.setdatogeneral(worksheet, 'AN' + row, 'PAT_3S', 10, true, '002060');
         worksheet.getCell('AN' + row).font = { color: { argb: 'FFFFFF' }, bold: true };
         worksheet.getCell('AN' + row).border = {
             right: { style: 'thin' },
@@ -527,7 +529,7 @@ export class ImportacionService {
         };
 
         worksheet.getCell('AO' + row).alignment = { vertical: 'middle', horizontal: 'center' };
-        this.setdatogeneral(worksheet, 'AO' + row, 'TIPO_TRANS', 10, true, '00DA50');
+        this.setdatogeneral(worksheet, 'AO' + row, 'PAT_1S', 10, true, '002060');
         worksheet.getCell('AO' + row).font = { color: { argb: 'FFFFFF' }, bold: true };
         worksheet.getCell('AO' + row).border = {
             right: { style: 'thin' },
@@ -535,7 +537,7 @@ export class ImportacionService {
         };
 
         worksheet.getCell('AP' + row).alignment = { vertical: 'middle', horizontal: 'center' };
-        this.setdatogeneral(worksheet, 'AP' + row, 'CANTIDAD_TRANS', 10, true, '002060');
+        this.setdatogeneral(worksheet, 'AP' + row, 'TIPO_TRANS', 10, true, '00DA50');
         worksheet.getCell('AP' + row).font = { color: { argb: 'FFFFFF' }, bold: true };
         worksheet.getCell('AP' + row).border = {
             right: { style: 'thin' },
@@ -543,7 +545,7 @@ export class ImportacionService {
         };
 
         worksheet.getCell('AQ' + row).alignment = { vertical: 'middle', horizontal: 'center' };
-        this.setdatogeneral(worksheet, 'AQ' + row, 'AP_BT', 10, true, '002060');
+        this.setdatogeneral(worksheet, 'AQ' + row, 'CANTIDAD_TRANS', 10, true, '002060');
         worksheet.getCell('AQ' + row).font = { color: { argb: 'FFFFFF' }, bold: true };
         worksheet.getCell('AQ' + row).border = {
             right: { style: 'thin' },
@@ -551,7 +553,7 @@ export class ImportacionService {
         };
 
         worksheet.getCell('AR' + row).alignment = { vertical: 'middle', horizontal: 'center' };
-        this.setdatogeneral(worksheet, 'AR' + row, 'AP_BT_ANGULO', 10, true, '002060');
+        this.setdatogeneral(worksheet, 'AR' + row, 'AP_BT', 10, true, '002060');
         worksheet.getCell('AR' + row).font = { color: { argb: 'FFFFFF' }, bold: true };
         worksheet.getCell('AR' + row).border = {
             right: { style: 'thin' },
@@ -559,7 +561,7 @@ export class ImportacionService {
         };
 
         worksheet.getCell('AS' + row).alignment = { vertical: 'middle', horizontal: 'center' };
-        this.setdatogeneral(worksheet, 'AS' + row, 'AP_MT', 10, true, '002060');
+        this.setdatogeneral(worksheet, 'AS' + row, 'AP_BT_ANGULO', 10, true, '002060');
         worksheet.getCell('AS' + row).font = { color: { argb: 'FFFFFF' }, bold: true };
         worksheet.getCell('AS' + row).border = {
             right: { style: 'thin' },
@@ -567,7 +569,7 @@ export class ImportacionService {
         };
 
         worksheet.getCell('AT' + row).alignment = { vertical: 'middle', horizontal: 'center' };
-        this.setdatogeneral(worksheet, 'AT' + row, 'AP_MT_ANGULO', 10, true, '002060');
+        this.setdatogeneral(worksheet, 'AT' + row, 'AP_MT', 10, true, '002060');
         worksheet.getCell('AT' + row).font = { color: { argb: 'FFFFFF' }, bold: true };
         worksheet.getCell('AT' + row).border = {
             right: { style: 'thin' },
@@ -575,7 +577,7 @@ export class ImportacionService {
         };
 
         worksheet.getCell('AU' + row).alignment = { vertical: 'middle', horizontal: 'center' };
-        this.setdatogeneral(worksheet, 'AU' + row, 'FASES', 10, true, '002060');
+        this.setdatogeneral(worksheet, 'AU' + row, 'AP_MT_ANGULO', 10, true, '002060');
         worksheet.getCell('AU' + row).font = { color: { argb: 'FFFFFF' }, bold: true };
         worksheet.getCell('AU' + row).border = {
             right: { style: 'thin' },
@@ -583,7 +585,7 @@ export class ImportacionService {
         };
 
         worksheet.getCell('AV' + row).alignment = { vertical: 'middle', horizontal: 'center' };
-        this.setdatogeneral(worksheet, 'AV' + row, 'ZONA', 10, true, '002060');
+        this.setdatogeneral(worksheet, 'AV' + row, 'FASES', 10, true, '002060');
         worksheet.getCell('AV' + row).font = { color: { argb: 'FFFFFF' }, bold: true };
         worksheet.getCell('AV' + row).border = {
             right: { style: 'thin' },
@@ -596,6 +598,15 @@ export class ImportacionService {
         worksheet.getCell('AW' + row).border = {
             right: { style: 'thin' },
             bottom: { style: 'thin' },
+        };
+
+        worksheet.getCell('AY' + row).alignment = { vertical: 'middle', horizontal: 'center' };
+        this.setdatogeneral(worksheet, 'AY' + row, 'SECTOR', 10, true, '002060');
+        worksheet.getCell('AY' + row).font = { color: { argb: 'FFFFFF' }, bold: true };
+        worksheet.getCell('AY' + row).border = {
+            right: { style: 'thin' },
+            bottom: { style: 'thin' },
+            left: { style: 'thin' },
         };
 
         worksheet.getCell('AZ' + row).alignment = { vertical: 'middle', horizontal: 'center' };
@@ -636,6 +647,15 @@ export class ImportacionService {
 
         dataLinea.forEach(element => {
             row += 1;
+
+            worksheet.getCell('AY' + row).alignment = { vertical: 'middle', horizontal: 'left' };
+            this.setdatogeneral(worksheet, 'AY' + row, element.c_nombrez, 10, false);
+            worksheet.getCell('AY' + row).border = {
+                left: { style: 'thin' },
+                right: { style: 'thin' },
+                bottom: { style: 'thin' },
+            };
+
             worksheet.getCell('AZ' + row).alignment = { vertical: 'middle', horizontal: 'left' };
             this.setdatogeneral(worksheet, 'AZ' + row, element.c_codigo, 10, false);
             worksheet.getCell('AZ' + row).border = {

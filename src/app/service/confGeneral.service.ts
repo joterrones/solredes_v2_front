@@ -60,6 +60,9 @@ export class confGeneralService{
         return this._http.post(this.url + 'configuracionGeneral/getLinea', data, { headers: reqHeader });
     }
 
+
+    
+
     estadoLinea(data, token): Observable<any> {
         var reqHeader = new HttpHeaders({
             'Content-Type': 'application/json',

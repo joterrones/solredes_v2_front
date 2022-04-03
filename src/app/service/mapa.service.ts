@@ -75,6 +75,17 @@ export class MapaService {
         return this._http.post(this.url + 'mapa/getLinea', data, { headers: reqHeader });
     }
 
+    getLineaFiltro(data, token): Observable<any> {
+        var reqHeader = new HttpHeaders({
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
+        });
+        console.log('enviando datos a node linea')
+        console.log(data)
+        return this._http.post(this.url + 'mapa/getLineaFiltro', data, { headers: reqHeader });
+    }
+
+
     getestructura2(data, token): Observable<any> {
         var reqHeader = new HttpHeaders({
             'Content-Type': 'application/json',
