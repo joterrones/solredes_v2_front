@@ -29,10 +29,13 @@
     </mat-accordion>
     <br />
     <mat-card>
-      <mat-form-field>
-        <input matInput placeholder="Buscar" [(ngModel)]="textfilter" (keyup)="applyFilter($event.target.value)">
-        <mat-icon matSuffix>search</mat-icon>
-      </mat-form-field>
+      <div class="cont">
+        <mat-form-field>
+          <input matInput placeholder="Buscar" [(ngModel)]="textfilter" (keyup)="applyFilter($event.target.value)">
+          <mat-icon matSuffix>search</mat-icon>
+        </mat-form-field>
+        <button mat-raised-button color="primary" (click)="download()" class="boton" *ngIf="permisoEdit">Descargar</button>
+      </div>
       <table mat-table [dataSource]="tablaUsuarios" matSort class="mat-elevation-z8">
         <ng-container matColumnDef="editar" >
           <th mat-header-cell *matHeaderCellDef> <button mat-icon-button color="accent" (click)="openDialog(null)" *ngIf="permisoEdit">

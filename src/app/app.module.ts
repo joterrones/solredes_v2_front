@@ -135,6 +135,7 @@ import { DashboardLineaEstadoComponent } from './component/general/dashboard/das
 import { ImportacionPlanillaDescargarComponent } from './component/importacion-planilla-descargar/importacion-planilla-descargar.component';
 import { FiltroCapaComponent } from './component/mapa/filtro-capa/filtro-capa.component';
 import { FiltroBuscarComponent } from './component/mapa/filtro-buscar/filtro-buscar.component';
+import { DataUsuarioProComponent } from './component/data-usuario-pro/data-usuario-pro.component';
 
 
 
@@ -267,6 +268,7 @@ import { FiltroBuscarComponent } from './component/mapa/filtro-buscar/filtro-bus
     ImportacionPlanillaDescargarComponent,
     FiltroCapaComponent,
     FiltroBuscarComponent,
+    DataUsuarioProComponent,
 
   ],
   imports: [
