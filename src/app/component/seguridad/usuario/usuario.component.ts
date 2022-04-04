@@ -255,5 +255,9 @@ export class UsuarioComponent extends BaseComponent implements OnInit {
       });
   }
 
+  download(){
+    this.router.navigate(["/data_usuario_pro"]);
+  }
+
 }
 

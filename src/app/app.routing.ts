@@ -45,6 +45,7 @@ import { MetradomontajeComponent } from './component/metradomontaje/metradomonta
 import { FichaComponent } from './component/ficha/ficha.component';
 import { PeriodoComponent } from './component/configGeneral/periodo/periodo.component';
 import { PartidamontajeComponent } from './component/configGeneral/partidamontaje/partidamontaje.component';
+import { DataUsuarioProComponent } from './component/data-usuario-pro/data-usuario-pro.component';
 //Array de rutas
 const appRoutes:Routes=[
     {path:'',component:LoginComponent},
@@ -89,6 +90,7 @@ const appRoutes:Routes=[
     {path:'ficha',component:FichaComponent},
     {path:'periodo',component:PeriodoComponent},
     {path:'partidamontaje',component:PartidamontajeComponent},
+    {path:'data_usuario_pro',component:DataUsuarioProComponent},
     {path:'**',component:LoginComponent},    
      
 ]

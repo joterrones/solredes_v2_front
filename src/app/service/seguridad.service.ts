@@ -164,4 +164,13 @@ export class SeguridadService {
         return this._http.post(this.url + 'seguridad/updatePantallaRol', data, { headers: reqHeader });
     }
 
+    getDataUserPro(data, token): Observable<any> {     
+        console.log(data);
+        var reqHeader = new HttpHeaders({
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
+        });
+        return this._http.post(this.url + 'seguridad/getDataUserPro', data, { headers: reqHeader });
+    }
+
 }
