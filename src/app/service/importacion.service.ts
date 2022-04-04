@@ -366,7 +366,7 @@ export class ImportacionService {
         };
 
         worksheet.getCell('U' + row).alignment = { vertical: 'middle', horizontal: 'center' };
-        this.setdatogeneral(worksheet, 'Y' + row, 'CANTIDAD_CONDUCTOR', 10, true, '002060');
+        this.setdatogeneral(worksheet, 'U' + row, 'CANTIDAD_CONDUCTOR', 10, true, '002060');
         worksheet.getCell('U' + row).font = { color: { argb: 'FFFFFF' }, bold: true };
         worksheet.getCell('U' + row).border = {
             right: { style: 'thin' },
