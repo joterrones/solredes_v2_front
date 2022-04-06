@@ -265,7 +265,7 @@ export class ImportacionPlanillaComponent extends BaseComponent implements OnIni
     };
 }
 
-openDialog(): void {
+/*openDialog(): void {
   if(this.idversion > 0){
     const dialogRef = this.dialog.open(ImportacionPlanillaDescargarComponent, {
       width: '750px',
@@ -286,7 +286,7 @@ openDialog(): void {
   exportar() {
     
     
-  }
+  }*/
 
   download() {
     let request = {

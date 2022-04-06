@@ -11,6 +11,7 @@ import { confGeneralService } from '../../../service/confGeneral.service';
 import { ConfirmComponent } from '../../general/confirm/confirm.component';
 import { LineaeditarComponent } from '../lineaeditar/lineaeditar.component';
 import { SeguridadService } from 'src/app/service/seguridad.service';
+import { ImportacionPlanillaDescargarComponent } from '../../importacion-planilla-descargar/importacion-planilla-descargar.component';
 
 
 @Component({
@@ -42,7 +43,7 @@ export class LineaComponent extends BaseComponent implements OnInit {
   estadoSelectb_montaje: boolean = null; 
   estadoSelectb_cierre: boolean = null; 
 
-  displayedColumns: string[] = ['editar', 'c_nombre', 'c_codigo', 'tipolinea', 'zona','Metrado','MetradoMon','mapa','expediente','replanteo','montaje','cierre','eliminar'];
+  displayedColumns: string[] = ['editar', 'c_nombre', 'c_codigo', 'tipolinea', 'zona','Metrado','MetradoMon','mapa','exportar','expediente','replanteo','montaje','cierre','eliminar'];
   public tablaLineas: MatTableDataSource<any>;
   public confirmar: Confirmar;
 
@@ -312,6 +313,21 @@ export class LineaComponent extends BaseComponent implements OnInit {
         this.openSnackBar(error.error, 99);
       });
   }
+
+  exportarDatos(linea): void {
+
+    const dialogRef = this.dialog.open(ImportacionPlanillaDescargarComponent, {
+      width: '750px',
+      data: { linea: linea }
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      try {       
+      } catch (error) {
+        console.log(error);
+      }
+    });
+
+  } 
 
   getPantallaRol() {
     let request = {

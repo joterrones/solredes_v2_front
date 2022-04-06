@@ -21,7 +21,7 @@
         <button mat-raised-button color="primary" (click)="orientacion()" class="boton" [disabled]="procesando" *ngIf="permisoEdit">(4)Orientación</button>
         <button mat-raised-button color="primary" (click)="download()" class="boton" [disabled]="procesando" *ngIf="permisoEdit">Descargar</button>
         <button mat-raised-button color="primary" (click)="deleteEstructuras()" [disabled]="procesando" class="btnborrar" *ngIf="permisoEdit"> Borrar</button>
-        <button mat-raised-button color="primary" (click)="openDialog()" class="boton" [disabled]="procesando" *ngIf="permisoEdit" > Exportar Datos</button>
+        <!--<button mat-raised-button color="primary" (click)="openDialog()" class="boton" [disabled]="procesando" *ngIf="permisoEdit" > Exportar Datos</button>-->
 
         <mat-progress-bar class="example-margin" mode="indeterminate" *ngIf="procesando">
         </mat-progress-bar>
