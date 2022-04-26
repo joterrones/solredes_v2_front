@@ -480,472 +480,474 @@ export class ImportacionPlanillaDescargarComponent extends BaseComponent impleme
                 right: { style: 'thin' },
                 bottom: { style: 'thin' },
             };
-            
+            var cont = 0;
             datos.forEach(element => {
-                row += 1;
-                worksheet.getCell('A' + row).alignment = { vertical: 'middle', horizontal: 'center' };
-                this.setdatogeneral(worksheet, 'A' + row, element.c_nombre, 10, false);
-                worksheet.getCell('A' + row).border = {
-                    left: { style: 'thin' },
-                    right: { style: 'thin' },
-                    bottom: { style: 'thin' },
-                };
-
-                worksheet.getCell('B' + row).alignment = { vertical: 'middle', horizontal: 'center' };
-                this.setdatogeneral(worksheet, 'B' + row, element.c_nro_se, 10, false);
-                worksheet.getCell('B' + row).border = {
-                    left: { style: 'thin' },
-                    right: { style: 'thin' },
-                    bottom: { style: 'thin' },
-                };
-
-                worksheet.getCell('C' + row).alignment = { vertical: 'middle', horizontal: 'center' };
-                this.setdatogeneral(worksheet, 'C' + row, element.c_nro_se, 10, false);
-                worksheet.getCell('C' + row).border = {
-                    left: { style: 'thin' },
-                    right: { style: 'thin' },
-                    bottom: { style: 'thin' },
-                };
-
-                worksheet.getCell('E' + row).alignment = { vertical: 'middle', horizontal: 'center' };
-                this.setdatogeneral(worksheet, 'E' + row, element.c_codigonodo, 10, false);
-                worksheet.getCell('E' + row).border = {
-                    left: { style: 'thin' },
-                    right: { style: 'thin' },
-                    bottom: { style: 'thin' },
-                };
-
-                worksheet.getCell('F' + row).alignment = { vertical: 'middle', horizontal: 'center' };
-                this.setdatogeneral(worksheet, 'F' + row, element.codigoap, 10, false);
-                worksheet.getCell('F' + row).border = {
-                    left: { style: 'thin' },
-                    right: { style: 'thin' },
-                    bottom: { style: 'thin' },
-                };
-
-                worksheet.getCell('F' + row).alignment = { vertical: 'middle', horizontal: 'center' };
-                this.setdatogeneral(worksheet, 'F' + row, element.codigoap, 10, false);
-                worksheet.getCell('F' + row).border = {
-                    left: { style: 'thin' },
-                    right: { style: 'thin' },
-                    bottom: { style: 'thin' },
-                };
-
-                worksheet.getCell('G' + row).alignment = { vertical: 'middle', horizontal: 'center' };
-                this.setdatogeneral(worksheet, 'G' + row, element.c_codigoas, 10, false);
-                worksheet.getCell('G' + row).border = {
-                    left: { style: 'thin' },
-                    right: { style: 'thin' },
-                    bottom: { style: 'thin' },
-                };
-
-                worksheet.getCell('G' + row).alignment = { vertical: 'middle', horizontal: 'center' };
-                this.setdatogeneral(worksheet, 'G' + row, element.c_codigoarsse, 10, false);
-                worksheet.getCell('G' + row).border = {
-                    left: { style: 'thin' },
-                    right: { style: 'thin' },
-                    bottom: { style: 'thin' },
-                };
-
-                worksheet.getCell('H' + row).alignment = { vertical: 'middle', horizontal: 'center' };
-                this.setdatogeneral(worksheet, 'H' + row, element.c_codigoarsse, 10, false);
-                worksheet.getCell('H' + row).border = {
-                    left: { style: 'thin' },
-                    right: { style: 'thin' },
-                    bottom: { style: 'thin' },
-                };
-
-                worksheet.getCell('I' + row).alignment = { vertical: 'middle', horizontal: 'center' };
-                this.setdatogeneral(worksheet, 'I' + row, element.c_progresiva, 10, false);
-                worksheet.getCell('I' + row).border = {
-                    left: { style: 'thin' },
-                    right: { style: 'thin' },
-                    bottom: { style: 'thin' },
-                };
-
-                worksheet.getCell('J' + row).alignment = { vertical: 'middle', horizontal: 'center' };
-                this.setdatogeneral(worksheet, 'J' + row, element.c_cota, 10, false);
-                worksheet.getCell('J' + row).border = {
-                    left: { style: 'thin' },
-                    right: { style: 'thin' },
-                    bottom: { style: 'thin' },
-                };
-
-                worksheet.getCell('K' + row).alignment = { vertical: 'middle', horizontal: 'center' };
-                this.setdatogeneral(worksheet, 'K' + row, element.c_vertice, 10, false);
-                worksheet.getCell('K' + row).border = {
-                    left: { style: 'thin' },
-                    right: { style: 'thin' },
-                    bottom: { style: 'thin' },
-                };
-
-                worksheet.getCell('L' + row).alignment = { vertical: 'middle', horizontal: 'center' };
-                this.setdatogeneral(worksheet, 'L' + row, element.c_angulo, 10, false);
-                worksheet.getCell('L' + row).border = {
-                    left: { style: 'thin' },
-                    right: { style: 'thin' },
-                    bottom: { style: 'thin' },
-                };
                 
-                worksheet.getCell('N' + row).alignment = { vertical: 'middle', horizontal: 'center' };
-                this.setdatogeneral(worksheet, 'N' + row, element.c_tipoterreno, 10, false);
-                worksheet.getCell('N' + row).border = {
-                    left: { style: 'thin' },
-                    right: { style: 'thin' },
-                    bottom: { style: 'thin' },
-                };
+                if (cont == 0) {
+                    row += 1;
+                    worksheet.getCell('A' + row).alignment = { vertical: 'middle', horizontal: 'center' };
+                    this.setdatogeneral(worksheet, 'A' + row, element.c_nombre, 10, false);
+                    worksheet.getCell('A' + row).border = {
+                        left: { style: 'thin' },
+                        right: { style: 'thin' },
+                        bottom: { style: 'thin' },
+                    };
 
-                worksheet.getCell('O' + row).alignment = { vertical: 'middle', horizontal: 'center' };
-                this.setdatogeneral(worksheet, 'O' + row, element.n_cantidad, 10, false);
-                worksheet.getCell('O' + row).border = {
-                    left: { style: 'thin' },
-                    right: { style: 'thin' },
-                    bottom: { style: 'thin' },
-                };
+                    worksheet.getCell('B' + row).alignment = { vertical: 'middle', horizontal: 'center' };
+                    this.setdatogeneral(worksheet, 'B' + row, element.c_nro_se, 10, false);
+                    worksheet.getCell('B' + row).border = {
+                        left: { style: 'thin' },
+                        right: { style: 'thin' },
+                        bottom: { style: 'thin' },
+                    };
 
-                worksheet.getCell('P' + row).alignment = { vertical: 'middle', horizontal: 'center' };
-                this.setdatogeneral(worksheet, 'P' + row, element.c_codigo, 10, false);
-                worksheet.getCell('P' + row).border = {
-                    left: { style: 'thin' },
-                    right: { style: 'thin' },
-                    bottom: { style: 'thin' },
-                };
+                    worksheet.getCell('C' + row).alignment = { vertical: 'middle', horizontal: 'center' };
+                    this.setdatogeneral(worksheet, 'C' + row, element.c_nro_se, 10, false);
+                    worksheet.getCell('C' + row).border = {
+                        left: { style: 'thin' },
+                        right: { style: 'thin' },
+                        bottom: { style: 'thin' },
+                    };
 
-                worksheet.getCell('Q' + row).alignment = { vertical: 'middle', horizontal: 'center' };
-                this.setdatogeneral(worksheet, 'Q' + row, element.c_longitud, 10, false);
-                worksheet.getCell('Q' + row).border = {
-                    left: { style: 'thin' },
-                    right: { style: 'thin' },
-                    bottom: { style: 'thin' },
-                };
+                    worksheet.getCell('D' + row).alignment = { vertical: 'middle', horizontal: 'center' };
+                    this.setdatogeneral(worksheet, 'D' + row, element.estructant, 10, false);
+                    worksheet.getCell('D' + row).border = {
+                        left: { style: 'thin' },
+                        right: { style: 'thin' },
+                        bottom: { style: 'thin' },
+                    };
 
-                worksheet.getCell('R' + row).alignment = { vertical: 'middle', horizontal: 'center' };
-                this.setdatogeneral(worksheet, 'R' + row, element.c_latitud, 10, false);
-                worksheet.getCell('R' + row).border = {
-                    left: { style: 'thin' },
-                    right: { style: 'thin' },
-                    bottom: { style: 'thin' },
-                };
+                    worksheet.getCell('E' + row).alignment = { vertical: 'middle', horizontal: 'center' };
+                    this.setdatogeneral(worksheet, 'E' + row, element.c_codigonodo, 10, false);
+                    worksheet.getCell('E' + row).border = {
+                        left: { style: 'thin' },
+                        right: { style: 'thin' },
+                        bottom: { style: 'thin' },
+                    };
 
-                worksheet.getCell('S' + row).alignment = { vertical: 'middle', horizontal: 'center' };
-                this.setdatogeneral(worksheet, 'S' + row, element.c_etiquetacorto, 10, false);
-                worksheet.getCell('S' + row).border = {
-                    left: { style: 'thin' },
-                    right: { style: 'thin' },
-                    bottom: { style: 'thin' },
-                };
+                    worksheet.getCell('F' + row).alignment = { vertical: 'middle', horizontal: 'center' };
+                    this.setdatogeneral(worksheet, 'F' + row, element.codigoap, 10, false);
+                    worksheet.getCell('F' + row).border = {
+                        left: { style: 'thin' },
+                        right: { style: 'thin' },
+                        bottom: { style: 'thin' },
+                    }
 
-                worksheet.getCell('T' + row).alignment = { vertical: 'middle', horizontal: 'center' };
-                this.setdatogeneral(worksheet, 'T' + row, element.n_cantidadpsta, 10, false);
-                worksheet.getCell('T' + row).border = {
-                    left: { style: 'thin' },
-                    right: { style: 'thin' },
-                    bottom: { style: 'thin' },
-                };
+                    worksheet.getCell('I' + row).alignment = { vertical: 'middle', horizontal: 'center' };
+                    this.setdatogeneral(worksheet, 'I' + row, element.c_progresiva, 10, false);
+                    worksheet.getCell('I' + row).border = {
+                        left: { style: 'thin' },
+                        right: { style: 'thin' },
+                        bottom: { style: 'thin' },
+                    };
 
-                worksheet.getCell('AO' + row).alignment = { vertical: 'middle', horizontal: 'center' };
-                this.setdatogeneral(worksheet, 'AO' + row, element.codigoap, 10, false);
-                worksheet.getCell('AO' + row).border = {
-                    left: { style: 'thin' },
-                    right: { style: 'thin' },
-                    bottom: { style: 'thin' },
-                };
+                    worksheet.getCell('J' + row).alignment = { vertical: 'middle', horizontal: 'center' };
+                    this.setdatogeneral(worksheet, 'J' + row, element.c_cota, 10, false);
+                    worksheet.getCell('J' + row).border = {
+                        left: { style: 'thin' },
+                        right: { style: 'thin' },
+                        bottom: { style: 'thin' },
+                    };
 
-                worksheet.getCell('AP' + row).alignment = { vertical: 'middle', horizontal: 'center' };
-                this.setdatogeneral(worksheet, 'AP' + row, element.n_cantidadea, 10, false);
-                worksheet.getCell('AP' + row).border = {
-                    left: { style: 'thin' },
-                    right: { style: 'thin' },
-                    bottom: { style: 'thin' },
-                };
+                    worksheet.getCell('K' + row).alignment = { vertical: 'middle', horizontal: 'center' };
+                    this.setdatogeneral(worksheet, 'K' + row, element.c_vertice, 10, false);
+                    worksheet.getCell('K' + row).border = {
+                        left: { style: 'thin' },
+                        right: { style: 'thin' },
+                        bottom: { style: 'thin' },
+                    };
 
-                worksheet.getCell('AR' + row).alignment = { vertical: 'middle', horizontal: 'center' };
-                this.setdatogeneral(worksheet, 'AR' + row, element.n_orientacion, 10, false);
-                worksheet.getCell('AR' + row).border = {
-                    left: { style: 'thin' },
-                    right: { style: 'thin' },
-                    bottom: { style: 'thin' },
-                };
+                    worksheet.getCell('L' + row).alignment = { vertical: 'middle', horizontal: 'center' };
+                    this.setdatogeneral(worksheet, 'L' + row, element.c_angulo, 10, false);
+                    worksheet.getCell('L' + row).border = {
+                        left: { style: 'thin' },
+                        right: { style: 'thin' },
+                        bottom: { style: 'thin' },
+                    };
+                    
+                    worksheet.getCell('N' + row).alignment = { vertical: 'middle', horizontal: 'center' };
+                    this.setdatogeneral(worksheet, 'N' + row, element.c_tipoterreno, 10, false);
+                    worksheet.getCell('N' + row).border = {
+                        left: { style: 'thin' },
+                        right: { style: 'thin' },
+                        bottom: { style: 'thin' },
+                    };
 
-                worksheet.getCell('AT' + row).alignment = { vertical: 'middle', horizontal: 'center' };
-                this.setdatogeneral(worksheet, 'AT' + row, element.n_orientacion, 10, false);
-                worksheet.getCell('AT' + row).border = {
-                    left: { style: 'thin' },
-                    right: { style: 'thin' },
-                    bottom: { style: 'thin' },
-                };
+                    worksheet.getCell('O' + row).alignment = { vertical: 'middle', horizontal: 'center' };
+                    this.setdatogeneral(worksheet, 'O' + row, element.n_cantidad, 10, false);
+                    worksheet.getCell('O' + row).border = {
+                        left: { style: 'thin' },
+                        right: { style: 'thin' },
+                        bottom: { style: 'thin' },
+                    };
 
-                worksheet.getCell('AU' + row).alignment = { vertical: 'middle', horizontal: 'center' };
-                this.setdatogeneral(worksheet, 'AU' + row, element.n_fases, 10, false);
-                worksheet.getCell('AU' + row).border = {
-                    left: { style: 'thin' },
-                    right: { style: 'thin' },
-                    bottom: { style: 'thin' },
-                };
+                    worksheet.getCell('P' + row).alignment = { vertical: 'middle', horizontal: 'center' };
+                    this.setdatogeneral(worksheet, 'P' + row, element.c_codigo, 10, false);
+                    worksheet.getCell('P' + row).border = {
+                        left: { style: 'thin' },
+                        right: { style: 'thin' },
+                        bottom: { style: 'thin' },
+                    };
 
-                worksheet.getCell('AV' + row).alignment = { vertical: 'middle', horizontal: 'center' };
-                this.setdatogeneral(worksheet, 'AV' + row, 17, 10, false);
-                worksheet.getCell('AV' + row).border = {
-                    left: { style: 'thin' },
-                    right: { style: 'thin' },
-                    bottom: { style: 'thin' },
-                };
+                    worksheet.getCell('Q' + row).alignment = { vertical: 'middle', horizontal: 'center' };
+                    this.setdatogeneral(worksheet, 'Q' + row, element.c_longitud, 10, false);
+                    worksheet.getCell('Q' + row).border = {
+                        left: { style: 'thin' },
+                        right: { style: 'thin' },
+                        bottom: { style: 'thin' },
+                    };
 
-                worksheet.getCell('AW' + row).alignment = { vertical: 'middle', horizontal: 'center' };
-                this.setdatogeneral(worksheet, 'AW' + row, element.c_funcion, 10, false);
-                worksheet.getCell('AW' + row).border = {
-                    left: { style: 'thin' },
-                    right: { style: 'thin' },
-                    bottom: { style: 'thin' },
-                };            
+                    worksheet.getCell('R' + row).alignment = { vertical: 'middle', horizontal: 'center' };
+                    this.setdatogeneral(worksheet, 'R' + row, element.c_latitud, 10, false);
+                    worksheet.getCell('R' + row).border = {
+                        left: { style: 'thin' },
+                        right: { style: 'thin' },
+                        bottom: { style: 'thin' },
+                    };
+
+                    worksheet.getCell('S' + row).alignment = { vertical: 'middle', horizontal: 'center' };
+                    this.setdatogeneral(worksheet, 'S' + row, element.c_etiquetacorto, 10, false);
+                    worksheet.getCell('S' + row).border = {
+                        left: { style: 'thin' },
+                        right: { style: 'thin' },
+                        bottom: { style: 'thin' },
+                    };
+
+                    worksheet.getCell('T' + row).alignment = { vertical: 'middle', horizontal: 'center' };
+                    this.setdatogeneral(worksheet, 'T' + row, element.n_cantidadpsta, 10, false);
+                    worksheet.getCell('T' + row).border = {
+                        left: { style: 'thin' },
+                        right: { style: 'thin' },
+                        bottom: { style: 'thin' },
+                    };
+
+                    worksheet.getCell('AO' + row).alignment = { vertical: 'middle', horizontal: 'center' };
+                    this.setdatogeneral(worksheet, 'AO' + row, element.codigoap, 10, false);
+                    worksheet.getCell('AO' + row).border = {
+                        left: { style: 'thin' },
+                        right: { style: 'thin' },
+                        bottom: { style: 'thin' },
+                    };
+
+                    worksheet.getCell('AP' + row).alignment = { vertical: 'middle', horizontal: 'center' };
+                    this.setdatogeneral(worksheet, 'AP' + row, element.n_cantidadea, 10, false);
+                    worksheet.getCell('AP' + row).border = {
+                        left: { style: 'thin' },
+                        right: { style: 'thin' },
+                        bottom: { style: 'thin' },
+                    };
+
+                    worksheet.getCell('AR' + row).alignment = { vertical: 'middle', horizontal: 'center' };
+                    this.setdatogeneral(worksheet, 'AR' + row, element.n_orientacion, 10, false);
+                    worksheet.getCell('AR' + row).border = {
+                        left: { style: 'thin' },
+                        right: { style: 'thin' },
+                        bottom: { style: 'thin' },
+                    };
+
+                    worksheet.getCell('AT' + row).alignment = { vertical: 'middle', horizontal: 'center' };
+                    this.setdatogeneral(worksheet, 'AT' + row, element.n_orientacion, 10, false);
+                    worksheet.getCell('AT' + row).border = {
+                        left: { style: 'thin' },
+                        right: { style: 'thin' },
+                        bottom: { style: 'thin' },
+                    };
+
+                    worksheet.getCell('AU' + row).alignment = { vertical: 'middle', horizontal: 'center' };
+                    this.setdatogeneral(worksheet, 'AU' + row, element.n_fases, 10, false);
+                    worksheet.getCell('AU' + row).border = {
+                        left: { style: 'thin' },
+                        right: { style: 'thin' },
+                        bottom: { style: 'thin' },
+                    };
+
+                    worksheet.getCell('AV' + row).alignment = { vertical: 'middle', horizontal: 'center' };
+                    this.setdatogeneral(worksheet, 'AV' + row, 17, 10, false);
+                    worksheet.getCell('AV' + row).border = {
+                        left: { style: 'thin' },
+                        right: { style: 'thin' },
+                        bottom: { style: 'thin' },
+                    };
+
+                    worksheet.getCell('AW' + row).alignment = { vertical: 'middle', horizontal: 'center' };
+                    this.setdatogeneral(worksheet, 'AW' + row, element.c_funcion, 10, false);
+                    worksheet.getCell('AW' + row).border = {
+                        left: { style: 'thin' },
+                        right: { style: 'thin' },
+                        bottom: { style: 'thin' },
+                    };            
+                    
+                    if(element.amortiguador_35 === null){
+                        element.amortiguador_35 = 0;
+                    }
+                    worksheet.getCell('W' + row).alignment = { vertical: 'middle', horizontal: 'center' };
+                    this.setdatogeneral(worksheet, 'W' + row, element.amortiguador_35, 10, false);
+                    worksheet.getCell('W' + row).border = {
+                        left: { style: 'thin' },
+                        right: { style: 'thin' },
+                        bottom: { style: 'thin' },
+                    };
+
+                    if(element.amortiguador_70 === null){
+                        element.amortiguador_70 = 0;
+                    }
+                    worksheet.getCell('X' + row).alignment = { vertical: 'middle', horizontal: 'center' };
+                    this.setdatogeneral(worksheet, 'X' + row, element.amortiguador_70, 10, false);
+                    worksheet.getCell('X' + row).border = {
+                        left: { style: 'thin' },
+                        right: { style: 'thin' },
+                        bottom: { style: 'thin' },
+                    };                           
+                    
+                    if(element.ri_a === null){
+                        element.ri_a = 0;
+                    }
+                    worksheet.getCell('Y' + row).alignment = { vertical: 'middle', horizontal: 'center' };
+                    this.setdatogeneral(worksheet, 'Y' + row, element.ri_a, 10, false);
+                    worksheet.getCell('Y' + row).border = {
+                        left: { style: 'thin' },
+                        right: { style: 'thin' },
+                        bottom: { style: 'thin' },
+                    };
+                    
+                    if(element.rv_a === null){
+                        element.rv_a = 0;
+                    }
+                    worksheet.getCell('Z' + row).alignment = { vertical: 'middle', horizontal: 'center' };
+                    this.setdatogeneral(worksheet, 'Z' + row, element.rv_a, 10, false);
+                    worksheet.getCell('Z' + row).border = {
+                        left: { style: 'thin' },
+                        right: { style: 'thin' },
+                        bottom: { style: 'thin' },
+                    };
+
+                    if(element.ri_mt === null){
+                        element.ri_mt = 0;
+                    }
+                    worksheet.getCell('AA' + row).alignment = { vertical: 'middle', horizontal: 'center' };
+                    this.setdatogeneral(worksheet, 'AA' + row, element.ri_mt, 10, false);
+                    worksheet.getCell('AA' + row).border = {
+                        left: { style: 'thin' },
+                        right: { style: 'thin' },
+                        bottom: { style: 'thin' },
+                    };
+                    
+                    if(element.rv_mt === null){
+                        element.rv_mt = 0;
+                    }
+                    worksheet.getCell('AB' + row).alignment = { vertical: 'middle', horizontal: 'center' };
+                    this.setdatogeneral(worksheet, 'AB' + row, element.rv_mt, 10, false);
+                    worksheet.getCell('AB' + row).border = {
+                        left: { style: 'thin' },
+                        right: { style: 'thin' },
+                        bottom: { style: 'thin' },
+                    };
+                    
+                    if(element.ri === null){
+                        element.ri = 0;
+                    }
+                    worksheet.getCell('AC' + row).alignment = { vertical: 'middle', horizontal: 'center' };
+                    this.setdatogeneral(worksheet, 'AC' + row, element.ri, 10, false);
+                    worksheet.getCell('AC' + row).border = {
+                        left: { style: 'thin' },
+                        right: { style: 'thin' },
+                        bottom: { style: 'thin' },
+                    };
+                    
+                    if(element.rv === null){
+                        element.rv = 0;
+                    }
+                    worksheet.getCell('AD' + row).alignment = { vertical: 'middle', horizontal: 'center' };
+                    this.setdatogeneral(worksheet, 'AD' + row, element.rv, 10, false);
+                    worksheet.getCell('AD' + row).border = {
+                        left: { style: 'thin' },
+                        right: { style: 'thin' },
+                        bottom: { style: 'thin' },
+                    };
+                    
+                    if(element.riy === null){
+                        element.riy = 0;
+                    }
+                    worksheet.getCell('AE' + row).alignment = { vertical: 'middle', horizontal: 'center' };
+                    this.setdatogeneral(worksheet, 'AE' + row, element.riy, 10, false);
+                    worksheet.getCell('AE' + row).border = {
+                        left: { style: 'thin' },
+                        right: { style: 'thin' },
+                        bottom: { style: 'thin' },
+                    };
+                    
+                    if(element.rvy === null){
+                        element.rvy = 0;
+                    }
+                    worksheet.getCell('AF' + row).alignment = { vertical: 'middle', horizontal: 'center' };
+                    this.setdatogeneral(worksheet, 'AF' + row, element.rvy, 10, false);
+                    worksheet.getCell('AF' + row).border = {
+                        left: { style: 'thin' },
+                        right: { style: 'thin' },
+                        bottom: { style: 'thin' },
+                    };
+                    
+                    if(element.pat_1 === null){
+                        element.pat_1 = 0;
+                    }
+                    worksheet.getCell('AG' + row).alignment = { vertical: 'middle', horizontal: 'center' };
+                    this.setdatogeneral(worksheet, 'AG' + row, element.pat_1, 10, false);
+                    worksheet.getCell('AG' + row).border = {
+                        left: { style: 'thin' },
+                        right: { style: 'thin' },
+                        bottom: { style: 'thin' },
+                    };
+                    
+                    if(element.pat_1c === null){
+                        element.pat_1c = 0;
+                    }
+                    worksheet.getCell('AH' + row).alignment = { vertical: 'middle', horizontal: 'center' };
+                    this.setdatogeneral(worksheet, 'AH' + row, element.pat_1c, 10, false);
+                    worksheet.getCell('AH' + row).border = {
+                        left: { style: 'thin' },
+                        right: { style: 'thin' },
+                        bottom: { style: 'thin' },
+                    };                            
+                    
+                    if(element.pat_2 === null){
+                        element.pat_2 = 0;
+                    }
+                    worksheet.getCell('AI' + row).alignment = { vertical: 'middle', horizontal: 'center' };
+                    this.setdatogeneral(worksheet, 'AI' + row, element.pat_2, 10, false);
+                    worksheet.getCell('AI' + row).border = {
+                        left: { style: 'thin' },
+                        right: { style: 'thin' },
+                        bottom: { style: 'thin' },
+                    };
+                    
+                    if(element.pat_3 === null){
+                        element.pat_3 = 0;
+                    }
+                    worksheet.getCell('AJ' + row).alignment = { vertical: 'middle', horizontal: 'center' };
+                    this.setdatogeneral(worksheet, 'AJ' + row, element.pat_3, 10, false);
+                    worksheet.getCell('AJ' + row).border = {
+                        left: { style: 'thin' },
+                        right: { style: 'thin' },
+                        bottom: { style: 'thin' },
+                    };
+                    
+                    if(element.pat_1cs === null){
+                        element.pat_1cs = 0;
+                    }
+                    worksheet.getCell('AK' + row).alignment = { vertical: 'middle', horizontal: 'center' };
+                    this.setdatogeneral(worksheet, 'AK' + row, element.pat_1cs, 10, false);
+                    worksheet.getCell('AK' + row).border = {
+                        left: { style: 'thin' },
+                        right: { style: 'thin' },
+                        bottom: { style: 'thin' },
+                    };
+                    
+                    if(element.pat_2s === null){
+                        element.pat_2s = 0;
+                    }
+                    worksheet.getCell('AL' + row).alignment = { vertical: 'middle', horizontal: 'center' };
+                    this.setdatogeneral(worksheet, 'AL' + row, element.pat_2s, 10, false);
+                    worksheet.getCell('AL' + row).border = {
+                        left: { style: 'thin' },
+                        right: { style: 'thin' },
+                        bottom: { style: 'thin' },
+                    };
+                    
+                    if(element.pat_3s === null){
+                        element.pat_3s = 0;
+                    }
+                    worksheet.getCell('AM' + row).alignment = { vertical: 'middle', horizontal: 'center' };
+                    this.setdatogeneral(worksheet, 'AM' + row, element.pat_3s, 10, false);
+                    worksheet.getCell('AM' + row).border = {
+                        left: { style: 'thin' },
+                        right: { style: 'thin' },
+                        bottom: { style: 'thin' },
+                    };
+                    
+                    if(element.pat_1s === null){
+                        element.pat_1s = 0;
+                    }
+                    worksheet.getCell('AN' + row).alignment = { vertical: 'middle', horizontal: 'center' };
+                    this.setdatogeneral(worksheet, 'AN' + row, element.pat_1s, 10, false);
+                    worksheet.getCell('AN' + row).border = {
+                        left: { style: 'thin' },
+                        right: { style: 'thin' },
+                        bottom: { style: 'thin' },
+                    };
+                    
+                    /*worksheet.getCell('AP' + row).alignment = { vertical: 'middle', horizontal: 'center' };
+                    this.setdatogeneral(worksheet, 'AP' + row, element2.n_cantidad, 10, false);
+                    worksheet.getCell('AP' + row).border = {
+                        left: { style: 'thin' },
+                        right: { style: 'thin' },
+                        bottom: { style: 'thin' },
+                    };*/
+                    
+                    if(element.ap_bt === null){
+                        element.ap_bt = 0;
+                    }
+                    worksheet.getCell('AQ' + row).alignment = { vertical: 'middle', horizontal: 'center' };
+                    this.setdatogeneral(worksheet, 'AQ' + row, element.ap_bt, 10, false);
+                    worksheet.getCell('AQ' + row).border = {
+                        left: { style: 'thin' },
+                        right: { style: 'thin' },
+                        bottom: { style: 'thin' },
+                    };
+
+                    if(element.n_orientacion === null){
+                        element.n_orientacion = 0;
+                    }
+                    /* worksheet.getCell('AR' + row).alignment = { vertical: 'middle', horizontal: 'center' };
+                    this.setdatogeneral(worksheet, 'AR' + row, element2.n_orientacion, 10, false);
+                    worksheet.getCell('AR' + row).border = {
+                        left: { style: 'thin' },
+                        right: { style: 'thin' },
+                        bottom: { style: 'thin' },
+                    };*/
+
+                    if(element.apmt === null){
+                        element.apmt = 0;
+                    }
+                    worksheet.getCell('AS' + row).alignment = { vertical: 'middle', horizontal: 'center' };
+                    this.setdatogeneral(worksheet, 'AS' + row, element.apmt, 10, false);
+                    worksheet.getCell('AS' + row).border = {
+                        left: { style: 'thin' },
+                        right: { style: 'thin' },
+                        bottom: { style: 'thin' },
+                    };
+
+                    /*worksheet.getCell('AT' + row).alignment = { vertical: 'middle', horizontal: 'center' };
+                    this.setdatogeneral(worksheet, 'AT' + row, element2.n_orientacion, 10, false);
+                    worksheet.getCell('AT' + row).border = {
+                        left: { style: 'thin' },
+                        right: { style: 'thin' },
+                        bottom: { style: 'thin' },
+                    };*/
+
+                    cont+=1;
+                }else if(cont == 1){
+                    worksheet.getCell('G' + row).alignment = { vertical: 'middle', horizontal: 'center' };
+                    this.setdatogeneral(worksheet, 'G' + row, element.c_codigoas, 10, false);
+                    worksheet.getCell('G' + row).border = {
+                        left: { style: 'thin' },
+                        right: { style: 'thin' },
+                        bottom: { style: 'thin' },
+                    };
+                    cont+=1;
+                }else if(cont == 2){
+                    if (element.c_codigoarsse == 'undefined') {
+                        element.c_codigoarsse = "";
+                    }
+                    worksheet.getCell('H' + row).alignment = { vertical: 'middle', horizontal: 'center' };
+                    this.setdatogeneral(worksheet, 'H' + row, element.c_codigoarsse, 10, false);
+                    worksheet.getCell('H' + row).border = {
+                        left: { style: 'thin' },
+                        right: { style: 'thin' },
+                        bottom: { style: 'thin' },
+                    };
+                    cont = 0;
+                }
                 
-                if(element.amortiguador_35 === null){
-                    element.amortiguador_35 = 0;
-                }
-                worksheet.getCell('W' + row).alignment = { vertical: 'middle', horizontal: 'center' };
-                this.setdatogeneral(worksheet, 'W' + row, element.amortiguador_35, 10, false);
-                worksheet.getCell('W' + row).border = {
-                    left: { style: 'thin' },
-                    right: { style: 'thin' },
-                    bottom: { style: 'thin' },
-                };
-
-                if(element.amortiguador_70 === null){
-                    element.amortiguador_70 = 0;
-                }
-                worksheet.getCell('X' + row).alignment = { vertical: 'middle', horizontal: 'center' };
-                this.setdatogeneral(worksheet, 'X' + row, element.amortiguador_70, 10, false);
-                worksheet.getCell('X' + row).border = {
-                    left: { style: 'thin' },
-                    right: { style: 'thin' },
-                    bottom: { style: 'thin' },
-                };                           
-                
-                if(element.ri_a === null){
-                    element.ri_a = 0;
-                }
-                worksheet.getCell('Y' + row).alignment = { vertical: 'middle', horizontal: 'center' };
-                this.setdatogeneral(worksheet, 'Y' + row, element.ri_a, 10, false);
-                worksheet.getCell('Y' + row).border = {
-                    left: { style: 'thin' },
-                    right: { style: 'thin' },
-                    bottom: { style: 'thin' },
-                };
-                
-                if(element.rv_a === null){
-                    element.rv_a = 0;
-                }
-                worksheet.getCell('Z' + row).alignment = { vertical: 'middle', horizontal: 'center' };
-                this.setdatogeneral(worksheet, 'Z' + row, element.rv_a, 10, false);
-                worksheet.getCell('Z' + row).border = {
-                    left: { style: 'thin' },
-                    right: { style: 'thin' },
-                    bottom: { style: 'thin' },
-                };
-
-                if(element.ri_mt === null){
-                    element.ri_mt = 0;
-                }
-                worksheet.getCell('AA' + row).alignment = { vertical: 'middle', horizontal: 'center' };
-                this.setdatogeneral(worksheet, 'AA' + row, element.ri_mt, 10, false);
-                worksheet.getCell('AA' + row).border = {
-                    left: { style: 'thin' },
-                    right: { style: 'thin' },
-                    bottom: { style: 'thin' },
-                };
-                
-                if(element.rv_mt === null){
-                    element.rv_mt = 0;
-                }
-                worksheet.getCell('AB' + row).alignment = { vertical: 'middle', horizontal: 'center' };
-                this.setdatogeneral(worksheet, 'AB' + row, element.rv_mt, 10, false);
-                worksheet.getCell('AB' + row).border = {
-                    left: { style: 'thin' },
-                    right: { style: 'thin' },
-                    bottom: { style: 'thin' },
-                };
-                
-                if(element.ri === null){
-                    element.ri = 0;
-                }
-                worksheet.getCell('AC' + row).alignment = { vertical: 'middle', horizontal: 'center' };
-                this.setdatogeneral(worksheet, 'AC' + row, element.ri, 10, false);
-                worksheet.getCell('AC' + row).border = {
-                    left: { style: 'thin' },
-                    right: { style: 'thin' },
-                    bottom: { style: 'thin' },
-                };
-                
-                if(element.rv === null){
-                    element.rv = 0;
-                }
-                worksheet.getCell('AD' + row).alignment = { vertical: 'middle', horizontal: 'center' };
-                this.setdatogeneral(worksheet, 'AD' + row, element.rv, 10, false);
-                worksheet.getCell('AD' + row).border = {
-                    left: { style: 'thin' },
-                    right: { style: 'thin' },
-                    bottom: { style: 'thin' },
-                };
-                
-                if(element.riy === null){
-                    element.riy = 0;
-                }
-                worksheet.getCell('AE' + row).alignment = { vertical: 'middle', horizontal: 'center' };
-                this.setdatogeneral(worksheet, 'AE' + row, element.riy, 10, false);
-                worksheet.getCell('AE' + row).border = {
-                    left: { style: 'thin' },
-                    right: { style: 'thin' },
-                    bottom: { style: 'thin' },
-                };
-                
-                if(element.rvy === null){
-                    element.rvy = 0;
-                }
-                worksheet.getCell('AF' + row).alignment = { vertical: 'middle', horizontal: 'center' };
-                this.setdatogeneral(worksheet, 'AF' + row, element.rvy, 10, false);
-                worksheet.getCell('AF' + row).border = {
-                    left: { style: 'thin' },
-                    right: { style: 'thin' },
-                    bottom: { style: 'thin' },
-                };
-                
-                if(element.pat_1 === null){
-                    element.pat_1 = 0;
-                }
-                worksheet.getCell('AG' + row).alignment = { vertical: 'middle', horizontal: 'center' };
-                this.setdatogeneral(worksheet, 'AG' + row, element.pat_1, 10, false);
-                worksheet.getCell('AG' + row).border = {
-                    left: { style: 'thin' },
-                    right: { style: 'thin' },
-                    bottom: { style: 'thin' },
-                };
-                
-                if(element.pat_1c === null){
-                    element.pat_1c = 0;
-                }
-                worksheet.getCell('AH' + row).alignment = { vertical: 'middle', horizontal: 'center' };
-                this.setdatogeneral(worksheet, 'AH' + row, element.pat_1c, 10, false);
-                worksheet.getCell('AH' + row).border = {
-                    left: { style: 'thin' },
-                    right: { style: 'thin' },
-                    bottom: { style: 'thin' },
-                };                            
-                
-                if(element.pat_2 === null){
-                    element.pat_2 = 0;
-                }
-                worksheet.getCell('AI' + row).alignment = { vertical: 'middle', horizontal: 'center' };
-                this.setdatogeneral(worksheet, 'AI' + row, element.pat_2, 10, false);
-                worksheet.getCell('AI' + row).border = {
-                    left: { style: 'thin' },
-                    right: { style: 'thin' },
-                    bottom: { style: 'thin' },
-                };
-                
-                if(element.pat_3 === null){
-                    element.pat_3 = 0;
-                }
-                worksheet.getCell('AJ' + row).alignment = { vertical: 'middle', horizontal: 'center' };
-                this.setdatogeneral(worksheet, 'AJ' + row, element.pat_3, 10, false);
-                worksheet.getCell('AJ' + row).border = {
-                    left: { style: 'thin' },
-                    right: { style: 'thin' },
-                    bottom: { style: 'thin' },
-                };
-                
-                if(element.pat_1cs === null){
-                    element.pat_1cs = 0;
-                }
-                worksheet.getCell('AK' + row).alignment = { vertical: 'middle', horizontal: 'center' };
-                this.setdatogeneral(worksheet, 'AK' + row, element.pat_1cs, 10, false);
-                worksheet.getCell('AK' + row).border = {
-                    left: { style: 'thin' },
-                    right: { style: 'thin' },
-                    bottom: { style: 'thin' },
-                };
-                
-                if(element.pat_2s === null){
-                    element.pat_2s = 0;
-                }
-                worksheet.getCell('AL' + row).alignment = { vertical: 'middle', horizontal: 'center' };
-                this.setdatogeneral(worksheet, 'AL' + row, element.pat_2s, 10, false);
-                worksheet.getCell('AL' + row).border = {
-                    left: { style: 'thin' },
-                    right: { style: 'thin' },
-                    bottom: { style: 'thin' },
-                };
-                
-                if(element.pat_3s === null){
-                    element.pat_3s = 0;
-                }
-                worksheet.getCell('AM' + row).alignment = { vertical: 'middle', horizontal: 'center' };
-                this.setdatogeneral(worksheet, 'AM' + row, element.pat_3s, 10, false);
-                worksheet.getCell('AM' + row).border = {
-                    left: { style: 'thin' },
-                    right: { style: 'thin' },
-                    bottom: { style: 'thin' },
-                };
-                
-                if(element.pat_1s === null){
-                    element.pat_1s = 0;
-                }
-                worksheet.getCell('AN' + row).alignment = { vertical: 'middle', horizontal: 'center' };
-                this.setdatogeneral(worksheet, 'AN' + row, element.pat_1s, 10, false);
-                worksheet.getCell('AN' + row).border = {
-                    left: { style: 'thin' },
-                    right: { style: 'thin' },
-                    bottom: { style: 'thin' },
-                };
-                
-                /*worksheet.getCell('AP' + row).alignment = { vertical: 'middle', horizontal: 'center' };
-                this.setdatogeneral(worksheet, 'AP' + row, element2.n_cantidad, 10, false);
-                worksheet.getCell('AP' + row).border = {
-                    left: { style: 'thin' },
-                    right: { style: 'thin' },
-                    bottom: { style: 'thin' },
-                };*/
-                
-                if(element.ap_bt === null){
-                    element.ap_bt = 0;
-                }
-                worksheet.getCell('AQ' + row).alignment = { vertical: 'middle', horizontal: 'center' };
-                this.setdatogeneral(worksheet, 'AQ' + row, element.ap_bt, 10, false);
-                worksheet.getCell('AQ' + row).border = {
-                    left: { style: 'thin' },
-                    right: { style: 'thin' },
-                    bottom: { style: 'thin' },
-                };
-
-                if(element.n_orientacion === null){
-                    element.n_orientacion = 0;
-                }
-                /* worksheet.getCell('AR' + row).alignment = { vertical: 'middle', horizontal: 'center' };
-                this.setdatogeneral(worksheet, 'AR' + row, element2.n_orientacion, 10, false);
-                worksheet.getCell('AR' + row).border = {
-                    left: { style: 'thin' },
-                    right: { style: 'thin' },
-                    bottom: { style: 'thin' },
-                };*/
-
-                if(element.apmt === null){
-                    element.apmt = 0;
-                }
-                worksheet.getCell('AS' + row).alignment = { vertical: 'middle', horizontal: 'center' };
-                this.setdatogeneral(worksheet, 'AS' + row, element.apmt, 10, false);
-                worksheet.getCell('AS' + row).border = {
-                    left: { style: 'thin' },
-                    right: { style: 'thin' },
-                    bottom: { style: 'thin' },
-                };
-
-                /*worksheet.getCell('AT' + row).alignment = { vertical: 'middle', horizontal: 'center' };
-                this.setdatogeneral(worksheet, 'AT' + row, element2.n_orientacion, 10, false);
-                worksheet.getCell('AT' + row).border = {
-                    left: { style: 'thin' },
-                    right: { style: 'thin' },
-                    bottom: { style: 'thin' },
-                };*/
-
             });
             worksheet.autoFilter = 'A1:AW1';
 
