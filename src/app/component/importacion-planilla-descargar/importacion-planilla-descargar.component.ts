@@ -524,7 +524,9 @@ export class ImportacionPlanillaDescargarComponent extends BaseComponent impleme
                         right: { style: 'thin' },
                         bottom: { style: 'thin' },
                     };
-
+                    if (element.codigoap == 'undefined') {
+                        element.codigoap = "";
+                    }
                     worksheet.getCell('F' + row).alignment = { vertical: 'middle', horizontal: 'center' };
                     this.setdatogeneral(worksheet, 'F' + row, element.codigoap, 10, false);
                     worksheet.getCell('F' + row).border = {
@@ -926,6 +928,9 @@ export class ImportacionPlanillaDescargarComponent extends BaseComponent impleme
 
                     cont+=1;
                 }else if(cont == 1){
+                    if (element.c_codigoas == 'undefined') {
+                        element.c_codigoas = "";
+                    }
                     worksheet.getCell('G' + row).alignment = { vertical: 'middle', horizontal: 'center' };
                     this.setdatogeneral(worksheet, 'G' + row, element.c_codigoas, 10, false);
                     worksheet.getCell('G' + row).border = {
