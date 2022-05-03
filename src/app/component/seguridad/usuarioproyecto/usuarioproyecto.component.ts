@@ -43,6 +43,9 @@ export class UsuarioproyectoComponent extends BaseComponent implements OnInit {
     let request = {
       n_idseg_userprofile: this.data.usuario.n_idseg_userprofile
     }
+    console.log("get user");
+    console.log(request);
+    
     this._seguridad_service.getUserPro(request,this.getToken().token).subscribe(
       result => {
         let resultado = <ResultadoApi>result;
@@ -83,44 +86,41 @@ export class UsuarioproyectoComponent extends BaseComponent implements OnInit {
   }
 
   
-  guardar(newForm) {
-    if(newForm.length == 0){
+  guardar(newForm, selection) {
+    console.log(newForm);
+    console.log(selection._selection.size);
+    
+    if(newForm.length == 0 && selection._selection.size == 0){
       this.resetUserPro();
     }
-    console.log(newForm);    
-    console.log(this.UserPro.length);
-    
-    if(newForm.length > 0){
-      this.resetUserPro();
-      for(let i = 0; i < newForm.length; i++ ){
-        let request  ={ 
-          n_idseg_userprofile: this.data.usuario.n_idseg_userprofile,
-          n_id_usermodi: this.usuarioLog.n_idseg_userprofile,
-          n_idpro_proyecto: newForm[i]
-        }
-        console.log("Envio datos UserPro",request);
-        
-        this._seguridad_service.saveUserPro(request, this.getToken().token).subscribe(
-          result => {
-            try {
-              if (result.estado) {
-                console.log(result.estado);                
-              } else {
-                this.openSnackBar(result.mensaje, 99);
-              }
-            } catch (error) {
-              this.openSnackBar(AppSettings.SERVICE_NO_CONECT_SERVER, 99);
-            }
-          }, error => {
-            console.error(error);
-            try {
-              this.openSnackBar(error.error.Detail, error.error.StatusCode);
-            } catch (error) {
-              this.openSnackBar(AppSettings.SERVICE_NO_CONECT_SERVER, 99);
-            }
-          });
-  
+    if(newForm.length > 0 && selection._selection.size > 0){
+      this.resetUserPro();      
+      let request  ={ 
+        n_idseg_userprofile: this.data.usuario.n_idseg_userprofile,
+        n_id_usermodi: this.usuarioLog.n_idseg_userprofile,
+        n_idpro_proyectoarray: newForm
       }
+      console.log("Envio datos UserPro",request);
+      
+      this._seguridad_service.saveUserPro(request, this.getToken().token).subscribe(
+        result => {
+          try {
+            if (result.estado) {
+              console.log(result.estado);                
+            } else {
+              this.openSnackBar(result.mensaje, 99);
+            }
+          } catch (error) {
+            this.openSnackBar(AppSettings.SERVICE_NO_CONECT_SERVER, 99);
+          }
+        }, error => {
+          console.error(error);
+          try {
+            this.openSnackBar(error.error.Detail, error.error.StatusCode);
+          } catch (error) {
+            this.openSnackBar(AppSettings.SERVICE_NO_CONECT_SERVER, 99);
+          }
+        });
       this.dialogAsigPro.close({ flag: true });
     }else{
       this.dialogAsigPro.close({ flag: true });
