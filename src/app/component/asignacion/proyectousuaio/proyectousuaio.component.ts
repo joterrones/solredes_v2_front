@@ -82,18 +82,24 @@ export class ProyectousuaioComponent extends BaseComponent implements OnInit {
   }
 
   
-  guardar(newForm) {
-    if(this.ProUser.length){
+  guardar(newForm, selection) {
+    console.log(newForm);
+    console.log(selection._selection.size);
+    console.log(this.data.n_idtra_grupo);
+
+    if(newForm.length == 0 && selection._selection.size == 0){
       this.resetProUser();
     }
-    console.log(newForm);
-    console.log(this.data.n_idtra_grupo);
-    console.log(this.ProUser.length);
+    /*if(this.ProUser.length){
+      this.resetProUser();
+    }*/
     
-    for(let i = 0; i < newForm.length; i++ ){
+    
+    if(newForm.length > 0 && selection._selection.size > 0){
+      this.resetProUser();
       let request  ={ 
         n_idtra_grupo: this.data.n_idtra_grupo,
-        n_idseg_userprofile: newForm[i],
+        n_idseg_userprofileArray: newForm,
         n_id_usermodi: this.usuarioLog.n_idseg_userprofile
       }
       console.log("Envio datos ProUser",request);

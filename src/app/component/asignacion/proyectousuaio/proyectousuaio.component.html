@@ -1,7 +1,7 @@
 <h2 mat-dialog-title>Asignar Usuario</h2>
 
 <mat-card>
-    <form class="example-container" #newForm="ngForm" (ngSubmit)="guardar(shoes._value)">
+    <form class="example-container" #newForm="ngForm" (ngSubmit)="guardar(shoes._value, shoes.selectedOptions)">
         <mat-selection-list #shoes class="tamano">
             <mat-list-option *ngFor="let shoe of ProUser" [value]="shoe.n_idseg_userprofileusu" [selected]="shoe.b_activo">
                 {{shoe.c_username}}
