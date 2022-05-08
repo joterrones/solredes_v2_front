@@ -23,10 +23,14 @@
                 </mat-select>
             </td>
         </ng-container>
-            
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <ng-template let-row matRowDef cdkVirtualFor [matRowDefColumns]="displayedColumns">
             <tr mat-row></tr>
         </ng-template>
     </table>
 </div>
+<label style="opacity: 80%;" > 
+    <br>
+    * Sin Acceso(SA) - Consultar(CO) - Modificar(MO)
+</label>  
+

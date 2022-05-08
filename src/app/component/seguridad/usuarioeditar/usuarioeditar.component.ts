@@ -130,11 +130,13 @@ export class UsuarioeditarComponent extends BaseComponent implements OnInit {
             }
           });
         }
-
+        
         if( u != 0){
           this.openSnackBar("El usuario existe", 200);
         }else if( d != 0 ){
           this.openSnackBar("El DNI existe", 200);
+        }else{
+          this.guardarUser(newForm); 
         }
 
       }else{
@@ -146,9 +148,22 @@ export class UsuarioeditarComponent extends BaseComponent implements OnInit {
   }
 
   guardarUser(newForm) {
-    console.log(this.usuarioLog.n_idseg_userprofile);    
-    this.usuario.n_id_usermodi = this.usuarioLog.n_idseg_userprofile;
-    this._seguridadservice.saveUser(this.usuario, this.getToken().token).subscribe(
+    console.log(this.usuarioLog.n_idseg_userprofile);  
+    let request = {
+      c_username : this.usuario.c_username,
+      c_clave : this.usuario.c_clave,
+      c_nombre1 : this.usuario.c_nombre1,
+      c_nombre2 : this.usuario.c_nombre2,
+      c_appaterno : this.usuario.c_appaterno,
+      c_apmaterno : this.usuario.c_apmaterno,
+      c_dni : this.usuario.c_dni,
+      n_idseg_userprofile : this.usuario.n_idseg_userprofile,
+      n_idseg_rol : this.usuario.n_idseg_rol,
+      n_id_usermodi : this.usuarioLog.n_idseg_userprofile,
+      n_idpro_proyecto : this.proyecto.n_idpro_proyecto
+    }
+    //this.usuario.n_id_usermodi = this.usuarioLog.n_idseg_userprofile;    
+    this._seguridadservice.saveUser(request, this.getToken().token).subscribe(
       result => {
         try {
           if (result.estado) {

@@ -60,7 +60,8 @@ export class UsuarioComponent extends BaseComponent implements OnInit {
 
   getTablaUsuario() {
     let request = {
-      n_idseg_rol: this.idroles
+      n_idseg_rol: this.idroles,
+      n_idpro_proyecto: this.proyecto.n_idpro_proyecto
     }
     
     this._seguridad_service.get(request, this.getToken().token).subscribe(
