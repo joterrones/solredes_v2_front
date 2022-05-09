@@ -57,29 +57,43 @@ export class PartidamontajeeditarComponent extends BaseComponent implements OnIn
   }
 
   guardar(newForm) {    
+    let val;
+    let val2;
+    console.log(this.tipoMontaje.c_codigo);
+    val = (this.tipoMontaje.c_codigo).toString().split('_');
+
+    if ( val[1] ) {
+      val2 = parseInt(val[1]);
+      if ( !isNaN(val2) ) {
+        this.tipoMontaje.n_id_usermodi = this.usuarioLog.n_idseg_userprofile;
+        console.log(this.tipoMontaje);
+        
+        this._confiGeneral_service.saveTipoMontaje(this.tipoMontaje, this.getToken().token).subscribe(
+          result => {
+            try {
+              if (result.estado) {
+                this.dialogRef.close({ flag: true, data: this.tipoMontaje });
+              } else {
+                this.openSnackBar(result.mensaje, 99);
+              }
+            } catch (error) {
+              this.openSnackBar(AppSettings.SERVICE_NO_CONECT_SERVER, 99);
+            }
+          }, error => {
+            console.error(error);
+            try {
+              this.openSnackBar(error.error.Detail, error.error.StatusCode);
+            } catch (error) {
+              this.openSnackBar(AppSettings.SERVICE_NO_CONECT_SERVER, 99);
+            }
+          });
+      }else{
+        this.openSnackBar("Código invalido", 200);
+      }
+    }else{
+      this.openSnackBar("Código invalido", 200);
+    }
     
-    this.tipoMontaje.n_id_usermodi = this.usuarioLog.n_idseg_userprofile;
-    console.log(this.tipoMontaje);
-    
-    this._confiGeneral_service.saveTipoMontaje(this.tipoMontaje, this.getToken().token).subscribe(
-      result => {
-        try {
-          if (result.estado) {
-            this.dialogRef.close({ flag: true, data: this.tipoMontaje });
-          } else {
-            this.openSnackBar(result.mensaje, 99);
-          }
-        } catch (error) {
-          this.openSnackBar(AppSettings.SERVICE_NO_CONECT_SERVER, 99);
-        }
-      }, error => {
-        console.error(error);
-        try {
-          this.openSnackBar(error.error.Detail, error.error.StatusCode);
-        } catch (error) {
-          this.openSnackBar(AppSettings.SERVICE_NO_CONECT_SERVER, 99);
-        }
-      });
   }
 
 }

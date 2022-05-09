@@ -40,7 +40,8 @@ export class CategoriatipomontajeeditarComponent extends BaseComponent implement
         n_idmon_categoriatipomontaje:0,
         c_codigo:'',
         c_nombre:'',        
-        n_id_usermodi: this.usuarioLog.n_idseg_userprofile              
+        n_id_usermodi: this.usuarioLog.n_idseg_userprofile,
+        n_idpro_proyecto: this.proyecto.n_idpro_proyecto              
       };      
     } else {
       this.editar = true;
@@ -51,26 +52,40 @@ export class CategoriatipomontajeeditarComponent extends BaseComponent implement
   }
   
   guardar(newForm) {
-    this.tipomontaje.n_id_usermodi= this.usuarioLog.n_idseg_userprofile;
-    this._configGeneralservice.saveCateTipoMontaje(this.tipomontaje, this.getToken().token).subscribe(
-      result => {
-        try {
-          if (result.estado) {
-            this.dialogRef.close({ flag: true, data: this.tipomontaje });
-          } else {
-            this.openSnackBar(result.mensaje, 99);
-          }
-        } catch (error) {
-          this.openSnackBar(AppSettings.SERVICE_NO_CONECT_SERVER, 99);
-        }
-      }, error => {
-        console.error(error);
-        try {
-          this.openSnackBar(error.error.Detail, error.error.StatusCode);
-        } catch (error) {
-          this.openSnackBar(AppSettings.SERVICE_NO_CONECT_SERVER, 99);
-        }
-      });
+    let val;
+    let val2;
+    console.log(this.tipomontaje.c_codigo);
+    val = (this.tipomontaje.c_codigo).toString().split('_');
+
+    if ( val[1] ) {
+      val2 = parseInt(val[1]);
+      if ( !isNaN(val2) ) {
+        this.tipomontaje.n_id_usermodi= this.usuarioLog.n_idseg_userprofile;
+        this._configGeneralservice.saveCateTipoMontaje(this.tipomontaje, this.getToken().token).subscribe(
+          result => {
+            try {
+              if (result.estado) {
+                this.dialogRef.close({ flag: true, data: this.tipomontaje });
+              } else {
+                this.openSnackBar(result.mensaje, 99);
+              }
+            } catch (error) {
+              this.openSnackBar(AppSettings.SERVICE_NO_CONECT_SERVER, 99);
+            }
+          }, error => {
+            console.error(error);
+            try {
+              this.openSnackBar(error.error.Detail, error.error.StatusCode);
+            } catch (error) {
+              this.openSnackBar(AppSettings.SERVICE_NO_CONECT_SERVER, 99);
+            }
+          });
+      }else{
+        this.openSnackBar("Código invalido", 200);
+      }
+    }else{
+      this.openSnackBar("Código invalido", 200);
+    }
   }
 
 }

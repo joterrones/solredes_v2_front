@@ -227,7 +227,6 @@ export class confGeneralService{
     }
 
     deleteTipoEmpresa(data): Observable<any> {
-        console.log('borrando Estructura')
         console.log(data)        
         return this._http.post(this.url + 'configuracionGeneral/deleteTipoEmpresa', data);
     } 

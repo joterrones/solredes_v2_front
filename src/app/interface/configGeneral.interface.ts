@@ -141,7 +141,8 @@ export interface TipoMontaje{
     n_idmon_categoriatipomontaje: number,
     c_codigo: String,
     c_nombre: String,
-    n_id_usermodi: number
+    n_id_usermodi: number,
+    n_idpro_proyecto: number
 }
 
 export interface EditarTipoMontaje{

@@ -116,7 +116,7 @@ export class PeriodoComponent extends BaseComponent implements OnInit {
         try {
           if (result.estado) {
             this.getPeriodos();
-            this.openSnackBar("Guia eliminada", 200);
+            this.openSnackBar("Periodo Eliminado", 200);
           } else {
             this.openSnackBar(result.mensaje, 99);
           }
