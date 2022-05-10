@@ -4,7 +4,7 @@
     <div mat-dialog-content class="contenedor">
         <img [src]="showImg || urlImagen || showImgDefault" alt="img" style="min-width: 400px; max-width: 400px;">
 
-        <input id="file" #fileInput hidden type='file' (change)="uploadfile($event.target.files)" >
+        <input id="file" #fileInput hidden type='file' accept="image/*" (change)="uploadfile($event.target.files)" >
         <button type="button" mat-mini-fab color="accent" (click)="fileInput.click()" style="margin-left: 10px;">
             <mat-icon>cloud_upload</mat-icon>
         </button>        

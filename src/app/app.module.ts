@@ -136,6 +136,7 @@ import { ImportacionPlanillaDescargarComponent } from './component/importacion-p
 import { FiltroCapaComponent } from './component/mapa/filtro-capa/filtro-capa.component';
 import { FiltroBuscarComponent } from './component/mapa/filtro-buscar/filtro-buscar.component';
 import { DataUsuarioProComponent } from './component/data-usuario-pro/data-usuario-pro.component';
+import { VersionesComponent } from './component/versiones/versiones.component';
 
 
 
@@ -269,6 +270,7 @@ import { DataUsuarioProComponent } from './component/data-usuario-pro/data-usuar
     FiltroCapaComponent,
     FiltroBuscarComponent,
     DataUsuarioProComponent,
+    VersionesComponent,
 
   ],
   imports: [
@@ -359,6 +361,7 @@ import { DataUsuarioProComponent } from './component/data-usuario-pro/data-usuar
     ImportacionPlanillaDescargarComponent,
     FiltroCapaComponent,
     FiltroBuscarComponent,
+    VersionesComponent
   ],
   providers: [
     MatDatepickerModule,

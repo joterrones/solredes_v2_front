@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { MatSnackBar } from '@angular/material';
+import { MatDialog, MatSnackBar } from '@angular/material';
 import { Router } from "@angular/router";
 import { BaseComponent } from '../../base/base.component';
 import { SeguridadService } from '../../../service/seguridad.service';
+import { VersionesComponent } from '../../versiones/versiones.component';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -26,9 +27,10 @@ export class LoginComponent extends BaseComponent implements OnInit {
   };
   isActive:boolean= true;
 
-  constructor(public _login_service: SeguridadService, public router: Router, public snackBar: MatSnackBar) { 
+  constructor(public _login_service: SeguridadService, public router: Router, public snackBar: MatSnackBar, public dialog: MatDialog) { 
     super(snackBar,router);
     this.ruta_img_login = "assets/images/fondologin3.jpg";
+    
   }
 
   ngOnInit() {
@@ -65,5 +67,17 @@ export class LoginComponent extends BaseComponent implements OnInit {
       this.typepassword="password";
       this.iconpassword="visibility_off";
     }
+  }
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(VersionesComponent, {
+      width: '750px',
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      try {
+      } catch (error) {
+        console.log(error);
+      }
+    });
   }
 }

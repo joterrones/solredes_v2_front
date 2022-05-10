@@ -23,9 +23,15 @@ export class UsuarioComponent extends BaseComponent implements OnInit {
   tit: String = "SEGURIDAD > GESTOR DE USUARIOS";
   pantallaRol= [];
   permisoEdit: boolean = false;
-  roles: [];
+  roles= [];
   idroles = 0;
   textfilter = '';
+  idAsignPro = 0;
+
+  userProAsign = [
+    { id: 1, name: "Asignado" },
+    { id: 2, name: "Sin asignar"}
+  ]
 
   displayedColumns: string[] = ['editar', 'username', 'c_nombreApellido','c_dni', 'c_rol', 'asigProyecto','resetear', 'activo'];
   public tablaUsuarios: MatTableDataSource<any>;
@@ -52,11 +58,24 @@ export class UsuarioComponent extends BaseComponent implements OnInit {
   }
 
   selectRole(n_idseg_rol) {
+    console.log("idAsignPro: "+this.idAsignPro);
     this.idroles = n_idseg_rol;
-    this.getTablaUsuario();
+    if (this.idAsignPro == 2) {
+      this.getUserSinAsignacion();
+    } else {      
+      this.getTablaUsuario();
+    }
+    
   }
 
-
+  selectEstadoAsignacion(id){
+    this.idAsignPro = id;
+    if(id == 2){
+      this.getUserSinAsignacion();
+    }else{
+      this.getTablaUsuario();
+    }
+  }
 
   getTablaUsuario() {
     let request = {
@@ -104,6 +123,34 @@ export class UsuarioComponent extends BaseComponent implements OnInit {
           this.openSnackBar(AppSettings.SERVICE_NO_CONECT_SERVER, 99);
         }
       });
+  }
+
+  getUserSinAsignacion(){
+
+    let request = {
+      n_idseg_rol: this.idroles,
+    }
+    
+    this._seguridad_service.getUserSinAsignacion(request, this.getToken().token).subscribe(
+      result => {        
+        try {
+          if (result.estado) {
+            console.log(result);
+            this.tablaUsuarios = new MatTableDataSource<any>(result.data);
+            this.tablaUsuarios.sort = this.sort;
+            this.tablaUsuarios.paginator = this.paginator;
+          } else {
+            this.openSnackBar(result.mensaje, 99);
+          }
+        } catch (error) {
+          this.openSnackBar(AppSettings.SERVICE_NO_CONECT_SERVER, 99);
+        } finally {
+          this.applyFilter(this.textfilter);
+        }
+      }, error => {
+        this.openSnackBar(error.error, 99);
+      });
+
   }
 
   applyFilter(filterValue: String) {

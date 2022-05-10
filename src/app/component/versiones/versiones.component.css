@@ -1,0 +1,11 @@
+.contenedor{
+
+    max-height: 450px;
+    overflow: scroll;
+
+}
+
+.error{
+    color: red;
+}
+
