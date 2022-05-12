@@ -95,5 +95,13 @@ export class MapaService {
         console.log(data)
         return this._http.post(this.url + 'mapa/getestructura2', data, { headers: reqHeader });
     }
+
+    getDataClick(req): Observable<any>{
+        var reqHeader = new HttpHeaders({
+            'Content-Type': 'application/json'
+        });
+        console.log(req);
+        return this._http.get(req,{ headers: reqHeader });
+    }
     
 }
