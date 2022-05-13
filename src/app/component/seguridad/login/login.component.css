@@ -120,18 +120,14 @@ mat-card-header{
   color: white;
 }
 
-.float{
-	position: absolute;
-	width: 100px;
-	height: 40px;
-	right: calc(100% - 125px);
-  top: calc(100% - 65px);
-	background-color:#3F51B5;
-	color:#FFF;
-	border-radius:50px;
-	text-align:center;
-	box-shadow: 5px 5px 10px 0px rgba(0,0,0,0.75);
+.example-spacer {
+  flex: 1 1 auto;
 }
+
+.buttonVersion{
+  margin-right: 10px;
+}
+
 
 /********************************************/
 /*

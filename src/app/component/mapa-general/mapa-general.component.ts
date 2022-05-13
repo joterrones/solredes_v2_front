@@ -60,6 +60,8 @@ export class MapaGeneralComponent extends BaseComponent implements OnInit {
   //urlUbideo = "http://35.184.146.235:8080/geoserver/Candwi/wms";
   
   data = [];
+
+  arrayTile = [];
   tileBase;
 
   myVectorLayer;
@@ -143,7 +145,149 @@ export class MapaGeneralComponent extends BaseComponent implements OnInit {
     });
   }
 
+  
+  ngOnInit(): void {
+    this.usuarioLog = this.getUser().data;
+    this.getPantallaRol(); 
+    
+    this.data = [
+      {
+        name: 'Expediente',
+        version: 1,
+        completed: true,
+        color: 'primary',
+        subtasks: [
+          { id: 1, name: 'Linea primaria', completed: true, color: 'primary' },
+          { id: 2, name: 'Red primaria', completed: true, color: 'accent' },
+          { id: 3, name: 'Red secudaria', completed: true, color: 'warn' },
+        ],
+      }, {
+        name: 'Replanteo',
+        version: 2,
+        completed: false,
+        color: 'primary',
+        subtasks: [
+          { id: 1, name: 'Linea primaria', completed: false, color: 'primary' },
+          { id: 2, name: 'Red primaria', completed: false, color: 'accent' },
+          { id: 3, name: 'Red secudaria', completed: false, color: 'warn' },
+        ],
+      },
+      {
+        name: 'Montaje',
+        version: 3,
+        completed: false,
+        color: 'primary',
+        subtasks: [
+          { id: 1, name: 'Linea primaria', completed: false, color: 'primary' },
+          { id: 2, name: 'Red primaria', completed: false, color: 'accent' },
+          { id: 3, name: 'Red secudaria', completed: false, color: 'warn' },
+        ],
+      }, {
+        name: 'Conforme a obra',
+        version: 4,
+        completed: false,
+        color: 'primary',
+        subtasks: [
+          { id: 1, name: 'Linea primaria', completed: false, color: 'primary' },
+          { id: 2, name: 'Red primaria', completed: false, color: 'accent' },
+          { id: 3, name: 'Red secudaria', completed: false, color: 'warn' },
+        ],
+      },{
+        name: 'Inspeccion Replanteo',
+        version: 0,
+        completed: false,
+        color: 'primary',
+        subtasks: [
+          { id: 1, name: 'Linea primaria', completed: false, color: 'primary' },
+          { id: 2, name: 'Red primaria', completed: false, color: 'accent' },
+          { id: 3, name: 'Red secudaria', completed: false, color: 'warn' },
+        ],
+      },{
+        name: 'Inspeccion Montaje',
+        version: 0,
+        completed: false,
+        color: 'primary',
+        subtasks: [
+          { id: 1, name: 'Linea primaria', completed: false, color: 'primary' },
+          { id: 2, name: 'Red primaria', completed: false, color: 'accent' },
+          { id: 3, name: 'Red secudaria', completed: false, color: 'warn' },
+        ],
+      },{
+        name: 'Inspeccion Conforme a obra',
+        version: 0,
+        completed: false,
+        color: 'primary',
+        subtasks: [
+          { id: 1, name: 'Linea primaria', completed: false, color: 'primary' },
+          { id: 2, name: 'Red primaria', completed: false, color: 'accent' },
+          { id: 3, name: 'Red secudaria', completed: false, color: 'warn' },
+        ],
+      }
+    ];
+    
+    this.tileBase = new TileLayer({
+      source: new XYZ({
+        url: 'https://{a-c}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+      })
+    })
+    this.tileLineasExpLP = this.customTileLayer('solredes:linea', "n_version =1 and n_idpl_tipolinea = 1 and n_idpro_proyecto = " + this.proyecto.n_idpro_proyecto);
+    this.tileAtributosExpLP = this.customTileLayer('solredes:punto', "n_version =1 and n_idpl_tipolinea = 1 and n_idpro_proyecto = " + this.proyecto.n_idpro_proyecto);
+    this.tileLineasExpRP = this.customTileLayer('solredes:linea', "n_version =1 and n_idpl_tipolinea = 2 and n_idpro_proyecto = " + this.proyecto.n_idpro_proyecto);
+    this.tileAtributosExpRP = this.customTileLayer('solredes:punto', "n_version =1 and n_idpl_tipolinea = 2 and n_idpro_proyecto = " + this.proyecto.n_idpro_proyecto);
+    this.tileLineasExpRS = this.customTileLayer('solredes:linea', "n_version =1 and n_idpl_tipolinea = 3 and n_idpro_proyecto = " + this.proyecto.n_idpro_proyecto);
+    this.tileAtributosExpRS = this.customTileLayer('solredes:punto', "n_version =1 and n_idpl_tipolinea = 3 and n_idpro_proyecto = " + this.proyecto.n_idpro_proyecto);
+
+    this.tileLineasRepLP = this.customTileLayer('solredes:linea', "n_version =2 and n_idpl_tipolinea = 1 and n_idpro_proyecto = " + this.proyecto.n_idpro_proyecto);
+    this.tileAtributosRepLP = this.customTileLayer('solredes:punto', "n_version =2 and n_idpl_tipolinea = 1 and n_idpro_proyecto = " + this.proyecto.n_idpro_proyecto);
+    this.tileLineasRepRP = this.customTileLayer('solredes:linea', "n_version =2 and n_idpl_tipolinea = 2 and n_idpro_proyecto = " + this.proyecto.n_idpro_proyecto);
+    this.tileAtributosRepRP = this.customTileLayer('solredes:punto', "n_version =2 and n_idpl_tipolinea = 2 and n_idpro_proyecto = " + this.proyecto.n_idpro_proyecto);
+    this.tileLineasRepRS = this.customTileLayer('solredes:linea', "n_version =2 and n_idpl_tipolinea = 3 and n_idpro_proyecto = " + this.proyecto.n_idpro_proyecto);
+    this.tileAtributosRepRS = this.customTileLayer('solredes:punto', "n_version =2 and n_idpl_tipolinea = 3 and n_idpro_proyecto = " + this.proyecto.n_idpro_proyecto);
+
+    this.tileLineasMonLP = this.customTileLayer('solredes:linea', "n_version =3 and n_idpl_tipolinea = 1 and n_idpro_proyecto = " + this.proyecto.n_idpro_proyecto);
+    this.tileAtributosMonLP = this.customTileLayer('solredes:punto', "n_version =3 and n_idpl_tipolinea = 1 and n_idpro_proyecto = " + this.proyecto.n_idpro_proyecto);
+    this.tileLineasMonRP = this.customTileLayer('solredes:linea', "n_version =3 and n_idpl_tipolinea = 2 and n_idpro_proyecto = " + this.proyecto.n_idpro_proyecto);
+    this.tileAtributosMonRP = this.customTileLayer('solredes:punto', "n_version =3 and n_idpl_tipolinea = 2 and n_idpro_proyecto = " + this.proyecto.n_idpro_proyecto);
+    this.tileLineasMonRS = this.customTileLayer('solredes:linea', "n_version =3 and n_idpl_tipolinea = 3 and n_idpro_proyecto = " + this.proyecto.n_idpro_proyecto);
+    this.tileAtributosMonRS = this.customTileLayer('solredes:punto', "n_version =3 and n_idpl_tipolinea = 3 and n_idpro_proyecto = " + this.proyecto.n_idpro_proyecto);
+
+    this.tileLineasConLP = this.customTileLayer('solredes:linea', "n_version =4 and n_idpl_tipolinea = 1 and n_idpro_proyecto = " + this.proyecto.n_idpro_proyecto);
+    this.tileAtributosConLP = this.customTileLayer('solredes:punto', "n_version =4 and n_idpl_tipolinea = 1 and n_idpro_proyecto = " + this.proyecto.n_idpro_proyecto);
+    this.tileLineasConRP = this.customTileLayer('solredes:linea', "n_version =4 and n_idpl_tipolinea = 2 and n_idpro_proyecto = " + this.proyecto.n_idpro_proyecto);
+    this.tileAtributosConRP = this.customTileLayer('solredes:punto', "n_version =4 and n_idpl_tipolinea = 2 and n_idpro_proyecto = " + this.proyecto.n_idpro_proyecto);
+    this.tileLineasConRS = this.customTileLayer('solredes:linea', "n_version =4 and n_idpl_tipolinea = 3 and n_idpro_proyecto = " + this.proyecto.n_idpro_proyecto);
+    this.tileAtributosConRS = this.customTileLayer('solredes:punto', "n_version =4 and n_idpl_tipolinea = 3 and n_idpro_proyecto = " + this.proyecto.n_idpro_proyecto);
+
+    this.tileLineasMonInspReplantLP = this.customTileLayer('solredes:lineaMonInsp', "n_tipoapp = 2 and n_idpl_tipolinea = 1 and n_idpro_proyecto = " + this.proyecto.n_idpro_proyecto);
+    this.tileAtributosMonInspReplantLP = this.customTileLayer('solredes:puntoMonInsp', "n_tipoapp = 2 and n_idpl_tipolinea = 1 and n_idpro_proyecto = " + this.proyecto.n_idpro_proyecto);
+    this.tileLineasMonInspReplantRP = this.customTileLayer('solredes:lineaMonInsp', "n_tipoapp = 2 and n_idpl_tipolinea = 2 and n_idpro_proyecto = " + this.proyecto.n_idpro_proyecto);
+    this.tileAtributosMonInspReplantRP = this.customTileLayer('solredes:puntoMonInsp', "n_tipoapp = 2 and n_idpl_tipolinea = 2 and n_idpro_proyecto = " + this.proyecto.n_idpro_proyecto);
+    this.tileLineasMonInspReplantRS = this.customTileLayer('solredes:lineaMonInsp', "n_tipoapp = 2 and n_idpl_tipolinea = 3 and n_idpro_proyecto = " + this.proyecto.n_idpro_proyecto);
+    this.tileAtributosMonInspReplantRS = this.customTileLayer('solredes:puntoMonInsp', "n_tipoapp = 2 and n_idpl_tipolinea = 3 and n_idpro_proyecto = " + this.proyecto.n_idpro_proyecto);
+
+    this.tileLineasMonInspMontLP = this.customTileLayer('solredes:lineaMonInsp', "n_tipoapp = 3 and n_idpl_tipolinea = 1 and n_idpro_proyecto = " + this.proyecto.n_idpro_proyecto);
+    this.tileLineasMonInspMontRP = this.customTileLayer('solredes:lineaMonInsp', "n_tipoapp = 3 and n_idpl_tipolinea = 2 and n_idpro_proyecto = " + this.proyecto.n_idpro_proyecto);
+    this.tileLineasMonInspMontRS = this.customTileLayer('solredes:lineaMonInsp', "n_tipoapp = 3 and n_idpl_tipolinea = 3 and n_idpro_proyecto = " + this.proyecto.n_idpro_proyecto);
+    this.tileAtributosMonInspMontLP = this.customTileLayer('solredes:puntoMonInsp', "n_tipoapp = 3 and n_idpl_tipolinea = 1 and n_idpro_proyecto = " + this.proyecto.n_idpro_proyecto);
+    this.tileAtributosMonInspMontRP = this.customTileLayer('solredes:puntoMonInsp', "n_tipoapp = 3 and n_idpl_tipolinea = 2 and n_idpro_proyecto = " + this.proyecto.n_idpro_proyecto);
+    this.tileAtributosMonInspMontRS = this.customTileLayer('solredes:puntoMonInsp', "n_tipoapp = 3 and n_idpl_tipolinea = 3 and n_idpro_proyecto = " + this.proyecto.n_idpro_proyecto);
+
+    this.tileLineasMonInspConfObraLP = this.customTileLayer('solredes:lineaMonInsp', "n_tipoapp = 4 and n_idpl_tipolinea = 1 and n_idpro_proyecto = " + this.proyecto.n_idpro_proyecto);
+    this.tileLineasMonInspConfObraRP = this.customTileLayer('solredes:lineaMonInsp', "n_tipoapp = 4 and n_idpl_tipolinea = 2 and n_idpro_proyecto = " + this.proyecto.n_idpro_proyecto);
+    this.tileLineasMonInspConfObraRS = this.customTileLayer('solredes:lineaMonInsp', "n_tipoapp = 4 and n_idpl_tipolinea = 3 and n_idpro_proyecto = " + this.proyecto.n_idpro_proyecto);
+    this.tileAtributosMonInspConfObraLP = this.customTileLayer('solredes:puntoMonInsp', "n_tipoapp = 4 and n_idpl_tipolinea = 1 and n_idpro_proyecto = " + this.proyecto.n_idpro_proyecto);
+    this.tileAtributosMonInspConfObraRP = this.customTileLayer('solredes:puntoMonInsp', "n_tipoapp = 4 and n_idpl_tipolinea = 2 and n_idpro_proyecto = " + this.proyecto.n_idpro_proyecto);
+    this.tileAtributosMonInspConfObraRS = this.customTileLayer('solredes:puntoMonInsp', "n_tipoapp = 4 and n_idpl_tipolinea = 3 and n_idpro_proyecto = " + this.proyecto.n_idpro_proyecto);
+    
+
+    //this.data[0].subtasks[0].completed == true
+    
+    //this.cargarCapas();
+    this.cargarCapas();
+    this.mostarCapas(this.data);
+  }
   mostarCapas(data) {
+    /*
     this.tileAtributosExpLP.setVisible(false);
     this.tileLineasExpLP.setVisible(false);
     this.tileAtributosExpRP.setVisible(false);
@@ -255,97 +399,147 @@ export class MapaGeneralComponent extends BaseComponent implements OnInit {
       }
       
     });
+    */
+    
+    this.arrayTile = [];
+    /*this.tileBase = new TileLayer({
+      source: new XYZ({
+        url: 'https://{a-c}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+      })
+    })
+    this.arrayTile.push(this.tileBase)*/
+    data.forEach(element => {
+      let checkOk = element.subtasks.filter(o => o.completed == true);
+      console.log(checkOk);
+      if (checkOk.length > 0) {
+        switch (element.version) {
+          case 1:
+            if(checkOk.filter(o => o.completed && o.id == 1).length > 0){
+              //this.tileLineasExpLP = this.customTileLayer('solredes:linea', "n_version =1 and n_idpl_tipolinea = 1 and n_idpro_proyecto = " + this.proyecto.n_idpro_proyecto);
+              //this.tileAtributosExpLP = this.customTileLayer('solredes:punto', "n_version =1 and n_idpl_tipolinea = 1 and n_idpro_proyecto = " + this.proyecto.n_idpro_proyecto);
+              this.arrayTile.push(this.tileLineasExpLP,this.tileAtributosExpLP )
+            };
+            if(checkOk.filter(o => o.completed && o.id == 2).length > 0){
+              //this.tileLineasExpRP = this.customTileLayer('solredes:linea', "n_version =1 and n_idpl_tipolinea = 2 and n_idpro_proyecto = " + this.proyecto.n_idpro_proyecto);
+              //this.tileAtributosExpRP = this.customTileLayer('solredes:punto', "n_version =1 and n_idpl_tipolinea = 2 and n_idpro_proyecto = " + this.proyecto.n_idpro_proyecto);
+              this.arrayTile.push(this.tileLineasExpRP,this.tileAtributosExpRP )
+            };
+            if(checkOk.filter(o => o.completed && o.id == 3).length > 0){
+              //this.tileLineasExpRS = this.customTileLayer('solredes:linea', "n_version =1 and n_idpl_tipolinea = 3 and n_idpro_proyecto = " + this.proyecto.n_idpro_proyecto);
+              //this.tileAtributosExpRS = this.customTileLayer('solredes:punto', "n_version =1 and n_idpl_tipolinea = 3 and n_idpro_proyecto = " + this.proyecto.n_idpro_proyecto);
+              this.arrayTile.push(this.tileLineasExpRS,this.tileAtributosExpRS )
+            };
+            break;
+          case 2:    
+            if(checkOk.filter(o => o.completed && o.id == 1).length > 0){
+              //this.tileLineasRepLP = this.customTileLayer('solredes:linea', "n_version =2 and n_idpl_tipolinea = 1 and n_idpro_proyecto = " + this.proyecto.n_idpro_proyecto);
+              //this.tileAtributosRepLP = this.customTileLayer('solredes:punto', "n_version =2 and n_idpl_tipolinea = 1 and n_idpro_proyecto = " + this.proyecto.n_idpro_proyecto);
+              this.arrayTile.push(this.tileLineasRepLP,this.tileAtributosRepLP )
+            };
+            if(checkOk.filter(o => o.completed && o.id == 2).length > 0){
+              //this.tileLineasRepRP = this.customTileLayer('solredes:linea', "n_version =2 and n_idpl_tipolinea = 2 and n_idpro_proyecto = " + this.proyecto.n_idpro_proyecto);
+              //this.tileAtributosRepRP = this.customTileLayer('solredes:punto', "n_version =2 and n_idpl_tipolinea = 2 and n_idpro_proyecto = " + this.proyecto.n_idpro_proyecto);
+              this.arrayTile.push(this.tileLineasRepRP,this.tileAtributosRepRP )
+            };
+            if(checkOk.filter(o => o.completed && o.id == 3).length > 0){
+              //this.tileLineasRepRS = this.customTileLayer('solredes:linea', "n_version =2 and n_idpl_tipolinea = 3 and n_idpro_proyecto = " + this.proyecto.n_idpro_proyecto);
+              //this.tileAtributosRepRS = this.customTileLayer('solredes:punto', "n_version =2 and n_idpl_tipolinea = 3 and n_idpro_proyecto = " + this.proyecto.n_idpro_proyecto);
+              this.arrayTile.push(this.tileLineasRepRS,this.tileAtributosRepRS )
+            } 
+            break;
+          case 3:
+            if(checkOk.filter(o => o.completed && o.id == 1).length > 0){
+              //this.tileLineasMonLP = this.customTileLayer('solredes:linea', "n_version =3 and n_idpl_tipolinea = 1 and n_idpro_proyecto = " + this.proyecto.n_idpro_proyecto);
+              //this.tileAtributosMonLP = this.customTileLayer('solredes:punto', "n_version =3 and n_idpl_tipolinea = 1 and n_idpro_proyecto = " + this.proyecto.n_idpro_proyecto);
+              this.arrayTile.push(this.tileLineasMonLP,this.tileAtributosMonLP )
+            };  
+            if(checkOk.filter(o => o.completed && o.id == 2).length > 0){
+              //this.tileLineasMonRP = this.customTileLayer('solredes:linea', "n_version =3 and n_idpl_tipolinea = 2 and n_idpro_proyecto = " + this.proyecto.n_idpro_proyecto);
+              //this.tileAtributosMonRP = this.customTileLayer('solredes:punto', "n_version =3 and n_idpl_tipolinea = 2 and n_idpro_proyecto = " + this.proyecto.n_idpro_proyecto);
+              this.arrayTile.push(this.tileLineasMonRP,this.tileAtributosMonRP )
+            };
+            if(checkOk.filter(o => o.completed && o.id == 3).length > 0){
+              //this.tileLineasMonRS = this.customTileLayer('solredes:linea', "n_version =3 and n_idpl_tipolinea = 3 and n_idpro_proyecto = " + this.proyecto.n_idpro_proyecto);
+              //this.tileAtributosMonRS = this.customTileLayer('solredes:punto', "n_version =3 and n_idpl_tipolinea = 3 and n_idpro_proyecto = " + this.proyecto.n_idpro_proyecto);
+              this.arrayTile.push(this.tileLineasMonRS,this.tileAtributosMonRS )
+            } 
+            break;
+          case 4:
+            if(checkOk.filter(o => o.completed && o.id == 1).length > 0){
+              //this.tileLineasConLP = this.customTileLayer('solredes:linea', "n_version =4 and n_idpl_tipolinea = 1 and n_idpro_proyecto = " + this.proyecto.n_idpro_proyecto);
+              //this.tileAtributosConLP = this.customTileLayer('solredes:punto', "n_version =4 and n_idpl_tipolinea = 1 and n_idpro_proyecto = " + this.proyecto.n_idpro_proyecto);
+              this.arrayTile.push(this.tileLineasConLP,this.tileAtributosConLP )
+            };
+            if(checkOk.filter(o => o.completed && o.id == 2).length > 0){
+              //this.tileLineasConRP = this.customTileLayer('solredes:linea', "n_version =4 and n_idpl_tipolinea = 2 and n_idpro_proyecto = " + this.proyecto.n_idpro_proyecto);
+              //this.tileAtributosConRP = this.customTileLayer('solredes:punto', "n_version =4 and n_idpl_tipolinea = 2 and n_idpro_proyecto = " + this.proyecto.n_idpro_proyecto);
+              this.arrayTile.push(this.tileLineasConRP,this.tileAtributosConRP )
+            };
+            if(checkOk.filter(o => o.completed && o.id == 3).length > 0){
+              //this.tileLineasConRS = this.customTileLayer('solredes:linea', "n_version =4 and n_idpl_tipolinea = 3 and n_idpro_proyecto = " + this.proyecto.n_idpro_proyecto);
+              //this.tileAtributosConRS = this.customTileLayer('solredes:punto', "n_version =4 and n_idpl_tipolinea = 3 and n_idpro_proyecto = " + this.proyecto.n_idpro_proyecto);
+              this.arrayTile.push(this.tileLineasConRS,this.tileAtributosConRS )
+            }   
+            break;
+        }
 
+        if(checkOk.filter(o => o.completed && o.id == 1).length > 0){
+          //this.tileLineasMonInspReplantLP = this.customTileLayer('solredes:lineaMonInsp', "n_tipoapp = 2 and n_idpl_tipolinea = 1 and n_idpro_proyecto = " + this.proyecto.n_idpro_proyecto);
+          //this.tileAtributosMonInspReplantLP = this.customTileLayer('solredes:puntoMonInsp', "n_tipoapp = 2 and n_idpl_tipolinea = 1 and n_idpro_proyecto = " + this.proyecto.n_idpro_proyecto);
+          this.arrayTile.push(this.tileLineasMonInspReplantLP,this.tileAtributosMonInspReplantLP )
+        };
+        if(checkOk.filter(o => o.completed && o.id == 2).length > 0){
+          //this.tileLineasMonInspReplantRP = this.customTileLayer('solredes:lineaMonInsp', "n_tipoapp = 2 and n_idpl_tipolinea = 2 and n_idpro_proyecto = " + this.proyecto.n_idpro_proyecto);
+          //this.tileAtributosMonInspReplantRP = this.customTileLayer('solredes:puntoMonInsp', "n_tipoapp = 2 and n_idpl_tipolinea = 2 and n_idpro_proyecto = " + this.proyecto.n_idpro_proyecto);
+        };
+        if(checkOk.filter(o => o.completed && o.id == 3).length > 0){
+          //this.tileLineasMonInspReplantRS = this.customTileLayer('solredes:lineaMonInsp', "n_tipoapp = 2 and n_idpl_tipolinea = 3 and n_idpro_proyecto = " + this.proyecto.n_idpro_proyecto);
+          //this.tileAtributosMonInspReplantRS = this.customTileLayer('solredes:puntoMonInsp', "n_tipoapp = 2 and n_idpl_tipolinea = 3 and n_idpro_proyecto = " + this.proyecto.n_idpro_proyecto);
+          this.arrayTile.push(this.tileLineasMonInspReplantRS,this.tileAtributosMonInspReplantRS )
+        };
+
+        if(checkOk.filter(o => o.completed && o.id == 1).length > 0){
+          //this.tileLineasMonInspMontLP = this.customTileLayer('solredes:lineaMonInsp', "n_tipoapp = 3 and n_idpl_tipolinea = 1 and n_idpro_proyecto = " + this.proyecto.n_idpro_proyecto);
+          //this.tileAtributosMonInspMontLP = this.customTileLayer('solredes:puntoMonInsp', "n_tipoapp = 3 and n_idpl_tipolinea = 1 and n_idpro_proyecto = " + this.proyecto.n_idpro_proyecto);
+          this.arrayTile.push(this.tileLineasMonInspMontLP,this.tileAtributosMonInspMontLP )
+        };
+        if(checkOk.filter(o => o.completed && o.id == 2).length > 0){
+          //this.tileLineasMonInspMontRP = this.customTileLayer('solredes:lineaMonInsp', "n_tipoapp = 3 and n_idpl_tipolinea = 2 and n_idpro_proyecto = " + this.proyecto.n_idpro_proyecto);
+          //this.tileAtributosMonInspMontRP = this.customTileLayer('solredes:puntoMonInsp', "n_tipoapp = 3 and n_idpl_tipolinea = 2 and n_idpro_proyecto = " + this.proyecto.n_idpro_proyecto);
+          this.arrayTile.push(this.tileLineasMonInspMontRP,this.tileAtributosMonInspMontRP )
+        };
+        if(checkOk.filter(o => o.completed && o.id == 3).length > 0){
+          //this.tileLineasMonInspMontRS = this.customTileLayer('solredes:lineaMonInsp', "n_tipoapp = 3 and n_idpl_tipolinea = 3 and n_idpro_proyecto = " + this.proyecto.n_idpro_proyecto);
+          //this.tileAtributosMonInspMontRS = this.customTileLayer('solredes:puntoMonInsp', "n_tipoapp = 3 and n_idpl_tipolinea = 3 and n_idpro_proyecto = " + this.proyecto.n_idpro_proyecto);
+          this.arrayTile.push(this.tileLineasMonInspMontRS,this.tileAtributosMonInspMontRS )
+        };
+
+        if(checkOk.filter(o => o.completed && o.id == 1).length > 0){
+          //this.tileLineasMonInspConfObraLP = this.customTileLayer('solredes:lineaMonInsp', "n_tipoapp = 4 and n_idpl_tipolinea = 1 and n_idpro_proyecto = " + this.proyecto.n_idpro_proyecto);
+          //this.tileAtributosMonInspConfObraLP = this.customTileLayer('solredes:puntoMonInsp', "n_tipoapp = 4 and n_idpl_tipolinea = 1 and n_idpro_proyecto = " + this.proyecto.n_idpro_proyecto);
+          this.arrayTile.push(this.tileLineasMonInspConfObraLP,this.tileAtributosMonInspConfObraLP )
+        };
+        if(checkOk.filter(o => o.completed && o.id == 2).length > 0){
+          //this.tileLineasMonInspConfObraRP = this.customTileLayer('solredes:lineaMonInsp', "n_tipoapp = 4 and n_idpl_tipolinea = 2 and n_idpro_proyecto = " + this.proyecto.n_idpro_proyecto);
+          //this.tileAtributosMonInspConfObraRP = this.customTileLayer('solredes:puntoMonInsp', "n_tipoapp = 4 and n_idpl_tipolinea = 2 and n_idpro_proyecto = " + this.proyecto.n_idpro_proyecto);
+          this.arrayTile.push(this.tileLineasMonInspConfObraRP,this.tileAtributosMonInspConfObraRP )
+        };
+        if(checkOk.filter(o => o.completed && o.id == 3).length > 0){
+          //this.tileLineasMonInspConfObraRS = this.customTileLayer('solredes:lineaMonInsp', "n_tipoapp = 4 and n_idpl_tipolinea = 3 and n_idpro_proyecto = " + this.proyecto.n_idpro_proyecto);
+          //this.tileAtributosMonInspConfObraRS = this.customTileLayer('solredes:puntoMonInsp', "n_tipoapp = 4 and n_idpl_tipolinea = 3 and n_idpro_proyecto = " + this.proyecto.n_idpro_proyecto);
+          this.arrayTile.push(this.tileLineasMonInspConfObraRS,this.tileAtributosMonInspConfObraRS )
+        };
+      }
+      
+    });
     console.log("textoVersiones", this.textoVersiones)
+    //console.log(this.map.getLayers().getArray());
 
-
+    this.map.getLayers().getArray().slice(1).forEach(layer => this.map.removeLayer(layer))
+    this.arrayTile.forEach(layer => this.map.addLayer(layer));
     // this.cargarCapas();
   }
 
-
-  ngOnInit(): void {
-    this.data = [
-      {
-        name: 'Expediente',
-        version: 1,
-        completed: true,
-        color: 'primary',
-        subtasks: [
-          { id: 1, name: 'Linea primaria', completed: true, color: 'primary' },
-          { id: 2, name: 'Red primaria', completed: true, color: 'accent' },
-          { id: 3, name: 'Red secudaria', completed: true, color: 'warn' },
-        ],
-      }, {
-        name: 'Replanteo',
-        version: 2,
-        completed: false,
-        color: 'primary',
-        subtasks: [
-          { id: 1, name: 'Linea primaria', completed: false, color: 'primary' },
-          { id: 2, name: 'Red primaria', completed: false, color: 'accent' },
-          { id: 3, name: 'Red secudaria', completed: false, color: 'warn' },
-        ],
-      },
-      {
-        name: 'Montaje',
-        version: 3,
-        completed: false,
-        color: 'primary',
-        subtasks: [
-          { id: 1, name: 'Linea primaria', completed: false, color: 'primary' },
-          { id: 2, name: 'Red primaria', completed: false, color: 'accent' },
-          { id: 3, name: 'Red secudaria', completed: false, color: 'warn' },
-        ],
-      }, {
-        name: 'Conforme a obra',
-        version: 4,
-        completed: false,
-        color: 'primary',
-        subtasks: [
-          { id: 1, name: 'Linea primaria', completed: false, color: 'primary' },
-          { id: 2, name: 'Red primaria', completed: false, color: 'accent' },
-          { id: 3, name: 'Red secudaria', completed: false, color: 'warn' },
-        ],
-      },{
-        name: 'Inspeccion Replanteo',
-        version: 0,
-        completed: false,
-        color: 'primary',
-        subtasks: [
-          { id: 1, name: 'Linea primaria', completed: false, color: 'primary' },
-          { id: 2, name: 'Red primaria', completed: false, color: 'accent' },
-          { id: 3, name: 'Red secudaria', completed: false, color: 'warn' },
-        ],
-      },{
-        name: 'Inspeccion Montaje',
-        version: 0,
-        completed: false,
-        color: 'primary',
-        subtasks: [
-          { id: 1, name: 'Linea primaria', completed: false, color: 'primary' },
-          { id: 2, name: 'Red primaria', completed: false, color: 'accent' },
-          { id: 3, name: 'Red secudaria', completed: false, color: 'warn' },
-        ],
-      },{
-        name: 'Inspeccion Conforme a obra',
-        version: 0,
-        completed: false,
-        color: 'primary',
-        subtasks: [
-          { id: 1, name: 'Linea primaria', completed: false, color: 'primary' },
-          { id: 2, name: 'Red primaria', completed: false, color: 'accent' },
-          { id: 3, name: 'Red secudaria', completed: false, color: 'warn' },
-        ],
-      }
-      
-
-    ];
-
-//    this.data[0].subtasks[0].completed == true
-    
-    this.cargarCapas();
-    this.mostarCapas(this.data);
-  }
 
   getPantallaRol() {
     let request = {
@@ -398,8 +592,23 @@ export class MapaGeneralComponent extends BaseComponent implements OnInit {
 
 
   cargarCapas() {
+    
+    /* this.tileDepartamento = new TileLayer({
+       source: new TileWMS({
+         url: this.urlUbideo,
+         params: {
+           'LAYERS': 'Candwi:Departamento',
+           'TILED': true
+         },
+         projection: 'EPSG:4326',
+         serverType: 'geoserver',
+         transition: 0,
+       })
+     });*/
 
-    this.tileBase = new TileLayer({
+
+
+    /*this.tileBase = new TileLayer({
       source: new XYZ({
         url: 'https://{a-c}.tile.openstreetmap.org/{z}/{x}/{y}.png'
       })
@@ -453,37 +662,17 @@ export class MapaGeneralComponent extends BaseComponent implements OnInit {
     this.tileAtributosMonInspConfObraLP = this.customTileLayer('solredes:puntoMonInsp', "n_tipoapp = 4 and n_idpl_tipolinea = 1 and n_idpro_proyecto = " + this.proyecto.n_idpro_proyecto);
     this.tileAtributosMonInspConfObraRP = this.customTileLayer('solredes:puntoMonInsp', "n_tipoapp = 4 and n_idpl_tipolinea = 2 and n_idpro_proyecto = " + this.proyecto.n_idpro_proyecto);
     this.tileAtributosMonInspConfObraRS = this.customTileLayer('solredes:puntoMonInsp', "n_tipoapp = 4 and n_idpl_tipolinea = 3 and n_idpro_proyecto = " + this.proyecto.n_idpro_proyecto);
-
-    
-    /* this.tileDepartamento = new TileLayer({
-       source: new TileWMS({
-         url: this.urlUbideo,
-         params: {
-           'LAYERS': 'Candwi:Departamento',
-           'TILED': true
-         },
-         projection: 'EPSG:4326',
-         serverType: 'geoserver',
-         transition: 0,
-       })
-     });*/
-
-    
-    const akfd = new TileLayer;
-    akfd.setVisible(true)
-    this.usuarioLog = this.getUser().data;
-
-    this.getPantallaRol();    
+*/
 
     const view = new View({
       center: [this.lng, this.lat],
       zoom: this.zoom,
       projection: 'EPSG:4326'
     });
-
+    
     this.map = new Map({
       target: 'ol-map',
-      layers: [
+      layers: [this.tileBase],/*[
         this.tileBase,
         this.tileLineasExpLP,
         this.tileAtributosExpLP,
@@ -519,12 +708,8 @@ export class MapaGeneralComponent extends BaseComponent implements OnInit {
         this.tileAtributosMonInspReplantLP,
         this.tileAtributosMonInspReplantRP,
         this.tileAtributosMonInspReplantRS,
-      ],
-      view: view,/*new View({
-        center: [this.lng, this.lat],
-        zoom: this.zoom,
-        projection: 'EPSG:4326'
-      }),*/
+      ],*/
+      view: view,
       controls: defaultControls({ attribution: true, zoom: true }).extend([])
     });
 

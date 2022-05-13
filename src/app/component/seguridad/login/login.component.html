@@ -1,8 +1,19 @@
 <div class="fondologin"></div>
 <div class="grad"></div>
+
 <div class="cuerpo">
-  <mat-toolbar color="primary" class="mat-elevation-z8 barra">SOL REDES 2.0</mat-toolbar>
+  <mat-toolbar color="primary" class="mat-elevation-z8 barra">
+    <mat-toolbar-row>
+      <span>SOL REDES</span>
+      <span class="example-spacer"></span>
+      <button mat-icon-button class="example-icon buttonVersion" aria-label="Example icon-button with share icon"
+        (click)="openDialog()">
+        1.0.3<mat-icon>keyboard_arrow_down</mat-icon>
+      </button>
+    </mat-toolbar-row>
+  </mat-toolbar>
   <br />
+
   <h1 class="titulologin">Herramienta para construccíon y supervisión de proyectos de electrificación rural </h1>
   <div class="login-contenedor">
     <mat-card class="example-card">
@@ -43,8 +54,5 @@
         <label class="errorLogin" *ngIf="!resultado">{{resultado.cMensaje}}</label>
       </mat-card-actions>
     </mat-card>
-      <button mat-raised-button *ngIf="!flag" type="submit" color="primary" mat-button class="float" (click)="openDialog()">
-        Versiones
-      </button>
-  </div>  
+  </div>
 </div>
