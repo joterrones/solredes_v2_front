@@ -71,7 +71,7 @@ export class ImportacionPlanillaDescargarComponent extends BaseComponent impleme
 
         this._exportar_service.exportar(request, this.getToken().token).subscribe(
         result => {    
-            console.log("result.data");
+            console.log(result.data);
             
             //this._exportar_service.exportarExcelPlanilla(result.data);
             var datos = result.data;
@@ -479,10 +479,9 @@ export class ImportacionPlanillaDescargarComponent extends BaseComponent impleme
             };
             var cont = 0;
             var elementAux = 0;
-            var i = 0;
             datos.forEach(element => {
 
-                if ( elementAux != element.n_idpl_estructura/*cont == 0*/) {
+                if ( elementAux != element.n_idpl_estructura && (cont == 2 || cont == 0)) {
                     elementAux = element.n_idpl_estructura;
                     row += 1;
                     worksheet.getCell('A' + row).alignment = { vertical: 'middle', horizontal: 'center' };
@@ -528,13 +527,13 @@ export class ImportacionPlanillaDescargarComponent extends BaseComponent impleme
                         element.codigoap = "";
                     }
 
-                    /*worksheet.getCell('F' + row).alignment = { vertical: 'middle', horizontal: 'center' };
+                    worksheet.getCell('F' + row).alignment = { vertical: 'middle', horizontal: 'center' };
                     this.setdatogeneral(worksheet, 'F' + row, element.codigoap, 10, false);
                     worksheet.getCell('F' + row).border = {
                         left: { style: 'thin' },
                         right: { style: 'thin' },
                         bottom: { style: 'thin' },
-                    }*/
+                    }
 
                     worksheet.getCell('I' + row).alignment = { vertical: 'middle', horizontal: 'center' };
                     this.setdatogeneral(worksheet, 'I' + row, element.c_progresiva, 10, false);
@@ -916,9 +915,9 @@ export class ImportacionPlanillaDescargarComponent extends BaseComponent impleme
                         right: { style: 'thin' },
                         bottom: { style: 'thin' },
                     };  
-                    i++;
-                    cont+=1;
-                }/*else if(cont == 1 && elementAux == element.n_idpl_estructura){
+                    
+                    cont=1;
+                }else if(cont == 1 && elementAux == element.n_idpl_estructura){
                     
                     if (element.c_codigoas == 'undefined') {
                         element.c_codigoas = "";
@@ -930,13 +929,8 @@ export class ImportacionPlanillaDescargarComponent extends BaseComponent impleme
                         right: { style: 'thin' },
                         bottom: { style: 'thin' },
                     };
-                   if(elementAux == datos[(i+1)].n_idpl_estructura){
-                        console.log(datos[(i+1)].n_idpl_estructura);
-                        cont+=1;
-                    }else{
-                        cont=0;
-                    }
-                    cont = 0;
+                    cont = 2;
+                    elementAux = element.n_idpl_estructura;
                 }else if(cont == 2 && elementAux == element.n_idpl_estructura){
                     
                     if (element.c_codigoarsse == 'undefined') {
@@ -950,9 +944,8 @@ export class ImportacionPlanillaDescargarComponent extends BaseComponent impleme
                         bottom: { style: 'thin' },
                     };
                     cont = 0;
-                }else{
-                    cont = 0;
-                }*/
+                    elementAux = element.n_idpl_estructura;
+                }
                 
             });
             worksheet.autoFilter = 'A1:AW1';
