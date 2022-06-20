@@ -23,4 +23,12 @@ export class FichaService{
         return this._http.post(this.url + 'ficha/get', request, { headers: reqHeader });
     }
 
+    getFoto(request,token): Observable<any> {
+        var reqHeader = new HttpHeaders({
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
+        });
+        return this._http.post(this.url + 'ficha/getFoto', request, { headers: reqHeader });
+    }
+
 }

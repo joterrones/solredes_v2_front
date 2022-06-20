@@ -223,7 +223,8 @@ import { VersionesComponent } from './component/versiones/versiones.component';
     MetradomontajeComponent, 
     DetallemetradoComponent, 
     ImportacionPlanillaEliminarComponent, 
-    RolpermisosComponent, FichaComponent, 
+    RolpermisosComponent, 
+    FichaComponent, 
     MapaLineaComponent,
     MapaGeneralComponent,
     MapaBaseComponent,
@@ -361,7 +362,8 @@ import { VersionesComponent } from './component/versiones/versiones.component';
     ImportacionPlanillaDescargarComponent,
     FiltroCapaComponent,
     FiltroBuscarComponent,
-    VersionesComponent
+    VersionesComponent,
+    FichaComponent
   ],
   providers: [
     MatDatepickerModule,
