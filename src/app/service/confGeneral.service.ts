@@ -334,12 +334,12 @@ export class confGeneralService{
         return this._http.post(this.url + 'configuracionGeneral/asignarLineaUser', data, { headers: reqHeader });
     }
 
-    getTipoElemento(token): Observable<any> {
+    getTipoElemento(data, token): Observable<any> {
         var reqHeader = new HttpHeaders({
             'Content-Type': 'application/json',
             'Authorization': 'Bearer ' + token
         });
-        return this._http.post(this.url + 'configuracionGeneral/getTipoElemento', { headers: reqHeader });
+        return this._http.post(this.url + 'configuracionGeneral/getTipoElemento', data,{ headers: reqHeader });
     } 
 
     saveTipoElemento(data, token): Observable<any> {

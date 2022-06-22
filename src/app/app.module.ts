@@ -137,6 +137,7 @@ import { FiltroCapaComponent } from './component/mapa/filtro-capa/filtro-capa.co
 import { FiltroBuscarComponent } from './component/mapa/filtro-buscar/filtro-buscar.component';
 import { DataUsuarioProComponent } from './component/data-usuario-pro/data-usuario-pro.component';
 import { VersionesComponent } from './component/versiones/versiones.component';
+import { ArmadoconfigsuministroComponent } from './component/armadoconfigsuministro/armadoconfigsuministro.component';
 
 
 
@@ -272,6 +273,7 @@ import { VersionesComponent } from './component/versiones/versiones.component';
     FiltroBuscarComponent,
     DataUsuarioProComponent,
     VersionesComponent,
+    ArmadoconfigsuministroComponent,
 
   ],
   imports: [
@@ -363,7 +365,8 @@ import { VersionesComponent } from './component/versiones/versiones.component';
     FiltroCapaComponent,
     FiltroBuscarComponent,
     VersionesComponent,
-    FichaComponent
+    FichaComponent,
+    ArmadoconfigsuministroComponent
   ],
   providers: [
     MatDatepickerModule,
