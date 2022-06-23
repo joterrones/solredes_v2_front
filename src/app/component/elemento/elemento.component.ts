@@ -34,10 +34,11 @@ export class ElementoComponent extends BaseComponent implements OnInit {
   idversion: number;
 
   armado: any;
-
+  stringBuscar: String = '';
   general: Array<any>;
   url_lamina: String;
   url_iconomapa: String;
+  dataCard = [];
 
   material = [
     { id: "", nombre: "" },
@@ -95,6 +96,10 @@ export class ElementoComponent extends BaseComponent implements OnInit {
     this.getTabla();
   }
 
+  onSelectBuscar(value){
+    this.stringBuscar = value
+    this.getTabla();
+  }
   getTipoElemento() {
     let request = {
       n_idpro_proyecto: this.proyecto.n_idpro_proyecto
@@ -117,7 +122,8 @@ export class ElementoComponent extends BaseComponent implements OnInit {
   getTabla() {
     let request = {
       n_idpl_tipoelemento:  this.idtipoelemento,
-      n_idpro_proyecto: this.proyecto.n_idpro_proyecto
+      n_idpro_proyecto: this.proyecto.n_idpro_proyecto,
+      stringBuscar: this.stringBuscar
     }
     console.log(request);
     
@@ -125,7 +131,8 @@ export class ElementoComponent extends BaseComponent implements OnInit {
       result => {
         if (result.estado) {
           this.tabla = new MatTableDataSource<any>(result.data);
-          console.log(result.data);          
+          console.log(result.data);     
+          this.dataCard = result.data;     
           this.tabla.sort = this.sort;
           this.tabla.paginator = this.paginator;
         } else {

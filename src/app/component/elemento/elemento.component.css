@@ -1,6 +1,6 @@
 table {
-    width: 100%;
-  }
+  width: 100%;
+}
 
 .contenedorBody {
   margin: 1%;
@@ -12,6 +12,30 @@ table {
   justify-content: space-around;
   flex-wrap: wrap;
 }
+
+
+.navega{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
 .cont{
   align-items: center;
+}
+.card{
+  margin: 1%;
+}
+.contentcard{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.contCardTit{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
 }

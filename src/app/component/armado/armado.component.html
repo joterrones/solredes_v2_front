@@ -188,8 +188,7 @@
 
         <div class="contenedor" >
             <div *ngFor="let e of dataCard">
-                <mat-card style="margin: 1%;;
-                 ">
+                <mat-card style="margin: 1%; max-width: 470px;">
                     <mat-card-header >
                         <div mat-card-avatar class="example-header-image">
                             <img *ngIf="e.c_iconomapa!=null" [src]="srcimg+ e.c_iconomapa+'.png'" height="30"

@@ -78,6 +78,7 @@ export class ArmadoComponent extends BaseComponent implements OnInit {
     this.idversion = id;
     this.getTabla();
   }
+  
   onSelectBuscar(value){
     this.stringBuscar = value
     this.getTabla();
