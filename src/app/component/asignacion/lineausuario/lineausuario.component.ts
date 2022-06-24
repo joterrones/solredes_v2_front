@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 
-import { MatDialogRef, MAT_DIALOG_DATA, MatSnackBar, MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA, MatSnackBar, MatTableDataSource, MatPaginator, MatSort, MatDialog } from '@angular/material';
 import { BaseComponent } from '../../base/base.component';
 import { Router } from "@angular/router";
 import { AppSettings } from '../../../common/appsettings';
@@ -8,6 +8,7 @@ import { AppSettings } from '../../../common/appsettings';
 import { confGeneralService } from '../../../service/confGeneral.service';
 import { ResultadoApi } from 'src/app/interface/common.interface';
 import { TraGrupos } from 'src/app/interface/configGeneral.interface';
+import { ConfirmComponent } from '../../general/confirm/confirm.component';
 
 @Component({
   selector: 'app-lineausuario',
@@ -21,15 +22,16 @@ export class LineausuarioComponent extends BaseComponent implements OnInit {
   tipolinea = [];
   idtipolinea = 0;
   idzona= 0;
-  lineaUser: [];
-
+  lineaGrupo = [];
+  selectAll = true;
   displayedColumns: string[] = ['c_nombre','select'];
-  public tablalineaUser: MatTableDataSource<any>;
+  public tablalineaGrupo: MatTableDataSource<any>;
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: false }) sort: MatSort;
   
   constructor(
-    public dialogAsigPro: MatDialogRef<LineausuarioComponent>,
+    public dialog: MatDialog,
+    public dialogAsigLinea: MatDialogRef<LineausuarioComponent>,
     private _confiGeneral_service: confGeneralService,
     @Inject(MAT_DIALOG_DATA) public data: TraGrupos,
     public _router: Router,
@@ -39,6 +41,7 @@ export class LineausuarioComponent extends BaseComponent implements OnInit {
     }
 
   ngOnInit() {
+    this.selectAll = true;
     this.usuarioLog = this.getUser().data;
     this.getLineaUser();
     this.getTablaTipolinea();
@@ -68,10 +71,10 @@ export class LineausuarioComponent extends BaseComponent implements OnInit {
         try {
           if (result.estado) {
             console.log("ProUser",result.data);
-            this.lineaUser = result.data;
-            this.tablalineaUser = new MatTableDataSource<any>(result.data);
-            this.tablalineaUser.sort = this.sort;
-            this.tablalineaUser.paginator = this.paginator;
+            this.lineaGrupo = result.data;
+            this.tablalineaGrupo = new MatTableDataSource<any>(result.data);
+            this.tablalineaGrupo.sort = this.sort;
+            this.tablalineaGrupo.paginator = this.paginator;
           } else {
             this.openSnackBar(result.mensaje, 99);
           }
@@ -119,7 +122,7 @@ export class LineausuarioComponent extends BaseComponent implements OnInit {
   noAsignarLineaUser(newForm){
     let request = {
       n_idtra_grupo: this.data.n_idtra_grupo,
-      n_idpl_linea: newForm.n_idpl_linealn,
+      n_idpl_linea: [newForm.n_idpl_linealn],
       n_id_usermodi: this.usuarioLog.n_idseg_userprofile
     }
     console.log(this.data.n_idtra_grupo);
@@ -128,7 +131,8 @@ export class LineausuarioComponent extends BaseComponent implements OnInit {
       result => {
         if (result.estado) {
           //this.dialogAsigPro.close({ flag: true });
-          this.getLineaUser();
+          //this.getLineaUser();
+          this.openSnackBar("Acción completada", 99);
         } else {
           this.openSnackBar(result.mensaje, 99);
         }
@@ -153,7 +157,7 @@ export class LineausuarioComponent extends BaseComponent implements OnInit {
     }else{
       let request  ={ 
         n_idtra_grupo: this.data.n_idtra_grupo,
-        n_idpl_linea: newForm.n_idpl_linealn,
+        n_idpl_linea: [newForm.n_idpl_linealn],
         n_id_usermodi: this.usuarioLog.n_idseg_userprofile
       }
       console.log("Envio datos lineaUser",request);
@@ -163,7 +167,8 @@ export class LineausuarioComponent extends BaseComponent implements OnInit {
           try {
             if (result.estado) {
               //this.dialogAsigPro.close({ flag: true });
-              this.getLineaUser();
+              //this.getLineaUser();
+              this.openSnackBar("Acción completada", 99);
             } else {
               this.openSnackBar(result.mensaje, 99);
             }
@@ -182,7 +187,107 @@ export class LineausuarioComponent extends BaseComponent implements OnInit {
   }
 
   applyFilter(filterValue: String) {
-    this.tablalineaUser.filter = filterValue.trim().toLowerCase();
+    this.tablalineaGrupo.filter = filterValue.trim().toLowerCase();
+  }
+
+  asignarAll(tablalineaGrupo): void {
+    
+    let array = tablalineaGrupo.filteredData;
+    console.log(array);
+    let elementArray = [];
+    
+    const dialogRef = this.dialog.open(ConfirmComponent, {
+      width: '500px',
+      data: { titulo: "¿Seguro que desea asignar todas las redes? \n\r"+ 
+                      "Se asignará "+array.length+ " redes"
+            }
+    });
+    dialogRef.afterClosed().subscribe(result => {
+
+      if (result) {
+        this.selectAll = true;
+        array.forEach(e => {
+          elementArray.push(e.n_idpl_linealn);
+        });
+        let request  = { 
+          n_idtra_grupo: this.data.n_idtra_grupo,
+          n_idpl_linea: elementArray,
+          n_id_usermodi: this.usuarioLog.n_idseg_userprofile
+        }
+        this._confiGeneral_service.asignarLineaUser(request, this.getToken().token).subscribe(
+          result => {
+            try {
+              if (result.estado) {
+                console.log(result.estado);
+                
+                this.dialogAsigLinea.close();
+                this.openSnackBar("Acción completada", 99);
+              } else {
+                this.openSnackBar(result.mensaje, 99);
+              }
+            } catch (error) {
+              this.openSnackBar(AppSettings.SERVICE_NO_CONECT_SERVER, 99);
+            }
+          }, error => {
+            console.error(error);
+            try {
+              this.openSnackBar(error.error.Detail, error.error.StatusCode);
+            } catch (error) {
+              this.openSnackBar(AppSettings.SERVICE_NO_CONECT_SERVER, 99);
+            }
+          });
+      }
+    });
+    
+    
+  }
+
+  denegarrAll(tablalineaGrupo): void {
+    
+    let array = tablalineaGrupo.filteredData;
+    console.log(array);
+    let elementArray = [];
+    const dialogRef = this.dialog.open(ConfirmComponent, {
+      width: '500px',
+      data: { titulo: "¿Seguro que desea denegar todas las redes? \n\r"+ 
+                      "Se denegará "+array.length+ " redes"
+            }
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(result);
+      
+      if (result) {
+        this.selectAll = false;
+        array.forEach(e => {
+          elementArray.push(e.n_idpl_linealn);
+        });
+        let request  = { 
+          n_idtra_grupo: this.data.n_idtra_grupo,
+          n_idpl_linea: elementArray,
+          n_id_usermodi: this.usuarioLog.n_idseg_userprofile
+        }
+        this._confiGeneral_service.noAsignarLineaUser(request, this.getToken().token).subscribe(
+          result => {
+            try {
+              if (result.estado) {
+                this.dialogAsigLinea.close();
+                this.openSnackBar("Acción completada", 99);
+              } else {
+                this.openSnackBar(result.mensaje, 99);
+              }
+            } catch (error) {
+              this.openSnackBar(AppSettings.SERVICE_NO_CONECT_SERVER, 99);
+            }
+          }, error => {
+            console.error(error);
+            try {
+              this.openSnackBar(error.error.Detail, error.error.StatusCode);
+            } catch (error) {
+              this.openSnackBar(AppSettings.SERVICE_NO_CONECT_SERVER, 99);
+            }
+          });
+      }
+    });
   }
 
 }

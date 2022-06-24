@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 
-import { MatDialogRef, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA, MatSnackBar, MatDialog } from '@angular/material';
 import { BaseComponent } from '../../base/base.component';
 import { Router } from "@angular/router";
 import { AppSettings } from '../../../common/appsettings';
@@ -8,6 +8,7 @@ import { AppSettings } from '../../../common/appsettings';
 import { confGeneralService } from '../../../service/confGeneral.service';
 import { ResultadoApi } from 'src/app/interface/common.interface';
 import { TraGrupos } from 'src/app/interface/configGeneral.interface';
+import { ConfirmComponent } from '../../general/confirm/confirm.component';
 
 @Component({
   selector: 'app-proyectousuaio',
@@ -17,9 +18,10 @@ import { TraGrupos } from 'src/app/interface/configGeneral.interface';
 })
 export class ProyectousuaioComponent extends BaseComponent implements OnInit {
   
-  ProUser: [];
+  ProUser = [];
 
   constructor(
+    public dialog: MatDialog,
     public dialogAsigPro: MatDialogRef<ProyectousuaioComponent>,
     private _confiGeneral_service: confGeneralService,
     @Inject(MAT_DIALOG_DATA) public data: TraGrupos,
@@ -109,6 +111,7 @@ export class ProyectousuaioComponent extends BaseComponent implements OnInit {
           try {
             if (result.estado) {
               this.dialogAsigPro.close({ flag: true });
+              this.openSnackBar("Acción completada", 99);
             } else {
               this.openSnackBar(result.mensaje, 99);
             }
@@ -128,4 +131,73 @@ export class ProyectousuaioComponent extends BaseComponent implements OnInit {
     
   }
 
+  asignarAll(): void {
+    let array = this.ProUser;
+    console.log(array);
+    let elementArray = [];
+    
+    const dialogRef = this.dialog.open(ConfirmComponent, {
+      width: '500px',
+      data: { titulo: "¿Seguro que desea asignar todos los usuarios? \n\r"+ 
+                      "Se asignará "+array.length+ " usuarios"
+            }
+    });
+    dialogRef.afterClosed().subscribe(result => {
+
+      if (result) {
+        array.forEach(e => {
+          elementArray.push(e.n_idseg_userprofileusu);
+        });
+        let request  ={ 
+          n_idtra_grupo: this.data.n_idtra_grupo,
+          n_idseg_userprofileArray: elementArray,
+          n_id_usermodi: this.usuarioLog.n_idseg_userprofile
+        }
+        console.log("Envio datos ProUser",request);
+        
+        this._confiGeneral_service.saveProUser(request, this.getToken().token).subscribe(
+          result => {
+            try {
+              if (result.estado) {
+                this.openSnackBar("Acción completada", 99);
+                this.dialogAsigPro.close({ flag: true });
+              } else {
+                this.openSnackBar(result.mensaje, 99);
+              }
+            } catch (error) {
+              this.openSnackBar(AppSettings.SERVICE_NO_CONECT_SERVER, 99);
+            }
+          }, error => {
+            console.error(error);
+            try {
+              this.openSnackBar(error.error.Detail, error.error.StatusCode);
+            } catch (error) {
+              this.openSnackBar(AppSettings.SERVICE_NO_CONECT_SERVER, 99);
+            }
+          });
+  
+      }
+    });
+    
+    
+  }
+
+  denegarrAll(): void {
+    let array = this.ProUser;   
+    
+    const dialogRef = this.dialog.open(ConfirmComponent, {
+      width: '500px',
+      data: { titulo: "¿Seguro que desea denegar todos los usuarios? \n\r"+ 
+                      "Se denegará "+array.length+ " usuarios"
+            }
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.resetProUser();
+        this.openSnackBar("Acción completada", 99);
+      }
+    });
+    
+    
+  }
 }
