@@ -428,7 +428,7 @@ export class FichaComponent extends BaseComponent implements OnInit {
     espacio += 24;
     var r = 0;
     var i = 0;
-
+    var t = this.datosFotos.length
     this.datosFotos.forEach( async element => {
       
       if(element.nfotodetalle){
@@ -443,7 +443,7 @@ export class FichaComponent extends BaseComponent implements OnInit {
           i = 0;
           espacio += 57;
         }
-        r++;
+        
         if(espacio >= 225){        
           doc.addPage();
           espacio = 20;
@@ -455,10 +455,12 @@ export class FichaComponent extends BaseComponent implements OnInit {
           doc.line(195, espacio, 195, espacio + 260);
           espacio += 15;
         }
-        if(this.datosFotos.length <= r){
-          console.log(espacio)
-          doc.save("FICHA MONTAJE.pdf")
-        }
+      }
+      r++;
+      if(t <= r){
+        console.log(r);
+        console.log(espacio)
+        doc.save("FICHA MONTAJE.pdf")
       }
     });
     //doc.save("PDF.pdf")
