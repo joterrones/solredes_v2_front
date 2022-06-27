@@ -253,7 +253,7 @@ export class FichaComponent extends BaseComponent implements OnInit {
 
     doc.rect(15, 70, 180, 8, 'F');
     doc.rect(15, 85, 180, 9, 'F');
-    doc.rect(15, 113, 180, 8, 'F');
+    
 
     doc.setLineWidth(0.5);//Ancho de las lineas siguientes 
     doc.line(15, 16, 195, 16); 
@@ -384,14 +384,14 @@ export class FichaComponent extends BaseComponent implements OnInit {
       doc.text(element.c_codigoarmado, 45, espacio + e, null, null,'center');
       //doc.text(element.c_nombrearmado, 80, espacio + e, null, null,'center');
       doc.text(''+element.n_cantidad, 80, espacio + e, null, null,'center');
-      if (element.c_observacion) {
+      if (element.c_observacion && element.c_observacion != '' && element.c_observacion != null) {
         doc.text(element.c_observacion, 130, espacio + e, null, null,'center');
-      } else {
+        e+=5;
+      } /*else {
         doc.text("", 130, espacio + e, null, null,'center');
-      }
+      }*/
       
       if(element.c_observacion2){ 
-        e+=5;
         doc.text(element.c_observacion2, 130, espacio + e, null, null,'center');
       }      
       if(this.datos.length > a ){
@@ -417,8 +417,9 @@ export class FichaComponent extends BaseComponent implements OnInit {
     }); 
     
     espacio = this.cont
+    doc.setFillColor(200, 200, 200);
+    doc.rect(15.5, espacio, 179.5, 8, 'F');
     doc.line(15, espacio, 195, espacio);
-
     doc.setFontSize(12);
     doc.setFontStyle('bold');
     doc.text('FOTOS', 105, espacio + 5, null, null,'center');

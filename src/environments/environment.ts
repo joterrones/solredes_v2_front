@@ -8,7 +8,7 @@ export const environment = {
   //urlArchivo : 'http://localhost:3200/archivos/'
   url: 'http://35.184.146.235:3200/api/',
   urlArchivo : 'http://35.184.146.235:3200/archivos/'
-};
+};//
 
 /*
  * For easier debugging in development mode, you can import the following file

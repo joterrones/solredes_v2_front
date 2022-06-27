@@ -138,6 +138,7 @@ import { FiltroBuscarComponent } from './component/mapa/filtro-buscar/filtro-bus
 import { DataUsuarioProComponent } from './component/data-usuario-pro/data-usuario-pro.component';
 import { VersionesComponent } from './component/versiones/versiones.component';
 import { ArmadoconfigsuministroComponent } from './component/armadoconfigsuministro/armadoconfigsuministro.component';
+import { DatosMonitoreoComponent } from './component/datos-monitoreo/datos-monitoreo.component';
 
 
 
@@ -274,6 +275,7 @@ import { ArmadoconfigsuministroComponent } from './component/armadoconfigsuminis
     DataUsuarioProComponent,
     VersionesComponent,
     ArmadoconfigsuministroComponent,
+    DatosMonitoreoComponent,
 
   ],
   imports: [
