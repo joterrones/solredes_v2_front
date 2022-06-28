@@ -33,7 +33,6 @@ export class FiltroCapaComponent extends BaseComponent implements OnInit {
   cancelar(){
     this.data.flag= false;
     this.data = JSON.parse(localStorage.getItem(this.FILTRO_HISTORICO));
-    console.log("filtro Cancelar", this.data);
     this.dialogRef.close(this.data);
   }
 

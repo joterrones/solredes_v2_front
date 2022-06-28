@@ -86,20 +86,16 @@ export class ProyectousuaioComponent extends BaseComponent implements OnInit {
 
   
   guardar(element) {
-    console.log(element);
-    console.log(this.data.n_idtra_grupo);
     let request  ={ 
       n_idtra_grupo: this.data.n_idtra_grupo,
       n_idseg_userprofileArray: [element.n_idseg_userprofile],
       n_id_usermodi: this.usuarioLog.n_idseg_userprofile
     }
     if (element.b_activo) {
-      console.log("DEBEMOS DENEGAR");
       this._confiGeneral_service.denegarAllProuser(request, this.getToken().token).subscribe(
         result => {
           try {
             if (result.estado) {
-              //this.dialogAsigPro.close({ flag: true });
               this.openSnackBar("Acción completada", 99);
             } else {
               this.openSnackBar(result.mensaje, 99);
@@ -115,16 +111,11 @@ export class ProyectousuaioComponent extends BaseComponent implements OnInit {
             this.openSnackBar(AppSettings.SERVICE_NO_CONECT_SERVER, 99);
           }
         });
-    } else {
-      console.log("DEBEMOS ASIGNAR");
-      
-      console.log("Envio datos ProUser",request);
-      
+    } else {      
       this._confiGeneral_service.saveProUser(request, this.getToken().token).subscribe(
         result => {
           try {
             if (result.estado) {
-              //this.dialogAsigPro.close({ flag: true });
               this.openSnackBar("Acción completada", 99);
             } else {
               this.openSnackBar(result.mensaje, 99);
@@ -140,48 +131,7 @@ export class ProyectousuaioComponent extends BaseComponent implements OnInit {
             this.openSnackBar(AppSettings.SERVICE_NO_CONECT_SERVER, 99);
           }
         });
-    }
-
-    /*if(newForm.length == 0 && selection._selection.size == 0){
-      this.resetProUser();
-    }
-    /*if(this.ProUser.length){
-      this.resetProUser();
-    }*/
-    
-    
-    /*if(newForm.length > 0 && selection._selection.size > 0){
-      this.resetProUser();
-      let request  ={ 
-        n_idtra_grupo: this.data.n_idtra_grupo,
-        n_idseg_userprofileArray: newForm,
-        n_id_usermodi: this.usuarioLog.n_idseg_userprofile
-      }
-      console.log("Envio datos ProUser",request);
-      
-      this._confiGeneral_service.saveProUser(request, this.getToken().token).subscribe(
-        result => {
-          try {
-            if (result.estado) {
-              this.dialogAsigPro.close({ flag: true });
-              this.openSnackBar("Acción completada", 99);
-            } else {
-              this.openSnackBar(result.mensaje, 99);
-            }
-          } catch (error) {
-            this.openSnackBar(AppSettings.SERVICE_NO_CONECT_SERVER, 99);
-          }
-        }, error => {
-          console.error(error);
-          try {
-            this.openSnackBar(error.error.Detail, error.error.StatusCode);
-          } catch (error) {
-            this.openSnackBar(AppSettings.SERVICE_NO_CONECT_SERVER, 99);
-          }
-        });
-
-    }*/
-    
+    }    
   }
 
   asignarAll(): void {

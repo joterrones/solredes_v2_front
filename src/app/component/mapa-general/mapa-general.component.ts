@@ -56,87 +56,11 @@ export class MapaGeneralComponent extends BaseComponent implements OnInit {
   lat: number = -12.088898333333335;
   lng: number = -77.00707333333334;
   zoom: number = 6;
-  /*lat: number = -12.2230529;
-  lng: number = -76.9290804;
-  zoom: number = 18;*/
+
   url = "http://35.184.146.235:8080/geoserver/solredes/wms";
   //urlUbideo = "http://35.184.146.235:8080/geoserver/Candwi/wms";
 
-  data = [
-    {
-      name: 'Expediente',
-      version: 1,
-      completed: true,
-      color: 'primary',
-      subtasks: [
-        { id: 1, name: 'Linea primaria', completed: true, color: 'primary' },
-        { id: 2, name: 'Red primaria', completed: true, color: 'accent' },
-        { id: 3, name: 'Red secudaria', completed: true, color: 'warn' },
-      ],
-    }, {
-      name: 'Replanteo',
-      version: 2,
-      completed: false,
-      color: 'primary',
-      subtasks: [
-        { id: 1, name: 'Linea primaria', completed: false, color: 'primary' },
-        { id: 2, name: 'Red primaria', completed: false, color: 'accent' },
-        { id: 3, name: 'Red secudaria', completed: false, color: 'warn' },
-      ],
-    },
-    {
-      name: 'Montaje',
-      version: 3,
-      completed: false,
-      color: 'primary',
-      subtasks: [
-        { id: 1, name: 'Linea primaria', completed: false, color: 'primary' },
-        { id: 2, name: 'Red primaria', completed: false, color: 'accent' },
-        { id: 3, name: 'Red secudaria', completed: false, color: 'warn' },
-      ],
-    }, {
-      name: 'Conforme a obra',
-      version: 4,
-      completed: false,
-      color: 'primary',
-      subtasks: [
-        { id: 1, name: 'Linea primaria', completed: false, color: 'primary' },
-        { id: 2, name: 'Red primaria', completed: false, color: 'accent' },
-        { id: 3, name: 'Red secudaria', completed: false, color: 'warn' },
-      ],
-    }, {
-      name: 'Inspeccion Replanteo',
-      version: 5,
-      completed: false,
-      color: 'primary',
-      subtasks: [
-        { id: 1, name: 'Linea primaria', completed: false, color: 'primary' },
-        { id: 2, name: 'Red primaria', completed: false, color: 'accent' },
-        { id: 3, name: 'Red secudaria', completed: false, color: 'warn' },
-      ],
-    }, {
-      name: 'Inspeccion Montaje',
-      version: 6,
-      completed: false,
-      color: 'primary',
-      subtasks: [
-        { id: 1, name: 'Linea primaria', completed: false, color: 'primary' },
-        { id: 2, name: 'Red primaria', completed: false, color: 'accent' },
-        { id: 3, name: 'Red secudaria', completed: false, color: 'warn' },
-      ],
-    }, {
-      name: 'Inspeccion Conforme a obra',
-      version: 7,
-      completed: false,
-      color: 'primary',
-      subtasks: [
-        { id: 1, name: 'Linea primaria', completed: false, color: 'primary' },
-        { id: 2, name: 'Red primaria', completed: false, color: 'accent' },
-        { id: 3, name: 'Red secudaria', completed: false, color: 'warn' },
-      ],
-    }
-  ];
-
+  data = [];
   arrayTile = [];
   tileBase;
 
@@ -163,7 +87,6 @@ export class MapaGeneralComponent extends BaseComponent implements OnInit {
   tileAtributosMonLP;
   tileAtributosMonRP;
   tileAtributosMonRS;
-
 
   tileLineasConLP;
   tileLineasConRP;
@@ -209,32 +132,99 @@ export class MapaGeneralComponent extends BaseComponent implements OnInit {
 
   }
 
-  cargarFiltros = () => {
-
-  }
-
-  openDialog(): void {
-    const dialogRef = this.dialog.open(FiltroCapaComponent, {
-      width: 'auto', height: '600px',
-      data: this.data
-    });
-    dialogRef.afterClosed().subscribe(result => {
-
-      if (result) {
-
-        console.log("afterClosed result", result)
-        this.data = result;
-        if (result.flag) {
-          this.mostarCapas(result);
-        }
-      }
-    });
-  }
-
   ngOnInit(): void {
     this.usuarioLog = this.getUser().data;
     this.getPantallaRol();
+    this.cargarFiltros();
+    this.setearFiltros();
+    this.tileBase = new TileLayer({
+      source: new XYZ({
+        url: 'https://{a-c}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+      })
+    })
+    this.cargarCapas();
+    this.mostarCapas(this.data);
+  }
 
+  cargarFiltros = () => {
+    this.data = [
+      {
+        name: 'Expediente',
+        version: 1,
+        completed: true,
+        color: 'primary',
+        subtasks: [
+          { id: 1, name: 'Linea primaria', completed: true, color: 'primary' },
+          { id: 2, name: 'Red primaria', completed: true, color: 'accent' },
+          { id: 3, name: 'Red secudaria', completed: true, color: 'warn' },
+        ],
+      }, {
+        name: 'Replanteo',
+        version: 2,
+        completed: false,
+        color: 'primary',
+        subtasks: [
+          { id: 1, name: 'Linea primaria', completed: false, color: 'primary' },
+          { id: 2, name: 'Red primaria', completed: false, color: 'accent' },
+          { id: 3, name: 'Red secudaria', completed: false, color: 'warn' },
+        ],
+      },
+      {
+        name: 'Montaje',
+        version: 3,
+        completed: false,
+        color: 'primary',
+        subtasks: [
+          { id: 1, name: 'Linea primaria', completed: false, color: 'primary' },
+          { id: 2, name: 'Red primaria', completed: false, color: 'accent' },
+          { id: 3, name: 'Red secudaria', completed: false, color: 'warn' },
+        ],
+      }, {
+        name: 'Conforme a obra',
+        version: 4,
+        completed: false,
+        color: 'primary',
+        subtasks: [
+          { id: 1, name: 'Linea primaria', completed: false, color: 'primary' },
+          { id: 2, name: 'Red primaria', completed: false, color: 'accent' },
+          { id: 3, name: 'Red secudaria', completed: false, color: 'warn' },
+        ],
+      }, {
+        name: 'Inspeccion Replanteo',
+        version: 5,
+        completed: false,
+        color: 'primary',
+        subtasks: [
+          { id: 1, name: 'Linea primaria', completed: false, color: 'primary' },
+          { id: 2, name: 'Red primaria', completed: false, color: 'accent' },
+          { id: 3, name: 'Red secudaria', completed: false, color: 'warn' },
+        ],
+      }, {
+        name: 'Inspeccion Montaje',
+        version: 6,
+        completed: false,
+        color: 'primary',
+        subtasks: [
+          { id: 1, name: 'Linea primaria', completed: false, color: 'primary' },
+          { id: 2, name: 'Red primaria', completed: false, color: 'accent' },
+          { id: 3, name: 'Red secudaria', completed: false, color: 'warn' },
+        ],
+      }, {
+        name: 'Inspeccion Conforme a obra',
+        version: 7,
+        completed: false,
+        color: 'primary',
+        subtasks: [
+          { id: 1, name: 'Linea primaria', completed: false, color: 'primary' },
+          { id: 2, name: 'Red primaria', completed: false, color: 'accent' },
+          { id: 3, name: 'Red secudaria', completed: false, color: 'warn' },
+        ],
+      }
+    ];
+
+  }
+
+  setearFiltros(){
     switch (this.proyecto.n_idpro_proyecto) {
       case 5:
         this.data[0].completed = false
@@ -259,15 +249,23 @@ export class MapaGeneralComponent extends BaseComponent implements OnInit {
         this.data[1].subtasks[2].completed = true
         break;
     }
-
-    this.tileBase = new TileLayer({
-      source: new XYZ({
-        url: 'https://{a-c}.tile.openstreetmap.org/{z}/{x}/{y}.png'
-      })
-    })
-    this.cargarCapas();
-    this.mostarCapas(this.data);
   }
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(FiltroCapaComponent, {
+      width: 'auto',
+      data: this.data
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.data = result;
+        if (result.flag) {
+          this.mostarCapas(result);
+        }
+      }
+    });
+  }
+
   mostarCapas(data) {
 
     this.arrayTile = [];

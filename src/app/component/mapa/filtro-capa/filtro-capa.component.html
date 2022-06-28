@@ -1,5 +1,6 @@
 <h1>Filtros</h1>
-<div mat-dialog-content>
+<mat-divider></mat-divider>
+<div mat-dialog-content class="tamano">
     <section class="example-section">
         <ul>
             <li *ngFor="let task of data">
@@ -24,7 +25,8 @@
         </ul>
     </section>
 </div>
-<div mat-dialog-actions>
+<mat-divider></mat-divider>
+<div class="contenedor">
     <button mat-stroked-button color="primary" (click)="aceptar()">
         <mat-icon>check</mat-icon>
         <span>Aceptar</span>
