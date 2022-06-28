@@ -25,8 +25,12 @@
     </section>
 </div>
 <div mat-dialog-actions>
-    <button mat-button cdkFocusInitial (click)="aceptar()">
-        <mat-icon>save</mat-icon>
+    <button mat-stroked-button color="primary" (click)="aceptar()">
+        <mat-icon>check</mat-icon>
         <span>Aceptar</span>
+    </button>
+    <button mat-stroked-button color="warn" (click)="cancelar()">
+        <mat-icon>close</mat-icon>
+        <span>Cancelar</span>
     </button>
 </div>

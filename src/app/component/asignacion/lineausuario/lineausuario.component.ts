@@ -24,6 +24,7 @@ export class LineausuarioComponent extends BaseComponent implements OnInit {
   idzona= 0;
   lineaGrupo = [];
   selectAll = true;
+  txtGrupo = ''
   displayedColumns: string[] = ['c_nombre','select'];
   public tablalineaGrupo: MatTableDataSource<any>;
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
@@ -41,6 +42,8 @@ export class LineausuarioComponent extends BaseComponent implements OnInit {
     }
 
   ngOnInit() {
+    console.log(this.data);
+    this.txtGrupo = this.data.c_nombre.toString()
     this.selectAll = true;
     this.usuarioLog = this.getUser().data;
     this.getLineaUser();

@@ -306,6 +306,15 @@ export class confGeneralService{
         console.log(data)
         return this._http.post(this.url + 'configuracionGeneral/saveProUser', data, { headers: reqHeader });
     }
+    
+    denegarAllProuser(data, token): Observable<any> {
+        var reqHeader = new HttpHeaders({
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
+        });        
+        console.log(data)
+        return this._http.post(this.url + 'configuracionGeneral/denegarAllProuser', data, { headers: reqHeader });
+    }
 
     getLineaUser(data, token): Observable<any> {
         var reqHeader = new HttpHeaders({

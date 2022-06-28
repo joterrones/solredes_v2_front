@@ -19,7 +19,7 @@ import { ConfirmComponent } from '../../general/confirm/confirm.component';
 export class ProyectousuaioComponent extends BaseComponent implements OnInit {
   
   ProUser = [];
-
+  txtGrupo = '';
   constructor(
     public dialog: MatDialog,
     public dialogAsigPro: MatDialogRef<ProyectousuaioComponent>,
@@ -31,7 +31,8 @@ export class ProyectousuaioComponent extends BaseComponent implements OnInit {
     super(snackBar, _router);
     }
 
-  ngOnInit() {
+  ngOnInit() {   
+    this.txtGrupo = this.data.c_nombre.toString()
     this.usuarioLog = this.getUser().data;
     this.getProUser();
   }
@@ -84,12 +85,64 @@ export class ProyectousuaioComponent extends BaseComponent implements OnInit {
   }
 
   
-  guardar(newForm, selection) {
-    console.log(newForm);
-    console.log(selection._selection.size);
+  guardar(element) {
+    console.log(element);
     console.log(this.data.n_idtra_grupo);
+    let request  ={ 
+      n_idtra_grupo: this.data.n_idtra_grupo,
+      n_idseg_userprofileArray: [element.n_idseg_userprofile],
+      n_id_usermodi: this.usuarioLog.n_idseg_userprofile
+    }
+    if (element.b_activo) {
+      console.log("DEBEMOS DENEGAR");
+      this._confiGeneral_service.denegarAllProuser(request, this.getToken().token).subscribe(
+        result => {
+          try {
+            if (result.estado) {
+              //this.dialogAsigPro.close({ flag: true });
+              this.openSnackBar("Acción completada", 99);
+            } else {
+              this.openSnackBar(result.mensaje, 99);
+            }
+          } catch (error) {
+            this.openSnackBar(AppSettings.SERVICE_NO_CONECT_SERVER, 99);
+          }
+        }, error => {
+          console.error(error);
+          try {
+            this.openSnackBar(error.error.Detail, error.error.StatusCode);
+          } catch (error) {
+            this.openSnackBar(AppSettings.SERVICE_NO_CONECT_SERVER, 99);
+          }
+        });
+    } else {
+      console.log("DEBEMOS ASIGNAR");
+      
+      console.log("Envio datos ProUser",request);
+      
+      this._confiGeneral_service.saveProUser(request, this.getToken().token).subscribe(
+        result => {
+          try {
+            if (result.estado) {
+              //this.dialogAsigPro.close({ flag: true });
+              this.openSnackBar("Acción completada", 99);
+            } else {
+              this.openSnackBar(result.mensaje, 99);
+            }
+          } catch (error) {
+            this.openSnackBar(AppSettings.SERVICE_NO_CONECT_SERVER, 99);
+          }
+        }, error => {
+          console.error(error);
+          try {
+            this.openSnackBar(error.error.Detail, error.error.StatusCode);
+          } catch (error) {
+            this.openSnackBar(AppSettings.SERVICE_NO_CONECT_SERVER, 99);
+          }
+        });
+    }
 
-    if(newForm.length == 0 && selection._selection.size == 0){
+    /*if(newForm.length == 0 && selection._selection.size == 0){
       this.resetProUser();
     }
     /*if(this.ProUser.length){
@@ -97,7 +150,7 @@ export class ProyectousuaioComponent extends BaseComponent implements OnInit {
     }*/
     
     
-    if(newForm.length > 0 && selection._selection.size > 0){
+    /*if(newForm.length > 0 && selection._selection.size > 0){
       this.resetProUser();
       let request  ={ 
         n_idtra_grupo: this.data.n_idtra_grupo,
@@ -127,7 +180,7 @@ export class ProyectousuaioComponent extends BaseComponent implements OnInit {
           }
         });
 
-    }
+    }*/
     
   }
 

@@ -4,10 +4,10 @@
 
 export const environment = {
   production: false,
-  //url: 'http://localhost:3200/api/',
-  //urlArchivo : 'http://localhost:3200/archivos/'
-  url: 'http://35.184.146.235:3200/api/',
-  urlArchivo : 'http://35.184.146.235:3200/archivos/'
+  url: 'http://localhost:3200/api/',
+  urlArchivo : 'http://localhost:3200/archivos/'
+  //url: 'http://35.184.146.235:3200/api/',
+  //urlArchivo : 'http://35.184.146.235:3200/archivos/'
 };//
 
 /*
