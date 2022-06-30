@@ -4,11 +4,11 @@ import { Router } from '@angular/router';
 import { AppSettings } from 'src/app/common/appsettings';
 import { ResultadoApi } from 'src/app/interface/common.interface';
 import { confGeneralService } from 'src/app/service/confGeneral.service';
+import { ExcelFormatService } from 'src/app/service/excelformat.service';
 import { MapaService } from 'src/app/service/mapa.service';
 import { SeguridadService } from 'src/app/service/seguridad.service';
 import { BaseComponent } from '../base/base.component';
 import { FichaComponent } from '../ficha/ficha.component';
-
 @Component({
   selector: 'app-datos-monitoreo',
   templateUrl: './datos-monitoreo.component.html',
@@ -33,6 +33,7 @@ export class DatosMonitoreoComponent extends BaseComponent implements OnInit {
     public _seguridad_service: SeguridadService,
     public _confiGeneral_service: confGeneralService,
     public _mapa_service: MapaService,
+    public _excel_service: ExcelFormatService,
     public dialog: MatDialog,
     public snack_1: MatSnackBar,
     public router: Router
@@ -156,5 +157,23 @@ export class DatosMonitoreoComponent extends BaseComponent implements OnInit {
         console.log(error);
       }
     });
+  }
+
+  exportarTodo = () =>{
+    let rq = {
+      n_idpl_linea : this.idLinea,
+      n_idpl_tipolinea: this.idTipoLinea,
+      n_idpl_zona: this.idZona,
+      n_idpro_proyecto: this.proyecto.n_idpro_proyecto
+    }
+
+    console.log("Exportar Todo rq", rq)
+
+      this._mapa_service.getinspeccionxls(this.getToken,rq ).subscribe(result => {
+        console.log("Exportar Todo result", result)
+        if(result.estado){
+         this._excel_service.generarInspeccionXls(result.data);
+        }
+      })
   }
 }

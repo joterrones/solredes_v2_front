@@ -87,7 +87,11 @@
                     </td>
                 </ng-container>
                 <ng-container matColumnDef="reporte">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Reporte</th>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Reporte   
+                        <button mat-icon-button color="accent" (click)="exportarTodo()">
+                        <mat-icon aria-label="Example icon-button with a heart icon">cloud_download</mat-icon>
+                      </button>
+                    </th>
                     <td mat-cell *matCellDef="let element">
                       <button mat-icon-button color="accent" (click)="exportar(element)">
                         <mat-icon aria-label="Example icon-button with a heart icon">cloud_download</mat-icon>
