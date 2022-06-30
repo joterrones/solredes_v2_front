@@ -52,10 +52,11 @@ export class TipoelementoComponent extends BaseComponent implements OnInit {
   }  
   
   getTablaTipoElemento() {  
-    this._confiGeneral_service.getTipoElemento(this.getToken().token).subscribe(
+    let request = {
+      n_idpro_proyecto: this.proyecto.n_idpro_proyecto
+    }
+    this._confiGeneral_service.getTipoElemento(request,this.getToken().token).subscribe(
       result => {      
-        console.log('retorna del node a tablatipoElemento')  
-        console.log(result);
         this.tabla = new MatTableDataSource<any>(result.data);
         this.tabla.sort = this.sort;
         this.tabla.paginator = this.paginator;
@@ -70,7 +71,6 @@ export class TipoelementoComponent extends BaseComponent implements OnInit {
   }
 
   openDialog(tipoelemento): void {
-    console.log(tipoelemento)
     const dialogRef = this.dialog.open(TipoelementoeditarComponent, {
       width: '750px',
       data: {tipoelemento }
@@ -80,7 +80,6 @@ export class TipoelementoComponent extends BaseComponent implements OnInit {
         this.getTablaTipoElemento();
 
       } catch (error) {
-        console.log(error);
         this.getTablaTipoElemento();
       }
     });
@@ -136,8 +135,6 @@ export class TipoelementoComponent extends BaseComponent implements OnInit {
           this.pantallaRol = resultado.data;
           this.pantallaRol.forEach(element => {            
             if(element.c_codigo === 'ma-adtel'){
-              console.log(element);
-              console.log(element.c_codigo);
               if(element.c_permiso === 'MO'){
                 this.permisoEdit = true;
               }

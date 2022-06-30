@@ -11,6 +11,7 @@ import { BaseComponent } from '../base/base.component';
 import { DetallearmadoComponent } from '../detallearmado/detallearmado.component';
 import { ConfirmComponent } from '../general/confirm/confirm.component';
 import { environment } from 'src/environments/environment';
+import { ArmadoconfigsuministroComponent } from '../armadoconfigsuministro/armadoconfigsuministro.component';
 
 @Component({
   selector: 'app-armado',
@@ -38,7 +39,7 @@ export class ArmadoComponent extends BaseComponent implements OnInit {
 
   version: Array<any>;
   idversion: number;
-
+  stringBuscar: String = '';
   armado:any;
 
   general: Array<any>;
@@ -46,7 +47,7 @@ export class ArmadoComponent extends BaseComponent implements OnInit {
   url_iconomapa:String;
   urlPdf: string =""
   srcimg: string = "assets/mapa/";
-
+  dataCard = [];
   constructor(
     public _armado_service: ArmadoService,
     public _general_service: GeneralService,
@@ -75,6 +76,11 @@ export class ArmadoComponent extends BaseComponent implements OnInit {
 
   onSelectVersion(id) {
     this.idversion = id;
+    this.getTabla();
+  }
+  
+  onSelectBuscar(value){
+    this.stringBuscar = value
     this.getTabla();
   }
   
@@ -150,11 +156,13 @@ export class ArmadoComponent extends BaseComponent implements OnInit {
     
     this.tablaconfig.filter = filterValue.trim().toLowerCase();
   }
+
   getTabla() {
     var request = {
       n_idpl_tipoarmado:this.idtipoarmado,
       n_version:this.idversion,
-      n_idpro_proyecto: this.proyecto.n_idpro_proyecto
+      n_idpro_proyecto: this.proyecto.n_idpro_proyecto,
+      stringBuscar: this.stringBuscar
     }
     console.log(request);
     
@@ -162,10 +170,10 @@ export class ArmadoComponent extends BaseComponent implements OnInit {
       result => {
         if(result.estado){
           console.log(result.data);
-          
-          this.tabla = new MatTableDataSource<any>(result.data);
+          this.dataCard = result.data;
+          /*this.tabla = new MatTableDataSource<any>(result.data);
           this.tabla.sort = this.sort;
-          this.tabla.paginator = this.paginator;
+          this.tabla.paginator = this.paginator;*/
         }else{
  
           this.openSnackBar(result.mensaje, 99);
@@ -175,7 +183,7 @@ export class ArmadoComponent extends BaseComponent implements OnInit {
       });
   }
 
-  getTablaConfig(id) {
+  /*getTablaConfig(id) {
     
     let request = {n_idpl_armado:id}
     this._armado_service.getconfigarmado(request,this.getProyect()).subscribe(
@@ -192,7 +200,7 @@ export class ArmadoComponent extends BaseComponent implements OnInit {
       }, error => {
         this.openSnackBar(<any>error, 99);
       });
-  }
+  }*/
 
   openDialog(item,tipoarmado): void {
     const dialogRef = this.dialog.open(DetallearmadoComponent, {
@@ -205,16 +213,25 @@ export class ArmadoComponent extends BaseComponent implements OnInit {
   }
 
   configurar(item){
-    this.config=true;
+    /*this.config=true;
     this.armado=item;
-    this.getTablaConfig(item.n_idpl_armado);
+    this.getTablaConfig(item.n_idpl_armado);*/
+    console.log(item);
+    
+    const dialogRef = this.dialog.open(ArmadoconfigsuministroComponent, {
+      width: '1250px',
+      data: {item: item}
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      this.getTabla();
+    });
   }
   back(){
     this.config=false;
     this.armado=null;
   }
 
-  keyPress(event: any,item) {
+  /*keyPress(event: any,item) {
     if(event.key==="Enter"){
         if(!(isNaN(item.n_cantidad))){
           let request ={
@@ -245,7 +262,7 @@ export class ArmadoComponent extends BaseComponent implements OnInit {
         item.n_cantidad = 0;
       }
     }
-  }
+  }*/
   public setparametros(n_version){
     this.idversion=n_version;
     this.getTabla();

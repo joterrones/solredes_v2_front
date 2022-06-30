@@ -1,45 +1,47 @@
 <app-menu>
     <div class="contenedorBody">
         <h2>{{tit}}</h2>
-        
+
         <mat-accordion>
             <mat-expansion-panel>
-              <mat-expansion-panel-header class="back-expansion">
-                <mat-panel-title class="cont">
-                  <mat-icon matSuffix>filter_list</mat-icon> Filtros
-                </mat-panel-title>
-                <mat-panel-description>
-                  Filtrado de datos en la lista
-                </mat-panel-description>
-              </mat-expansion-panel-header>
-              <div class="contenedor">
-      
-                <mat-form-field>
-                  <mat-select placeholder="Tipo Elemento">
-                    <mat-option value="0" (click)='selectTipoElement(0)'>
-                      -TODOS-
-                    </mat-option>
-                    <mat-option *ngFor="let tp of tipoelemento" [value]="tp.n_idpl_tipoelemento" (click)='selectTipoElement(tp.n_idpl_tipoelemento)'>
-                      {{tp.c_codigo+" "+tp.c_nombre}}
-                    </mat-option>
-                  </mat-select>
-                </mat-form-field>
-              </div>
-      
+                <mat-expansion-panel-header class="back-expansion">
+                    <mat-panel-title class="cont">
+                        <mat-icon matSuffix>filter_list</mat-icon> Filtros
+                    </mat-panel-title>
+                    <mat-panel-description>
+                        Filtrado de datos en la lista
+                    </mat-panel-description>
+                </mat-expansion-panel-header>
+                <div class="contenedor">
+
+                    <mat-form-field>
+                        <mat-select placeholder="Tipo Elemento">
+                            <mat-option value="0" (click)='selectTipoElement(0)'>
+                                -TODOS-
+                            </mat-option>
+                            <mat-option *ngFor="let tp of tipoelemento" [value]="tp.n_idpl_tipoelemento"
+                                (click)='selectTipoElement(tp.n_idpl_tipoelemento)'>
+                                {{tp.c_codigo+" "+tp.c_nombre}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <input matInput placeholder="Buscar" (keyup.enter)="onSelectBuscar($event.target.value)">
+                        <mat-icon matSuffix>search</mat-icon>
+                    </mat-form-field>
+                </div>
+
             </mat-expansion-panel>
-          </mat-accordion>
-          <br />
-        <mat-card>
+        </mat-accordion>
+        <br />
+        <!--<mat-card>
             <mat-form-field>
                 <input matInput placeholder="Buscar" (keyup)="applyFilter($event.target.value)">
                 <mat-icon matSuffix>search</mat-icon>
             </mat-form-field>
 
             <table mat-table [dataSource]="tabla" matSort class="mat-elevation-z8">
-                <!--<ng-container matColumnDef="n_idpl_elemento">
-                    <th mat-header-cell *matHeaderCellDef color="error"> ID </th>
-                    <td mat-cell *matCellDef="let element"> {{element.n_idpl_elemento}} </td>
-                </ng-container> -->
+                
                 <ng-container matColumnDef="c_codigo">
                     <th mat-header-cell *matHeaderCellDef color="error"> Código </th>
                     <td mat-cell *matCellDef="let element"> {{element.c_codigo}} </td>
@@ -104,7 +106,77 @@
                 </ng-template>
             </table>
             <mat-paginator [pageSizeOptions]="pagin" showFirstLastButtons></mat-paginator>
-        </mat-card>
+        </mat-card> -->
+        <div class="contenedor">
+            <div *ngFor="let e of dataCard">
+                <mat-card style="margin: 1%; max-width: 460px;">
+                    <mat-card-header>
+                        <div mat-card-avatar>
+                            <mat-icon>event_note</mat-icon>
+                        </div>
+                        <mat-card-title>{{e.c_nombre}}</mat-card-title>
+                    </mat-card-header>
+                    <mat-card-content>
+                        <div class="contentcard">
+                            <ul class="mdc-list" style="padding-left: 5px;">
 
+                                <p>Código: {{e.c_codigo}} </p>
+
+                                <mat-form-field appearance="fill">
+                                    <mat-label>Material</mat-label>
+                                    <mat-select placeholder="Seleccione" multiple [(value)]="e.array_material"
+                                        [disabled]="!permisoEdit">
+                                        <mat-option *ngFor="let item of material" [value]="item.id"
+                                            (click)="onSelectChange(e)">
+                                            {{item.nombre}}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                                <mat-form-field appearance="fill">
+                                    <mat-label>Esfuerzo</mat-label>
+                                    <mat-select placeholder="Seleccione" multiple [(value)]="e.array_esfuerzo"
+                                        [disabled]="!permisoEdit">
+                                        <mat-option *ngFor="let item of esfuerzo" [value]="item.id"
+                                            (click)="onSelectChange(e)">
+                                            {{item.nombre}}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </ul>
+                            <ul class="mdc-list">
+                                <div style="margin-top: 10px; margin-bottom: 10px;">
+                                    <mat-checkbox name="b_partidanueva" #b_partidanueva="ngModel"
+                                        [(ngModel)]="e.b_partidanueva" [disabled]="!permisoEdit">
+                                        Partida Nueva
+                                    </mat-checkbox>
+                                </div>
+
+                                <mat-form-field appearance="fill">
+                                    <mat-label>Altura</mat-label>
+                                    <mat-select placeholder="Seleccione" multiple [(value)]="e.array_altura"
+                                        [disabled]="!permisoEdit">
+                                        <mat-option *ngFor="let item of altura" [value]="item.id"
+                                            (click)="onSelectChange(e)">
+                                            {{item.nombre}}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                                <mat-form-field appearance="fill">
+                                    <mat-label>Sección conductor</mat-label>
+                                    <mat-select placeholder="Seleccione" multiple [(value)]="e.array_seccionconductor"
+                                        [disabled]="!permisoEdit">
+                                        <mat-option *ngFor="let item of seccion" [value]="item.id"
+                                            (click)="onSelectChange(e)">
+                                            {{item.nombre}}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </ul>
+                        </div>
+                    </mat-card-content>
+
+                </mat-card>
+            </div>
+        </div>
     </div>
 </app-menu>

@@ -26,7 +26,8 @@ export class TragrupoComponent extends BaseComponent implements OnInit {
   permisoEdit: boolean = false;
   proyectos: [];
   textfilter = '';
-
+  dataCard = [];
+  stringBuscar: String = '';
   displayedColumns: string[] = ['editar', 'c_nombre', 'asigLinea','asigUsuario','eliminar'];
   public tablaTraGrupos: MatTableDataSource<any>;
   public confirmar: Confirmar;
@@ -53,7 +54,8 @@ export class TragrupoComponent extends BaseComponent implements OnInit {
   getTablaTraGrupos() {
     console.log(this.proyecto.n_idpro_proyecto);
     let request = {
-      n_idpro_proyecto: this.proyecto.n_idpro_proyecto
+      n_idpro_proyecto: this.proyecto.n_idpro_proyecto,
+      stringBuscar: this.stringBuscar
     }
     this._confiGeneral_service.getTraGrupos(request, this.getToken().token).subscribe(
       result => {
@@ -61,6 +63,7 @@ export class TragrupoComponent extends BaseComponent implements OnInit {
         try {
           if (result.estado) {
             console.log(result.data);
+            this.dataCard = result.data;
             this.tablaTraGrupos = new MatTableDataSource<any>(result.data);
             this.tablaTraGrupos.sort = this.sort;
             this.tablaTraGrupos.paginator = this.paginator;
@@ -79,6 +82,10 @@ export class TragrupoComponent extends BaseComponent implements OnInit {
 
   applyFilter(filterValue: String) {
     this.tablaTraGrupos.filter = filterValue.trim().toLowerCase();
+  }
+  onSelectBuscar(value){
+    this.stringBuscar = value
+    this.getTablaTraGrupos();
   }
 
   openDialog(traGrupos): void {

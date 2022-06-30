@@ -46,6 +46,7 @@ import { FichaComponent } from './component/ficha/ficha.component';
 import { PeriodoComponent } from './component/configGeneral/periodo/periodo.component';
 import { PartidamontajeComponent } from './component/configGeneral/partidamontaje/partidamontaje.component';
 import { DataUsuarioProComponent } from './component/data-usuario-pro/data-usuario-pro.component';
+import { DatosMonitoreoComponent } from './component/datos-monitoreo/datos-monitoreo.component';
 //Array de rutas
 const appRoutes:Routes=[
     {path:'',component:LoginComponent},
@@ -91,6 +92,7 @@ const appRoutes:Routes=[
     {path:'periodo',component:PeriodoComponent},
     {path:'partidamontaje',component:PartidamontajeComponent},
     {path:'data_usuario_pro',component:DataUsuarioProComponent},
+    {path:'datosMonitoreo',component:DatosMonitoreoComponent},
     {path:'**',component:LoginComponent},    
      
 ]

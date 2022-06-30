@@ -1,0 +1,106 @@
+<app-menu>
+    <div class="contenedorBody">
+        <mat-accordion>
+            <mat-expansion-panel>
+                <mat-expansion-panel-header class="back-expansion">
+                    <mat-panel-title class="cont">
+                        <mat-icon matSuffix>filter_list</mat-icon> Filtros
+                    </mat-panel-title>
+                    <mat-panel-description>
+                        Filtrado de datos en la lista
+                    </mat-panel-description>
+                </mat-expansion-panel-header>
+                <div class="contenedor">
+                    <mat-form-field>
+                        <mat-select placeholder="Linea">
+                            <mat-option value="0" (click)='selectLinea(0)'>
+                                -TODOS-
+                            </mat-option>
+                            <mat-option *ngFor="let l of linea" [value]="l.n_idpl_linea" [matTooltip]="l.c_codigo +' - ' + l.c_nombre"
+                                (click)='selectLinea(l.n_idpl_linea)'>
+                                {{l.c_nombre}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-select placeholder="Tipo Linea">
+                            <mat-option value="0" (click)='selectTipolinea(0)'>
+                                -TODOS-
+                            </mat-option>
+                            <mat-option *ngFor="let lineat of tipolinea" [value]="lineat.n_idpl_tipolinea"
+                                (click)='selectTipolinea(lineat.n_idpl_tipolinea)'>
+                                {{lineat.c_nombre}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+
+                    <mat-form-field>
+                        <mat-select placeholder="Zonas">
+                            <mat-option value="0" (click)='selectZona(0)'>
+                                -TODOS-
+                            </mat-option>
+                            <mat-option *ngFor="let z of zona" [value]="z.n_idpl_zona"
+                                (click)='selectZona(z.n_idpl_zona)'>
+                                {{z.c_nombre}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </mat-expansion-panel>
+        </mat-accordion>
+        <br>
+        <mat-card>
+            <table mat-table [dataSource]="tablaconfig" matSort class="mat-elevation-z8">
+                <ng-container matColumnDef="c_codigo">
+                    <th mat-header-cell *matHeaderCellDef color="error" mat-sort-header> Código </th>
+                    <td mat-cell *matCellDef="let element"> {{element.c_codigo}} </td>
+                </ng-container>
+                <ng-container matColumnDef="c_coordenadas">
+                    <th mat-header-cell *matHeaderCellDef color="error" mat-sort-header> Coordenadas </th>
+                    <td mat-cell *matCellDef="let element"> {{element.c_latitud}}, {{element.c_longitud}} </td>
+                </ng-container>
+                <ng-container matColumnDef="zona">
+                    <th mat-header-cell *matHeaderCellDef color="error" mat-sort-header> Zona </th>
+                    <td mat-cell *matCellDef="let element"> {{element.c_codigoz}} </td>
+                </ng-container>
+                <ng-container matColumnDef="linea">
+                    <th mat-header-cell *matHeaderCellDef color="error" mat-sort-header> Línea </th>
+                    <td mat-cell *matCellDef="let element" [matTooltip]="element.c_nombrel">
+                        {{element.c_codigol}}
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="tipolinea">
+                    <th mat-header-cell *matHeaderCellDef color="error" mat-sort-header> T. Línea </th>
+                    <td mat-cell *matCellDef="let element"> {{element.c_nombretl}} </td>
+                </ng-container>
+                <ng-container matColumnDef="username">
+                    <th mat-header-cell *matHeaderCellDef color="error" mat-sort-header> Usuario </th>
+                    <td mat-cell *matCellDef="let e"
+                        [matTooltip]="e.c_nombre1 +' '+ e.c_nombre2 +' '+ e.c_appaterno +' '+ e.c_apmaterno">
+                        {{e.c_username}}
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="d_fechacrea">
+                    <th mat-header-cell *matHeaderCellDef color="error" mat-sort-header> Fecha </th>
+                    <td mat-cell *matCellDef="let element">
+                        {{element.d_fechacrea}}
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="reporte">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Reporte</th>
+                    <td mat-cell *matCellDef="let element">
+                      <button mat-icon-button color="accent" (click)="exportar(element)">
+                        <mat-icon aria-label="Example icon-button with a heart icon">cloud_download</mat-icon>
+                      </button>
+                    </td>
+                  </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumnsConfig"></tr>
+                <ng-template let-row matRowDef cdkVirtualFor [matRowDefColumns]="displayedColumnsConfig">
+                    <tr mat-row></tr>
+                </ng-template>
+            </table>
+            <mat-paginator [pageSizeOptions]="[20,50,100]" showFirstLastButtons></mat-paginator>
+        </mat-card>
+    </div>
+</app-menu>

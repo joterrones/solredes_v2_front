@@ -27,6 +27,10 @@ export class MapaService {
         return this._http.post(this.url + 'mapa/getdetalle', req);
     }
 
+    getdetalleMon(req): Observable<any> {
+        return this._http.post(this.url + 'mapa/getdetallemon', req);
+    }
+
     getestructura(req): Observable<any> {
         return this._http.post(this.url + 'mapa/getestructura', req);
     }
@@ -102,6 +106,22 @@ export class MapaService {
         });
         console.log(req);
         return this._http.get(req,{ headers: reqHeader });
+    }
+
+    getMonInspeccion(data, token): Observable<any> {
+        var reqHeader = new HttpHeaders({
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
+        });
+        return this._http.post(this.url + 'mapa/getMonInspeccion', data, { headers: reqHeader });
+    }
+
+    getLineasMon(token): Observable<any> {
+        var reqHeader = new HttpHeaders({
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
+        });
+        return this._http.post(this.url + 'mapa/getLineasMon', { headers: reqHeader });
     }
     
 }

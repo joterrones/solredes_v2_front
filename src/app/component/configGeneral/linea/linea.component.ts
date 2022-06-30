@@ -168,8 +168,7 @@ export class LineaComponent extends BaseComponent implements OnInit {
 
   gettipolinea() {
     let request = {
-      n_idpl_tipolinea: this.idtipolinea,    
-      n_idpro_proyecto: this.proyecto.n_idpro_proyecto  
+      n_idpl_tipolinea: this.idtipolinea,
     }
     this._confiGeneral_service.gettipolinea(request,this.getToken().token).subscribe(
       result => {
@@ -191,7 +190,6 @@ export class LineaComponent extends BaseComponent implements OnInit {
 
   getzona(){
     let request = {
-      n_idpl_tipolinea: this.idtipolinea,
       n_idpro_proyecto: this.proyecto.n_idpro_proyecto      
     }
     this._confiGeneral_service.getZonas(request,this.getToken().token).subscribe(

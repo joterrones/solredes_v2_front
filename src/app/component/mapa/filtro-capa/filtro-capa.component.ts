@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MatSnackBar, MAT_DIALOG_DATA } from '@angular/material';
 import { Router } from '@angular/router';
+import { transformWithProjections } from 'ol/proj';
 import { BaseComponent } from '../../base/base.component';
 
 @Component({
@@ -9,7 +10,7 @@ import { BaseComponent } from '../../base/base.component';
   styleUrls: ['./filtro-capa.component.css']
 })
 export class FiltroCapaComponent extends BaseComponent implements OnInit {
-
+  FILTRO_HISTORICO: string = "filtroHistorico";
   constructor(
     public dialogRef: MatDialogRef<FiltroCapaComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -20,13 +21,20 @@ export class FiltroCapaComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit() {
+    localStorage.setItem(this.FILTRO_HISTORICO, JSON.stringify(this.data));
     this.dialogRef.disableClose = true;
   }
 
   aceptar() {
+    this.data.flag = true;
     this.dialogRef.close(this.data);
   }
-  //allComplete: boolean = false;
+
+  cancelar(){
+    this.data.flag= false;
+    this.data = JSON.parse(localStorage.getItem(this.FILTRO_HISTORICO));
+    this.dialogRef.close(this.data);
+  }
 
   updateAllComplete(task) {
     task.completed = task.subtasks != null && task.subtasks.every(t => t.completed);

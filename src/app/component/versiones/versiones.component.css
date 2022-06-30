@@ -7,4 +7,15 @@
     color: red;
 }
 
+p{
+    color: #000;
+    margin-top: 7px;
+    margin-bottom: 7px;
+}
+mat-card-title{
+    font-size: 18px;
+}
 
+mat-card-subtitle{
+    color: #000;
+}

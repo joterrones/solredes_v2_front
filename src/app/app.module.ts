@@ -137,6 +137,8 @@ import { FiltroCapaComponent } from './component/mapa/filtro-capa/filtro-capa.co
 import { FiltroBuscarComponent } from './component/mapa/filtro-buscar/filtro-buscar.component';
 import { DataUsuarioProComponent } from './component/data-usuario-pro/data-usuario-pro.component';
 import { VersionesComponent } from './component/versiones/versiones.component';
+import { ArmadoconfigsuministroComponent } from './component/armadoconfigsuministro/armadoconfigsuministro.component';
+import { DatosMonitoreoComponent } from './component/datos-monitoreo/datos-monitoreo.component';
 
 
 
@@ -223,7 +225,8 @@ import { VersionesComponent } from './component/versiones/versiones.component';
     MetradomontajeComponent, 
     DetallemetradoComponent, 
     ImportacionPlanillaEliminarComponent, 
-    RolpermisosComponent, FichaComponent, 
+    RolpermisosComponent, 
+    FichaComponent, 
     MapaLineaComponent,
     MapaGeneralComponent,
     MapaBaseComponent,
@@ -271,6 +274,8 @@ import { VersionesComponent } from './component/versiones/versiones.component';
     FiltroBuscarComponent,
     DataUsuarioProComponent,
     VersionesComponent,
+    ArmadoconfigsuministroComponent,
+    DatosMonitoreoComponent,
 
   ],
   imports: [
@@ -361,7 +366,9 @@ import { VersionesComponent } from './component/versiones/versiones.component';
     ImportacionPlanillaDescargarComponent,
     FiltroCapaComponent,
     FiltroBuscarComponent,
-    VersionesComponent
+    VersionesComponent,
+    FichaComponent,
+    ArmadoconfigsuministroComponent
   ],
   providers: [
     MatDatepickerModule,

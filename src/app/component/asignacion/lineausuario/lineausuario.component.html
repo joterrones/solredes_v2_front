@@ -1,4 +1,4 @@
-<h2 mat-dialog-title>Asignar Redes</h2>
+<h2 mat-dialog-title>Asignar Redes: {{txtGrupo}}</h2>
 <mat-card>
     <div class="contenido">
         <mat-form-field>
@@ -28,20 +28,25 @@
         </mat-form-field>
     </div>
     <div class="tamano">
-        <table mat-table [dataSource]="tablalineaUser" matSort class="mat-elevation-z8">
+        <table mat-table [dataSource]="tablalineaGrupo" matSort class="mat-elevation-z8">
             <ng-container matColumnDef="c_nombre">
                 <th mat-header-cell *matHeaderCellDef color="error"> Nombre </th>
                 <td mat-cell *matCellDef="let element" style="max-width: 500px;"> {{element.c_nombre}} </td>
             </ng-container>
         
             <ng-container matColumnDef="select">
-                <th mat-header-cell *matHeaderCellDef color="error"> Asignar </th>
+                <th mat-header-cell *matHeaderCellDef color="error" class="contenedor"> 
+                    <button mat-stroked-button color="primary" (click)="asignarAll(tablalineaGrupo)">
+                        Asignar todo
+                    </button>
+                    <button mat-stroked-button color="warn" (click)="denegarrAll(tablalineaGrupo)">
+                        Denegar todo
+                    </button>
+                </th>
                 <td mat-cell *matCellDef="let element">
-        
                     <mat-selection-list #shoes>
                         <mat-list-option [value]="element.n_idpl_linealn" [selected]="element.n_borrado == 0"
                             (click)="guardar(element)">
-        
                         </mat-list-option>
                     </mat-selection-list>
                 </td>

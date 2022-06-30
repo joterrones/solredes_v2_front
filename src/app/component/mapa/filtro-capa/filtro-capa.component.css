@@ -8,3 +8,19 @@
     flex-direction: column;
     margin-left: 10px;
 }
+.contenedor{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    flex-wrap:wrap;
+    margin-top: 16px;
+}
+
+.tamano{
+    height: 500px;
+    overflow-y: scroll;
+}
+
+h1{
+    margin: 16px 0px;
+}

@@ -13,7 +13,7 @@
                         </mat-panel-description>
                     </mat-expansion-panel-header>
                     <div class="contenedor">
-                        <mat-form-field>                            
+                        <mat-form-field>
                             <mat-select placeholder="Tipo de Armados">
                                 <mat-option value="0" (click)='onSelectTipoArmado(0)'>
                                     -TODOS-
@@ -24,7 +24,7 @@
                                 </mat-option>
                             </mat-select>
                         </mat-form-field>
-                        <mat-form-field>                            
+                        <mat-form-field>
                             <mat-select placeholder="Version">
                                 <mat-option value="0" (click)='onSelectVersion(0)'>
                                     -TODOS-
@@ -35,24 +35,29 @@
                                 </mat-option>
                             </mat-select>
                         </mat-form-field>
+                        <mat-form-field>
+                            <input matInput placeholder="Buscar" (keyup.enter)="onSelectBuscar($event.target.value)">
+                                <mat-icon matSuffix>search</mat-icon>
+                        </mat-form-field>
                     </div>
                 </mat-expansion-panel>
             </mat-accordion>
             <br />
-            <mat-card>
+             <!--<mat-card>
                 <mat-form-field>
                     <input matInput placeholder="Buscar" (keyup)="applyFilter($event.target.value)">
                     <mat-icon matSuffix>search</mat-icon>
                 </mat-form-field>
-                <table mat-table [dataSource]="tabla" matSort  class="mat-elevation-z8"> 
-                    <!-- Button Editar -->
+               <table mat-table [dataSource]="tabla" matSort class="mat-elevation-z8">
+                    
                     <ng-container matColumnDef="ver">
                         <th mat-header-cell *matHeaderCellDef> <button mat-icon-button color="primary"
                                 (click)="openDialog(null,tipoarmado)" *ngIf="permisoEdit">
                                 <mat-icon aria-label="Example icon-button with a heart icon">add</mat-icon>
                             </button> </th>
                         <td mat-cell *matCellDef="let element">
-                            <button mat-icon-button color="primary" (click)="openDialog(element,tipoarmado)" *ngIf="permisoEdit">
+                            <button mat-icon-button color="primary" (click)="openDialog(element,tipoarmado)"
+                                *ngIf="permisoEdit">
                                 <mat-icon aria-label="Example icon-button with a heart icon">edit</mat-icon>
                             </button>
                         </td>
@@ -71,7 +76,8 @@
                     </ng-container>
                     <ng-container matColumnDef="c_iconomapa">
                         <th mat-header-cell *matHeaderCellDef mat-sort-header> Ícono Mapa </th>
-                        <td mat-cell *matCellDef="let element"><!-- {{element.c_iconomapa}} -->
+                        <td mat-cell *matCellDef="let element">
+                            
                             <div *ngIf="element.c_iconomapa!=null">
                                 <img [src]="srcimg+ element.c_iconomapa+'.png'" height="20" width="20" />
                             </div>
@@ -82,11 +88,11 @@
                     </ng-container>
                     <ng-container matColumnDef="c_nombrelamina">
                         <th mat-header-cell *matHeaderCellDef mat-sort-header> Lámina </th>
-                        <td mat-cell *matCellDef="let element"> 
+                        <td mat-cell *matCellDef="let element">
                             <a [href]="urlPdf+element.c_rutaimg" target="_blank"> {{element.c_nombrelamina}} </a>
                         </td>
-                    </ng-container>                   
-                    
+                    </ng-container>
+
                     <ng-container matColumnDef="n_version">
                         <th mat-header-cell *matHeaderCellDef mat-sort-header> Versión </th>
                         <td mat-cell *matCellDef="let element"> {{element.n_version}} </td>
@@ -96,27 +102,29 @@
                         <th mat-header-cell *matHeaderCellDef mat-sort-header> Tipo Armado </th>
                         <td mat-cell *matCellDef="let element"> {{element.c_codigotipoarmado}} </td>
                     </ng-container>
+
                     
-                    <!-- Button Config -->
                     <ng-container matColumnDef="config">
                         <th mat-header-cell *matHeaderCellDef mat-sort-header> Conf. Sum. </th>
                         <td mat-cell *matCellDef="let element">
-                            <button mat-icon-button color="primary" (click)="configurar(element)" [disabled]="!permisoEdit">
+                            <button mat-icon-button color="primary" (click)="configurar(element)"
+                                [disabled]="!permisoEdit">
                                 <mat-icon aria-label="Example icon-button with a heart icon">settings</mat-icon>
                             </button>
                         </td>
                     </ng-container>
 
-                    <!-- Button Config -->
+                    
                     <ng-container matColumnDef="configmont">
                         <th mat-header-cell *matHeaderCellDef mat-sort-header> Conf. Mont. </th>
                         <td mat-cell *matCellDef="let element">
-                            <button mat-icon-button color="primary" (click)="openDialogConfigMontaje(element)" [disabled]="!permisoEdit">
+                            <button mat-icon-button color="primary" (click)="openDialogConfigMontaje(element)"
+                                [disabled]="!permisoEdit">
                                 <mat-icon aria-label="Example icon-button with a heart icon">settings</mat-icon>
                             </button>
                         </td>
                     </ng-container>
-                    <!-- Button Eliminar -->
+                    
                     <ng-container matColumnDef="eliminar">
                         <th mat-header-cell *matHeaderCellDef mat-sort-header> Eliminar </th>
                         <td mat-cell *matCellDef="let element">
@@ -131,13 +139,13 @@
                     </ng-template>
                 </table>
                 <mat-paginator [pageSizeOptions]="[10,20,50,100]" showFirstLastButtons></mat-paginator>
-            </mat-card>
+            </mat-card> -->
         </div>
 
-        <div *ngIf="config">
+        <!--<div *ngIf="config">
             <mat-card>
                 <h2>{{"["+armado.c_codigo +"] "+ armado.c_nombre}}</h2>
-                
+
                 <div class="navega">
                     <mat-form-field>
                         <input matInput placeholder="Buscar" (keyup)="applyFilterConfig($event.target.value)">
@@ -176,6 +184,71 @@
                 </table>
                 <mat-paginator [pageSizeOptions]="[20,50,100]" showFirstLastButtons></mat-paginator>
             </mat-card>
+        </div> -->
+
+        <div class="contenedor" >
+            <div *ngFor="let e of dataCard">
+                <mat-card style="margin: 1%; max-width: 470px;">
+                    <mat-card-header >
+                        <div mat-card-avatar class="example-header-image">
+                            <img *ngIf="e.c_iconomapa!=null" [src]="srcimg+ e.c_iconomapa+'.png'" height="30"
+                                width="30" />
+                            <img *ngIf="e.c_iconomapa==null" src="assets/images/imgDefault.jpg" height="30"
+                                width="30" />
+                        </div>
+                        <mat-card-title>{{e.c_nombre}}</mat-card-title>
+                    </mat-card-header>
+                    <mat-card-content>
+                        <div class="contentcard">
+                            <ul class="mdc-list" style="padding-right: 40px;">
+                                <li class="mdc-list-item">                    
+                                    <p>Código: {{e.c_codigo}} </p>                                    
+                                </li>
+                                <li class="mdc-list-item">                    
+                                    <p>Código corto: {{e.c_codigo_corto}}</p>
+                                </li>     
+                                <li class="mdc-list-item">                    
+                                    <p>Tipo armado: {{e.c_codigotipoarmado}}</p>
+                                </li>                           
+                            </ul>
+                            <ul class="mdc-list">
+                                
+                                <li class="mdc-list-item">                    
+                                    <p>Versión: {{e.n_version}}</p>
+                                </li>
+                                <li class="mdc-list-item">                    
+                                    <p>Lamina: {{e.c_nombrelamina}}</p>
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <div style="display: flex; flex-direction: row; justify-content: space-between;">
+
+                            <button mat-stroked-button color="primary" (click)="configurar(e)">
+                                Configuración de Suministro
+                                <mat-icon> settings</mat-icon>
+                            </button>
+                            <button mat-stroked-button color="primary" (click)="openDialogConfigMontaje(e)">
+                                Configuración de Montaje
+                                <mat-icon> settings</mat-icon>
+                            </button>
+
+                        </div>
+                    </mat-card-content>                    
+                    <mat-divider></mat-divider>
+                    <mat-card-actions style="display: flex; flex-direction: row;">
+                        <button mat-icon-button color="primary" (click)="openDialog(e,tipoarmado)" *ngIf="permisoEdit">
+                            <mat-icon aria-label="Example icon-button with a heart icon">edit</mat-icon>
+                        </button>
+                        <button mat-icon-button color="error" (click)="eliminar(e)" [disabled]="!permisoEdit">
+                            <mat-icon aria-label="Example icon-button with a heart icon">delete</mat-icon>
+                        </button>
+                    </mat-card-actions>
+                </mat-card>
+            </div>
         </div>
     </div>
+    <button mat-fab color="" aria-label="Example icon button with a delete icon" class="btn-flotante" (click)="openDialog(null,tipoarmado)">
+        <mat-icon>add</mat-icon>
+    </button>
 </app-menu>

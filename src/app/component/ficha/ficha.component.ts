@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { MatDialog, MatSnackBar } from '@angular/material';
+import { Component, Inject, OnInit } from '@angular/core';
+import { MatDialog, MatDialogRef, MatSnackBar, MAT_DIALOG_DATA } from '@angular/material';
 import { Router } from '@angular/router';
 
 import * as JsPDF from 'jspdf';
@@ -17,32 +17,49 @@ import { BaseComponent } from '../base/base.component';
 })
 export class FichaComponent extends BaseComponent implements OnInit {
   datos: any
-  naturalWidth = 45
-  naturalHeight = 45
+  datosFotos: any
   cont: number;
   constructor(
     public _ficha_service: FichaService,
-    public dialog: MatDialog,
+    public dialogRef: MatDialogRef<FichaComponent>,  
+    @Inject(MAT_DIALOG_DATA) public data,
     public snack_1: MatSnackBar,
     public _router: Router,
   ) {
     super(snack_1, _router)
   }
-
+  
   ngOnInit() {
     this.getDatos();
   }
 
   getDatos(){
     let request = {
-      c_codigo: "c_codigo2"   
+      n_idmon_inspeccion: this.data.n_idmon_inspeccion
     }
     this._ficha_service.get(request,this.getToken().token).subscribe(
       result => {
         let resultado = <ResultadoApi>result;
         if (resultado.estado) {          
           this.datos = resultado.data
-          console.log(this.datos);         
+          console.log(this.datos);      
+          this._ficha_service.getFoto(request,this.getToken().token).subscribe(
+            result => {
+              let resultado = <ResultadoApi>result;
+              if (resultado.estado) {          
+                this.datosFotos = resultado.data
+                console.log(this.datosFotos);      
+                this.descargarpdf2();
+              } else {
+                this.openSnackBar(resultado.mensaje, 99);
+              }
+            }, error => {
+              try {
+                this.openSnackBar(error.error.Detail, error.error.StatusCode);
+              } catch (error) {
+                this.openSnackBar(AppSettings.SERVICE_NO_CONECT_SERVER, 99);
+              }
+            });
         } else {
           this.openSnackBar(resultado.mensaje, 99);
         }
@@ -187,7 +204,7 @@ export class FichaComponent extends BaseComponent implements OnInit {
     var r = 0;
     var i = 0;
 
-    this.datos.forEach( async element => { 
+    /*this.datos.forEach( async element => { 
       let imageSrcString = await this.toDataURL(environment.urlArchivo+element.c_rutafoto);    
       doc.addImage(imageSrcString,'JPEG',i + 27, espacio, 45, 45);    
       doc.text(marker.nfoto,i + 27, espacio-0.5, null, null);
@@ -212,8 +229,8 @@ export class FichaComponent extends BaseComponent implements OnInit {
         console.log(espacio)
         doc.save("PDF.pdf")
       }
-    });     
-    
+    });     */
+    doc.save("PDF.pdf")
   }
 
   descargarpdf2= async ()=> {
@@ -223,6 +240,20 @@ export class FichaComponent extends BaseComponent implements OnInit {
 
     let marker = element;
     const fecha = new Date();
+    doc.setDrawColor(0);
+    doc.setFillColor(174, 174, 174);
+    doc.rect(15, 16, 180, 10, 'F');
+
+    doc.setFillColor(200, 200, 200);
+    doc.rect(15, 26, 180, 7, 'F');
+    doc.rect(15, 41, 180, 9, 'F');
+
+    doc.rect(15, 50, 30, 27, 'F');
+    doc.rect(105, 50, 37, 27, 'F');
+
+    doc.rect(15, 70, 180, 8, 'F');
+    doc.rect(15, 85, 180, 9, 'F');
+    
 
     doc.setLineWidth(0.5);//Ancho de las lineas siguientes 
     doc.line(15, 16, 195, 16); 
@@ -247,54 +278,60 @@ export class FichaComponent extends BaseComponent implements OnInit {
     doc.setFontSize(10)
     doc.setFontStyle('Arial');//Estilo de la fuente
     doc.text(fecha.toLocaleDateString()+' - '+fecha.toLocaleTimeString(), 150, espacio + 14, null, null,'center');
-    doc.line(15, espacio + 18, 195, espacio + 18);  
+    doc.line(15, espacio + 17, 195, espacio + 17);  
 
-    espacio+=4;
+    espacio+=3;
     //linea final
     doc.line(15, espacio + 245, 195, espacio + 245);
 
     doc.line(15, 16, 15, espacio + 245);
-    doc.line(105, espacio-2, 105, espacio + 58);
+    doc.line(105, espacio-1, 105, espacio + 58);
     doc.line(195, 16, 195,  espacio + 245);
 
     doc.setFontSize(11);
     doc.setFontStyle('bold');
 
     
-    doc.text('DATOS DEL USUARIO', 60, espacio + 19, null, null,'center');
+    doc.text('DATOS DEL USUARIO', 60, espacio + 20, null, null,'center');
     
-    doc.line(15, espacio + 23, 105, espacio + 23); 
+    doc.line(15, espacio + 23, 195, espacio + 23); 
     doc.line(45, espacio + 23, 45, espacio + 43); 
 
     doc.setFontStyle('bold');
-    doc.text('USUARIO', 30, espacio + 27, null, null,'center');
+    doc.text('USUARIO', 19, espacio + 27, null, null,'left');
     doc.setFontStyle('Arial Narrow');
     doc.text(marker.c_username, 75, espacio + 27, null, null,'center');
 
-    doc.line(15, espacio + 29, 105, espacio + 29); 
+    doc.line(15, espacio + 29, 195, espacio + 29); 
 
     doc.setFontStyle('bold');
-    doc.text('NOMBRES', 30, espacio + 34, null, null,'center');
+    doc.text('NOMBRES', 19, espacio + 34, null, null,'left');
     let name = marker.c_nombre1 +' '+ marker.c_nombre1;    
     doc.setFontStyle('Arial Narrow');
     doc.text(name, 75, espacio + 34, null, null,'center');
 
-    doc.line(15, espacio + 36, 105, espacio + 36); 
+    doc.line(15, espacio + 36, 195, espacio + 36); 
 
     doc.setFontStyle('bold');
-    doc.text('APELLIDOS', 30, espacio + 41, null, null,'center');
+    doc.text('APELLIDOS', 19, espacio + 41, null, null,'left');
     let lastname = marker.c_appaterno +' '+marker.c_apmaterno;
     doc.setFontStyle('Arial Narrow');
     doc.text(lastname, 75, espacio + 41, null, null,'center');
     
     doc.setFontStyle('bold');
-    doc.text('COORDENADAS', 123, espacio + 29, null, null,'center');
-    doc.line(142, espacio + 14, 142, espacio + 43); 
-    
+    doc.text('COORDENADAS', 150, espacio + 20, null, null,'center');
+    //doc.line(142, espacio + 14, 142, espacio + 43); 
+    doc.line(142, espacio + 23, 142, espacio + 43); 
+
+    doc.setFontStyle('bold');
+    doc.text('LATITUD', 112, espacio + 27, null, null,'left');
+    doc.text('LONGITUD', 112, espacio + 34, null, null,'left');
+    doc.text('ALTITUD', 112, espacio + 41, null, null,'left');
+
     doc.setFontStyle('Arial Narrow');
-    doc.text('LATITUD: '+ marker.c_latitud, 167, espacio + 25, null, null,'center');
-    doc.text('LONGITUD: '+ marker.c_longitud, 167, espacio + 31, null, null,'center');
-    doc.text('ALTITUD: '+ marker.n_altitud, 167, espacio + 37, null, null,'center');
+    doc.text(''+marker.c_latitud+'1516515', 170, espacio + 27, null, null,'center');
+    doc.text(''+marker.c_longitud, 170, espacio + 34, null, null,'center');
+    doc.text(''+marker.n_altitud, 170, espacio + 41, null, null,'center');
 
     espacio += 10;
 
@@ -303,30 +340,40 @@ export class FichaComponent extends BaseComponent implements OnInit {
     doc.setFontStyle('bold');
     doc.text('ESTRUCTURA', 60, espacio + 38, null, null,'center');
     doc.setFontStyle('Arial Narrow');
-    doc.text(marker.c_codigoestructura, 60, espacio + 45, null, null,'center');
-
+    if (marker.c_codigoestructura) {
+      doc.text(marker.c_codigoestructura, 60, espacio + 45, null, null,'center');
+    } else {
+      doc.text("", 60, espacio + 45, null, null,'center');
+    }
+    
     doc.line(15, espacio + 41, 195, espacio + 41);
 
     doc.setFontStyle('bold');
     doc.text('CÓDIGOEDE: ', 150, espacio + 38, null, null,'center');
     doc.setFontStyle('Arial Narrow');
-    doc.text(marker.c_codigoede, 150, espacio + 45, null, null,'center');  
+    if (marker.c_codigoede) {
+      doc.text(marker.c_codigoede, 150, espacio + 45, null, null,'center');  
+    }else{
+      doc.text("", 150, espacio + 45, null, null,'center');  
+    }
+    
 
     doc.line(15, espacio + 48, 195, espacio + 48);
 
     doc.setFontSize(12);
     doc.setFontStyle('bold');
-    doc.text('ARMADOS', 105, espacio + 55, null, null, 'center');    
+    doc.text('ARMADOS', 105, espacio + 54, null, null, 'center');    
     doc.setFontSize(10);
-    doc.line(15, espacio + 59, 195, espacio + 59);
+    doc.line(15, espacio + 57, 195, espacio + 57);
 
-    espacio += 12;
+    espacio += 10;
     
     doc.setFontStyle('bold');
     doc.text('CÓDIGO', 45, espacio + 54.5, null, null,'center');
-    doc.text('NOMBRE', 80, espacio + 54.5, null, null,'center');
+    //doc.text('NOMBRE', 80, espacio + 54.5, null, null,'center');
+    doc.text('CANTIDAD', 80, espacio + 54.5, null, null,'center');
     doc.text('OBSERVACIÓN', 130, espacio + 54.5, null, null,'center');
-    doc.text('CANTIDAD', 170, espacio + 54.5, null, null,'center');
+    
     
     doc.line(25, espacio + 56, 183, espacio + 56);
     
@@ -335,11 +382,16 @@ export class FichaComponent extends BaseComponent implements OnInit {
     this.datos.forEach(element => {      
       doc.setFontStyle('Arial Narrow');
       doc.text(element.c_codigoarmado, 45, espacio + e, null, null,'center');
-      doc.text(element.c_nombrearmado, 80, espacio + e, null, null,'center');
-      doc.text(element.c_observacion, 130, espacio + e, null, null,'center');
-      doc.text(''+element.n_cantidad, 170, espacio + e, null, null,'center');
-      if(element.c_observacion2){ 
+      //doc.text(element.c_nombrearmado, 80, espacio + e, null, null,'center');
+      doc.text(''+element.n_cantidad, 80, espacio + e, null, null,'center');
+      if (element.c_observacion && element.c_observacion != '' && element.c_observacion != null) {
+        doc.text(element.c_observacion, 130, espacio + e, null, null,'center');
         e+=5;
+      } /*else {
+        doc.text("", 130, espacio + e, null, null,'center');
+      }*/
+      
+      if(element.c_observacion2){ 
         doc.text(element.c_observacion2, 130, espacio + e, null, null,'center');
       }      
       if(this.datos.length > a ){
@@ -365,8 +417,9 @@ export class FichaComponent extends BaseComponent implements OnInit {
     }); 
     
     espacio = this.cont
+    doc.setFillColor(200, 200, 200);
+    doc.rect(15.5, espacio, 179.5, 8, 'F');
     doc.line(15, espacio, 195, espacio);
-
     doc.setFontSize(12);
     doc.setFontStyle('bold');
     doc.text('FOTOS', 105, espacio + 5, null, null,'center');
@@ -375,33 +428,43 @@ export class FichaComponent extends BaseComponent implements OnInit {
     espacio += 24;
     var r = 0;
     var i = 0;
+    var t = this.datosFotos.length
+    this.datosFotos.forEach( async element => {
+      
+      if(element.nfotodetalle){
+        console.log('FOTO-------'+element.nfotodetalle.substring(0,2));
+        console.log(environment.urlArchivo+'inspeccion/'+element.nfotodetalle.substring(0,2)+'/'+element.nfotodetalle);
+        
+        let imageSrcString = await this.toDataURL(environment.urlArchivo+'inspeccion/'+element.nfotodetalle.substring(0,2)+'/'+element.nfotodetalle);    
+        doc.addImage(imageSrcString,'JPG',i + 27, espacio, 45, 45);    
+        doc.text(element.nfoto,i + 27, espacio-0.5, null, null);
+        i+=55;
+        if(i >= 165){        
+          i = 0;
+          espacio += 57;
+        }
+        
+        if(espacio >= 225){        
+          doc.addPage();
+          espacio = 20;
+          doc.setLineWidth(0.5);
+          doc.line(15, espacio, 195, espacio);   
+          doc.line(15, espacio + 260, 195, espacio + 260);
 
-    this.datos.forEach( async element => { 
-      let imageSrcString = await this.toDataURL(environment.urlArchivo+element.c_rutafoto);    
-      doc.addImage(imageSrcString,'JPEG',i + 27, espacio, 45, 45);    
-      doc.text(marker.nfoto,i + 27, espacio-0.5, null, null);
-      i+=55;
-      if(i >= 165){        
-        i = 0;
-        espacio += 57;
+          doc.line(15, espacio, 15, espacio + 260);
+          doc.line(195, espacio, 195, espacio + 260);
+          espacio += 15;
+        }
       }
       r++;
-      if(espacio >= 225){        
-        doc.addPage();
-        espacio = 20;
-        doc.setLineWidth(0.5);
-        doc.line(15, espacio, 195, espacio);   
-        doc.line(15, espacio + 260, 195, espacio + 260);
-
-        doc.line(15, espacio, 15, espacio + 260);
-        doc.line(195, espacio, 195, espacio + 260);
-        espacio += 15;
-      }
-      if(this.datos.length <= r){
+      if(t <= r){
+        console.log(r);
         console.log(espacio)
-        doc.save("PDF.pdf")
+        doc.save("FICHA MONTAJE.pdf")
       }
-    });    
+    });
+    //doc.save("PDF.pdf")
+    this.dialogRef.close({ flag: true });
   } 
   
   toDataURL = async (url) => {

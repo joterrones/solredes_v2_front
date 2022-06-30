@@ -1,17 +1,42 @@
-<h2 mat-dialog-title>Asignar Usuario</h2>
+
 
 <mat-card>
-    <form class="example-container" #newForm="ngForm" (ngSubmit)="guardar(shoes._value, shoes.selectedOptions)">
+    <div class="contenedor">
+        <h2 mat-dialog-title>Asignar Usuario: {{txtGrupo}}</h2>
+        <div style="margin: 16px;">
+            <button mat-stroked-button color="primary" (click)="asignarAll()">
+                Asignar todo
+            </button>
+            <button mat-stroked-button color="warn" (click)="denegarrAll()">
+                Denegar todo
+            </button>
+        </div>
+    </div>
+    <br>
+    <mat-divider></mat-divider>
+    
+    <!--<form class="example-container" #newForm="ngForm" (ngSubmit)="guardar(shoes._value, shoes.selectedOptions)">
         <mat-selection-list #shoes class="tamano">
-            <mat-list-option *ngFor="let shoe of ProUser" [value]="shoe.n_idseg_userprofileusu" [selected]="shoe.b_activo">
+            <mat-list-option *ngFor="let shoe of ProUser" [value]="shoe.n_idseg_userprofileusu"
+                [selected]="shoe.b_activo">
                 {{shoe.c_username}}
             </mat-list-option>
         </mat-selection-list>
+        
+        <mat-divider></mat-divider>
+        <br>
         <div mat-dialog-actions>
             <button mat-button type="submit" cdkFocusInitial [disabled]="!newForm.form.valid">
                 <mat-icon>save</mat-icon>
                 <span>Guardar</span>
             </button>
         </div>
-    </form>
+    </form>-->
+
+    <mat-selection-list #shoes class="tamano">
+        <mat-list-option *ngFor="let e of ProUser" [value]="e.n_idseg_userprofileusu"
+            [selected]="e.b_activo" (click)="guardar(e)">
+            {{e.c_username}}
+        </mat-list-option>
+    </mat-selection-list>
 </mat-card>

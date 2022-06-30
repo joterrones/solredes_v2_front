@@ -1,0 +1,12 @@
+.contenedor{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.spinner{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+}

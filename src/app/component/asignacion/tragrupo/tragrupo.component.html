@@ -4,11 +4,11 @@
         <br />
         <mat-card>
             <mat-form-field>
-                <input matInput placeholder="Buscar" [(ngModel)]="textfilter"
-                    (keyup)="applyFilter($event.target.value)">
+                <input matInput placeholder="Buscar" (keyup.enter)="onSelectBuscar($event.target.value)">
                 <mat-icon matSuffix>search</mat-icon>
             </mat-form-field>
-            <table mat-table [dataSource]="tablaTraGrupos" matSort class="mat-elevation-z8">
+            
+            <!--<table mat-table [dataSource]="tablaTraGrupos" matSort class="mat-elevation-z8">
                 <ng-container matColumnDef="editar">
                     <th mat-header-cell *matHeaderCellDef> <button mat-icon-button color="accent"
                             (click)="openDialog(null)" *ngIf="permisoEdit">
@@ -26,7 +26,7 @@
                     <td mat-cell *matCellDef="let element"> {{element.c_nombre }} </td>
                 </ng-container>
 
-                <!-- Asignar Linea -->
+                
                 <ng-container matColumnDef="asigLinea">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header>Redes</th>
                     <td mat-cell *matCellDef="let element">
@@ -36,7 +36,7 @@
                     </td>
                 </ng-container>
 
-                <!-- Asignar Usuarios -->
+                
                 <ng-container matColumnDef="asigUsuario">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header>Usuarios</th>
                     <td mat-cell *matCellDef="let element">
@@ -46,7 +46,7 @@
                     </td>
                 </ng-container>
 
-                <!-- Button Eliminar -->
+                
                 <ng-container matColumnDef="eliminar">
 
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> Eliminar </th>
@@ -64,7 +64,60 @@
 
             </table>
 
-            <mat-paginator [pageSizeOptions]="pagin" showFirstLastButtons></mat-paginator>
+            <mat-paginator [pageSizeOptions]="pagin" showFirstLastButtons></mat-paginator>-->
         </mat-card>
+        <br>
+        <div class="contenedor">
+            <div *ngFor="let e of dataCard">
+                <mat-card style="margin: 1%; max-width: 470px;">
+                    <mat-card-header>
+                        <div mat-card-avatar>
+                            <mat-icon>event_note</mat-icon>
+                        </div>
+                        <mat-card-title>{{e.c_nombre}}</mat-card-title>
+                    </mat-card-header>
+                    <mat-card-content>
+                        <div class="contentcard">
+                            <ul class="mdc-list" style="padding-right: 30px;">
+                                <li class="mdc-list-item">
+                                    <p>Número de redes: {{e.nredes}} </p>
+                                </li>
+                            </ul>
+                            <ul class="mdc-list">
+                                <li class="mdc-list-item">
+                                    <p>Número de usuarios: {{e.nusersactivo}} </p>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="contentBtn">
+                            <button mat-stroked-button color="primary" (click)="openDialogLinea(e)" class="btncard">
+                                Asignar redes
+                                <mat-icon aria-label="Example icon-button with a heart icon">playlist_add_check
+                                </mat-icon>
+                            </button>
+                            <button mat-stroked-button color="primary" (click)="openDialogUsuarios(e)" class="btncard">
+                                Asignar Usuarios
+                                <mat-icon aria-label="Example icon-button with a heart icon">playlist_add_check
+                                </mat-icon>
+                            </button>
+                        </div>
+                    </mat-card-content>
+                    <mat-divider></mat-divider>
+                    <mat-card-actions style="display: flex; flex-direction: row;">
+                        <button mat-icon-button color="primary" (click)="openDialog(e)" *ngIf="permisoEdit">
+                            <mat-icon aria-label="Example icon-button with a heart icon">edit</mat-icon>
+                        </button>
+                        <button mat-icon-button color="error" (click)="eliminar(e)" [disabled]="!permisoEdit">
+                            <mat-icon aria-label="Example icon-button with a heart icon">delete</mat-icon>
+                        </button>
+                    </mat-card-actions>
+                </mat-card>
+            </div>
+        </div>
+
     </div>
+    <button mat-fab color="" aria-label="Example icon button with a delete icon" class="btn-flotante"
+        (click)="openDialog(null)">
+        <mat-icon>add</mat-icon>
+    </button>
 </app-menu>
