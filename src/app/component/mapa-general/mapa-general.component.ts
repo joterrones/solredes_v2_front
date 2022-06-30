@@ -3,8 +3,6 @@ import Map from 'ol/Map';
 import View from 'ol/View';
 import TileLayer from 'ol/layer/Tile';
 import TileWMS from 'ol/source/TileWMS';
-import OSM from 'ol/source/OSM';
-import * as OlProj from 'ol/proj';
 import { Router } from '@angular/router';
 import { MatDialog, MatSnackBar } from '@angular/material';
 import { BaseComponent } from '../base/base.component';
@@ -19,17 +17,7 @@ import { AppSettings } from 'src/app/common/appsettings';
 import { FiltroCapaComponent } from '../mapa/filtro-capa/filtro-capa.component';
 import { confGeneralService } from 'src/app/service/confGeneral.service';
 import { MapaService } from 'src/app/service/mapa.service';
-import Select from 'ol/interaction/Select';
 import { FiltroBuscarComponent } from '../mapa/filtro-buscar/filtro-buscar.component';
-
-import VectorSource from 'ol/source/vector';
-import Vector from 'ol/layer/vector';
-import GeoJSON from 'ol/format/geojson';
-import Fill from 'ol/style/Fill';
-import Style from 'ol/style/Style';
-import Geometry from 'ol/geom/Geometry';
-import {bbox} from 'ol/loadingstrategy';
-import { HttpClient } from '@angular/common/http';
 import { MapaDetalleComponent } from '../mapa/mapa-detalle/mapa-detalle.component';
 
 
