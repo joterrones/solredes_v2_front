@@ -16276,68 +16276,86 @@ export class ExcelFormatService {
     wsfase1.getColumn(2).width = 30;
     wsfase1.getColumn(3).width = 25;
     wsfase1.getColumn(4).width = 25;
-    wsfase1.getColumn(5).width = 30;
+    wsfase1.getColumn(5).width = 25;
     wsfase1.getColumn(6).width = 30;
-    wsfase1.getColumn(7).width = 60;
-    wsfase1.getColumn(8).width = 30;
+    wsfase1.getColumn(7).width = 30;
+    wsfase1.getColumn(8).width = 60;
     wsfase1.getColumn(9).width = 30;
     wsfase1.getColumn(10).width = 30;
-    wsfase1.getColumn(11).width = 100;
-    wsfase1.getColumn(12).width = 20;
+    wsfase1.getColumn(11).width = 30;
+    wsfase1.getColumn(12).width = 100;
+    wsfase1.getColumn(13).width = 20;
 
 
     
     let row = 1;
-    wsfase1.mergeCells("B" + row + ":L" + row);
+    wsfase1.mergeCells("B" + row + ":M" + row);
     this.setdatogeneral(wsfase1, "B" + row, title, 14, true,'91cff2');
     row++;
     row++;
+    wsfase1.getCell('B' + row).alignment = { vertical: 'middle', horizontal: 'center' };
+    wsfase1.getCell('C' + row).alignment = { vertical: 'middle', horizontal: 'center' };
+    wsfase1.getCell('D' + row).alignment = { vertical: 'middle', horizontal: 'center' };
+    wsfase1.getCell('E' + row).alignment = { vertical: 'middle', horizontal: 'center' };
+    wsfase1.getCell('F' + row).alignment = { vertical: 'middle', horizontal: 'center' };
+    wsfase1.getCell('G' + row).alignment = { vertical: 'middle', horizontal: 'center' };
+    wsfase1.getCell('H' + row).alignment = { vertical: 'middle', horizontal: 'center' };
+    wsfase1.getCell('I' + row).alignment = { vertical: 'middle', horizontal: 'center' };
+    wsfase1.getCell('J' + row).alignment = { vertical: 'middle', horizontal: 'center' };
+    wsfase1.getCell('K' + row).alignment = { vertical: 'middle', horizontal: 'center' };
+    wsfase1.getCell('L' + row).alignment = { vertical: 'middle', horizontal: 'center' };
+    wsfase1.getCell('M' + row).alignment = { vertical: 'middle', horizontal: 'center' };
+
     this.setdatogeneral(wsfase1, "B" + row, 'Código', 12, true,'91cff2');
-    this.setdatogeneral(wsfase1, "C" + row, 'Latitud', 12, true,'91cff2');
-    this.setdatogeneral(wsfase1, "D" + row, 'Longitud', 12, true,'91cff2');
-    this.setdatogeneral(wsfase1, "E" + row, 'Zona', 12, true,'91cff2');
-    this.setdatogeneral(wsfase1, "F" + row, 'Tipo de linea', 12, true,'91cff2');
-    this.setdatogeneral(wsfase1, "G" + row, 'Linea', 12, true,'91cff2');
-    this.setdatogeneral(wsfase1, "H" + row, 'Usuario', 12, true,'91cff2');
-    this.setdatogeneral(wsfase1, "I" + row, 'Fecha', 12, true,'91cff2');
-    this.setdatogeneral(wsfase1, "J" + row, 'Armado', 12, true,'91cff2');
-    this.setdatogeneral(wsfase1, "K" + row, 'Observación', 12, true,'91cff2');
-    this.setdatogeneral(wsfase1, "L" + row, 'Cantidad de fotos', 12, true,'91cff2');
+    this.setdatogeneral(wsfase1, "C" + row, 'Estructura', 12, true,'91cff2');
+    this.setdatogeneral(wsfase1, "D" + row, 'Latitud', 12, true,'91cff2');
+    this.setdatogeneral(wsfase1, "E" + row, 'Longitud', 12, true,'91cff2');
+    this.setdatogeneral(wsfase1, "F" + row, 'Zona', 12, true,'91cff2');
+    this.setdatogeneral(wsfase1, "G" + row, 'Tipo de linea', 12, true,'91cff2');
+    this.setdatogeneral(wsfase1, "H" + row, 'Linea', 12, true,'91cff2');
+    this.setdatogeneral(wsfase1, "I" + row, 'Usuario', 12, true,'91cff2');
+    this.setdatogeneral(wsfase1, "J" + row, 'Fecha', 12, true,'91cff2');
+    this.setdatogeneral(wsfase1, "K" + row, 'Armado', 12, true,'91cff2');
+    this.setdatogeneral(wsfase1, "L" + row, 'Observación', 12, true,'91cff2');
+    this.setdatogeneral(wsfase1, "M" + row, 'Cantidad de fotos', 12, true,'91cff2');
 
     inspecciones.forEach(element => {
       row ++;
       wsfase1.getCell('B' + row).alignment = { vertical: 'middle', horizontal: 'center' };
-      this.setdatogeneral(wsfase1, "B" + row, element.c_codigo, 10, false);
+      this.setdatogeneral(wsfase1, "B" + row, element.c_codigo, 10, false); 
 
       wsfase1.getCell('C' + row).alignment = { vertical: 'middle', horizontal: 'center' };
-      this.setdatogeneral(wsfase1, "C" + row, element.c_latitud, 10, false);
+      this.setdatogeneral(wsfase1, "C" + row, element.c_codigoestructura, 10, false);
 
       wsfase1.getCell('D' + row).alignment = { vertical: 'middle', horizontal: 'center' };
-      this.setdatogeneral(wsfase1, "D" + row, element.c_longitud, 10, false);
+      this.setdatogeneral(wsfase1, "D" + row, element.c_latitud, 10, false);
 
       wsfase1.getCell('E' + row).alignment = { vertical: 'middle', horizontal: 'center' };
-      this.setdatogeneral(wsfase1, "E" + row, element.c_zona, 10, false);
+      this.setdatogeneral(wsfase1, "E" + row, element.c_longitud, 10, false);
 
       wsfase1.getCell('F' + row).alignment = { vertical: 'middle', horizontal: 'center' };
-      this.setdatogeneral(wsfase1, "F" + row, element.c_tipolinea, 10, false);
+      this.setdatogeneral(wsfase1, "F" + row, element.c_zona, 10, false);
 
       wsfase1.getCell('G' + row).alignment = { vertical: 'middle', horizontal: 'center' };
-      this.setdatogeneral(wsfase1, "G" + row, element.c_linea, 10, false);
+      this.setdatogeneral(wsfase1, "G" + row, element.c_tipolinea, 10, false);
 
       wsfase1.getCell('H' + row).alignment = { vertical: 'middle', horizontal: 'center' };
-      this.setdatogeneral(wsfase1, "H" + row, element.c_username, 10, false);
+      this.setdatogeneral(wsfase1, "H" + row, element.c_linea, 10, false);
 
       wsfase1.getCell('I' + row).alignment = { vertical: 'middle', horizontal: 'center' };
-      this.setdatogeneral(wsfase1, "I" + row, element.d_fecha, 10, false);
+      this.setdatogeneral(wsfase1, "I" + row, element.c_username, 10, false);
 
       wsfase1.getCell('J' + row).alignment = { vertical: 'middle', horizontal: 'center' };
-      this.setdatogeneral(wsfase1, "J" + row, element.c_armado, 10, false);
+      this.setdatogeneral(wsfase1, "J" + row, element.d_fecha, 10, false);
 
       wsfase1.getCell('K' + row).alignment = { vertical: 'middle', horizontal: 'center' };
-      this.setdatogeneral(wsfase1, "K" + row, element.c_observacion, 10, false);
+      this.setdatogeneral(wsfase1, "K" + row, element.c_armado, 10, false);
+
+      wsfase1.getCell('L' + row).alignment = { vertical: 'middle', horizontal: 'center' };
+      this.setdatogeneral(wsfase1, "L" + row, element.c_observacion, 10, false);
 
       wsfase1.getCell('M' + row).alignment = { vertical: 'middle', horizontal: 'center' };
-      this.setdatogeneral(wsfase1, "L" + row, element.n_foto, 10, false);
+      this.setdatogeneral(wsfase1, "M" + row, element.n_foto, 10, false);
     });
 
     // Generate Excel File with given name

@@ -116,12 +116,12 @@ export class MapaService {
         return this._http.post(this.url + 'mapa/getMonInspeccion', data, { headers: reqHeader });
     }
 
-    getLineasMon(token): Observable<any> {
+    getLineasMon( req, token): Observable<any> {
         var reqHeader = new HttpHeaders({
             'Content-Type': 'application/json',
             'Authorization': 'Bearer ' + token
         });
-        return this._http.post(this.url + 'mapa/getLineasMon', { headers: reqHeader });
+        return this._http.post(this.url + 'mapa/getLineasMon', req,{ headers: reqHeader });
     }
 
     getinspeccionxls(token, request): Observable<any> {
@@ -130,6 +130,33 @@ export class MapaService {
             'Authorization': 'Bearer ' + token
         });
         return this._http.post(this.url + 'mapa/getinspeccionxls',request, { headers: reqHeader });
+    }
+
+    getUsers(req,token): Observable<any> {
+        var reqHeader = new HttpHeaders({
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
+        });
+        console.log(req);
+        
+        return this._http.post(this.url + 'mapa/getUsers', req, { headers: reqHeader });
+    }
+
+
+    getTipoLineaMon(req, token): Observable<any> {
+        var reqHeader = new HttpHeaders({
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
+        });       
+        return this._http.post(this.url + 'mapa/getTipoLineaMon', req, { headers: reqHeader });
+    }
+
+    getZonaMon(req, token): Observable<any> {
+        var reqHeader = new HttpHeaders({
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
+        });
+        return this._http.post(this.url + 'mapa/getZonaMon', req, { headers: reqHeader });
     }
     
 }

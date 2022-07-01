@@ -140,7 +140,7 @@ import { VersionesComponent } from './component/versiones/versiones.component';
 import { ArmadoconfigsuministroComponent } from './component/armadoconfigsuministro/armadoconfigsuministro.component';
 import { DatosMonitoreoComponent } from './component/datos-monitoreo/datos-monitoreo.component';
 
-
+import {MAT_DATE_LOCALE} from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -375,7 +375,8 @@ import { DatosMonitoreoComponent } from './component/datos-monitoreo/datos-monit
     DatePipe,
     appRoutingProviders,
     { provide: LocationStrategy, useClass: HashLocationStrategy },
-    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true },
+    { provide: MAT_DATE_LOCALE, useValue: 'es-ES' }
   ],
   bootstrap: [AppComponent]
 })

@@ -62,3 +62,9 @@ table {
 		right: 20px;
 	}
 } 
+
+.example-events {
+  height: 200px;
+  border: 1px solid #555;
+  overflow: auto;
+}

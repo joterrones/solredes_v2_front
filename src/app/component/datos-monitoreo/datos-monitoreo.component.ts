@@ -9,6 +9,7 @@ import { MapaService } from 'src/app/service/mapa.service';
 import { SeguridadService } from 'src/app/service/seguridad.service';
 import { BaseComponent } from '../base/base.component';
 import { FichaComponent } from '../ficha/ficha.component';
+
 @Component({
   selector: 'app-datos-monitoreo',
   templateUrl: './datos-monitoreo.component.html',
@@ -24,11 +25,14 @@ export class DatosMonitoreoComponent extends BaseComponent implements OnInit {
   idTipoLinea: number = 0;
   idLinea: number = 0;
   idZona: number = 0;
-
+  idUser: number = 0;
+  fechaInicio = '';
+  fechaFinal = '';
   tipolinea: [];
   zona: [];
   linea: [];
-
+  users: [];
+  fechaBool = true;
   constructor(
     public _seguridad_service: SeguridadService,
     public _confiGeneral_service: confGeneralService,
@@ -46,27 +50,40 @@ export class DatosMonitoreoComponent extends BaseComponent implements OnInit {
     this.gettipolinea();  
     this.getzona();      
     this.getTabla();
+    this.getUsers();
   }
 
   selectLinea(n_idpl_linea){
     this.idLinea = n_idpl_linea;
+    this.getUsers();
     this.getTabla();
   }
   selectTipolinea(n_idpl_tipolinea) {
     this.idTipoLinea = n_idpl_tipolinea;
+    this.getzona();     
     this.getTabla();
   }
 
   selectZona(n_idpl_zona) {
     this.idZona = n_idpl_zona;
+    this.getLineas();
     this.getTabla();
   }
+
+  selectUser(n_idseg_userprofile){
+    this.idUser = n_idseg_userprofile;
+    this.getTabla();
+  }
+
   getTabla(){
     let request = {
       n_idpl_linea: this.idLinea,
       n_idpl_tipolinea: this.idTipoLinea,
       n_idpl_zona: this.idZona,
       n_idpro_proyecto: this.proyecto.n_idpro_proyecto,
+      n_idseg_userprofile: this.idUser,
+      fecha_inicio: this.fechaInicio,
+      fecha_final: this.fechaFinal
       //stringBuscar: this.stringBuscar
     }
     console.log(request);
@@ -86,27 +103,35 @@ export class DatosMonitoreoComponent extends BaseComponent implements OnInit {
         this.openSnackBar(<any>error, 99);        
       });
   }
-  getLineas(){
-    
-    this._mapa_service.getLineasMon(this.getToken().token).subscribe(
+
+  gettipolinea() {
+    let request = {
+      n_idpro_proyecto: this.proyecto.n_idpro_proyecto      
+    }
+    this._mapa_service.getTipoLineaMon(request,this.getToken().token).subscribe(
       result => {
-        if(result.estado){
-          console.log(result.data);
-          this.linea = result.data;
-        }else{
- 
-          this.openSnackBar(result.mensaje, 99);
+        let resultado = <ResultadoApi>result;
+        if (resultado.estado) {
+          this.tipolinea = resultado.data;
+          console.log(this.tipolinea);
+        } else {
+          this.openSnackBar(resultado.mensaje, 99);
         }
       }, error => {
-        this.openSnackBar(<any>error, 99);        
+        try {
+          this.openSnackBar(error.error.Detail, error.error.StatusCode);
+        } catch (error) {
+          this.openSnackBar(AppSettings.SERVICE_NO_CONECT_SERVER, 99);
+        }
       });
   }
 
   getzona(){
     let request = {
-      n_idpro_proyecto: this.proyecto.n_idpro_proyecto      
+      n_idpro_proyecto: this.proyecto.n_idpro_proyecto,
+      n_idpl_tipolinea: this.idTipoLinea,      
     }
-    this._confiGeneral_service.getZonas(request,this.getToken().token).subscribe(
+    this._mapa_service.getZonaMon(request,this.getToken().token).subscribe(
       result => {
         let resultado = <ResultadoApi>result;
         if (resultado.estado) {
@@ -124,26 +149,77 @@ export class DatosMonitoreoComponent extends BaseComponent implements OnInit {
       });
   }
 
-  gettipolinea() {
+  getLineas(){
     let request = {
-      n_idpl_tipolinea: 0,
+      n_idpro_proyecto: this.proyecto.n_idpro_proyecto,
+      n_idpl_tipolinea: this.idTipoLinea, 
+      n_idpl_zona: this.idZona     
     }
-    this._confiGeneral_service.gettipolinea(request,this.getToken().token).subscribe(
+    this._mapa_service.getLineasMon( request, this.getToken().token).subscribe(
       result => {
-        let resultado = <ResultadoApi>result;
-        if (resultado.estado) {
-          this.tipolinea = resultado.data;
-          console.log(this.tipolinea);
-        } else {
-          this.openSnackBar(resultado.mensaje, 99);
+        if(result.estado){
+          console.log(result.data);
+          this.linea = result.data;
+        }else{
+ 
+          this.openSnackBar(result.mensaje, 99);
         }
       }, error => {
-        try {
-          this.openSnackBar(error.error.Detail, error.error.StatusCode);
-        } catch (error) {
-          this.openSnackBar(AppSettings.SERVICE_NO_CONECT_SERVER, 99);
-        }
+        this.openSnackBar(<any>error, 99);        
       });
+  }
+
+  getUsers(){
+    let request = {
+      n_idpro_proyecto: this.proyecto.n_idpro_proyecto,
+      n_idpl_tipolinea: this.idTipoLinea, 
+      n_idpl_zona: this.idZona,
+      n_idpl_linea: this.idLinea     
+    }
+    this._mapa_service.getUsers( request, this.getToken().token).subscribe(
+      result => {
+        if(result.estado){
+          console.log(result.data);
+          this.users = result.data;
+        }else{
+ 
+          this.openSnackBar(result.mensaje, 99);
+        }
+      }, error => {
+        this.openSnackBar(<any>error, 99);        
+      });
+  
+  }
+
+  inicio(event){
+    console.log(event);    
+    let dia = event.value.getDate()
+    let mes = (event.value.getMonth()+1)
+    let anio = event.value.getFullYear()
+    if (mes < 10) {
+      mes = '0'+mes;
+    }
+    if (dia < 10) {
+      dia = '0'+dia;
+    }
+    this.fechaInicio = anio + '-' + mes + '-' + dia + ' 00:00:00.000'
+    this.fechaBool = false
+    console.log(this.fechaInicio);
+    
+  }
+  fin(event){
+    console.log(event);    
+    let dia = event.value.getDate().toString()
+    let mes = (event.value.getMonth()+1).toString()
+    let anio = event.value.getFullYear().toString()
+    if (mes < 10) {
+      mes = '0'+mes;
+    }
+    if (dia < 10) {
+      dia = '0'+dia;
+    }
+    this.fechaFinal = anio + '-' + mes + '-' + dia + ' 23:59:59.000'
+    this.getTabla();
   }
 
   exportar(element){
@@ -176,4 +252,5 @@ export class DatosMonitoreoComponent extends BaseComponent implements OnInit {
         }
       })
   }
+
 }
