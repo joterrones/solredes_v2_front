@@ -85,10 +85,10 @@ export class ProyectousuaioComponent extends BaseComponent implements OnInit {
   }
 
   
-  guardar(element) {
+  guardar(element) {    
     let request  ={ 
       n_idtra_grupo: this.data.n_idtra_grupo,
-      n_idseg_userprofileArray: [element.n_idseg_userprofile],
+      n_idseg_userprofileArray: [element.n_idseg_userprofileusu],
       n_id_usermodi: this.usuarioLog.n_idseg_userprofile
     }
     if (element.b_activo) {

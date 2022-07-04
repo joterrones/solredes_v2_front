@@ -151,6 +151,7 @@ export class TragrupoComponent extends BaseComponent implements OnInit {
       data: grupo, 
     });
     dialogAsigPro.afterClosed().subscribe(result => {
+      this.getTablaTraGrupos();
     });
   }
 
@@ -160,6 +161,7 @@ export class TragrupoComponent extends BaseComponent implements OnInit {
       data: grupo, 
     });
     dialogAsigPro.afterClosed().subscribe(result => {
+      this.getTablaTraGrupos();
     });
   }
 
