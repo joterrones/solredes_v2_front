@@ -19,7 +19,7 @@ import { FichaComponent } from '../ficha/ficha.component';
 export class DatosMonitoreoComponent extends BaseComponent implements OnInit {
   
   tablaconfig: MatTableDataSource<any>;
-  displayedColumnsConfig: string[] = [ 'c_codigo','c_coordenadas','zona','linea','tipolinea','username','d_fechacrea', 'reporte'];
+  displayedColumnsConfig: string[] = [ 'zona','linea','tipolinea','username','c_codigo','c_coordenadas','d_fechacrea', 'reporte'];
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: false }) sort: MatSort;
   idTipoLinea: number = 0;
