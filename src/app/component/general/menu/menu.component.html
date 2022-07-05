@@ -11,7 +11,7 @@
                     </label>
                 </button>
             </label></mat-toolbar>
-        <!--último iditem = 26 -->
+        <!--último iditem = 27 -->
         <mat-nav-list>
             <mat-accordion>
                 <mat-expansion-panel [expanded]="idPanel == 1" >
@@ -187,10 +187,24 @@
                         </mat-panel-title>
                     </mat-expansion-panel-header>
                     <a mat-list-item [routerLink]="['/grafico']" *ngIf="re_repor" (click)="panel(8,23)" [ngClass]="{'select':iditem == 23}">
-                        <mat-icon>bar_chart</mat-icon>
+                        <mat-icon>keyboard_arrow_right</mat-icon>
                         <span>Reporte</span>
                     </a>
                 </mat-expansion-panel>
+                <div *ngIf="iduserEdit">
+                    <mat-expansion-panel [expanded]="idPanel == 9" >
+                        <mat-expansion-panel-header >
+                            <mat-panel-title>
+                                <mat-icon>restore</mat-icon>
+                                Versión
+                            </mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <a mat-list-item [routerLink]="['/version']" *ngIf="ve_adver" (click)="panel(9,27)" [ngClass]="{'select':iditem == 27}">
+                            <mat-icon>keyboard_arrow_right</mat-icon>
+                            <span>Versión</span>
+                        </a>
+                    </mat-expansion-panel>
+                </div>
             </mat-accordion>
         </mat-nav-list>
         <div class="logo">

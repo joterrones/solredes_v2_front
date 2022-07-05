@@ -450,4 +450,52 @@ export class confGeneralService{
         console.log('borrando tipo montaje')
         return this._http.post(this.url + 'configuracionGeneral/deleteTipoMontaje', data);
     }
+
+    getVersion(token): Observable<any> {
+        var reqHeader = new HttpHeaders({
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
+        });
+        return this._http.post(this.url + 'configuracionGeneral/getVersion', { headers: reqHeader });
+    } 
+
+    saveVersion(data, token): Observable<any> {
+        var reqHeader = new HttpHeaders({
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
+        });
+        console.log('enviando datos a node')
+        console.log(data)
+        return this._http.post(this.url + 'configuracionGeneral/saveVersion', data, { headers: reqHeader });
+    }
+
+    deleteVersion(data): Observable<any> {
+        console.log('borrando Tipo linea')
+        console.log(data)        
+        return this._http.post(this.url + 'configuracionGeneral/deleteVersion', data);
+    }   
+
+    getDetalleVersion(request,token): Observable<any> {
+        var reqHeader = new HttpHeaders({
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
+        });
+        return this._http.post(this.url + 'configuracionGeneral/getDetalleVersion', request,{ headers: reqHeader });
+    } 
+
+    saveDetalleVersion(data, token): Observable<any> {
+        var reqHeader = new HttpHeaders({
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
+        });
+        console.log('enviando datos a node')
+        console.log(data)
+        return this._http.post(this.url + 'configuracionGeneral/saveDetalleVersion', data, { headers: reqHeader });
+    }
+
+    deleteDetalleVersion(data): Observable<any> {
+        console.log('borrando Tipo linea')
+        console.log(data)        
+        return this._http.post(this.url + 'configuracionGeneral/deleteDetalleVersion', data);
+    }  
 }

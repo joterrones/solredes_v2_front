@@ -141,6 +141,10 @@ import { ArmadoconfigsuministroComponent } from './component/armadoconfigsuminis
 import { DatosMonitoreoComponent } from './component/datos-monitoreo/datos-monitoreo.component';
 
 import {MAT_DATE_LOCALE} from '@angular/material';
+import { VersionComponent } from './component/configGeneral/version/version.component';
+import { VersioneditarComponent } from './component/configGeneral/versioneditar/versioneditar.component';
+import { VersiondetalleComponent } from './component/configGeneral/versiondetalle/versiondetalle.component';
+import { VersiondetalleeditarComponent } from './component/configGeneral/versiondetalleeditar/versiondetalleeditar.component';
 
 @NgModule({
   declarations: [
@@ -276,6 +280,10 @@ import {MAT_DATE_LOCALE} from '@angular/material';
     VersionesComponent,
     ArmadoconfigsuministroComponent,
     DatosMonitoreoComponent,
+    VersionComponent,
+    VersioneditarComponent,
+    VersiondetalleComponent,
+    VersiondetalleeditarComponent,
 
   ],
   imports: [
@@ -368,7 +376,9 @@ import {MAT_DATE_LOCALE} from '@angular/material';
     FiltroBuscarComponent,
     VersionesComponent,
     FichaComponent,
-    ArmadoconfigsuministroComponent
+    ArmadoconfigsuministroComponent,
+    VersioneditarComponent,
+    VersiondetalleeditarComponent
   ],
   providers: [
     MatDatepickerModule,

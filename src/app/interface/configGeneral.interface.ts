@@ -149,7 +149,24 @@ export interface EditarTipoMontaje{
     tipomontaje: TipoMontaje
 }
 
+export interface Version{
+    n_idv_cabecera: number,
+    c_cabecera: String,
+    c_fecha: String,
+    n_id_usermodi: number    
+}
 
+export interface EditarVersion{
+    version: Version
+}
 
+export interface DetalleVersion{
+    n_idv_detalle: number,
+    n_idv_cabecera: number,
+    c_detalle: String,
+    n_id_usermodi: number    
+}
 
-
+export interface EditarDetalleVersion{
+    detalle_version: DetalleVersion
+}

@@ -1,5 +1,9 @@
 .contenedor{
     max-height: 450px;
+    
+}
+
+.scroll{
     overflow-y: scroll;
 }
 
@@ -18,4 +22,11 @@ mat-card-title{
 
 mat-card-subtitle{
     color: #000;
+}
+
+.btn{
+    padding-top: 16px; 
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
 }

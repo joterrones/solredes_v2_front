@@ -57,6 +57,7 @@ export class MenuComponent extends BaseComponent implements OnInit {
   public ma_adper: boolean = false;
   public re_repor: boolean = false; 
   public ma_adpmo: boolean = false;
+  public ve_adver: boolean = false;
 
   colorPro: string;
   pantallaRol: [];
@@ -65,7 +66,7 @@ export class MenuComponent extends BaseComponent implements OnInit {
 
   idPanel: number = 0;
   iditem: number = 0;
-  
+  iduserEdit = false;
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
       map(result => result.matches)
@@ -84,7 +85,7 @@ export class MenuComponent extends BaseComponent implements OnInit {
     }, 1000)
   }
 
-  ngOnInit() {
+  ngOnInit() {    
     this.colorPro = this.proyecto.c_color    
     this.urlImagen = environment.urlArchivo + this.proyecto.c_rutalogo;
     if (this.bLogin) {
@@ -96,6 +97,10 @@ export class MenuComponent extends BaseComponent implements OnInit {
       this.getRolUser();
       this.idPanel = parseInt(localStorage.getItem('panelMenu'));
       this.iditem = parseInt(localStorage.getItem('itemMenu'));
+      console.log(this.usuario.n_idseg_userprofile);      
+      if (this.usuario.n_idseg_userprofile == 101) {
+        this.iduserEdit = true
+      }
     }
     
   }
@@ -214,6 +219,9 @@ export class MenuComponent extends BaseComponent implements OnInit {
                   break; 
                 case 'ma-adpmo':
                   this.ma_adpmo = true;
+                  break;
+                case 've-adver':
+                  this.ve_adver = true;
                   break;
               }
             }

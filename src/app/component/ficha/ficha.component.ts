@@ -37,6 +37,7 @@ export class FichaComponent extends BaseComponent implements OnInit {
     let request = {
       n_idmon_inspeccion: this.data.n_idmon_inspeccion
     }
+    console.log(request);    
     this._ficha_service.get(request,this.getToken().token).subscribe(
       result => {
         let resultado = <ResultadoApi>result;
@@ -245,14 +246,18 @@ export class FichaComponent extends BaseComponent implements OnInit {
     doc.rect(15, 16, 180, 10, 'F');
 
     doc.setFillColor(200, 200, 200);
+    /*CÓDIGO FECHA HORA */
     doc.rect(15, 26, 180, 7, 'F');
+    /*DATOS USUARIOS */
     doc.rect(15, 41, 180, 9, 'F');
 
     doc.rect(15, 50, 30, 27, 'F');
     doc.rect(105, 50, 37, 27, 'F');
 
     doc.rect(15, 70, 180, 8, 'F');
-    doc.rect(15, 85, 180, 9, 'F');
+    doc.rect(15, 85, 180, 8, 'F');
+    /*ARMADO*/
+    doc.rect(15, 100, 180, 9, 'F');
     
 
     doc.setLineWidth(0.5);//Ancho de las lineas siguientes 
@@ -285,7 +290,7 @@ export class FichaComponent extends BaseComponent implements OnInit {
     doc.line(15, espacio + 245, 195, espacio + 245);
 
     doc.line(15, 16, 15, espacio + 245);
-    doc.line(105, espacio-1, 105, espacio + 58);
+    doc.line(105, espacio-1, 105, espacio + 73);
     doc.line(195, 16, 195,  espacio + 245);
 
     doc.setFontSize(11);
@@ -329,7 +334,7 @@ export class FichaComponent extends BaseComponent implements OnInit {
     doc.text('ALTITUD', 112, espacio + 41, null, null,'left');
 
     doc.setFontStyle('Arial Narrow');
-    doc.text(''+marker.c_latitud+'1516515', 170, espacio + 27, null, null,'center');
+    doc.text(''+marker.c_latitud, 170, espacio + 27, null, null,'center');
     doc.text(''+marker.c_longitud, 170, espacio + 34, null, null,'center');
     doc.text(''+marker.n_altitud, 170, espacio + 41, null, null,'center');
 
@@ -338,23 +343,48 @@ export class FichaComponent extends BaseComponent implements OnInit {
     doc.line(15, espacio + 33, 195, espacio + 33);
     
     doc.setFontStyle('bold');
-    doc.text('ESTRUCTURA', 60, espacio + 38, null, null,'center');
+    doc.text('Zona', 60, espacio + 38, null, null,'center');
     doc.setFontStyle('Arial Narrow');
-    if (marker.c_codigoestructura) {
-      doc.text(marker.c_codigoestructura, 60, espacio + 45, null, null,'center');
+    if (marker.c_nombrez) {
+      doc.text(marker.c_nombrez, 60, espacio + 46, null, null,'center');
     } else {
-      doc.text("", 60, espacio + 45, null, null,'center');
+      doc.text("", 60, espacio + 46, null, null,'center');
     }
     
     doc.line(15, espacio + 41, 195, espacio + 41);
 
     doc.setFontStyle('bold');
-    doc.text('CÓDIGOEDE: ', 150, espacio + 38, null, null,'center');
+    doc.text('Tipo Línea: ', 150, espacio + 38, null, null,'center');
     doc.setFontStyle('Arial Narrow');
-    if (marker.c_codigoede) {
-      doc.text(marker.c_codigoede, 150, espacio + 45, null, null,'center');  
+    if (marker.c_nombretipolinea) {
+      doc.text(marker.c_nombretipolinea, 150, espacio + 46, null, null,'center');  
     }else{
-      doc.text("", 150, espacio + 45, null, null,'center');  
+      doc.text("", 150, espacio + 46, null, null,'center');  
+    }
+    
+
+    doc.line(15, espacio + 48, 195, espacio + 48);
+
+    espacio += 15;
+    /**153435435465465645465 */
+    doc.setFontStyle('bold');
+    doc.text('LÍNEA', 60, espacio + 38, null, null,'center');
+    doc.setFontStyle('Arial Narrow');
+    if (marker.c_nombrelinea) {
+      doc.text(marker.c_nombrelinea, 60, espacio + 46, null, null,'center');
+    } else {
+      doc.text("", 60, espacio + 46, null, null,'center');
+    }
+    
+    doc.line(15, espacio + 41, 195, espacio + 41);
+
+    doc.setFontStyle('bold');
+    doc.text('ESTRUCTURA: ', 150, espacio + 38, null, null,'center');
+    doc.setFontStyle('Arial Narrow');
+    if (marker.c_codigoestructura) {
+      doc.text(marker.c_codigoestructura, 150, espacio + 46, null, null,'center');  
+    }else{
+      doc.text("", 150, espacio + 46, null, null,'center');  
     }
     
 
@@ -381,9 +411,18 @@ export class FichaComponent extends BaseComponent implements OnInit {
     let a = 1;
     this.datos.forEach(element => {      
       doc.setFontStyle('Arial Narrow');
-      doc.text(element.c_codigoarmado, 45, espacio + e, null, null,'center');
-      //doc.text(element.c_nombrearmado, 80, espacio + e, null, null,'center');
-      doc.text(''+element.n_cantidad, 80, espacio + e, null, null,'center');
+      if (element.c_codigoarmado) {
+        doc.text(element.c_codigoarmado, 45, espacio + e, null, null,'center');
+      }else{
+        doc.text("", 45, espacio + e, null, null,'center');
+      }
+      
+      if (element.n_cantidad) {
+        doc.text(''+element.n_cantidad, 80, espacio + e, null, null,'center');
+      }else{
+        doc.text('', 80, espacio + e, null, null,'center');
+      }
+      
       if (element.c_observacion && element.c_observacion != '' && element.c_observacion != null) {
         doc.text(element.c_observacion, 130, espacio + e, null, null,'center');
         e+=5;

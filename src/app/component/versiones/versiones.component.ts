@@ -6,10 +6,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./versiones.component.css']
 })
 export class VersionesComponent implements OnInit {
-
+  leermas = false;
   constructor() { }
 
   ngOnInit() {
+  }
+
+  leer(){   
+    this.leermas = !this.leermas
   }
 
 }

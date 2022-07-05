@@ -1,0 +1,67 @@
+<app-menu>
+    <div class="contenedorBody">
+      <h2> ADMINISTRACIÓN DE VERSIÓN</h2>
+      <mat-accordion>
+        <mat-expansion-panel>                
+  
+        </mat-expansion-panel>
+      </mat-accordion>
+      <br />
+      <mat-card>
+        <mat-form-field>
+          <input matInput placeholder="Buscar" [(ngModel)]="textfilter" (keyup)="applyFilter($event.target.value)">
+          <mat-icon matSuffix>search</mat-icon>
+        </mat-form-field>
+        <table mat-table [dataSource]="tablaTipoLinea" matSort class="mat-elevation-z8">
+
+          <ng-container matColumnDef="editar">
+            <th mat-header-cell *matHeaderCellDef> <button mat-icon-button color="accent" (click)="openDialog(null)" *ngIf="permisoEdit">
+                <mat-icon aria-label="Example icon-button with a heart icon">add</mat-icon>
+              </button> </th>
+            <td mat-cell *matCellDef="let element">
+              <button mat-icon-button color="accent" (click)="openDialog(element)" *ngIf="permisoEdit">
+                <mat-icon aria-label="Example icon-button with a heart icon">edit</mat-icon>
+              </button>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="c_nombre">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Cabecera </th>
+            <td mat-cell *matCellDef="let element"> {{element.c_cabecera}} </td>
+          </ng-container>        
+
+          <ng-container matColumnDef="c_fecha">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha </th>
+            <td mat-cell *matCellDef="let element"> {{element.c_fecha}} </td>
+          </ng-container>    
+          
+          <ng-container matColumnDef="detalle">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Detalle </th>
+            <td mat-cell *matCellDef="let element">
+              <button mat-icon-button color="accent" (click)="showDetalle(element)" [disabled]="!permisoEdit">                
+                <mat-icon aria-label="Example icon-button with a heart icon">reorder</mat-icon>                
+              </button>              
+            </td>
+          </ng-container>
+  
+          <!-- Button Eliminar -->
+          <ng-container matColumnDef="eliminar">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Eliminar </th>
+            <td mat-cell *matCellDef="let element">
+              <button mat-icon-button color="error" (click)="eliminar(element)" [disabled]="!permisoEdit">
+                <mat-icon aria-label="Example icon-button with a heart icon">delete</mat-icon>
+              </button>
+            </td>
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <ng-template let-row matRowDef cdkVirtualFor [matRowDefColumns]="displayedColumns">
+            <tr mat-row></tr>
+  
+          </ng-template>
+  
+        </table>
+  
+        <mat-paginator [pageSizeOptions]="pagin" showFirstLastButtons></mat-paginator>
+      </mat-card>
+    </div>
+  </app-menu>
