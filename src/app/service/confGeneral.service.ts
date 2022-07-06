@@ -494,8 +494,12 @@ export class confGeneralService{
     }
 
     deleteDetalleVersion(data): Observable<any> {
-        console.log('borrando Tipo linea')
         console.log(data)        
         return this._http.post(this.url + 'configuracionGeneral/deleteDetalleVersion', data);
     }  
+
+    getVersiones(data): Observable<any> {
+        return this._http.post(this.url + 'configuracionGeneral/getVersiones', data);
+    } 
+
 }

@@ -2,210 +2,34 @@
 <div class="contenedor" [ngClass]="{'scroll':leermas == true}">
     <mat-card>
         <!-- VERSION -->
-        <div class="mdc-list-group">
-            <mat-card-title-group>
-                <mat-card-title>1.1.2</mat-card-title>
-                <div>
-                    <mat-card-subtitle>01/07/2022</mat-card-subtitle>
-                </div>
-            </mat-card-title-group>
-            <mat-card-subtitle>
-                <p>Se la opción para exportar archivo Excel con los datos visualizados en la tabla en Monitoreo - Datos</p>
-                <p>Se corrigió los datos al exportar archivo Excel en Monitoreo - Datos </p>
-                <p>Se agrego los filtros usuario y rango de fechas en Monitoreo - Datos </p>
-            </mat-card-subtitle>
-        </div>
-        <hr class="mdc-list-divider">
-
-        <!-- VERSION -->
-        <div class="mdc-list-group">
-            <mat-card-title-group>
-                <mat-card-title>1.1.1</mat-card-title>
-                <div>
-                    <mat-card-subtitle>28/06/2022</mat-card-subtitle>
-                </div>
-            </mat-card-title-group>
-            <mat-card-subtitle>
-                <p>Se actualizo los filtros para Monitoreo - Mapa General</p>
-            </mat-card-subtitle>
-        </div>
-        <hr class="mdc-list-divider">
-
-        <!-- VERSION -->
-        <div class="mdc-list-group">
-        <mat-card-title-group>
-            <mat-card-title>1.1.0</mat-card-title>
-            <div>
-                <mat-card-subtitle>27/06/2022</mat-card-subtitle>
+        <div *ngFor="let i of arrCabecera">
+            <div class="mdc-list-group" >
+                <mat-card-title-group>
+                    <mat-card-title>{{i.c_cabecera}}</mat-card-title>
+                    <div>
+                        <mat-card-subtitle>{{i.c_fecha}}</mat-card-subtitle>
+                    </div>
+                </mat-card-title-group>
+                <mat-card-subtitle *ngFor="let e of arrDetalle">
+                    <p *ngIf="e.n_idv_cabeceradt == i.n_idv_cabecera">{{e.c_detalle}}</p>
+                </mat-card-subtitle>
             </div>
-        </mat-card-title-group>
-        <mat-card-subtitle>
-            <p>Se cambio el nombre del módulo “Mapa” a “Monitoreo” </p>
-            <p>Se añadió la opción “Datos” en “Monitoreo” </p>
-        </mat-card-subtitle>
-        </div>
-       
-
+            <hr class="mdc-list-divider" *ngIf="i.n_idv_cabecera != 11">
+        </div> 
         <div *ngIf="leermas">
-            <hr class="mdc-list-divider">
-            <!-- VERSION -->
-            <div class="mdc-list-group">
-                <mat-card-title-group>
-                    <mat-card-title>1.0.10</mat-card-title>
-                    <div>
-                        <mat-card-subtitle>24/06/2022</mat-card-subtitle>
-                    </div>
-                </mat-card-title-group>
-                <mat-card-subtitle>
-                    <p>Se cambio el diseño de Administración de Grupo </p>
-                    <p>Se añadió la opción "Asignar todos" en la asignación de redes y usuarios - Administración de grupos</p>
-                    <p>Se añadió la opción "Denegar todos" en la asignación de redes y usuarios - Administración de grupos</p>
-                </mat-card-subtitle>
-            </div>
-            <hr class="mdc-list-divider">
-            <!-- VERSION -->
-            <div class="mdc-list-group">
-                <mat-card-title-group>
-                    <mat-card-title>1.0.9</mat-card-title>
-                    <div>
-                        <mat-card-subtitle>23/06/2022</mat-card-subtitle>
-                    </div>
-                </mat-card-title-group>
-                <mat-card-subtitle>
-                    <p>Se cambio el diseño de Administración de Elemento </p>
-                </mat-card-subtitle>
-            </div>
-
-            <hr class="mdc-list-divider">
-
-            <!-- VERSION -->
-            <div class="mdc-list-group">
-                <mat-card-title-group>
-                    <mat-card-title>1.0.8</mat-card-title>
-                    <div>
-                        <mat-card-subtitle>22/06/2022</mat-card-subtitle>
-                    </div>
-                </mat-card-title-group>
-                <mat-card-subtitle>
-                    <p>Se cambio el diseño de Administración de Armado </p>
-                </mat-card-subtitle>
-            </div>
-
-            <hr class="mdc-list-divider">
-
-            <!-- VERSION -->
-            <div class="mdc-list-group">
-                <mat-card-title-group>
-                    <mat-card-title>1.0.7</mat-card-title>
-                    <div>
-                        <mat-card-subtitle>20/06/2022</mat-card-subtitle>
-                    </div>
-                </mat-card-title-group>
-                <mat-card-subtitle>
-                    <p>Se agrego la opción para ver los detalles del Elemento-Inspección en el mapa general. </p>
-                    <p>Se agrego la opción de descargar Ficha Montaje del Elemento-Inspección seleccionado en el mapa
-                        general. </p>
-                </mat-card-subtitle>
-            </div>
-
-            <hr class="mdc-list-divider">
-
-            <!-- VERSION -->
-            <div class="mdc-list-group">
-                <mat-card-title-group>
-                    <mat-card-title>1.0.6</mat-card-title>
-                    <div>
-                        <mat-card-subtitle>24/05/2022</mat-card-subtitle>
-                    </div>
-                </mat-card-title-group>
-                <mat-card-subtitle>
-                    <p>Cambio en la lógica de exportación - Aministración de Linea </p>
-                </mat-card-subtitle>
-            </div>
-
-            <hr class="mdc-list-divider">
-
-            <!-- VERSION -->
-            <div class="mdc-list-group">
-                <mat-card-title-group>
-                    <mat-card-title>1.0.5</mat-card-title>
-                    <div>
-                        <mat-card-subtitle>19/05/2022</mat-card-subtitle>
-                    </div>
-                </mat-card-title-group>
-                <mat-card-subtitle>
-                    <p>Cambio de lógica en la importación - Importación de Planilla</p>
-                </mat-card-subtitle>
-            </div>
-
-            <hr class="mdc-list-divider">
-
-            <!-- VERSION -->
-            <div class="mdc-list-group">
-                <mat-card-title-group>
-                    <mat-card-title>1.0.4</mat-card-title>
-                    <div>
-                        <mat-card-subtitle>16/05/2022</mat-card-subtitle>
-                    </div>
-                </mat-card-title-group>
-                <mat-card-subtitle>
-                    <p>Corrección al asignar líneas a los usuarios - Administración de Grupos - Asignación de redes</p>
-                </mat-card-subtitle>
-                <mat-card-subtitle>
-                    <p>Se añadió un nuevo icono "SFV" Administración de Armado</p>
-                </mat-card-subtitle>
-            </div>
-
-            <hr class="mdc-list-divider">
-
-            <!-- VERSION -->
-            <div class="mdc-list-group">
-                <mat-card-title-group>
-                    <mat-card-title>1.0.3</mat-card-title>
-                    <div>
-                        <mat-card-subtitle>13/05/2022</mat-card-subtitle>
-                    </div>
-                </mat-card-title-group>
-                <mat-card-subtitle>
-                    <p>Se redujo el tiempo de respuesta en el mapa general</p>
-                </mat-card-subtitle>
-            </div>
-
-            <hr class="mdc-list-divider">
-
-            <!-- VERSION -->
-            <div class="mdc-list-group">
-                <mat-card-title-group>
-                    <mat-card-title>1.0.2</mat-card-title>
-                    <div>
-                        <mat-card-subtitle>12/05/2022</mat-card-subtitle>
-                    </div>
-                </mat-card-title-group>
-                <mat-card-subtitle>
-                    <p>Se agrego la opción para ver los detalles del elemento en el mapa general</p>
-                </mat-card-subtitle>
-            </div>
-
-            <hr class="mdc-list-divider">
-
-            <!-- VERSION -->
-            <div class="mdc-list-group">
-                <mat-card-title-group>
-                    <mat-card-title>1.0.1</mat-card-title>
-                    <div>
-                        <mat-card-subtitle>10/05/2022</mat-card-subtitle>
-                    </div>
-                </mat-card-title-group>
-                <mat-card-subtitle>
-                    <p>Corrección de carga de imágenes - Administración de Almacén y Guía</p>
-                </mat-card-subtitle>
-                <mat-card-subtitle>
-                    <p>Corrección de carga de imágenes - Administración de Proyectos</p>
-                </mat-card-subtitle>
-                <mat-card-subtitle>
-                    <p>Actualización de los filtros Administración de Usuarios, se añadió el filtro "Estado Asignación"
-                    </p>
-                </mat-card-subtitle>
+            <div *ngFor="let i of arrCabecera2">
+                <hr class="mdc-list-divider">
+                <div class="mdc-list-group" >
+                    <mat-card-title-group>
+                        <mat-card-title>{{i.c_cabecera}}</mat-card-title>
+                        <div>
+                            <mat-card-subtitle>{{i.c_fecha}}</mat-card-subtitle>
+                        </div>
+                    </mat-card-title-group>
+                    <mat-card-subtitle *ngFor="let e of arrDetalle2">
+                        <p *ngIf="e.n_idv_cabeceradt == i.n_idv_cabecera">{{e.c_detalle}}</p>
+                    </mat-card-subtitle>
+                </div>                
             </div>
         </div>
     </mat-card>
