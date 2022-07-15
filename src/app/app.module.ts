@@ -145,6 +145,9 @@ import { VersionComponent } from './component/configGeneral/version/version.comp
 import { VersioneditarComponent } from './component/configGeneral/versioneditar/versioneditar.component';
 import { VersiondetalleComponent } from './component/configGeneral/versiondetalle/versiondetalle.component';
 import { VersiondetalleeditarComponent } from './component/configGeneral/versiondetalleeditar/versiondetalleeditar.component';
+import { PruebaComponent } from './component/pruebasocket/prueba/prueba.component';
+import { SocketIoModule } from 'ngx-socket-io';
+import {MatBadgeModule} from '@angular/material/badge';
 
 @NgModule({
   declarations: [
@@ -284,6 +287,7 @@ import { VersiondetalleeditarComponent } from './component/configGeneral/version
     VersioneditarComponent,
     VersiondetalleComponent,
     VersiondetalleeditarComponent,
+    PruebaComponent,
 
   ],
   imports: [
@@ -322,6 +326,9 @@ import { VersiondetalleeditarComponent } from './component/configGeneral/version
     MatChipsModule,
     ObserversModule,
     MatTooltipModule,
+    FormsModule,
+    SocketIoModule,
+    MatBadgeModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyDpcWweoH2IqPSGvBX91N46EsIdY-IfNiY'
     })

@@ -3,6 +3,7 @@ import { MatDialog, MatSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
 import { AppSettings } from 'src/app/common/appsettings';
 import { ProyectoService } from 'src/app/service/proyecto.service';
+import { SocketWebService } from 'src/app/service/socket.services';
 import { environment } from 'src/environments/environment';
 import { BaseComponent } from '../base/base.component';
 import { ProyectoDetalleComponent } from '../proyecto-detalle/proyecto-detalle.component';
@@ -16,12 +17,14 @@ import { ProyectoDetalleComponent } from '../proyecto-detalle/proyecto-detalle.c
 export class ProyectoSeleccionComponent extends BaseComponent implements OnInit {
   proyectos = [];
   urlImagen: string;
-  constructor(public _proyecto_service: ProyectoService,
+  constructor(
+    public _proyecto_service: ProyectoService,
     public _router: Router,
     public snackBar: MatSnackBar,
     public dialog: MatDialog
     ) {
     super(snackBar, _router)
+    
   }
 
   ngOnInit() {
@@ -31,7 +34,6 @@ export class ProyectoSeleccionComponent extends BaseComponent implements OnInit 
 
   getProyectos() {
     let usuario = this.getToken().data;
-    console.log("get_seleccionproyecto usuario", usuario)
     this._proyecto_service.get_seleccionproyecto(usuario).subscribe(
       result => {
         console.log("get_seleccionproyecto", result)
@@ -57,9 +59,7 @@ export class ProyectoSeleccionComponent extends BaseComponent implements OnInit 
     this.router.navigate(['/principal']);
   }
 
-  openDialog(item): void {
-    console.log(item);
-    
+  openDialog(item): void {    
     const dialogRef = this.dialog.open(ProyectoDetalleComponent, {
       width: '750px', height: '600px',
       data: { item: item }

@@ -13,6 +13,7 @@ import { AppSettings } from 'src/app/common/appsettings';
 import { SeguridadService } from 'src/app/service/seguridad.service';
 import { ResultadoApi } from 'src/app/interface/common.interface';
 import { environment } from 'src/environments/environment';
+import { SocketWebService } from 'src/app/service/socket.services';
 @Component({
   selector: 'app-menu',
   templateUrl: './menu.component.html',
@@ -67,12 +68,14 @@ export class MenuComponent extends BaseComponent implements OnInit {
   idPanel: number = 0;
   iditem: number = 0;
   iduserEdit = false;
+  notif = "";
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
       map(result => result.matches)
     );
 
   constructor(
+    private socketWebService: SocketWebService,
     public _seguridad_service: SeguridadService,
     private breakpointObserver: BreakpointObserver,
     public router: Router,
@@ -80,6 +83,11 @@ export class MenuComponent extends BaseComponent implements OnInit {
     public dialog: MatDialog,
     /*public mapaService: MapaService*/) {
     super(snackBar, router);
+    this.socketWebService.outEven.subscribe(res => {
+      console.log("responde back soccket "+ res);
+      console.log(res);
+      this.notif = res;
+    })
     setInterval(() => {
       this.date = new Date()
     }, 1000)
@@ -92,12 +100,10 @@ export class MenuComponent extends BaseComponent implements OnInit {
       this.username = this.getToken().data.c_username;
       this.usuario = this.getToken().data;
       console.log('Usuario Menu');
-      console.log(this.usuario);
       this.getPantallaRol();
       this.getRolUser();
       this.idPanel = parseInt(localStorage.getItem('panelMenu'));
-      this.iditem = parseInt(localStorage.getItem('itemMenu'));
-      console.log(this.usuario.n_idseg_userprofile);      
+      this.iditem = parseInt(localStorage.getItem('itemMenu'));   
       if (this.usuario.n_idseg_userprofile == 101) {
         this.iduserEdit = true
       }
@@ -135,7 +141,6 @@ export class MenuComponent extends BaseComponent implements OnInit {
         let resultado = <ResultadoApi>result;
         if (resultado.estado) {
           this.pantallaRol = resultado.data;
-          console.log(this.pantallaRol);
           resultado.data.forEach(element => {
             if(element.c_permiso == "MO" || element.c_permiso == "CO"){             
               switch (element.c_codigo) {

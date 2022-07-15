@@ -49,6 +49,7 @@ import { DataUsuarioProComponent } from './component/data-usuario-pro/data-usuar
 import { DatosMonitoreoComponent } from './component/datos-monitoreo/datos-monitoreo.component';
 import { VersionComponent } from './component/configGeneral/version/version.component';
 import { VersiondetalleComponent } from './component/configGeneral/versiondetalle/versiondetalle.component';
+import { PruebaComponent } from './component/pruebasocket/prueba/prueba.component';
 //Array de rutas
 const appRoutes:Routes=[
     {path:'',component:LoginComponent},
@@ -96,7 +97,8 @@ const appRoutes:Routes=[
     {path:'data_usuario_pro',component:DataUsuarioProComponent},
     {path:'datosMonitoreo',component:DatosMonitoreoComponent},
     {path:'version',component:VersionComponent},
-    {path:'detalle_version/:n_idv_cabecera/:c_cabecera',component:VersiondetalleComponent},
+    {path:'detalle_version/:n_idv_cabecera/:c_cabecera',component:VersiondetalleComponent}, 
+    {path:'prueba',component:PruebaComponent},
     {path:'**',component:LoginComponent},    
      
 ]

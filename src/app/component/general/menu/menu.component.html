@@ -226,12 +226,14 @@
                 </label>
             </div>
             <span class="example-fill-remaining-space"></span>
-            <button mat-button [matMenuTriggerFor]="usuario">
-                <mat-icon>person</mat-icon>
-                <label class="titulo">
-                    <span>{{username}}-{{rol}}</span>
-                </label>
-            </button>
+            <p>
+                <button mat-button [matMenuTriggerFor]="usuario">
+                    <mat-icon [matBadge]="notif" matBadgeColor="warn">person</mat-icon>
+                    <label class="titulo">
+                        <span>{{username}}-{{rol}}</span>
+                    </label>
+                </button>
+            </p>
             <mat-menu #usuario="matMenu">
                 <button mat-menu-item (click)="descargarManual()">Guía</button>
                 <button mat-menu-item (click)="openDialogClave()">Cambiar Contraseña</button>
