@@ -1,5 +1,6 @@
 import { EventEmitter, Injectable, Output } from '@angular/core';
 import { Socket } from 'ngx-socket-io';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,7 @@ export class SocketWebService extends Socket {
   constructor(
   ) {
     super({
-      url: 'http://localhost:3200',
+      url: environment.urlSocket,
       options: {
         query: {
           nameRoom: "sala1"

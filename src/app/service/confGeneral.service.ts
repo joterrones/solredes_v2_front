@@ -502,4 +502,28 @@ export class confGeneralService{
         return this._http.post(this.url + 'configuracionGeneral/getVersiones', data);
     } 
 
+    getNotificacion(request, token): Observable<any> {
+        var reqHeader = new HttpHeaders({
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
+        });
+        return this._http.post(this.url + 'configuracionGeneral/getNotificacion', request,{ headers: reqHeader });
+    } 
+
+    getNotificacionDetalle(request, token): Observable<any> {
+        var reqHeader = new HttpHeaders({
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
+        });
+        return this._http.post(this.url + 'configuracionGeneral/getNotificacionDetalle', request,{ headers: reqHeader });
+    } 
+
+    showNotificacion(request, token): Observable<any> {
+        var reqHeader = new HttpHeaders({
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
+        });
+        return this._http.post(this.url + 'configuracionGeneral/showNotificacion', request,{ headers: reqHeader });
+    } 
+
 }

@@ -14,11 +14,12 @@ import { SeguridadService } from 'src/app/service/seguridad.service';
 import { ResultadoApi } from 'src/app/interface/common.interface';
 import { environment } from 'src/environments/environment';
 import { SocketWebService } from 'src/app/service/socket.services';
+import { confGeneralService } from 'src/app/service/confGeneral.service';
 @Component({
   selector: 'app-menu',
   templateUrl: './menu.component.html',
   styleUrls: ['./menu.component.css'],
-  providers: [SeguridadService]
+  providers: [SeguridadService, confGeneralService]
   //providers: [MapaService]
 
 })
@@ -69,6 +70,9 @@ export class MenuComponent extends BaseComponent implements OnInit {
   iditem: number = 0;
   iduserEdit = false;
   notif = "";
+  detalleArr = [];
+  detalleArrMon = [];
+  Arr = [];
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
       map(result => result.matches)
@@ -78,15 +82,16 @@ export class MenuComponent extends BaseComponent implements OnInit {
     private socketWebService: SocketWebService,
     public _seguridad_service: SeguridadService,
     private breakpointObserver: BreakpointObserver,
+    public _confiGeneral_service: confGeneralService,    
     public router: Router,
     public snackBar: MatSnackBar,
     public dialog: MatDialog,
     /*public mapaService: MapaService*/) {
     super(snackBar, router);
     this.socketWebService.outEven.subscribe(res => {
-      console.log("responde back soccket "+ res);
-      console.log(res);
-      this.notif = res;
+      if(res != null){
+        this.getNotificacion()
+      }
     })
     setInterval(() => {
       this.date = new Date()
@@ -107,8 +112,85 @@ export class MenuComponent extends BaseComponent implements OnInit {
       if (this.usuario.n_idseg_userprofile == 101) {
         this.iduserEdit = true
       }
+      this.getNotificacion()
     }
     
+  }
+  getNotificacion(){
+    console.log("*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-", this.usuario.n_idseg_userprofile);
+    
+    var request = {
+      n_idseg_userprofile: this.usuario.n_idseg_userprofile,     
+    }
+    console.log(request);
+    
+    this._confiGeneral_service.getNotificacion(request, this.getToken().token).subscribe(
+      result => {
+          if (result.estado) {
+            console.log(result.data);
+            let n = 0;
+            result.data.forEach(element => {
+              if (element.b_estado) {
+                n++;
+              } 
+              this.detalleArr = result.data;
+            });           
+            if (n <= 0) {
+              this.notif = "";  
+            }else{
+              this.notif = n.toString();
+            }
+            
+            this._confiGeneral_service.getNotificacionDetalle(request, this.getToken().token).subscribe(
+              result => {
+                  if (result.estado) {
+                    console.log(result.data);
+                    this.detalleArrMon = result.data
+                    
+                    this.detalleArr.forEach(element => {
+                      let arrAux = []
+                      this.detalleArrMon.forEach(e => {
+                        if (element.n_idg_notificacion == e.n_idg_notificacion) {
+                          arrAux.push(e.c_codigo_mon)
+                        }
+                      });
+                      let item = {
+                        n_idseg_userprofile: element.n_idseg_userprofile,
+                        c_detalle: element.c_detalle,
+                        b_estado: element.b_estado,
+                        options: arrAux,
+                      }
+                      this.Arr.push(item)
+                    });
+                  } else {
+                    this.openSnackBar(result.mensaje, 99);
+                  }
+              }, error => {
+                this.openSnackBar(error.error, 99);
+              });
+          } else {
+            this.openSnackBar(result.mensaje, 99);
+          }
+      }, error => {
+        this.openSnackBar(error.error, 99);
+      });
+  }
+
+  showNotificacion(){
+    this.notif = "";
+    var request = {
+      n_idseg_userprofile: this.usuario.n_idseg_userprofile,     
+    }
+    this._confiGeneral_service.showNotificacion(request, this.getToken().token).subscribe(
+      result => {
+          if (result.estado) {
+            
+          } else {
+            this.openSnackBar(result.mensaje, 99);
+          }
+      }, error => {
+        this.openSnackBar(error.error, 99);
+      });
   }
 
   getRolUser() {
