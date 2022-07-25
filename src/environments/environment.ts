@@ -9,7 +9,7 @@ export const environment = {
   //urlSocket: 'http://localhost:3200'
   url: 'http://35.184.146.235:3200/api/',
   urlArchivo : 'http://35.184.146.235:3200/archivos/',
-  urlSocket: 'http://35.184.146.235:3200',
+  urlSocket: 'http://35.184.146.235:3200'
 };
 
 /*
