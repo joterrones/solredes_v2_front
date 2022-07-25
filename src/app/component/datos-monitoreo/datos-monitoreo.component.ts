@@ -240,7 +240,8 @@ export class DatosMonitoreoComponent extends BaseComponent implements OnInit {
       n_idpl_linea : this.idLinea,
       n_idpl_tipolinea: this.idTipoLinea,
       n_idpl_zona: this.idZona,
-      n_idpro_proyecto: this.proyecto.n_idpro_proyecto
+      n_idpro_proyecto: this.proyecto.n_idpro_proyecto,
+      n_idseg_userprofile: this.idUser,
     }
 
     console.log("Exportar Todo rq", rq)

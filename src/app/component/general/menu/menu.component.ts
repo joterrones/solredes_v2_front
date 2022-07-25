@@ -53,7 +53,8 @@ export class MenuComponent extends BaseComponent implements OnInit {
   public imp_impli: boolean = false;
   public imp_impsu: boolean = false;
   public imp_impmo: boolean = false;
-  public ma_mapge: boolean = false;
+  public mo_mapge: boolean = false;
+  public mo_datos: boolean = false;
   public al_adalm: boolean = false;
   public ma_mapli: boolean = false;
   public ma_adper: boolean = false;
@@ -112,22 +113,18 @@ export class MenuComponent extends BaseComponent implements OnInit {
       if (this.usuario.n_idseg_userprofile == 101) {
         this.iduserEdit = true
       }
-      this.getNotificacion()
+      //this.getNotificacion()
     }
     
   }
   getNotificacion(){
-    console.log("*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-", this.usuario.n_idseg_userprofile);
-    
     var request = {
       n_idseg_userprofile: this.usuario.n_idseg_userprofile,     
     }
-    console.log(request);
     
     this._confiGeneral_service.getNotificacion(request, this.getToken().token).subscribe(
       result => {
           if (result.estado) {
-            console.log(result.data);
             let n = 0;
             result.data.forEach(element => {
               if (element.b_estado) {
@@ -144,9 +141,7 @@ export class MenuComponent extends BaseComponent implements OnInit {
             this._confiGeneral_service.getNotificacionDetalle(request, this.getToken().token).subscribe(
               result => {
                   if (result.estado) {
-                    console.log(result.data);
-                    this.detalleArrMon = result.data
-                    
+                    this.detalleArrMon = result.data                    
                     this.detalleArr.forEach(element => {
                       let arrAux = []
                       this.detalleArrMon.forEach(e => {
@@ -289,8 +284,11 @@ export class MenuComponent extends BaseComponent implements OnInit {
                 case 'imp-impmo':
                   this.imp_impmo = true;
                   break;
-                case 'ma-mapge':
-                  this.ma_mapge = true;
+                case 'mo-mapge':
+                  this.mo_mapge = true;
+                  break;
+                case 'mo-datos':
+                  this.mo_datos = true;
                   break;
                 case 'al-adalm':
                   this.al_adalm = true;

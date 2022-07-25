@@ -371,7 +371,7 @@ export class FichaComponent extends BaseComponent implements OnInit {
     doc.text('LÍNEA', 60, espacio + 38, null, null,'center');
     doc.setFontStyle('Arial Narrow');
     if (marker.c_nombrelinea) {
-      doc.text(marker.c_nombrelinea, 60, espacio + 46, null, null,'center');
+      doc.text(marker.c_nombrelinea, 60, espacio + 46, null, null,'center'); 
     } else {
       doc.text("", 60, espacio + 46, null, null,'center');
     }
@@ -425,13 +425,17 @@ export class FichaComponent extends BaseComponent implements OnInit {
       
       if (element.c_observacion && element.c_observacion != '' && element.c_observacion != null) {
         doc.text(element.c_observacion, 130, espacio + e, null, null,'center');
-        e+=5;
       } /*else {
         doc.text("", 130, espacio + e, null, null,'center');
       }*/
       
       if(element.c_observacion2){ 
-        doc.text(element.c_observacion2, 130, espacio + e, null, null,'center');
+        e+=4;
+        if(element.c_observacion2 === ' Falta grapa “U”.'){
+          doc.text("Falta grapa \"U\".", 130, espacio + e, null, null,'center');
+        }else{
+          doc.text(element.c_observacion2, 130, espacio + e, null, null,'center');
+        }
       }      
       if(this.datos.length > a ){
         e++;
