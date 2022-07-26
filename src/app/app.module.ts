@@ -148,6 +148,7 @@ import { VersiondetalleeditarComponent } from './component/configGeneral/version
 import { PruebaComponent } from './component/pruebasocket/prueba/prueba.component';
 import { SocketIoModule } from 'ngx-socket-io';
 import {MatBadgeModule} from '@angular/material/badge';
+import { DatosMonitoreoEditarComponent } from './component/datos-monitoreo-editar/datos-monitoreo-editar.component';
 
 @NgModule({
   declarations: [
@@ -288,6 +289,7 @@ import {MatBadgeModule} from '@angular/material/badge';
     VersiondetalleComponent,
     VersiondetalleeditarComponent,
     PruebaComponent,
+    DatosMonitoreoEditarComponent,
 
   ],
   imports: [
@@ -385,7 +387,8 @@ import {MatBadgeModule} from '@angular/material/badge';
     FichaComponent,
     ArmadoconfigsuministroComponent,
     VersioneditarComponent,
-    VersiondetalleeditarComponent
+    VersiondetalleeditarComponent,
+    DatosMonitoreoEditarComponent
   ],
   providers: [
     MatDatepickerModule,

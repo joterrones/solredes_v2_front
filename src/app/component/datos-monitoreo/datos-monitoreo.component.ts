@@ -8,7 +8,9 @@ import { ExcelFormatService } from 'src/app/service/excelformat.service';
 import { MapaService } from 'src/app/service/mapa.service';
 import { SeguridadService } from 'src/app/service/seguridad.service';
 import { BaseComponent } from '../base/base.component';
+import { DatosMonitoreoEditarComponent } from '../datos-monitoreo-editar/datos-monitoreo-editar.component';
 import { FichaComponent } from '../ficha/ficha.component';
+import { ConfirmComponent } from '../general/confirm/confirm.component';
 
 @Component({
   selector: 'app-datos-monitoreo',
@@ -19,7 +21,7 @@ import { FichaComponent } from '../ficha/ficha.component';
 export class DatosMonitoreoComponent extends BaseComponent implements OnInit {
   
   tablaconfig: MatTableDataSource<any>;
-  displayedColumnsConfig: string[] = [ 'zona','linea','tipolinea','username','c_codigo','c_coordenadas','d_fechacrea', 'reporte'];
+  displayedColumnsConfig: string[] = [ 'editar','zona','linea','tipolinea','username','c_codigo','c_coordenadas','d_fechacrea', 'reporte'];
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: false }) sort: MatSort;
   idTipoLinea: number = 0;
@@ -243,15 +245,42 @@ export class DatosMonitoreoComponent extends BaseComponent implements OnInit {
       n_idpro_proyecto: this.proyecto.n_idpro_proyecto,
       n_idseg_userprofile: this.idUser,
     }
-
     console.log("Exportar Todo rq", rq)
-
       this._mapa_service.getinspeccionxls(this.getToken,rq ).subscribe(result => {
         console.log("Exportar Todo result", result)
         if(result.estado){
          this._excel_service.generarInspeccionXls(result.data);
         }
       })
+  }
+
+  openDialog(item): void {
+    const dialogRef = this.dialog.open(DatosMonitoreoEditarComponent, {
+      width: '750px',
+      data: { inspeccion: item, lineas: this.linea, zonas: this.zona, tipolineas: this.tipolinea}
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      try {        
+        this.getTabla();
+
+      } catch (error) {
+        console.log(error);
+        this.getTabla();
+      }
+    });
+  }  
+  
+  eliminar(item): void {
+    const dialogRef = this.dialog.open(ConfirmComponent, {
+      width: '500px',
+      data: { titulo: "¿Desea eliminar la Linea " + item.c_nombre + "?" }
+    });
+    dialogRef.afterClosed().subscribe(result => {
+
+      if (result) {
+        //this.delete_linea(item);
+      }
+    });
   }
 
 }

@@ -1,0 +1,82 @@
+<h1 mat-dialog-title>Edición {{inspeccion.c_codigo}}</h1>
+<!-- <form class="example-container" #newForm="ngForm" (ngSubmit)="guardar(newForm)">
+    <div mat-dialog-content class="contenedor">
+
+        <mat-form-field>
+            <input matInput type="Codigo" placeholder="Codigo" name="c_codigo" #c_clave="ngModel"
+                [(ngModel)]="inspeccion.c_codigo" minlength="3" required />
+            <mat-hint class="error" *ngIf="inspeccion.c_codigo.length<3">debe tener mínimo de 3 dígitos</mat-hint>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-select placeholder="zona" [(value)]="inspeccion.n_idpl_zona" required>
+                <mat-option *ngFor="let z of zonas" [value]="z.n_idpl_zona">
+                    {{z.c_nombre}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-select placeholder="Tipo Linea" [(value)]="inspeccion.n_idpl_tipolinea" required>
+                <mat-option *ngFor="let tlinea of tipolineas" [value]="tlinea.n_idpl_tipolinea">
+                    {{tlinea.c_nombre}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-select placeholder="Linea" [(value)]="inspeccion.n_idpl_linea" required>
+                <mat-option *ngFor="let linea of lineas" [value]="linea.n_idpl_linea">
+                    {{linea.c_nombre}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field>
+            <input matInput type="coordenada" placeholder="Latitud" name="c_latitud" #c_clave="ngModel"
+                [(ngModel)]="inspeccion.c_latitud" minlength="3" required />
+            <mat-hint class="error" *ngIf="inspeccion.c_latitud.length<3">debe tener mínimo de 3 dígitos</mat-hint>
+        </mat-form-field>
+
+        <mat-form-field>
+            <input matInput type="coordenada" placeholder="Longitud" name="c_longitud" #c_clave="ngModel"
+                [(ngModel)]="inspeccion.c_longitud" minlength="3" required />
+            <mat-hint class="error" *ngIf="inspeccion.c_longitud.length<3">debe tener mínimo de 3 dígitos</mat-hint>
+        </mat-form-field>
+    </div>
+    <div mat-dialog-actions>
+
+        <button mat-button type="submit" cdkFocusInitial [disabled]="!newForm.form.valid">
+            <mat-icon>save</mat-icon>
+            <span>Guardar</span>
+        </button>
+    </div>
+</form> -->
+<div style="overflow-y: scroll; max-height: 600px;">
+    <div *ngFor="let item of obs" class="contentcard" >
+        <h4>
+            {{item.c_codigoarmado}}
+        </h4>
+    
+        <mat-form-field class="input" appearance="fill">
+            <input matInput type="Codigo" placeholder="Observación" name="c_codigo" #c_clave="ngModel"
+                [(ngModel)]="item.c_observacion"/>
+            <button mat-icon-button aria-label="Example icon-button with a heart icon" matSuffix (click)="onSelectChange(item)" >
+                <mat-icon >save</mat-icon>
+                </button>
+        </mat-form-field>
+    
+        <mat-form-field appearance="fill">
+            <mat-label>Observación</mat-label>
+            <mat-select placeholder="Seleccione" [(value)]="item.n_idgen_observacion">
+                <mat-option *ngFor="let i of genobs" [value]="i.n_idgen_observacion"
+                    (click)="onSelectChange2(item)">
+                    {{i.c_codigo}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    
+</div>
+    
+
+

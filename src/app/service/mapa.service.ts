@@ -158,5 +158,37 @@ export class MapaService {
         });
         return this._http.post(this.url + 'mapa/getZonaMon', req, { headers: reqHeader });
     }
+
+    saveMon(req, token): Observable<any> {
+        var reqHeader = new HttpHeaders({
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
+        });
+        return this._http.post(this.url + 'mapa/saveMon', req, { headers: reqHeader });
+    }
+
+    getObservaciones(req, token): Observable<any> {
+        var reqHeader = new HttpHeaders({
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
+        });
+        return this._http.post(this.url + 'mapa/getObservaciones', req, { headers: reqHeader });
+    }
+
+    saveObservacion(req, token): Observable<any> {
+        var reqHeader = new HttpHeaders({
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
+        });
+        return this._http.post(this.url + 'mapa/saveObservacion', req, { headers: reqHeader });
+    }
+
+    saveGenObservacion(req, token): Observable<any> {
+        var reqHeader = new HttpHeaders({
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
+        });
+        return this._http.post(this.url + 'mapa/saveGenObservacion', req, { headers: reqHeader });
+    }
     
 }

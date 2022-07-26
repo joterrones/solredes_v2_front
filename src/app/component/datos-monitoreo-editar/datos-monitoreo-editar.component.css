@@ -1,0 +1,31 @@
+.contenedor{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    flex-wrap:wrap;
+   
+  }
+  .error{
+    color: red;
+  }
+
+  .contenedor {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    flex-wrap: wrap;
+  }
+
+  .contentcard{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    
+  }
+
+ 
+  .input {
+    min-width: 150px;
+    max-width: 300px;
+    width: 100%;
+  }
