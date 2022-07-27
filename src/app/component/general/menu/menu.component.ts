@@ -113,7 +113,7 @@ export class MenuComponent extends BaseComponent implements OnInit {
       if (this.usuario.n_idseg_userprofile == 101) {
         this.iduserEdit = true
       }
-      //this.getNotificacion()
+      this.getNotificacion()
     }
     
   }

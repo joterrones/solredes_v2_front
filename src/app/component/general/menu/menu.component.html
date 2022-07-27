@@ -238,7 +238,7 @@
                 <button mat-menu-item (click)="openDialogClave()">Cambiar Contraseña</button>
                 <button mat-menu-item (click)="logoff()">Cerrar Sesión</button>
             </mat-menu>
-            <!--<p>
+            <p>
                 <button mat-button [matMenuTriggerFor]="notificacion" (click)="showNotificacion()">
                     <mat-icon [matBadge]="notif" matBadgeColor="warn">notifications</mat-icon>
                 </button> 
@@ -250,7 +250,7 @@
                         <button *ngFor="let subItem of item.options" mat-menu-item>{{ subItem }}</button>
                      </mat-menu> 
                 </div>                
-            </mat-menu>-->
+            </mat-menu>
         </mat-toolbar>
         <!--Aquí va el contenido de los formularios-->
         <ng-content>

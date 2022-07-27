@@ -145,7 +145,6 @@ import { VersionComponent } from './component/configGeneral/version/version.comp
 import { VersioneditarComponent } from './component/configGeneral/versioneditar/versioneditar.component';
 import { VersiondetalleComponent } from './component/configGeneral/versiondetalle/versiondetalle.component';
 import { VersiondetalleeditarComponent } from './component/configGeneral/versiondetalleeditar/versiondetalleeditar.component';
-import { PruebaComponent } from './component/pruebasocket/prueba/prueba.component';
 import { SocketIoModule } from 'ngx-socket-io';
 import {MatBadgeModule} from '@angular/material/badge';
 import { DatosMonitoreoEditarComponent } from './component/datos-monitoreo-editar/datos-monitoreo-editar.component';
@@ -288,7 +287,6 @@ import { DatosMonitoreoEditarComponent } from './component/datos-monitoreo-edita
     VersioneditarComponent,
     VersiondetalleComponent,
     VersiondetalleeditarComponent,
-    PruebaComponent,
     DatosMonitoreoEditarComponent,
 
   ],
