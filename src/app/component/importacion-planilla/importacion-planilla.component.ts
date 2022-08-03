@@ -123,9 +123,9 @@ export class ImportacionPlanillaComponent extends BaseComponent implements OnIni
           element.VERSION = this.idversion;
           if (element.NRO_SSEE == null) { element.NRO_SSEE = "" }
           if (element.CIRCUITO == null) { element.CIRCUITO = "" }
-          if (element.ARMADO_P == null) { element.ARMADO_P = "" } else { element.ARMADO_P = String(element.ARMADO_P).replace('\'', '$') }
-          if (element.ARMADO_S == null) { element.ARMADO_S = "" } else { element.ARMADO_S = String(element.ARMADO_S).replace('\'', '$') }
-          if (element.S_TIPO == null) { element.S_TIPO = "" } else { element.S_TIPO = String(element.S_TIPO).replace('\'', '$') }
+          if (element.ARMADO_P == null) { element.ARMADO_P = "" } else { element.ARMADO_P = String(element.ARMADO_P).replace(/'/g,"$") }
+          if (element.ARMADO_S == null) { element.ARMADO_S = "" } else { element.ARMADO_S = String(element.ARMADO_S).replace(/'/g,"$") }
+          if (element.S_TIPO == null) { element.S_TIPO = "" } else { element.S_TIPO = String(element.S_TIPO).replace(/'/g,"$") }
           if (element.PROGRESIVA == null) { element.PROGRESIVA = 0 }
           if (element.VANO == null) { element.VANO = 0 }
           if (element.T_TERRENO == null) { element.T_TERRENO = "" }
@@ -152,7 +152,7 @@ export class ImportacionPlanillaComponent extends BaseComponent implements OnIni
           if (element.PAT_2S == null) { element.PAT_2S = 0 }
           if (element.PAT_3S == null) { element.PAT_3S = 0 }
           if (element.COTA == null) { element.COTA = "0" }
-          if (element.ANGULO == null) { element.ANGULO = "0" } else { element.ANGULO = String(element.ANGULO).replace('\'', '$') }
+          if (element.ANGULO == null) { element.ANGULO = "0" } else { element.ANGULO = String(element.ANGULO).replace(/'/g,"$") }
           if (element.VERTICE == null) { element.VERTICE = "0" }
           if (element.AP_BT == null) { element.AP_BT = 0 }
           if (element.AP_MT == null) { element.AP_MT = 0 }
