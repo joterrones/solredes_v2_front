@@ -60,7 +60,7 @@
                     <div >
                         <mat-form-field appearance="fill" style="margin-right: 12px;">
                             <mat-label>Inicio</mat-label>
-                            <input matInput [matDatepicker]="picker1"
+                            <input matInput [min]="minDate1" [max]="maxDate" [matDatepicker]="picker1"
                                    (dateChange)="inicio( $event)" disabled>
                             <mat-hint>MM/DD/YYYY</mat-hint>
                             <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
@@ -68,7 +68,7 @@
                         </mat-form-field>
                         <mat-form-field appearance="fill">
                             <mat-label>Fin</mat-label>
-                            <input matInput [matDatepicker]="picker2"
+                            <input matInput [min]="minDate2" [max]="maxDate" [matDatepicker]="picker2"
                                    (dateChange)="fin( $event)" disabled>
                             <mat-hint>MM/DD/YYYY</mat-hint>
                             <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
@@ -122,7 +122,7 @@
                 <ng-container matColumnDef="d_fechacrea">
                     <th mat-header-cell *matHeaderCellDef color="error" mat-sort-header> Fecha </th>
                     <td mat-cell *matCellDef="let element">
-                        {{element.d_fechacrea}}
+                        {{element.d_fecha}}
                     </td>
                 </ng-container>
                 <ng-container matColumnDef="reporte">

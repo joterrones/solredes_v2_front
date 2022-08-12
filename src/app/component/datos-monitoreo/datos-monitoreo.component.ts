@@ -35,6 +35,12 @@ export class DatosMonitoreoComponent extends BaseComponent implements OnInit {
   linea: [];
   users: [];
   fechaBool = true;
+  minDate1: Date;
+  maxDate: Date;
+
+  minDate2: Date;
+
+
   constructor(
     public _seguridad_service: SeguridadService,
     public _confiGeneral_service: confGeneralService,
@@ -43,11 +49,17 @@ export class DatosMonitoreoComponent extends BaseComponent implements OnInit {
     public dialog: MatDialog,
     public snack_1: MatSnackBar,
     public router: Router
+    
   ) { 
     super(snack_1,router)
+    const anio = new Date().getFullYear();
+    const mes = new Date().getMonth();
+    const dia = new Date().getDate();
+    this.minDate1 = new Date(anio - 2, 0, 1);
+    this.maxDate = new Date(anio, mes, dia);
   }
 
-  ngOnInit() {
+  ngOnInit() {    
     this.getLineas();
     this.gettipolinea();  
     this.getzona();      
@@ -195,9 +207,12 @@ export class DatosMonitoreoComponent extends BaseComponent implements OnInit {
 
   inicio(event){
     console.log(event);    
-    let dia = event.value.getDate()
-    let mes = (event.value.getMonth()+1)
-    let anio = event.value.getFullYear()
+    let dia = event.value.getDate().toString()
+    let mes = (event.value.getMonth()+1).toString()
+    let anio = event.value.getFullYear().toString()
+
+    this.minDate2 = new Date(event.value.getFullYear(), event.value.getMonth(), event.value.getDate());
+
     if (mes < 10) {
       mes = '0'+mes;
     }
@@ -207,6 +222,11 @@ export class DatosMonitoreoComponent extends BaseComponent implements OnInit {
     this.fechaInicio = anio + '-' + mes + '-' + dia + ' 00:00:00.000'
     this.fechaBool = false
     console.log(this.fechaInicio);
+
+    if(this.fechaFinal != ''){
+      console.log(this.fechaFinal);      
+      this.getTabla();
+    }
     
   }
   fin(event){

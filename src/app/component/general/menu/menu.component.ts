@@ -118,8 +118,12 @@ export class MenuComponent extends BaseComponent implements OnInit {
     
   }
   getNotificacion(){
+    this.detalleArr = [];
+    this.detalleArrMon = [];
+    this.Arr = [];
     var request = {
-      n_idseg_userprofile: this.usuario.n_idseg_userprofile,     
+      n_idseg_userprofile: this.usuario.n_idseg_userprofile,   
+      n_idpro_proyecto: this.proyecto.n_idpro_proyecto
     }
     
     this._confiGeneral_service.getNotificacion(request, this.getToken().token).subscribe(
@@ -127,7 +131,7 @@ export class MenuComponent extends BaseComponent implements OnInit {
           if (result.estado) {
             let n = 0;
             result.data.forEach(element => {
-              if (element.b_estado) {
+              if (!element.b_estado) {
                 n++;
               } 
               this.detalleArr = result.data;
@@ -150,6 +154,7 @@ export class MenuComponent extends BaseComponent implements OnInit {
                         }
                       });
                       let item = {
+                        n_idg_notificacion: element.n_idg_notificacion,
                         n_idseg_userprofile: element.n_idseg_userprofile,
                         c_detalle: element.c_detalle,
                         b_estado: element.b_estado,
@@ -171,15 +176,16 @@ export class MenuComponent extends BaseComponent implements OnInit {
       });
   }
 
-  showNotificacion(){
-    this.notif = "";
+  showNotificacion(n_idg_notificacion){
+    console.log(n_idg_notificacion);
+    
     var request = {
-      n_idseg_userprofile: this.usuario.n_idseg_userprofile,     
+      n_idg_notificacion: n_idg_notificacion,     
     }
     this._confiGeneral_service.showNotificacion(request, this.getToken().token).subscribe(
       result => {
           if (result.estado) {
-            
+            this.getNotificacion()
           } else {
             this.openSnackBar(result.mensaje, 99);
           }

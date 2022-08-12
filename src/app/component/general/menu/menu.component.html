@@ -239,16 +239,20 @@
                 <button mat-menu-item (click)="logoff()">Cerrar Sesión</button>
             </mat-menu>
             <p>
-                <button mat-button [matMenuTriggerFor]="notificacion" (click)="showNotificacion()">
+                <button mat-button [matMenuTriggerFor]="notificacion" >
                     <mat-icon [matBadge]="notif" matBadgeColor="warn">notifications</mat-icon>
                 </button> 
             </p>
             <mat-menu #notificacion="matMenu" >
-                <div *ngFor="let item of Arr">
-                    <button mat-menu-item [matMenuTriggerFor]="sub_menu">{{item.c_detalle}}</button>
-                     <mat-menu #sub_menu="matMenu" >
+                <div *ngFor="let item of Arr">         
+                    <button mat-menu-item  (click)="showNotificacion(item.n_idg_notificacion)">   <!-- [matMenuTriggerFor]="sub_menu" -->
+                        <span class="checkView" *ngIf="!item.b_estado">•</span>
+                        <mat-icon>dialpad</mat-icon>                     
+                        {{item.c_detalle}}
+                    </button>
+                    <!-- <mat-menu #sub_menu="matMenu" >
                         <button *ngFor="let subItem of item.options" mat-menu-item>{{ subItem }}</button>
-                     </mat-menu> 
+                    </mat-menu>  -->
                 </div>                
             </mat-menu>
         </mat-toolbar>
