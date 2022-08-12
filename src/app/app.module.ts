@@ -148,6 +148,7 @@ import { VersiondetalleeditarComponent } from './component/configGeneral/version
 import { SocketIoModule } from 'ngx-socket-io';
 import {MatBadgeModule} from '@angular/material/badge';
 import { DatosMonitoreoEditarComponent } from './component/datos-monitoreo-editar/datos-monitoreo-editar.component';
+import { DatosMonitoreoPopupComponent } from './component/datos-monitoreo-popup/datos-monitoreo-popup.component';
 
 @NgModule({
   declarations: [
@@ -288,6 +289,7 @@ import { DatosMonitoreoEditarComponent } from './component/datos-monitoreo-edita
     VersiondetalleComponent,
     VersiondetalleeditarComponent,
     DatosMonitoreoEditarComponent,
+    DatosMonitoreoPopupComponent,
 
   ],
   imports: [
@@ -386,7 +388,8 @@ import { DatosMonitoreoEditarComponent } from './component/datos-monitoreo-edita
     ArmadoconfigsuministroComponent,
     VersioneditarComponent,
     VersiondetalleeditarComponent,
-    DatosMonitoreoEditarComponent
+    DatosMonitoreoEditarComponent,
+    DatosMonitoreoPopupComponent
   ],
   providers: [
     MatDatepickerModule,

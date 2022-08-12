@@ -1,0 +1,58 @@
+<mat-card style="max-height: 800px;">
+    <table mat-table [dataSource]="tablaconfig" matSort class="mat-elevation-z8">
+       
+        <ng-container matColumnDef="zona">
+            <th mat-header-cell *matHeaderCellDef color="error" mat-sort-header> Zona </th>
+            <td mat-cell *matCellDef="let element"> {{element.c_codigoz}} </td>
+        </ng-container>
+        <ng-container matColumnDef="linea">
+            <th mat-header-cell *matHeaderCellDef color="error" mat-sort-header> Línea </th>
+            <td mat-cell *matCellDef="let element" [matTooltip]="element.c_nombrel">
+                {{element.c_codigol}}
+            </td>
+        </ng-container>
+        <ng-container matColumnDef="tipolinea">
+            <th mat-header-cell *matHeaderCellDef color="error" mat-sort-header> T. Línea </th>
+            <td mat-cell *matCellDef="let element"> {{element.c_nombretl}} </td>
+        </ng-container>
+        <ng-container matColumnDef="c_codigo">
+            <th mat-header-cell *matHeaderCellDef color="error" mat-sort-header> Código </th>
+            <td mat-cell *matCellDef="let element"> {{element.c_codigo}} </td>
+        </ng-container>
+        <ng-container matColumnDef="c_coordenadas">
+            <th mat-header-cell *matHeaderCellDef color="error" mat-sort-header> Coordenadas </th>
+            <td mat-cell *matCellDef="let element"> {{element.c_latitud}}, {{element.c_longitud}} </td>
+        </ng-container>
+        <ng-container matColumnDef="username">
+            <th mat-header-cell *matHeaderCellDef color="error" mat-sort-header> Usuario </th>
+            <td mat-cell *matCellDef="let e"
+                [matTooltip]="e.c_nombre1 +' '+ e.c_nombre2 +' '+ e.c_appaterno +' '+ e.c_apmaterno">
+                {{e.c_username}}
+            </td>
+        </ng-container>
+        <ng-container matColumnDef="d_fechacrea">
+            <th mat-header-cell *matHeaderCellDef color="error" mat-sort-header> Fecha </th>
+            <td mat-cell *matCellDef="let element">
+                {{element.d_fecha}}
+            </td>
+        </ng-container>
+        <ng-container matColumnDef="reporte">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Reporte
+                <button mat-icon-button color="accent" (click)="exportarTodo()">
+                    <img src="../../../assets/icons/export-exce.png" alt="" height="24">
+                </button>
+            </th>
+            <td mat-cell *matCellDef="let element">
+                <button mat-icon-button color="accent" (click)="exportar(element)">
+                    <img src="../../../assets/icons/exportar-pdf.png" alt="" height="24">
+                </button>
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumnsConfig"></tr>
+        <ng-template let-row matRowDef cdkVirtualFor [matRowDefColumns]="displayedColumnsConfig">
+            <tr mat-row></tr>
+        </ng-template>
+    </table>
+    <mat-paginator [pageSizeOptions]="[10,20,50]" showFirstLastButtons></mat-paginator>
+</mat-card>

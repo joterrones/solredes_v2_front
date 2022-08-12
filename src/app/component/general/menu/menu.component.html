@@ -247,6 +247,7 @@
                 <div *ngFor="let item of Arr">         
                     <button mat-menu-item  (click)="showNotificacion(item.n_idg_notificacion)">   <!-- [matMenuTriggerFor]="sub_menu" -->
                         <span class="checkView" *ngIf="!item.b_estado">•</span>
+                        <span class="checkView2" *ngIf="item.b_estado"></span>
                         <mat-icon>dialpad</mat-icon>                     
                         {{item.c_detalle}}
                     </button>

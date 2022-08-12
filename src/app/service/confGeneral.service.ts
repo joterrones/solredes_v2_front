@@ -526,4 +526,20 @@ export class confGeneralService{
         return this._http.post(this.url + 'configuracionGeneral/showNotificacion', request,{ headers: reqHeader });
     } 
 
+    getMonInspeccionPopup(request, token): Observable<any> {
+        var reqHeader = new HttpHeaders({
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
+        });
+        return this._http.post(this.url + 'configuracionGeneral/getMonInspeccionPopup', request,{ headers: reqHeader });
+    } 
+
+    getinspeccionxlspopup( token, request): Observable<any> {
+        var reqHeader = new HttpHeaders({
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
+        });
+        return this._http.post(this.url + 'configuracionGeneral/getinspeccionxlspopup',request, { headers: reqHeader });
+    } 
+
 }

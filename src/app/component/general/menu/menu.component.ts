@@ -15,6 +15,7 @@ import { ResultadoApi } from 'src/app/interface/common.interface';
 import { environment } from 'src/environments/environment';
 import { SocketWebService } from 'src/app/service/socket.services';
 import { confGeneralService } from 'src/app/service/confGeneral.service';
+import { DatosMonitoreoPopupComponent } from '../../datos-monitoreo-popup/datos-monitoreo-popup.component';
 @Component({
   selector: 'app-menu',
   templateUrl: './menu.component.html',
@@ -186,6 +187,12 @@ export class MenuComponent extends BaseComponent implements OnInit {
       result => {
           if (result.estado) {
             this.getNotificacion()
+            const dialogRef = this.dialog.open(DatosMonitoreoPopupComponent, {
+              width: '950px', 
+              data: { n_idg_notificacion: n_idg_notificacion}
+            });
+            dialogRef.afterClosed().subscribe(result => {
+            });
           } else {
             this.openSnackBar(result.mensaje, 99);
           }
