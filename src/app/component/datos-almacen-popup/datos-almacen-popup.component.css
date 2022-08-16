@@ -1,0 +1,10 @@
+table {
+    width: 100%;
+}
+
+.navega{
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+    flex-wrap: wrap;
+}

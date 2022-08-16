@@ -56,4 +56,20 @@ export class DashboardService {
         });
         return this._http.post(this.url + 'dashboard/getLineas', request,{ headers: reqHeader });
     }
+
+    getMonInspecion(request, token): Observable<any> {
+        var reqHeader = new HttpHeaders({
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
+        });
+        return this._http.post(this.url + 'dashboard/getMonInspecion', request,{ headers: reqHeader });
+    }
+
+    getDatosGuia(request, token): Observable<any> {
+        var reqHeader = new HttpHeaders({
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
+        });
+        return this._http.post(this.url + 'dashboard/getDatosGuia', request,{ headers: reqHeader });
+    }
 }

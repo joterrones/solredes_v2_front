@@ -16,6 +16,7 @@ import { environment } from 'src/environments/environment';
 import { SocketWebService } from 'src/app/service/socket.services';
 import { confGeneralService } from 'src/app/service/confGeneral.service';
 import { DatosMonitoreoPopupComponent } from '../../datos-monitoreo-popup/datos-monitoreo-popup.component';
+import { DatosAlmacenPopupComponent } from '../../datos-almacen-popup/datos-almacen-popup.component';
 @Component({
   selector: 'app-menu',
   templateUrl: './menu.component.html',
@@ -159,6 +160,7 @@ export class MenuComponent extends BaseComponent implements OnInit {
                         n_idseg_userprofile: element.n_idseg_userprofile,
                         c_detalle: element.c_detalle,
                         b_estado: element.b_estado,
+                        b_almacen: element.b_almacen,
                         options: arrAux,
                       }
                       this.Arr.push(item)
@@ -177,28 +179,49 @@ export class MenuComponent extends BaseComponent implements OnInit {
       });
   }
 
-  showNotificacion(n_idg_notificacion){
-    console.log(n_idg_notificacion);
-    
-    var request = {
-      n_idg_notificacion: n_idg_notificacion,     
+  showNotificacion(item){
+    console.log(item);
+    let request = {
+      n_idg_notificacion: item.n_idg_notificacion,     
     }
-    this._confiGeneral_service.showNotificacion(request, this.getToken().token).subscribe(
-      result => {
-          if (result.estado) {
-            this.getNotificacion()
-            const dialogRef = this.dialog.open(DatosMonitoreoPopupComponent, {
-              width: '950px', 
-              data: { n_idg_notificacion: n_idg_notificacion}
-            });
-            dialogRef.afterClosed().subscribe(result => {
-            });
-          } else {
-            this.openSnackBar(result.mensaje, 99);
-          }
-      }, error => {
-        this.openSnackBar(error.error, 99);
-      });
+    if (item.b_almacen) {      
+      this._confiGeneral_service.showNotificacion(request, this.getToken().token).subscribe(
+        result => {
+            if (result.estado) {
+              this.getNotificacion()
+              const dialogRef = this.dialog.open(DatosAlmacenPopupComponent, {
+                width: '750px', 
+                data: { n_idg_notificacion: item.n_idg_notificacion}
+              });
+              dialogRef.afterClosed().subscribe(result => {
+              });
+            } else {
+              this.openSnackBar(result.mensaje, 99);
+            }
+        }, error => {
+          this.openSnackBar(error.error, 99);
+        });
+      
+    }else{      
+      this._confiGeneral_service.showNotificacion(request, this.getToken().token).subscribe(
+        result => {
+            if (result.estado) {
+              this.getNotificacion()
+              const dialogRef = this.dialog.open(DatosMonitoreoPopupComponent, {
+                width: '950px', 
+                data: { n_idg_notificacion: item.n_idg_notificacion}
+              });
+              dialogRef.afterClosed().subscribe(result => {
+              });
+            } else {
+              this.openSnackBar(result.mensaje, 99);
+            }
+        }, error => {
+          this.openSnackBar(error.error, 99);
+        });
+    }
+    
+    
   }
 
   getRolUser() {

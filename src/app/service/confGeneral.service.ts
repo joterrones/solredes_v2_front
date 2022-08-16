@@ -542,4 +542,12 @@ export class confGeneralService{
         return this._http.post(this.url + 'configuracionGeneral/getinspeccionxlspopup',request, { headers: reqHeader });
     } 
 
+    getAlmacenPopup(request, token): Observable<any> {
+        var reqHeader = new HttpHeaders({
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
+        });
+        return this._http.post(this.url + 'configuracionGeneral/getAlmacenPopup', request,{ headers: reqHeader });
+    } 
+
 }

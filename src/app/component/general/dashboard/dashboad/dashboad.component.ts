@@ -77,6 +77,9 @@ export class DashboadComponent extends BaseComponent implements OnInit {
   public MyCharLuminaria: any;
   public MyCharLPReforzamiento: any;
 
+  public myChartInspeccion: any;
+  public myChartGuia: any;
+
   ntotproyecto1 = 0;
   ntotproyecto2 = 0;
   nsinasignacionf1 = 0;
@@ -102,6 +105,18 @@ export class DashboadComponent extends BaseComponent implements OnInit {
   ntotalLuminaria = 0.00;
   ntotalLPReforzamiento = 0.00;
 
+  fechaInicio= "";
+  fechaFinal= "";
+
+  fechaInicio2= "";
+  fechaFinal2= "";
+
+  fechaBool = true;
+  fechaFinalBool = false;
+
+  fechaBool2 = true;
+  fechaFinalBool2 = false;
+
   constructor(
     public snackBar: MatSnackBar,
     public router: Router,
@@ -111,7 +126,40 @@ export class DashboadComponent extends BaseComponent implements OnInit {
     private _proyecto_service: ProyectoService,
     public dialog: MatDialog
 
-  ) { super(snackBar, router); }
+  ) { 
+    super(snackBar, router); 
+    let anio = new Date().getFullYear();
+    let mes = new Date().getMonth() +1;
+    let dia = new Date().getDate();
+    
+    let c_mesInicio = (mes-1).toString();
+    let c_mesFinal = mes.toString();
+    let c_dia = dia.toString();
+
+    if (mes < 10) {
+      c_mesInicio = '0'+(mes-1).toString();
+      c_mesFinal = '0'+mes.toString();
+    }
+
+    if (dia < 10) {
+      c_dia = '0'+dia.toString;
+    }
+
+    if(mes == 2 && dia > 28){
+      this.fechaInicio = anio + '-' + c_mesInicio + '-28 00:00:00.000'
+      this.fechaFinal = anio + '-' + c_mesFinal + '-' + c_dia + ' 23:59:59.000'
+      this.fechaInicio2 = anio + '-' + c_mesInicio + '-28 00:00:00.000'
+      this.fechaFinal2 = anio + '-' + c_mesFinal + '-' + c_dia + ' 23:59:59.000'
+    }else{
+      this.fechaInicio = anio + '-' + c_mesInicio + '-' + c_dia + ' 00:00:00.000'
+      this.fechaFinal = anio + '-' + c_mesFinal + '-' + c_dia + ' 23:59:59.000'
+      this.fechaInicio2 = anio + '-' + c_mesInicio + '-' + c_dia + ' 00:00:00.000'
+      this.fechaFinal2 = anio + '-' + c_mesFinal + '-' + c_dia + ' 23:59:59.000'
+    }
+    
+    console.log(this.fechaInicio);
+    console.log(this.fechaFinal);    
+  }
 
   ngOnInit() {
     /*this.getFase();
@@ -120,6 +168,8 @@ export class DashboadComponent extends BaseComponent implements OnInit {
     this.getTotales();
     this.getDepartamento_dash();*/
     this.getLineas();
+    this.getMonInspeccion();
+    this.getDatosGuia();
   }
 
   selectFase(id) {
@@ -186,6 +236,11 @@ export class DashboadComponent extends BaseComponent implements OnInit {
   }
 
   getEstadoLineas(){
+    if (this.myChartLineasEstado != undefined) {
+      this.myChartLineasEstado.clear();
+      this.myChartLineasEstado.destroy();
+    } 
+    
     this.myChartLineasEstado = new Chart('LineasEstado', {
       type: 'bar',
       data: {
@@ -215,6 +270,170 @@ export class DashboadComponent extends BaseComponent implements OnInit {
         }
       }
     });
+  }
+
+  inicio(event){
+    console.log(event);    
+    let dia = event.value.getDate().toString()
+    let mes = (event.value.getMonth()+1).toString()
+    let anio = event.value.getFullYear().toString()
+
+    if (mes < 10) {
+      mes = '0'+mes;
+    }
+    if (dia < 10) {
+      dia = '0'+dia;
+    }
+    this.fechaInicio = anio + '-' + mes + '-' + dia + ' 00:00:00.000'
+    this.fechaBool = false
+    console.log(this.fechaInicio);
+
+    if(this.fechaFinalBool){
+      console.log(this.fechaFinal);      
+      this.getMonInspeccion();
+    }
+    
+  }
+
+  fin(event){
+    console.log(event);    
+    let dia = event.value.getDate().toString()
+    let mes = (event.value.getMonth()+1).toString()
+    let anio = event.value.getFullYear().toString()
+    if (mes < 10) {
+      mes = '0'+mes;
+    }
+    if (dia < 10) {
+      dia = '0'+dia;
+    }
+    this.fechaFinal = anio + '-' + mes + '-' + dia + ' 23:59:59.000'
+    this.fechaFinalBool = true;
+    this.getMonInspeccion();
+  }
+
+  getMonInspeccion(){
+    let request = {
+      n_idpro_proyecto: this.proyecto.n_idpro_proyecto,
+      fechaInicio: this.fechaInicio,
+      fechaFinal: this.fechaFinal      
+    }
+
+    this.dashboardServices.getMonInspecion(request, this.getToken().token).subscribe(result => {
+      console.log("Exportar Todo result", result)
+      if(result.estado){
+       console.log(result.data);
+       if (this.myChartInspeccion != undefined) {
+        this.myChartInspeccion.clear();
+        this.myChartInspeccion.destroy();
+      } 
+       this.myChartInspeccion = new Chart('INSPECCION', {
+          type: 'bar',
+          data: {
+            labels: result.data.claves,
+            datasets: [{
+              label: '',
+              data: result.data.cantidades,
+              backgroundColor: AppSettings.COLOR,
+              borderColor: AppSettings.COLOR_BORDER,
+              borderWidth: 1
+            }]
+          },
+          options: {
+            legend: { display: false },
+            scales: {
+              yAxes: [{
+                ticks: {
+                  beginAtZero: true
+                }
+              }]
+            }
+          }
+        });    
+      }
+    })
+    
+  }
+
+  inicio2(event){
+    console.log(event);    
+    let dia = event.value.getDate().toString()
+    let mes = (event.value.getMonth()+1).toString()
+    let anio = event.value.getFullYear().toString()
+
+    if (mes < 10) {
+      mes = '0'+mes;
+    }
+    if (dia < 10) {
+      dia = '0'+dia;
+    }
+    this.fechaInicio2 = anio + '-' + mes + '-' + dia + ' 00:00:00.000'
+    this.fechaBool2 = false
+    console.log(this.fechaInicio);
+
+    if(this.fechaFinalBool2){
+      console.log(this.fechaFinal);      
+      this.getDatosGuia();
+    }
+    
+  }
+
+  fin2(event){
+    console.log(event);    
+    let dia = event.value.getDate().toString()
+    let mes = (event.value.getMonth()+1).toString()
+    let anio = event.value.getFullYear().toString()
+    if (mes < 10) {
+      mes = '0'+mes;
+    }
+    if (dia < 10) {
+      dia = '0'+dia;
+    }
+    this.fechaFinal2 = anio + '-' + mes + '-' + dia + ' 23:59:59.000'
+    this.fechaFinalBool2 = true;
+    this.getDatosGuia();
+  }
+
+  getDatosGuia(){
+    let request = {
+      n_idpro_proyecto: this.proyecto.n_idpro_proyecto,
+      fechaInicio: this.fechaInicio2,
+      fechaFinal: this.fechaFinal2    
+    }
+
+    this.dashboardServices.getDatosGuia(request, this.getToken().token).subscribe(result => {
+      console.log("Exportar Todo result", result)
+      if(result.estado){
+        console.log(result.data);
+        if (this.myChartGuia != undefined) {
+          this.myChartGuia.clear();
+          this.myChartGuia.destroy();
+        } 
+       this.myChartGuia = new Chart('GUIAS', {
+          type: 'bar',
+          data: {
+            labels: result.data.claves,
+            datasets: [{
+              label: '',
+              data: result.data.cantidades,
+              backgroundColor: AppSettings.COLOR,
+              borderColor: AppSettings.COLOR_BORDER,
+              borderWidth: 1
+            }]
+          },
+          options: {
+            legend: { display: false },
+            scales: {
+              yAxes: [{
+                ticks: {
+                  beginAtZero: true
+                }
+              }]
+            }
+          }
+        });
+      }
+    })
+    
   }
 
   getFase() {
