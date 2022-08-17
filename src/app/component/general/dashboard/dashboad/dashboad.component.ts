@@ -17,6 +17,8 @@ import { DashboardLineaZonaComponent } from '../dashboard-linea-zona/dashboard-l
 import { DashboardPeriodoComponent } from '../dashboard-periodo/dashboard-periodo.component';
 import { DashboardZonaComponent } from '../dashboard-zona/dashboard-zona.component';
 import { DashboardLineaEstadoComponent } from '../dashboard-linea-estado/dashboard-linea-estado.component';
+import { DashboardGuiasComponent } from '../dashboard-guias/dashboard-guias.component';
+import { DashboardInspeccionComponent } from '../dashboard-inspeccion/dashboard-inspeccion.component';
 
 
 @Component({
@@ -156,9 +158,6 @@ export class DashboadComponent extends BaseComponent implements OnInit {
       this.fechaInicio2 = anio + '-' + c_mesInicio + '-' + c_dia + ' 00:00:00.000'
       this.fechaFinal2 = anio + '-' + c_mesFinal + '-' + c_dia + ' 23:59:59.000'
     }
-    
-    console.log(this.fechaInicio);
-    console.log(this.fechaFinal);    
   }
 
   ngOnInit() {
@@ -368,10 +367,8 @@ export class DashboadComponent extends BaseComponent implements OnInit {
     }
     this.fechaInicio2 = anio + '-' + mes + '-' + dia + ' 00:00:00.000'
     this.fechaBool2 = false
-    console.log(this.fechaInicio);
 
-    if(this.fechaFinalBool2){
-      console.log(this.fechaFinal);      
+    if(this.fechaFinalBool2){   
       this.getDatosGuia();
     }
     
@@ -774,6 +771,32 @@ export class DashboadComponent extends BaseComponent implements OnInit {
     const dialogRef = this.dialog.open(DashboardLineaEstadoComponent, {
       width: '950px', 
       data:  this.dataResultado
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      try {       
+      } catch (error) {
+        console.log(error);
+      }
+    });
+  }  
+
+  openInpeccion(): void { 
+    const dialogRef = this.dialog.open(DashboardInspeccionComponent, {
+      width: '950px', 
+      //data:  this.dataResultado
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      try {       
+      } catch (error) {
+        console.log(error);
+      }
+    });
+  }  
+
+  openGuias(): void { 
+    const dialogRef = this.dialog.open(DashboardGuiasComponent, {
+      width: '950px', 
+      //data:  this.dataResultado
     });
     dialogRef.afterClosed().subscribe(result => {
       try {       

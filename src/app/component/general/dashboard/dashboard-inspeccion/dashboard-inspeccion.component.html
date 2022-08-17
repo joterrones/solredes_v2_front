@@ -1,0 +1,26 @@
+<div class="contenedorBody" id="printSectionId">
+    <div class="contenedorChart">
+        <div class="elementoChart">
+            <mat-card>
+                <h3>INSPECCION</h3>
+                  <mat-form-field appearance="fill" style="margin-right: 12px;">
+                      <mat-label>Inicio</mat-label>
+                      <input matInput [matDatepicker]="picker1"
+                             (dateChange)="inicio( $event)" disabled>
+                      <mat-hint>MM/DD/YYYY</mat-hint>
+                      <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                      <mat-datepicker #picker1 disabled="false"></mat-datepicker>
+                  </mat-form-field>
+                  <mat-form-field appearance="fill">
+                      <mat-label>Fin</mat-label>
+                      <input matInput [matDatepicker]="picker2"
+                             (dateChange)="fin( $event)" disabled>
+                      <mat-hint>MM/DD/YYYY</mat-hint>
+                      <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                      <mat-datepicker #picker2 [disabled]="fechaBool"></mat-datepicker>
+                  </mat-form-field>         
+                <canvas id="INSPECCION_">{{myChartInspeccion}}</canvas>     
+            </mat-card>
+          </div>
+    </div>
+</div>

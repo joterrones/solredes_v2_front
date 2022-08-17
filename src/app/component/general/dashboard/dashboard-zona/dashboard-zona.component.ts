@@ -23,7 +23,6 @@ export class DashboardZonaComponent extends BaseComponent implements OnInit {
    }
 
   ngOnInit() {
-    
     this.getLineas();   
   }
 

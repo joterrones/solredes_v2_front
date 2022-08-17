@@ -150,6 +150,8 @@ import {MatBadgeModule} from '@angular/material/badge';
 import { DatosMonitoreoEditarComponent } from './component/datos-monitoreo-editar/datos-monitoreo-editar.component';
 import { DatosMonitoreoPopupComponent } from './component/datos-monitoreo-popup/datos-monitoreo-popup.component';
 import { DatosAlmacenPopupComponent } from './component/datos-almacen-popup/datos-almacen-popup.component';
+import { DashboardInspeccionComponent } from './component/general/dashboard/dashboard-inspeccion/dashboard-inspeccion.component';
+import { DashboardGuiasComponent } from './component/general/dashboard/dashboard-guias/dashboard-guias.component';
 
 @NgModule({
   declarations: [
@@ -292,6 +294,8 @@ import { DatosAlmacenPopupComponent } from './component/datos-almacen-popup/dato
     DatosMonitoreoEditarComponent,
     DatosMonitoreoPopupComponent,
     DatosAlmacenPopupComponent,
+    DashboardInspeccionComponent,
+    DashboardGuiasComponent,
 
   ],
   imports: [
@@ -392,7 +396,9 @@ import { DatosAlmacenPopupComponent } from './component/datos-almacen-popup/dato
     VersiondetalleeditarComponent,
     DatosMonitoreoEditarComponent,
     DatosMonitoreoPopupComponent,
-    DatosAlmacenPopupComponent
+    DatosAlmacenPopupComponent,
+    DashboardGuiasComponent,
+    DashboardInspeccionComponent
   ],
   providers: [
     MatDatepickerModule,
