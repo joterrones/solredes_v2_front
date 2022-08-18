@@ -2,76 +2,8 @@
   <div class="contenedorBody" id="printSectionId">
 
     <h2>REPORTE ESTADISTICO</h2>
-    <!-- <mat-accordion>
-      <mat-expansion-panel>
-        <mat-expansion-panel-header>
-          <mat-panel-title>
-            Filtros y Exportación de Datos
-          </mat-panel-title>
-          <mat-panel-description>
-            Pulsar para desplegar las opciones
-          </mat-panel-description>
-        </mat-expansion-panel-header>
-        <div class="contenedorfiltro">
-          <mat-form-field style="width: 30%;">
-            <mat-select placeholder="Fases">
-              <mat-option value="0" (click)='selectFase(0)'>
-                -TODOS-
-              </mat-option>
-              <mat-option *ngFor="let fase of fases" [value]="fase.n_idgen_fase"
-                (click)='selectFase(fase.n_idgen_fase)'>
-                {{fase.c_nombre}}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-          <mat-form-field style="width: 30%;">
-            <mat-select placeholder="Departamentos">
-              <mat-option value="0" (click)="selectDepartamento(0)">
-                -TODOS-
-              </mat-option>
-              <mat-option value="-100" (click)="selectDepartamento(-100)">
-                -SIN ASIGNAR-
-              </mat-option>
-              <mat-option *ngFor="let item of departamentos" [value]="item.n_idgen_departamento"
-                (click)="selectDepartamento(item.n_idgen_departamento)">
-                {{item.c_nombre}}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-        </div>
-        <div class="contenedorfiltro">
-          <mat-form-field style="width: 80%;">
-            <mat-select placeholder="Proyectos">
-              <mat-option value="0" (click)="selectProyecto(0)" >
-                -TODOS-
-              </mat-option>
-              <mat-option *ngFor="let item of proyectos" [value]="item.n_idgen_proyecto"
-                (click)="selectProyecto(item.n_idgen_proyecto)">
-                {{item.c_codigomem}} - {{item.c_nombreproyecto}}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-        </div>
-        <mat-action-row>
-          <button mat-button color="accent" (click)="printToCart('printSectionId')">Imprimir</button>
-        </mat-action-row>
-      </mat-expansion-panel>
-
-    </mat-accordion> -->
 
     <div class="contenedorChart">
-
-      <div class="elementoChart">
-        <mat-card>
-          <div class="contCard">
-            <h3>CANTIDAD DE ESTRUCTURAS POR LINEA</h3>
-            <button mat-icon-button color="accent" (click)="lineasEstructuras()">
-              <mat-icon> zoom_out_map</mat-icon>
-            </button>
-          </div>
-          <canvas id="Lineas_estructuras">{{myChartLineas}}</canvas>
-        </mat-card>
-      </div>
 
       <div class="elementoChart">
         <mat-card>
@@ -88,18 +20,6 @@
       <div class="elementoChart">
         <mat-card>
           <div class="contCard">
-            <h3>PROGRESO</h3>
-            <button mat-icon-button color="accent" (click)="openDialogProgreso()">
-              <mat-icon> zoom_out_map</mat-icon>
-            </button>
-          </div>
-          <canvas id="progreso">{{MyCharProgreso}}</canvas>
-        </mat-card>
-      </div>
-
-      <div class="elementoChart">
-        <mat-card>
-          <div class="contCard">
             <h3>PERIODO</h3>
             <button mat-icon-button color="accent" (click)="openDialogPeriodo()">
               <mat-icon> zoom_out_map</mat-icon>
@@ -109,17 +29,31 @@
         </mat-card>
       </div>
 
-      <!--<div class="elementoChart">
+      
+
+      <div class="elementoChart">
         <mat-card>
           <div class="contCard">
-            <h3>ZONA</h3>
-            <button mat-icon-button color="accent" (click)="openDialogZona()">            
-              <mat-icon> zoom_out_map</mat-icon>            
+            <h3>CANTIDAD DE ESTRUCTURAS POR LINEA</h3>
+            <button mat-icon-button color="accent" (click)="lineasEstructuras()">
+              <mat-icon> zoom_out_map</mat-icon>
             </button>
           </div>
-          <canvas id="ZONA">{{MyCharZona}}</canvas>
-        </mat-card>        
-      </div> -->
+          <canvas id="Lineas_estructuras">{{myChartLineas}}</canvas>
+        </mat-card>
+      </div>
+
+      <div class="elementoChart">
+        <mat-card>
+          <div class="contCard">
+            <h3>PROGRESO</h3>
+            <button mat-icon-button color="accent" (click)="openDialogProgreso()">
+              <mat-icon> zoom_out_map</mat-icon>
+            </button>
+          </div>
+          <canvas id="progreso">{{MyCharProgreso}}</canvas>
+        </mat-card>
+      </div>
 
       <div class="elementoChart">
         <mat-card>
@@ -140,6 +74,9 @@
         </mat-card>
       </div>
 
+    </div>
+
+    <div class="contenedorChart">
       <div class="elementoChart">
         <mat-card>
           <div class="contCard">
@@ -168,7 +105,7 @@
         </mat-card>
       </div>
 
-      <div class="elementoChart" style="max-width: 480px;">
+      <div class="elementoChart">
         <mat-card>
           <div class="contCard">
             <h3>GUÍAS</h3>            
@@ -195,213 +132,8 @@
           <canvas id="GUIAS">{{myChartGuia}}</canvas>
         </mat-card>
       </div>
+    </div>
 
-      <!-- 
-      <div class="elementoChart">
-        <mat-card>
-          <h4>MONTO DE INVERSIÓN POR FASE</h4>
-          <canvas id="fasemonto">{{MyCharFaseMonto}}</canvas>
-          <h5>Monto Inversión Total: {{ntotalmontocontratado | number : '0.00'}}</h5>
-        </mat-card>
-      </div>
-      <div class="elementoChart">
-        <mat-card>
-          <h4>MONTO VALORIZADO VS MONTO CONTRATADO POR FASE</h4>
-          <canvas id="fasemontovalorizado">{{MyCharMontoValorizado}}</canvas>
-          <h5>Contratado Total (CT): {{ntotalmontocontratado2 | number : '0.00'}} / Valorizado Total (VT): {{ntotalmontovalorizado | number : '0.00'}}</h5>
-          <h5>% VT/CT: {{nporcentajevalorizado | number : '0.00'}}</h5>
-        </mat-card>
-        
-      </div>
-      <div class="elementoChart">
-        <mat-card>
-          <h3>KILOMETROS POR LINEA PRIMARIA</h3>
-          <canvas id="linealp">{{MyCharLineaPrimaria}}</canvas>
-          <h5>Total de Kilometros: {{ntotalLP | number : '0.00'}}</h5>
-        </mat-card>
-      </div>
-      <div class="elementoChart">
-        <mat-card>
-          <h3>KILOMETROS POR LINEA PRIMARIA (Reforzamiento)</h3>
-          <canvas id="linealpref">{{MyCharLPReforzamiento}}</canvas>
-          <h5>Total de Kilometros: {{ntotalLPReforzamiento | number : '0.00'}}</h5>
-        </mat-card>
-      </div>
-      <div class="elementoChart">
-        <mat-card>
-          <h3>KILOMETROS POR RED PRIMARIA</h3>
-          <canvas id="linearp">{{MyCharRedPrimaria}}</canvas>
-          <h5>Total de Kilometros: {{ntotalRP | number : '0.00'}}</h5>
-        </mat-card>
-      </div>
-      <div class="elementoChart">
-        <mat-card>
-          <h3>KILOMETROS POR RED SECUNDARIA</h3>
-          <canvas id="linears">{{MyCharRedSecundaria}}</canvas>
-          <h5>Total de Kilometros: {{ntotalRS | number : '0.00'}}</h5>
-        </mat-card>
-      </div>
-      <div class="elementoChart">
-        <mat-card>
-          <h3>CANTIDAD DE LUMINARIAS</h3>
-          <canvas id="luminaria">{{MyCharLuminaria}}</canvas>
-          <h5>Total de Luminarias: {{ntotalLuminaria | number : '0.00'}}</h5>
-        </mat-card>
-      </div>
-      <div class="elementoChart">
-      </div>-->
-    </div>
-    <!--
-    <h3>
-      <p>Información de Proyectos asignados a la HSP (Total de Proyectos)</p>
-    </h3>
-    <div class="contenedorChart">
-      <div class="elementoTotal">
-        <mat-card class="example-card">
-          <mat-card-content>
-            <h5>
-              <p>Total Proyectos</p>
-            </h5>
-            <h3 style="text-align: center">{{ntotproyecto1 | number}}</h3>
-          </mat-card-content>
-        </mat-card>
-      </div>
-      <div class="elementoTotal">
-        <mat-card class="example-card">
-          <mat-card-content>
-            <h5>
-              <p>Sin asignación de Fase</p>
-            </h5>
-            <h3 style="text-align: center">{{nsinasignacionf1 | number}}</h3>
-          </mat-card-content>
-        </mat-card>
-      </div>
-      <div class="elementoTotal">
-        <mat-card class="example-card">
-          <mat-card-content>
-            <h5>
-              <p>Proyectos Pre-Inversión</p>
-            </h5>
-            <h3 style="text-align: center">{{npreinversion1 | number}}</h3>
-          </mat-card-content>
-        </mat-card>
-      </div>
-      <div class="elementoTotal">
-        <mat-card class="example-card">
-          <mat-card-content>
-            <h5>
-              <p>Proyectos Estudio Definitivo</p>
-            </h5>
-            <h3 style="text-align: center">{{nestudiodef1 | number}}</h3>
-          </mat-card-content>
-        </mat-card>
-      </div>
-      <div class="elementoTotal">
-        <mat-card class="example-card">
-          <mat-card-content>
-            <h5>
-              <p>Proyectos Ejecución</p>
-            </h5>
-            <h3 style="text-align: center">{{nejecucion1 | number}}</h3>
-          </mat-card-content>
-        </mat-card>
-      </div>
-      <div class="elementoTotal" *ngIf="n_idgen_fase==4">
-        <mat-card class="example-card">
-          <mat-card-content>
-            <h5>
-              <p>Proyectos Supervisión</p>
-            </h5>
-            <h3 style="text-align: center">{{nsupervision1 | number}}</h3>
-          </mat-card-content>
-        </mat-card>
-      </div>
-      <div class="elementoTotal">
-        <mat-card class="example-card">
-          <mat-card-content>
-            <h5>
-              <p>Proyectos Cierre</p>
-            </h5>
-            <h3 style="text-align: center">{{ncierre1 | number}}</h3>
-          </mat-card-content>
-        </mat-card>
-      </div>
-    </div>
-    <h3>
-      <p>Información de Proyectos asignados a la HSP (con información de Ubicación)</p>
-    </h3>
-    <div class="contenedorChart">
-      <div class="elementoTotal">
-        <mat-card class="example-card">
-          <mat-card-content>
-            <h5>
-              <p>Total Proyectos</p>
-            </h5>
-            <h3 style="text-align: center">{{ntotproyecto2 | number}}</h3>
-          </mat-card-content>
-        </mat-card>
-      </div>
-      <div class="elementoTotal">
-        <mat-card class="example-card">
-          <mat-card-content>
-            <h5>
-              <p>Sin asignación de Fase</p>
-            </h5>
-            <h3 style="text-align: center">{{nsinasignacionf2 | number}}</h3>
-          </mat-card-content>
-        </mat-card>
-      </div>
-      <div class="elementoTotal">
-        <mat-card class="example-card">
-          <mat-card-content>
-            <h5>
-              <p>Proyectos Pre-Inversión</p>
-            </h5>
-            <h3 style="text-align: center">{{npreinversion2 | number}}</h3>
-          </mat-card-content>
-        </mat-card>
-      </div>
-      <div class="elementoTotal">
-        <mat-card class="example-card">
-          <mat-card-content>
-            <h5>
-              <p>Proyectos Estudio Definitivo</p>
-            </h5>
-            <h3 style="text-align: center">{{nestudiodef2 | number}}</h3>
-          </mat-card-content>
-        </mat-card>
-      </div>
-      <div class="elementoTotal">
-        <mat-card class="example-card">
-          <mat-card-content>
-            <h5>
-              <p>Proyectos Ejecución</p>
-            </h5>
-            <h3 style="text-align: center">{{nejecucion2 | number}}</h3>
-          </mat-card-content>
-        </mat-card>
-      </div>
-      <div class="elementoTotal" *ngIf="n_idgen_fase==4">
-        <mat-card class="example-card">
-          <mat-card-content>
-            <h5>
-              <p>Proyectos Supervisión</p>
-            </h5>
-            <h3 style="text-align: center">{{nsupervision2 | number}}</h3>
-          </mat-card-content>
-        </mat-card>
-      </div>
-      <div class="elementoTotal">
-        <mat-card class="example-card">
-          <mat-card-content>
-            <h5>
-              <p>Proyectos Cierre</p>
-            </h5>
-            <h3 style="text-align: center">{{ncierre2 | number}}</h3>
-          </mat-card-content>
-        </mat-card>
-      </div>
-    </div>-->
 
   </div>
 </app-menu>
