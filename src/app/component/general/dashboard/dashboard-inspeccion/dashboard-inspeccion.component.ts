@@ -5,6 +5,7 @@ import { AppSettings } from 'src/app/common/appsettings';
 import { BaseComponent } from 'src/app/component/base/base.component';
 import { DashboardService } from 'src/app/service/dashboard.service';
 import { Chart } from 'chart.js';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-dashboard-inspeccion',
@@ -16,10 +17,10 @@ export class DashboardInspeccionComponent extends BaseComponent implements OnIni
   fechaInicio= "";
   fechaFinal= "";
 
-  fechaBool = true;
-  fechaFinalBool = false;
-
   public myChartInspeccion: any;
+
+  date = new FormControl(new Date());
+  date2;
 
   constructor(
     public dialogRef: MatDialogRef<DashboardInspeccionComponent>,    
@@ -32,7 +33,9 @@ export class DashboardInspeccionComponent extends BaseComponent implements OnIni
     let anio = new Date().getFullYear();
     let mes = new Date().getMonth() +1;
     let dia = new Date().getDate();
-    
+
+    this.date2 =  new FormControl(new Date(anio, (mes-2), dia));
+
     let c_mesInicio = (mes-1).toString();
     let c_mesFinal = mes.toString();
     let c_dia = dia.toString();
@@ -57,6 +60,24 @@ export class DashboardInspeccionComponent extends BaseComponent implements OnIni
    }
 
   ngOnInit() {
+    if(this.dataResultado.fechaInicioInspecion){
+      let event = this.dataResultado.fechaInicioInspecion
+      let dia = event.getDate().toString()
+      let mes = (event.getMonth()+1).toString()
+      let anio = event.getFullYear().toString()
+      this.date2 =  new FormControl(new Date(anio, (mes-1), dia));
+    }
+
+    if(this.dataResultado.fechaFinalInspecion){
+      let event = this.dataResultado.fechaFinalInspecion
+      let dia = event.getDate().toString()
+      let mes = (event.getMonth()+1).toString()
+      let anio = event.getFullYear().toString()
+      this.date =  new FormControl(new Date(anio, (mes-1), dia));
+    }
+
+    this.fechaInicio = this.dataResultado.fechaInicio
+    this.fechaFinal = this.dataResultado.fechafinal
     this.getMonInspeccion();
   }
 
@@ -73,13 +94,9 @@ export class DashboardInspeccionComponent extends BaseComponent implements OnIni
       dia = '0'+dia;
     }
     this.fechaInicio = anio + '-' + mes + '-' + dia + ' 00:00:00.000'
-    this.fechaBool = false
-    console.log(this.fechaInicio);
-
-    if(this.fechaFinalBool){
-      console.log(this.fechaFinal);      
-      this.getMonInspeccion();
-    }
+    
+    this.getMonInspeccion();
+    
     
   }
 
@@ -95,7 +112,6 @@ export class DashboardInspeccionComponent extends BaseComponent implements OnIni
       dia = '0'+dia;
     }
     this.fechaFinal = anio + '-' + mes + '-' + dia + ' 23:59:59.000'
-    this.fechaFinalBool = true;
     this.getMonInspeccion();
   }
 

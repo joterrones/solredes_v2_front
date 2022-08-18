@@ -5,6 +5,7 @@ import { AppSettings } from 'src/app/common/appsettings';
 import { BaseComponent } from 'src/app/component/base/base.component';
 import { DashboardService } from 'src/app/service/dashboard.service';
 import { Chart } from 'chart.js';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-dashboard-guias',
@@ -18,8 +19,9 @@ export class DashboardGuiasComponent extends BaseComponent implements OnInit {
   fechaInicio2= "";
   fechaFinal2= "";
 
-  fechaBool2 = true;
-  fechaFinalBool2 = false;
+
+  date = new FormControl(new Date());
+  date2;
 
   constructor(
     public dialogRef: MatDialogRef<DashboardGuiasComponent>,    
@@ -32,7 +34,7 @@ export class DashboardGuiasComponent extends BaseComponent implements OnInit {
     let anio = new Date().getFullYear();
     let mes = new Date().getMonth() +1;
     let dia = new Date().getDate();
-    
+    this.date2 =  new FormControl(new Date(anio, (mes-2), dia));
     let c_mesInicio = (mes-1).toString();
     let c_mesFinal = mes.toString();
     let c_dia = dia.toString();
@@ -56,6 +58,24 @@ export class DashboardGuiasComponent extends BaseComponent implements OnInit {
    }
 
   ngOnInit() {
+    if(this.dataResultado.fechaInicioGuia){
+      let event = this.dataResultado.fechaInicioGuia
+      let dia = event.getDate().toString()
+      let mes = (event.getMonth()+1).toString()
+      let anio = event.getFullYear().toString()
+      this.date2 =  new FormControl(new Date(anio, (mes-1), dia));
+    }
+
+    if(this.dataResultado.fechaFinalGuia){
+      let event = this.dataResultado.fechaFinalGuia
+      let dia = event.getDate().toString()
+      let mes = (event.getMonth()+1).toString()
+      let anio = event.getFullYear().toString()
+      this.date =  new FormControl(new Date(anio, (mes-1), dia));
+    }
+
+    this.fechaInicio2 = this.dataResultado.fechaInicio2
+    this.fechaFinal2 = this.dataResultado.fechaFinal2
     this.getDatosGuia();
   }
   
@@ -71,12 +91,9 @@ export class DashboardGuiasComponent extends BaseComponent implements OnInit {
     if (dia < 10) {
       dia = '0'+dia;
     }
-    this.fechaInicio2 = anio + '-' + mes + '-' + dia + ' 00:00:00.000'
-    this.fechaBool2 = false
-
-    if(this.fechaFinalBool2){
-      this.getDatosGuia();
-    }
+ 
+    this.getDatosGuia();
+    
     
   }
 
@@ -92,7 +109,6 @@ export class DashboardGuiasComponent extends BaseComponent implements OnInit {
       dia = '0'+dia;
     }
     this.fechaFinal2 = anio + '-' + mes + '-' + dia + ' 23:59:59.000'
-    this.fechaFinalBool2 = true;
     this.getDatosGuia();
   }
 

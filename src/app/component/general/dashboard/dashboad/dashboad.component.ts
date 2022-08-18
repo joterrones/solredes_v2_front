@@ -19,6 +19,7 @@ import { DashboardZonaComponent } from '../dashboard-zona/dashboard-zona.compone
 import { DashboardLineaEstadoComponent } from '../dashboard-linea-estado/dashboard-linea-estado.component';
 import { DashboardGuiasComponent } from '../dashboard-guias/dashboard-guias.component';
 import { DashboardInspeccionComponent } from '../dashboard-inspeccion/dashboard-inspeccion.component';
+import { FormControl } from '@angular/forms';
 
 
 @Component({
@@ -27,6 +28,7 @@ import { DashboardInspeccionComponent } from '../dashboard-inspeccion/dashboard-
   styleUrls: ['./dashboad.component.css'],
   providers: [DashboardService, GeneralService, UbigeoService, TareaService, ProyectoService]
 })
+
 export class DashboadComponent extends BaseComponent implements OnInit {
 
   departamentos = []
@@ -56,6 +58,8 @@ export class DashboadComponent extends BaseComponent implements OnInit {
     { id: 3, nombre: "Montaje" },
     { id: 4, nombre: "Cierre" },
   ];
+
+  selectVersion;
   tplinea = [];
   expediente = [];
   replanteo = [];
@@ -108,16 +112,22 @@ export class DashboadComponent extends BaseComponent implements OnInit {
   ntotalLPReforzamiento = 0.00;
 
   fechaInicio= "";
+  fechaInicioInspecion;
   fechaFinal= "";
+  fechaFinalInspecion;
 
   fechaInicio2= "";
+  fechaInicioGuia;
   fechaFinal2= "";
+  fechaFinalGuia;
 
-  fechaBool = true;
   fechaFinalBool = false;
 
-  fechaBool2 = true;
+
   fechaFinalBool2 = false;
+
+  date = new FormControl(new Date());
+  date2;
 
   constructor(
     public snackBar: MatSnackBar,
@@ -133,7 +143,7 @@ export class DashboadComponent extends BaseComponent implements OnInit {
     let anio = new Date().getFullYear();
     let mes = new Date().getMonth() +1;
     let dia = new Date().getDate();
-    
+    this.date2 =  new FormControl(new Date(anio, (mes-2), dia));
     let c_mesInicio = (mes-1).toString();
     let c_mesFinal = mes.toString();
     let c_dia = dia.toString();
@@ -219,7 +229,7 @@ export class DashboadComponent extends BaseComponent implements OnInit {
 
   selecVersion(id) {
     console.log("Slecet ID", id);   
-    
+    this.selectVersion = id;
     if(id == 1){
       this.selectedArr = this.expediente
       console.log(this.selectedArr);            
@@ -270,9 +280,11 @@ export class DashboadComponent extends BaseComponent implements OnInit {
       }
     });
   }
-
+  
+  
   inicio(event){
-    console.log(event);    
+    console.log(event);  
+    this.fechaInicioInspecion = event.value  
     let dia = event.value.getDate().toString()
     let mes = (event.value.getMonth()+1).toString()
     let anio = event.value.getFullYear().toString()
@@ -284,18 +296,16 @@ export class DashboadComponent extends BaseComponent implements OnInit {
       dia = '0'+dia;
     }
     this.fechaInicio = anio + '-' + mes + '-' + dia + ' 00:00:00.000'
-    this.fechaBool = false
+
     console.log(this.fechaInicio);
 
-    if(this.fechaFinalBool){
-      console.log(this.fechaFinal);      
-      this.getMonInspeccion();
-    }
+    this.getMonInspeccion();
     
   }
 
   fin(event){
     console.log(event);    
+    this.fechaFinalInspecion = event.value
     let dia = event.value.getDate().toString()
     let mes = (event.value.getMonth()+1).toString()
     let anio = event.value.getFullYear().toString()
@@ -316,7 +326,8 @@ export class DashboadComponent extends BaseComponent implements OnInit {
       fechaInicio: this.fechaInicio,
       fechaFinal: this.fechaFinal      
     }
-
+    console.log(request);
+    
     this.dashboardServices.getMonInspecion(request, this.getToken().token).subscribe(result => {
       console.log("Exportar Todo result", result)
       if(result.estado){
@@ -355,10 +366,11 @@ export class DashboadComponent extends BaseComponent implements OnInit {
 
   inicio2(event){
     console.log(event);    
+    this.fechaInicioGuia = event.value
     let dia = event.value.getDate().toString()
     let mes = (event.value.getMonth()+1).toString()
     let anio = event.value.getFullYear().toString()
-
+    
     if (mes < 10) {
       mes = '0'+mes;
     }
@@ -366,16 +378,14 @@ export class DashboadComponent extends BaseComponent implements OnInit {
       dia = '0'+dia;
     }
     this.fechaInicio2 = anio + '-' + mes + '-' + dia + ' 00:00:00.000'
-    this.fechaBool2 = false
 
-    if(this.fechaFinalBool2){   
-      this.getDatosGuia();
-    }
+    this.getDatosGuia();
     
   }
 
   fin2(event){
     console.log(event);    
+    this.fechaFinalGuia = event.value
     let dia = event.value.getDate().toString()
     let mes = (event.value.getMonth()+1).toString()
     let anio = event.value.getFullYear().toString()
@@ -770,7 +780,7 @@ export class DashboadComponent extends BaseComponent implements OnInit {
   openLineaEstado(): void { 
     const dialogRef = this.dialog.open(DashboardLineaEstadoComponent, {
       width: '950px', 
-      data:  this.dataResultado
+      data:  {resultado: this.dataResultado, version: this.selectVersion}
     });
     dialogRef.afterClosed().subscribe(result => {
       try {       
@@ -783,7 +793,7 @@ export class DashboadComponent extends BaseComponent implements OnInit {
   openInpeccion(): void { 
     const dialogRef = this.dialog.open(DashboardInspeccionComponent, {
       width: '950px', 
-      //data:  this.dataResultado
+      data:  {fechaInicio: this.fechaInicio, fechafinal: this.fechaFinal, fechaInicioInspecion: this.fechaInicioInspecion, fechaFinalInspecion: this.fechaFinalInspecion}
     });
     dialogRef.afterClosed().subscribe(result => {
       try {       
@@ -796,7 +806,7 @@ export class DashboadComponent extends BaseComponent implements OnInit {
   openGuias(): void { 
     const dialogRef = this.dialog.open(DashboardGuiasComponent, {
       width: '950px', 
-      //data:  this.dataResultado
+      data:  {fechaInicio2: this.fechaInicio2, fechaFinal2: this.fechaFinal2, fechaFinalGuia: this.fechaFinalGuia, fechaInicioGuia: this.fechaInicioGuia}
     });
     dialogRef.afterClosed().subscribe(result => {
       try {       

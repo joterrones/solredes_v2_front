@@ -1,10 +1,9 @@
 .contenedorChart{
-    width: 100%; 
-
+  width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: center;
-    flex-wrap:wrap
+    flex-wrap:wrap;
   }
   .elementoChart{
     flex-grow: 1;
@@ -36,3 +35,15 @@
     justify-content: space-between;
     flex-wrap: wrap;
   }
+
+  .contfecha{
+    display: flex;
+    flex-direction: row;
+  }
+
+  .mat-form-field-flex {
+    display: inline-flex;
+    align-items: baseline;
+    box-sizing: border-box;
+    width: 10%;
+}

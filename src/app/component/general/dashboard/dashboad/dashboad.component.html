@@ -65,10 +65,10 @@
         <mat-card>
           <div class="contCard">
             <h3>CANTIDAD DE ESTRUCTURAS POR LINEA</h3>
-            <button mat-icon-button color="accent" (click)="lineasEstructuras()">            
-              <mat-icon> zoom_out_map</mat-icon>            
+            <button mat-icon-button color="accent" (click)="lineasEstructuras()">
+              <mat-icon> zoom_out_map</mat-icon>
             </button>
-          </div>          
+          </div>
           <canvas id="Lineas_estructuras">{{myChartLineas}}</canvas>
         </mat-card>
       </div>
@@ -77,39 +77,39 @@
         <mat-card>
           <div class="contCard">
             <h3>CANTIDAD DE LINEAS POR ZONA</h3>
-            <button mat-icon-button color="accent" (click)="lineaZona()">            
-              <mat-icon> zoom_out_map</mat-icon>            
+            <button mat-icon-button color="accent" (click)="lineaZona()">
+              <mat-icon> zoom_out_map</mat-icon>
             </button>
-          </div>          
-          <canvas id="lineaZona">{{MyCharLineaZona}}</canvas>          
+          </div>
+          <canvas id="lineaZona">{{MyCharLineaZona}}</canvas>
         </mat-card>
       </div>
-      
+
       <div class="elementoChart">
         <mat-card>
           <div class="contCard">
             <h3>PROGRESO</h3>
-            <button mat-icon-button color="accent" (click)="openDialogProgreso()">            
-              <mat-icon> zoom_out_map</mat-icon>            
+            <button mat-icon-button color="accent" (click)="openDialogProgreso()">
+              <mat-icon> zoom_out_map</mat-icon>
             </button>
           </div>
           <canvas id="progreso">{{MyCharProgreso}}</canvas>
-        </mat-card>        
+        </mat-card>
       </div>
 
       <div class="elementoChart">
         <mat-card>
           <div class="contCard">
             <h3>PERIODO</h3>
-            <button mat-icon-button color="accent" (click)="openDialogPeriodo()">            
-              <mat-icon> zoom_out_map</mat-icon>            
+            <button mat-icon-button color="accent" (click)="openDialogPeriodo()">
+              <mat-icon> zoom_out_map</mat-icon>
             </button>
           </div>
           <canvas id="periodo">{{MyCharPeriodo}}</canvas>
-        </mat-card>        
+        </mat-card>
       </div>
 
-      <div class="elementoChart">
+      <!--<div class="elementoChart">
         <mat-card>
           <div class="contCard">
             <h3>ZONA</h3>
@@ -119,83 +119,79 @@
           </div>
           <canvas id="ZONA">{{MyCharZona}}</canvas>
         </mat-card>        
-      </div>
-      
+      </div> -->
+
       <div class="elementoChart">
-        <mat-card>          
+        <mat-card>
           <div class="contCard">
-            <h3>ESTADO DE LINEAS</h3>
+            <h3>ESTADO DE LÍNEAS</h3>
             <mat-form-field>
               <mat-select placeholder="Versiones">
-                  <mat-option *ngFor="let item of versiones" [value]="item.id" (click)="selecVersion(item.id)">
-                      {{item.nombre}}
-                  </mat-option>
+                <mat-option *ngFor="let item of versiones" [value]="item.id" (click)="selecVersion(item.id)">
+                  {{item.nombre}}
+                </mat-option>
               </mat-select>
             </mat-form-field>
-            <button mat-icon-button color="accent" (click)="openLineaEstado()">            
-              <mat-icon> zoom_out_map</mat-icon>            
+            <button mat-icon-button color="accent" (click)="openLineaEstado()">
+              <mat-icon> zoom_out_map</mat-icon>
             </button>
-          </div>          
+          </div>
           <canvas id="LineasEstado">{{myChartLineasEstado}}</canvas>
         </mat-card>
       </div>
 
       <div class="elementoChart">
-        <mat-card>          
+        <mat-card>
           <div class="contCard">
-            <h3>INSPECCION</h3>
-            <div >
-              <mat-form-field appearance="fill" style="margin-right: 12px;">
-                  <mat-label>Inicio</mat-label>
-                  <input matInput [matDatepicker]="picker1"
-                         (dateChange)="inicio( $event)" disabled>
-                  <mat-hint>MM/DD/YYYY</mat-hint>
-                  <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-                  <mat-datepicker #picker1 disabled="false"></mat-datepicker>
-              </mat-form-field>
-              <mat-form-field appearance="fill">
-                  <mat-label>Fin</mat-label>
-                  <input matInput [matDatepicker]="picker2"
-                         (dateChange)="fin( $event)" disabled>
-                  <mat-hint>MM/DD/YYYY</mat-hint>
-                  <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-                  <mat-datepicker #picker2 [disabled]="fechaBool"></mat-datepicker>
-              </mat-form-field>
-          </div>
-            <button mat-icon-button color="accent" (click)="openInpeccion()">            
-              <mat-icon> zoom_out_map</mat-icon>            
+            <h3>INSPECCIÓN</h3>            
+            <button mat-icon-button color="accent" (click)="openInpeccion()">
+              <mat-icon> zoom_out_map</mat-icon>
             </button>
-          </div>          
+          </div>
+          <div class="contfecha">
+            <mat-form-field appearance="fill" style="margin-right: 12px; max-width: 50%;">
+              <mat-label>Inicio</mat-label>
+              <input matInput [matDatepicker]="picker1" (dateChange)="inicio( $event)" disabled [formControl]="date2">
+              <mat-hint>MM/DD/YYYY</mat-hint>
+              <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+              <mat-datepicker #picker1 disabled="false"></mat-datepicker>
+            </mat-form-field>
+            <mat-form-field appearance="fill" style="max-width: 50%;">
+              <mat-label>Fin</mat-label>
+              <input matInput [matDatepicker]="picker2" (dateChange)="fin( $event)" disabled [formControl]="date">
+              <mat-hint>MM/DD/YYYY</mat-hint>
+              <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+              <mat-datepicker #picker2 disabled="false"></mat-datepicker>
+            </mat-form-field>
+          </div>
           <canvas id="INSPECCION">{{myChartInspeccion}}</canvas>
         </mat-card>
       </div>
 
-      <div class="elementoChart">
-        <mat-card>          
+      <div class="elementoChart" style="max-width: 480px;">
+        <mat-card>
           <div class="contCard">
-            <h3>GUÍAS</h3>
-            <div >
-              <mat-form-field appearance="fill" style="margin-right: 12px;">
-                  <mat-label>Inicio</mat-label>
-                  <input matInput [matDatepicker]="picker3"
-                         (dateChange)="inicio2( $event)" disabled>
-                  <mat-hint>MM/DD/YYYY</mat-hint>
-                  <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
-                  <mat-datepicker #picker3 disabled="false"></mat-datepicker>
-              </mat-form-field>
-              <mat-form-field appearance="fill">
-                  <mat-label>Fin</mat-label>
-                  <input matInput [matDatepicker]="picker4"
-                         (dateChange)="fin2( $event)" disabled>
-                  <mat-hint>MM/DD/YYYY</mat-hint>
-                  <mat-datepicker-toggle matSuffix [for]="picker4"></mat-datepicker-toggle>
-                  <mat-datepicker #picker4 [disabled]="fechaBool2"></mat-datepicker>
-              </mat-form-field>
-          </div>
-            <button mat-icon-button color="accent" (click)="openGuias()">            
-              <mat-icon> zoom_out_map</mat-icon>            
+            <h3>GUÍAS</h3>            
+            <button mat-icon-button color="accent" (click)="openGuias()">
+              <mat-icon> zoom_out_map</mat-icon>
             </button>
-          </div>          
+          </div>
+          <div class="contfecha">
+            <mat-form-field appearance="fill" style="margin-right: 12px; max-width: 50%;">
+              <mat-label>Inicio</mat-label>
+              <input matInput [matDatepicker]="picker3" (dateChange)="inicio2( $event)" disabled [formControl]="date2">
+              <mat-hint>MM/DD/YYYY</mat-hint>
+              <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+              <mat-datepicker #picker3 disabled="false"></mat-datepicker>
+            </mat-form-field>
+            <mat-form-field appearance="fill" style="max-width: 50%;">
+              <mat-label>Fin</mat-label>
+              <input matInput [matDatepicker]="picker4" (dateChange)="fin2( $event)" disabled [formControl]="date">
+              <mat-hint>MM/DD/YYYY</mat-hint>
+              <mat-datepicker-toggle matSuffix [for]="picker4"></mat-datepicker-toggle>
+              <mat-datepicker #picker4 disabled="false"></mat-datepicker>
+            </mat-form-field>
+          </div>
           <canvas id="GUIAS">{{myChartGuia}}</canvas>
         </mat-card>
       </div>

@@ -29,6 +29,8 @@ export class DashboardLineaEstadoComponent extends BaseComponent implements OnIn
     { id: 4, nombre: "Cierre" },
   ];
 
+  selectVersion
+
   constructor(
     public dialogRef: MatDialogRef<DashboardLineaEstadoComponent>,    
     @Inject(MAT_DIALOG_DATA) public dataResultado: any,
@@ -40,18 +42,30 @@ export class DashboardLineaEstadoComponent extends BaseComponent implements OnIn
 
   ngOnInit() {    
     console.log(this.dataResultado);
-    this.expediente = this.dataResultado.data.graficoLineaEstado.expediente
+    this.expediente = this.dataResultado.resultado.data.graficoLineaEstado.expediente
     
-    this.replanteo = this.dataResultado.data.graficoLineaEstado.replanteo
+    this.replanteo = this.dataResultado.resultado.data.graficoLineaEstado.replanteo
     
-    this.montaje = this.dataResultado.data.graficoLineaEstado.montaje
+    this.montaje = this.dataResultado.resultado.data.graficoLineaEstado.montaje
     
-    this.cierre = this.dataResultado.data.graficoLineaEstado.cierre
+    this.cierre = this.dataResultado.resultado.data.graficoLineaEstado.cierre
 
-    this.tplinea = this.dataResultado.data.graficoLineaEstado.tplinea
+    this.tplinea = this.dataResultado.resultado.data.graficoLineaEstado.tplinea
 
-    this.total = this.dataResultado.data.graficoLineaEstado.total
-
+    this.total = this.dataResultado.resultado.data.graficoLineaEstado.total
+    
+    if(this.dataResultado.version){
+      this.selectVersion = this.dataResultado.version
+      if(this.selectVersion == 1){
+        this.selectedArr = this.expediente   
+      }else if(this.selectVersion == 2){
+        this.selectedArr = this.replanteo      
+      }else if(this.selectVersion == 3){
+        this.selectedArr = this.montaje     
+      }else if(this.selectVersion == 4){
+        this.selectedArr = this.cierre
+      }
+    }
     this.getEstadoLineas();  
 
   }
@@ -72,6 +86,10 @@ export class DashboardLineaEstadoComponent extends BaseComponent implements OnIn
     this.getEstadoLineas();
   }
   getEstadoLineas(){
+    if (this.myChartLineasEstado != undefined) {
+      this.myChartLineasEstado.clear();
+      this.myChartLineasEstado.destroy();
+    } 
     this.myChartLineasEstado = new Chart('LineasEstados', {
       type: 'bar',
       data: {

@@ -10,8 +10,8 @@
 	bottom: 0px;
 	width: auto;
 	height: auto;
-  background: rgb(246,248,252);
-  background: linear-gradient(180deg, rgba(246,248,252,1) 0%, rgba(199,213,237,1) 54%, rgba(171,192,228,1) 75%, rgba(171,192,228,1) 100%);
+  background: rgb(221,229,244);
+  /*background: linear-gradient(180deg, rgba(246,248,252,1) 0%, rgba(199,213,237,1) 54%, rgba(171,192,228,1) 75%, rgba(171,192,228,1) 100%);*/
   background-repeat: no-repeat;  
   /*background-image: url('../../../../assets/images/fondologin6_1.jpg');*/
   /*background-image: url('../../../../assets/images/fondologin7_1.jpg');*/

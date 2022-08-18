@@ -6,7 +6,7 @@
                   <mat-form-field appearance="fill" style="margin-right: 12px;">
                       <mat-label>Inicio</mat-label>
                       <input matInput [matDatepicker]="picker3"
-                             (dateChange)="inicio2( $event)" disabled>
+                             (dateChange)="inicio2( $event)" disabled [formControl]="date2">
                       <mat-hint>MM/DD/YYYY</mat-hint>
                       <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
                       <mat-datepicker #picker3 disabled="false"></mat-datepicker>
@@ -14,10 +14,10 @@
                   <mat-form-field appearance="fill">
                       <mat-label>Fin</mat-label>
                       <input matInput [matDatepicker]="picker4"
-                             (dateChange)="fin2( $event)" disabled>
+                             (dateChange)="fin2( $event)" disabled [formControl]="date">
                       <mat-hint>MM/DD/YYYY</mat-hint>
                       <mat-datepicker-toggle matSuffix [for]="picker4"></mat-datepicker-toggle>
-                      <mat-datepicker #picker4 [disabled]="fechaBool2"></mat-datepicker>
+                      <mat-datepicker #picker4 disabled="false"></mat-datepicker>
                   </mat-form-field>                    
               <canvas id="GUIAS_">{{myChartGuia}}</canvas>      
             </mat-card>
