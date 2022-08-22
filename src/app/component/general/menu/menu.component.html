@@ -11,7 +11,7 @@
                     </label>
                 </button>
             </label></mat-toolbar>
-        <!--último iditem = 27 -->
+        <!--último iditem = 28 -->
         <mat-nav-list>
             <mat-accordion>
                 <mat-expansion-panel [expanded]="idPanel == 1" >
@@ -161,6 +161,10 @@
                     <a mat-list-item [routerLink]="['/mapageneral']" *ngIf="mo_mapge" (click)="panel(6,21)" [ngClass]="{'select':iditem == 21}">
                         <mat-icon>keyboard_arrow_right</mat-icon>
                         <span>Mapa General</span>
+                    </a>
+                    <a mat-list-item [routerLink]="['/mapageneral2']" *ngIf="mo_mapge" (click)="panel(6,28)" [ngClass]="{'select':iditem == 28}">
+                        <mat-icon>keyboard_arrow_right</mat-icon>
+                        <span>Mapa General light</span>
                     </a>
                     <a mat-list-item [routerLink]="['/datosMonitoreo']" *ngIf="mo_datos" (click)="panel(6,26)" [ngClass]="{'select':iditem == 26}">
                         <mat-icon>keyboard_arrow_right</mat-icon>

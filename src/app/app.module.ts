@@ -152,6 +152,7 @@ import { DatosMonitoreoPopupComponent } from './component/datos-monitoreo-popup/
 import { DatosAlmacenPopupComponent } from './component/datos-almacen-popup/datos-almacen-popup.component';
 import { DashboardInspeccionComponent } from './component/general/dashboard/dashboard-inspeccion/dashboard-inspeccion.component';
 import { DashboardGuiasComponent } from './component/general/dashboard/dashboard-guias/dashboard-guias.component';
+import { MapaGeneral2Component } from './component/mapa-general2/mapa-general2.component';
 
 @NgModule({
   declarations: [
@@ -296,6 +297,7 @@ import { DashboardGuiasComponent } from './component/general/dashboard/dashboard
     DatosAlmacenPopupComponent,
     DashboardInspeccionComponent,
     DashboardGuiasComponent,
+    MapaGeneral2Component,
 
   ],
   imports: [

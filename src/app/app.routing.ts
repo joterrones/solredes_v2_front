@@ -49,6 +49,7 @@ import { DataUsuarioProComponent } from './component/data-usuario-pro/data-usuar
 import { DatosMonitoreoComponent } from './component/datos-monitoreo/datos-monitoreo.component';
 import { VersionComponent } from './component/configGeneral/version/version.component';
 import { VersiondetalleComponent } from './component/configGeneral/versiondetalle/versiondetalle.component';
+import { MapaGeneral2Component } from './component/mapa-general2/mapa-general2.component';
 
 //Array de rutas
 const appRoutes:Routes=[
@@ -98,6 +99,7 @@ const appRoutes:Routes=[
     {path:'datosMonitoreo',component:DatosMonitoreoComponent},
     {path:'version',component:VersionComponent},
     {path:'detalle_version/:n_idv_cabecera/:c_cabecera',component:VersiondetalleComponent}, 
+    {path:'mapageneral2',component:MapaGeneral2Component},
     {path:'**',component:LoginComponent},    
      
 ]
