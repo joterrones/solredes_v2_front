@@ -9,7 +9,7 @@ import { BaseComponent } from '../base/base.component';
 import XYZ from 'ol/source/XYZ';
 import {
   defaults as defaultControls,
-  Control
+  Control, Attribution
 } from 'ol/control';
 import { SeguridadService } from 'src/app/service/seguridad.service';
 import { ResultadoApi } from 'src/app/interface/common.interface';
@@ -19,6 +19,7 @@ import { confGeneralService } from 'src/app/service/confGeneral.service';
 import { MapaService } from 'src/app/service/mapa.service';
 import { FiltroBuscarComponent } from '../mapa/filtro-buscar/filtro-buscar.component';
 import { MapaDetalleComponent } from '../mapa/mapa-detalle/mapa-detalle.component';
+import OSM from 'ol/source/OSM';
 
 @Component({
   selector: 'app-mapa-general2',
@@ -122,9 +123,13 @@ export class MapaGeneral2Component extends BaseComponent implements OnInit {
     this.cargarFiltros();
     this.setearFiltros();
     this.tileBase = new TileLayer({
-      source: new XYZ({
-        url: 'https://{a-c}.tile.openstreetmap.org/{z}/{x}/{y}.png'
-      })
+      source: new OSM(),
+      /* source: new XYZ({
+        url: 'https://{a-c}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+      }), */
+      visible: true,
+      minResolution: 0,
+      maxResolution: 4,
     })
     this.cargarCapas();
     this.mostarCapas(this.data);
@@ -283,19 +288,19 @@ export class MapaGeneral2Component extends BaseComponent implements OnInit {
             break;
           case 2:
             if (checkOk.filter(o => o.completed && o.id == 1).length > 0) {
-              this.tileLineasRepLP = this.customTileLayer('solredes:linea', "n_version =2 and n_idpl_tipolinea = 1 and n_idpro_proyecto = " + this.proyecto.n_idpro_proyecto);
+              /* this.tileLineasRepLP = this.customTileLayer('solredes:linea', "n_version =2 and n_idpl_tipolinea = 1 and n_idpro_proyecto = " + this.proyecto.n_idpro_proyecto); */
               this.tileAtributosRepLP = this.customTileLayer('solredes:SE', "n_version =2 and n_idpl_tipolinea = 1 and n_idpro_proyecto = " + this.proyecto.n_idpro_proyecto);
-              this.arrayTile.push(this.tileLineasRepLP, this.tileAtributosRepLP)
+              this.arrayTile.push(/* this.tileLineasRepLP, */ this.tileAtributosRepLP)
             };
             if (checkOk.filter(o => o.completed && o.id == 2).length > 0) {
-              this.tileLineasRepRP = this.customTileLayer('solredes:linea', "n_version =2 and n_idpl_tipolinea = 2 and n_idpro_proyecto = " + this.proyecto.n_idpro_proyecto);
+              /* this.tileLineasRepRP = this.customTileLayer('solredes:linea', "n_version =2 and n_idpl_tipolinea = 2 and n_idpro_proyecto = " + this.proyecto.n_idpro_proyecto); */
               this.tileAtributosRepRP = this.customTileLayer('solredes:SE', "n_version =2 and n_idpl_tipolinea = 2 and n_idpro_proyecto = " + this.proyecto.n_idpro_proyecto);
-              this.arrayTile.push(this.tileLineasRepRP, this.tileAtributosRepRP)
+              this.arrayTile.push(/* this.tileLineasRepRP, */ this.tileAtributosRepRP)
             };
             if (checkOk.filter(o => o.completed && o.id == 3).length > 0) {
-              this.tileLineasRepRS = this.customTileLayer('solredes:linea', "n_version =2 and n_idpl_tipolinea = 3 and n_idpro_proyecto = " + this.proyecto.n_idpro_proyecto);
+              /* this.tileLineasRepRS = this.customTileLayer('solredes:linea', "n_version =2 and n_idpl_tipolinea = 3 and n_idpro_proyecto = " + this.proyecto.n_idpro_proyecto); */
               this.tileAtributosRepRS = this.customTileLayer('solredes:SE', "n_version =2 and n_idpl_tipolinea = 3 and n_idpro_proyecto = " + this.proyecto.n_idpro_proyecto);
-              this.arrayTile.push(this.tileLineasRepRS, this.tileAtributosRepRS)
+              this.arrayTile.push(/* this.tileLineasRepRS, */ this.tileAtributosRepRS)
             }
             break;
           case 3:
@@ -434,13 +439,15 @@ export class MapaGeneral2Component extends BaseComponent implements OnInit {
         params: {
           'LAYERS': capa,
           'CQL_FILTER': filtro,
-          'TILED': true
+          //'TILED': true
         },
         projection: 'EPSG:4326',
         serverType: 'geoserver',
         transition: 0,
-      })
-
+      }),
+      visible: true,
+      minResolution: 0,
+      maxResolution: 4, 
     });
   }
 
@@ -451,7 +458,7 @@ export class MapaGeneral2Component extends BaseComponent implements OnInit {
     const view = new View({
       center: [this.lng, this.lat],
       zoom: this.zoom,
-      projection: 'EPSG:4326'
+      projection: 'EPSG:4326',
     });
 
     this.map = new Map({
@@ -459,6 +466,9 @@ export class MapaGeneral2Component extends BaseComponent implements OnInit {
       layers: [this.tileBase],
       view: view,
       controls: defaultControls({ attribution: true, zoom: true }).extend([])
+      /* controls: defaultControls({attribution: false}).extend([new Attribution({
+        collapsible: false,
+      })]), */
     });
 
 
