@@ -106,6 +106,11 @@ export class MapaGeneral2Component extends BaseComponent implements OnInit {
   tileDepartamento;
   textoVersiones = "0";
 
+  xmin = 0.0;
+  ymin = 0.0; 
+  xmax = 0.0; 
+  ymax = 0.0;
+
   constructor(
     public _router: Router,
     public snackBar: MatSnackBar,
@@ -121,15 +126,16 @@ export class MapaGeneral2Component extends BaseComponent implements OnInit {
     this.usuarioLog = this.getUser().data;
     this.getPantallaRol();
     this.cargarFiltros();
-    this.setearFiltros();
+    //this.setearFiltros();
     this.tileBase = new TileLayer({
-      source: new OSM(),
-      /* source: new XYZ({
+      //source: new OSM(),
+      source: new XYZ({
         url: 'https://{a-c}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-      }), */
+      }),
       visible: true,
       minResolution: 0,
       maxResolution: 4,
+      useInterimTilesOnError: false,
     })
     this.cargarCapas();
     this.mostarCapas(this.data);
@@ -140,12 +146,12 @@ export class MapaGeneral2Component extends BaseComponent implements OnInit {
       {
         name: 'Expediente',
         version: 1,
-        completed: true,
+        completed: false,
         color: 'primary',
         subtasks: [
-          { id: 1, name: 'Linea primaria', completed: true, color: 'primary' },
-          { id: 2, name: 'Red primaria', completed: true, color: 'accent' },
-          { id: 3, name: 'Red secudaria', completed: true, color: 'warn' },
+          { id: 1, name: 'Linea primaria', completed: false, color: 'primary' },
+          { id: 2, name: 'Red primaria', completed: false, color: 'accent' },
+          { id: 3, name: 'Red secudaria', completed: false, color: 'warn' },
         ],
       }, {
         name: 'Replanteo',
@@ -238,7 +244,7 @@ export class MapaGeneral2Component extends BaseComponent implements OnInit {
         this.data[1].subtasks[2].completed = true
         break;
     }
-  }
+  } 
 
   openDialog(): void {
     const dialogRef = this.dialog.open(FiltroCapaComponent, {
@@ -249,7 +255,7 @@ export class MapaGeneral2Component extends BaseComponent implements OnInit {
       if (result) {
         this.data = result;
         if (result.flag) {
-          this.mostarCapas(result);
+          this.mostarCapas(this.data);
         }
       }
     });
@@ -288,19 +294,20 @@ export class MapaGeneral2Component extends BaseComponent implements OnInit {
             break;
           case 2:
             if (checkOk.filter(o => o.completed && o.id == 1).length > 0) {
-              /* this.tileLineasRepLP = this.customTileLayer('solredes:linea', "n_version =2 and n_idpl_tipolinea = 1 and n_idpro_proyecto = " + this.proyecto.n_idpro_proyecto); */
-              this.tileAtributosRepLP = this.customTileLayer('solredes:SE', "n_version =2 and n_idpl_tipolinea = 1 and n_idpro_proyecto = " + this.proyecto.n_idpro_proyecto);
-              this.arrayTile.push(/* this.tileLineasRepLP, */ this.tileAtributosRepLP)
+              this.tileLineasRepLP = this.customTileLayer('solredes:linea2', "n_version =2 and n_idpl_tipolinea = 1 and n_idpro_proyecto = " + this.proyecto.n_idpro_proyecto);
+              this.tileAtributosRepLP = this.customTileLayer('solredes:punto2', "n_version =2 and n_idpl_tipolinea = 1 and n_idpro_proyecto = " + this.proyecto.n_idpro_proyecto);
+              this.arrayTile.push(this.tileLineasRepLP, this.tileAtributosRepLP)
             };
             if (checkOk.filter(o => o.completed && o.id == 2).length > 0) {
-              /* this.tileLineasRepRP = this.customTileLayer('solredes:linea', "n_version =2 and n_idpl_tipolinea = 2 and n_idpro_proyecto = " + this.proyecto.n_idpro_proyecto); */
-              this.tileAtributosRepRP = this.customTileLayer('solredes:SE', "n_version =2 and n_idpl_tipolinea = 2 and n_idpro_proyecto = " + this.proyecto.n_idpro_proyecto);
-              this.arrayTile.push(/* this.tileLineasRepRP, */ this.tileAtributosRepRP)
+              this.tileLineasRepRP = this.customTileLayer('solredes:linea2', "n_version =2 and n_idpl_tipolinea = 2 and n_idpro_proyecto = " + this.proyecto.n_idpro_proyecto);
+              this.tileAtributosRepRP = this.customTileLayer('solredes:punto2', "n_version =2 and n_idpl_tipolinea = 2 and n_idpro_proyecto = " + this.proyecto.n_idpro_proyecto);
+              this.arrayTile.push(this.tileLineasRepRP, this.tileAtributosRepRP)
             };
             if (checkOk.filter(o => o.completed && o.id == 3).length > 0) {
-              /* this.tileLineasRepRS = this.customTileLayer('solredes:linea', "n_version =2 and n_idpl_tipolinea = 3 and n_idpro_proyecto = " + this.proyecto.n_idpro_proyecto); */
-              this.tileAtributosRepRS = this.customTileLayer('solredes:SE', "n_version =2 and n_idpl_tipolinea = 3 and n_idpro_proyecto = " + this.proyecto.n_idpro_proyecto);
-              this.arrayTile.push(/* this.tileLineasRepRS, */ this.tileAtributosRepRS)
+              this.tileLineasRepRS = this.customTileLayer('solredes:linea2', "n_version =2 and n_idpl_tipolinea = 3 and n_idpro_proyecto = " + this.proyecto.n_idpro_proyecto);
+              this.tileAtributosRepRS = this.customTileLayer('solredes:punto2', "n_version =2 and n_idpl_tipolinea = 3 and n_idpro_proyecto = " + this.proyecto.n_idpro_proyecto);
+              console.log(this.tileAtributosRepRS);              
+              this.arrayTile.push(this.tileLineasRepRS, this.tileAtributosRepRS)
             }
             break;
           case 3:
@@ -393,12 +400,14 @@ export class MapaGeneral2Component extends BaseComponent implements OnInit {
       }
 
     });
-    console.log("textoVersiones", this.textoVersiones)
+    //console.log("textoVersiones", this.textoVersiones)
     //console.log(this.map.getLayers().getArray());
 
     this.map.getLayers().getArray().slice(1).forEach(layer => this.map.removeLayer(layer))
     this.arrayTile.forEach(layer => this.map.addLayer(layer));
     // this.cargarCapas();
+    console.log("iteracin");
+    
   }
 
   getPantallaRol() {
@@ -432,22 +441,22 @@ export class MapaGeneral2Component extends BaseComponent implements OnInit {
   }
 
   customTileLayer(capa, filtro) {
-
     return new TileLayer({
       source: new TileWMS({
         url: this.url,
         params: {
           'LAYERS': capa,
           'CQL_FILTER': filtro,
-          //'TILED': true
+          'TILED': true
         },
         projection: 'EPSG:4326',
         serverType: 'geoserver',
         transition: 0,
+        crossOrigin: "anonymus"
       }),
       visible: true,
       minResolution: 0,
-      maxResolution: 4, 
+      maxResolution: 4,
     });
   }
 
@@ -458,6 +467,7 @@ export class MapaGeneral2Component extends BaseComponent implements OnInit {
     const view = new View({
       center: [this.lng, this.lat],
       zoom: this.zoom,
+      maxZoom: 19.2,
       projection: 'EPSG:4326',
     });
 
@@ -471,6 +481,22 @@ export class MapaGeneral2Component extends BaseComponent implements OnInit {
       })]), */
     });
 
+    
+    this.map.on('moveend', () => {  
+      var glbox =  this.map.getView().calculateExtent(this.map.getSize());
+      console.log(glbox); 
+      this.xmin = glbox[0];
+      this.ymin = glbox[1]; 
+      this.xmax = glbox[2]; 
+      this.ymax = glbox[3];
+      this.url = "http://35.184.146.235:8080/geoserver/solredes/wms?viewparams=xmin:"+this.xmin+";ymin:"+this.ymin+";xmax:"+this.xmax+";ymax:"+this.ymax;
+      console.log(this.map.getView().getZoom());
+      console.log(this.map.getView());
+      if (this.map.getView().getZoom() > 15 && this.map.getView().getZoom() < 16) {
+        this.mostarCapas(this.data);  
+      }
+      
+    });
 
     this.map.on('singleclick', (evt) => {
       this.spinner = true;
