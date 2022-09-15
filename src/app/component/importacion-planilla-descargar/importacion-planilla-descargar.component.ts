@@ -477,12 +477,13 @@ export class ImportacionPlanillaDescargarComponent extends BaseComponent impleme
                 right: { style: 'thin' },
                 bottom: { style: 'thin' },
             };
-            var cont = 0;
-            var elementAux = 0;
+            /* var cont = 0;
+            var elementAux = 0; */
             datos.forEach(element => {
 
-                if ( elementAux != element.n_idpl_estructura && (cont == 2 || cont == 0)) {
+                /* if ( elementAux != element.n_idpl_estructura && (cont == 2 || cont == 0)) {
                     elementAux = element.n_idpl_estructura;
+                     */
                     row += 1;
                     worksheet.getCell('A' + row).alignment = { vertical: 'middle', horizontal: 'center' };
                     this.setdatogeneral(worksheet, 'A' + row, element.c_nombre, 10, false);
@@ -916,8 +917,8 @@ export class ImportacionPlanillaDescargarComponent extends BaseComponent impleme
                         bottom: { style: 'thin' },
                     };  
                     
-                    cont=1;
-                }else if(cont == 1 && elementAux == element.n_idpl_estructura){
+                    //cont=1;
+                /* }else if(cont == 1 && elementAux == element.n_idpl_estructura){
                     
                     if (element.c_codigoas == 'undefined') {
                         element.c_codigoas = "";
@@ -945,7 +946,7 @@ export class ImportacionPlanillaDescargarComponent extends BaseComponent impleme
                     };
                     cont = 0;
                     elementAux = element.n_idpl_estructura;
-                }
+                } */
                 
             });
             worksheet.autoFilter = 'A1:AW1';

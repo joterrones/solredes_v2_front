@@ -40,7 +40,6 @@ export class BaseComponent implements OnInit {
       this.bLogin = false;
     } else {
       this.bLogin = true;
-
     }
     console.log(this.bLogin)
   }
