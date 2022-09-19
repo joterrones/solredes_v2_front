@@ -340,7 +340,7 @@ import { MapaGeneral2Component } from './component/mapa-general2/mapa-general2.c
     SocketIoModule,
     MatBadgeModule,
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyDpcWweoH2IqPSGvBX91N46EsIdY-IfNiY'
+      apiKey: 'AIzaSyD2zo-QSWTbDC6Hax2wAQO5CqvcLWfW_g4'
     })
   ],
   entryComponents: [
