@@ -47,6 +47,16 @@ export class ReporteService {
     return this._http.post(this.url + 'reporte/getZonasProyectos', request, { headers: reqHeader });
 }
 
+getPeriodos(request,token): Observable<any> {
+  var reqHeader = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + token
+  });
+  console.log(request);
+  
+  return this._http.post(this.url + 'reporte/getPeriodos', request, { headers: reqHeader });
+}
+
 saveReporteCabecero(request,token): Observable<any> {
   var reqHeader = new HttpHeaders({
       'Content-Type': 'application/json',

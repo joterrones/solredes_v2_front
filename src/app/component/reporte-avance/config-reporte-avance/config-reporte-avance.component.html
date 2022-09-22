@@ -27,7 +27,7 @@
              required />
         </mat-form-field>
     </div>
-    <div mat-dialog-actions>
+    <div mat-dialog-actions class="btn-conteiner" >
         <button mat-button type="submit" cdkFocusInitial
         [disabled]="!newForm.form.valid">
         <mat-icon>save</mat-icon>
@@ -35,6 +35,7 @@
         </button>
         <button mat-icon-button color="error" (click)="limpiar()"  type="reset" [disabled]="permisoEdit">
             <mat-icon aria-label="Example icon-button with a heart icon">clear</mat-icon>
+            <span>Limpiar</span>
         </button>
     </div>
     </form>

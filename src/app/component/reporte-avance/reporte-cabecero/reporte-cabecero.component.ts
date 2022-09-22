@@ -23,7 +23,7 @@ import { ReporteCabeceroEditarComponent } from '../reporte-cabecero-editar/repor
 export class ReporteCabeceroComponent extends BaseComponent implements OnInit {
   pantallaRol= [];
   permisoEdit: boolean = false;
-  displayedColumns: string[] = ['eliminar','insertar-editar','detalle','anio','mes','zona','fecha', 'config'];
+  displayedColumns: string[] = ['insertar','detalle','mes','zona','fecha', 'eliminar','config'];
 
 
   public CabeceroReporte: MatTableDataSource<any>;

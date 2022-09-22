@@ -157,6 +157,7 @@ import { ReporteAvanceComponent } from './component/reporte-avance/reporte-avanc
 import { ReporteCabeceroComponent } from './component/reporte-avance/reporte-cabecero/reporte-cabecero.component';
 import { ReporteCabeceroEditarComponent } from './component/reporte-avance/reporte-cabecero-editar/reporte-cabecero-editar.component';
 import { ConfigReporteAvanceComponent } from './component/reporte-avance/config-reporte-avance/config-reporte-avance.component';
+import { FlexLayoutModule } from '@angular/flex-layout'
 
 @NgModule({
   declarations: [
@@ -347,6 +348,7 @@ import { ConfigReporteAvanceComponent } from './component/reporte-avance/config-
     FormsModule,
     SocketIoModule,
     MatBadgeModule,
+    FlexLayoutModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyD2zo-QSWTbDC6Hax2wAQO5CqvcLWfW_g4'
     })

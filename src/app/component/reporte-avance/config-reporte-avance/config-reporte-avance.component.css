@@ -36,3 +36,6 @@ table {
   height: 800px;
   overflow-y: scroll;
 }
+.btn-conteiner{
+  display: flex;
+}

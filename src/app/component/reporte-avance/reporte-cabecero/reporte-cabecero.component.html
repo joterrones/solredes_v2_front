@@ -3,69 +3,66 @@
         <h2> CONTROL REPORTE DE AVANCE</h2>
     </div>
     <mat-accordion>
-        <mat-expansion-panel>                
+        <mat-expansion-panel>
 
         </mat-expansion-panel>
-      </mat-accordion>
-    <br/>
+    </mat-accordion>
+    <br />
     <mat-card>
         <table mat-table [dataSource]="CabeceroReporte" matSort class="mat-elevation-z8">
+            <ng-container matColumnDef="insertar">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header class="th-header">
+                    <button mat-icon-button color="error" (click)="openEdit(null)" [disabled]="!permisoEdit">
+                        <mat-icon>add</mat-icon>
+                    </button>
+                </th>
+                <td mat-cell *matCellDef="let element">
+                    <button mat-icon-button color="error" (click)="openEdit(element)" [disabled]="!permisoEdit">
+                        <mat-icon>edit</mat-icon>
+                    </button>
+                </td>
+            </ng-container>
+            <ng-container matColumnDef="detalle">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header class="th-header"> Detalle </th>
+                <td mat-cell *matCellDef="let element" class="td-header">
+                    <button mat-icon-button color="error" (click)="openDialog(element)" [disabled]="!permisoEdit">
+                        <mat-icon>attach_file</mat-icon>
+                    </button>
+                </td>
+                
+            </ng-container>
+            <ng-container matColumnDef="mes">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header class="th-header"> Mes </th>
+                <td mat-cell *matCellDef="let element">{{element.c_descripcion}}</td>
+            </ng-container>
+            <ng-container matColumnDef="zona">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header class="th-header"> Zona </th>
+                <td mat-cell *matCellDef="let element">{{element.c_nombre}}</td>
+            </ng-container>
+            <ng-container matColumnDef="fecha">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header class="th-header"> Fecha </th>
+                <td mat-cell *matCellDef="let element">{{element.d_fechacorte | date: 'dd/MM/yyyy'}}</td>
+            </ng-container>
             <ng-container matColumnDef="eliminar">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header class="th-header" > Elminar </th>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header class="th-header"> Elminar </th>
                 <td mat-cell *matCellDef="let element" class="td-header">
                     <button mat-icon-button color="error" (click)="delete(element)" [disabled]="!permisoEdit">
                         <mat-icon aria-label="Example icon-button with a heart icon">delete</mat-icon>
                     </button>
                 </td>
             </ng-container>
-            <ng-container matColumnDef="insertar-editar">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header class="th-header" > 
-                    <button mat-icon-button color="error" (click)="openEdit(null)" [disabled]="!permisoEdit">
-                        <mat-icon aria-label="Example icon-button with a heart icon">add</mat-icon>
-                    </button>
-                </th>
-                <td mat-cell *matCellDef="let element" >
-                    <button mat-icon-button color="error" (click)="openEdit(element)" [disabled]="!permisoEdit">
-                        <mat-icon aria-label="Example icon-button with a heart icon">edit</mat-icon>
-                    </button>
-                </td>
-            </ng-container> 
-            <ng-container matColumnDef="detalle">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header class="th-header" > Detalle </th>
-                <td mat-cell *matCellDef="let element" class="td-header">
-                    <button mat-icon-button color="error" (click)="openDialog(element)" [disabled]="!permisoEdit">
-                        <mat-icon aria-label="Example icon-button with a heart icon">attach_file</mat-icon>
-                    </button>
-                </td>
-            </ng-container> 
-            <ng-container matColumnDef="anio">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header class="th-header" > Año </th>
-                <td mat-cell *matCellDef="let element" >{{element.n_anio}}</td>
-            </ng-container>
-            <ng-container matColumnDef="mes">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header class="th-header" > Mes </th>
-                <td mat-cell *matCellDef="let element" >{{element.n_mes}}</td>
-            </ng-container>
-            <ng-container matColumnDef="zona">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header class="th-header" > Zona </th>
-                <td mat-cell *matCellDef="let element" >{{element.c_nombre}}</td>
-            </ng-container>
-            <ng-container matColumnDef="fecha">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header class="th-header" > Fecha </th>
-                <td mat-cell *matCellDef="let element" >{{element.d_fechacorte}}</td>
-            </ng-container>
             <ng-container matColumnDef="config">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header class="th-header" > Configurar </th>
-                <td mat-cell *matCellDef="let element" >
+                <th mat-header-cell *matHeaderCellDef mat-sort-header class="th-header"> Configurar </th>
+                <td mat-cell *matCellDef="let element">
                     <button mat-icon-button color="error" (click)="openConfig(element)" [disabled]="!permisoEdit">
                         <mat-icon aria-label="Example icon-button with a heart icon">settings</mat-icon>
                     </button>
                 </td>
             </ng-container>
-            
+
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
             <ng-template let-row matRowDef cdkVirtualFor [matRowDefColumns]="displayedColumns">
-            <tr mat-row></tr>
+                <tr mat-row></tr>
             </ng-template>
         </table>
     </mat-card>

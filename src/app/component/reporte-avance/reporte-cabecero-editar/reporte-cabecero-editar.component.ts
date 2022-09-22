@@ -17,13 +17,13 @@ import { BaseComponent } from '../../base/base.component';
 export class ReporteCabeceroEditarComponent extends BaseComponent implements OnInit {
 
   zonas :[];
+  periodos:[];
   fechaInicio = ''
 
   reporte : Reporte
   editar: boolean;
   cabecero: any ={
-    n_anio: 0,
-    n_mes: 0  ,
+    n_idgen_periodo: 0,
     n_idgen_zona: 0, 
     c_nombre: '' ,
     d_fechacorte: new Date,
@@ -52,8 +52,7 @@ export class ReporteCabeceroEditarComponent extends BaseComponent implements OnI
       console.log("guardando");
       this.editar = false;
       this.cabecero = {
-        n_anio: 0,
-        n_mes: 0  ,
+        n_idgen_periodo: 0,
         n_idgen_zona: 0,
         c_nombre: '' ,
         d_fechacorte: Date,
@@ -64,8 +63,9 @@ export class ReporteCabeceroEditarComponent extends BaseComponent implements OnI
       this.editar = true;
       this.cabecero = this.data.item;
       console.log("editando");
-      console.log('data: ',this.data.item)      
+      console.log('data: ',this.data.item)    
     } 
+    this.getPeriodos()
     this.getZonasProyecto()
   }
 
@@ -81,6 +81,20 @@ export class ReporteCabeceroEditarComponent extends BaseComponent implements OnI
         this.openSnackBar(error.error, 99);
       });
       console.log('zonas: ',this.zonas);
+  }
+
+  getPeriodos() {  
+    let request = {
+      n_idpl_tipolinea: this.proyecto.n_idpro_proyecto      
+    }
+    this.reporteService.getPeriodos(request,this.getToken().token).subscribe(
+      result => {                
+        console.log(result.data, 'dato de periodos');
+        this.periodos = result.data
+      }, error => {
+        this.openSnackBar(error.error, 99);
+      });
+      console.log('zonas: ',this.periodos);
   }
 
   guardar(newForm){
