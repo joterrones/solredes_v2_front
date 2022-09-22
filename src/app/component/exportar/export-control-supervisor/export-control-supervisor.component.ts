@@ -5,12 +5,13 @@ import { ExcelFormatService } from '../../../service/excelformat.service';
 import { BaseComponent } from '../../base/base.component';
 import { ProyectoService } from '../../../service/proyecto.service';
 import { AppSettings } from 'src/app/common/appsettings';
+import { ReporteService } from 'src/app/service/reporte.service';
 
 @Component({
   selector: 'app-export-control-supervisor',
   templateUrl: './export-control-supervisor.component.html',
   styleUrls: ['./export-control-supervisor.component.css'],
-  providers: [ProyectoService,]
+  providers: [ProyectoService]
 })
 export class ExportControlSupervisorComponent extends BaseComponent implements OnInit {
 

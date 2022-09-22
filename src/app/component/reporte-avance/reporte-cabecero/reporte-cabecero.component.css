@@ -1,0 +1,12 @@
+table{
+    width: 100%;
+    text-align: center;
+}
+.th-header{
+    align-items: center;
+    background-color: rgb(11, 7, 77);
+    color: white;
+}
+.td-header{
+    background-color: rgb(233, 237, 246);
+}

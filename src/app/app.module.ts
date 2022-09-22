@@ -153,6 +153,10 @@ import { DatosAlmacenPopupComponent } from './component/datos-almacen-popup/dato
 import { DashboardInspeccionComponent } from './component/general/dashboard/dashboard-inspeccion/dashboard-inspeccion.component';
 import { DashboardGuiasComponent } from './component/general/dashboard/dashboard-guias/dashboard-guias.component';
 import { MapaGeneral2Component } from './component/mapa-general2/mapa-general2.component';
+import { ReporteAvanceComponent } from './component/reporte-avance/reporte-avance/reporte-avance.component';
+import { ReporteCabeceroComponent } from './component/reporte-avance/reporte-cabecero/reporte-cabecero.component';
+import { ReporteCabeceroEditarComponent } from './component/reporte-avance/reporte-cabecero-editar/reporte-cabecero-editar.component';
+import { ConfigReporteAvanceComponent } from './component/reporte-avance/config-reporte-avance/config-reporte-avance.component';
 
 @NgModule({
   declarations: [
@@ -298,6 +302,10 @@ import { MapaGeneral2Component } from './component/mapa-general2/mapa-general2.c
     DashboardInspeccionComponent,
     DashboardGuiasComponent,
     MapaGeneral2Component,
+    ReporteAvanceComponent,
+    ReporteCabeceroComponent,
+    ReporteCabeceroEditarComponent,
+    ConfigReporteAvanceComponent,
 
   ],
   imports: [
@@ -400,7 +408,10 @@ import { MapaGeneral2Component } from './component/mapa-general2/mapa-general2.c
     DatosMonitoreoPopupComponent,
     DatosAlmacenPopupComponent,
     DashboardGuiasComponent,
-    DashboardInspeccionComponent
+    DashboardInspeccionComponent,
+    ReporteAvanceComponent,
+    ReporteCabeceroEditarComponent,
+    ConfigReporteAvanceComponent
   ],
   providers: [
     MatDatepickerModule,
@@ -408,7 +419,7 @@ import { MapaGeneral2Component } from './component/mapa-general2/mapa-general2.c
     appRoutingProviders,
     { provide: LocationStrategy, useClass: HashLocationStrategy },
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true },
-    { provide: MAT_DATE_LOCALE, useValue: 'es-ES' }
+    { provide: MAT_DATE_LOCALE, useValue: 'es-ES' },
   ],
   bootstrap: [AppComponent]
 })

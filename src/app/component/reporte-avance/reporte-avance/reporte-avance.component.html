@@ -1,0 +1,59 @@
+<button mat-icon-button color="error" (click)="download()" [disabled]="permisoEdit">EXPORTAR
+  <mat-icon aria-label="Example icon-button with a heart icon">download</mat-icon>
+</button>
+<mat-card class="card-generic" >
+  <table mat-table [dataSource]="tablaTipoLinea" matSort class="mat-elevation-z8">
+    <ng-container matColumnDef="seccion">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header class="th-header" > Seccion </th>
+      <td mat-cell *matCellDef="let element" class="td-seccion">{{element.c_seccion}}</td>
+    </ng-container>
+    <ng-container matColumnDef="poste">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header class="th-header" > Poste </th>
+      <td mat-cell *matCellDef="let element" class="th-poste"> {{element.c_tipo}} </td>
+    </ng-container>
+    <ng-container matColumnDef="metradoc">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header class="th-header" > Metrado Contractual </th>
+      <td mat-cell *matCellDef="let element"> {{element.n_metrado_contractual}} </td>
+    </ng-container>
+    <ng-container matColumnDef="metrador">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header class="th-header" > Metrado Replanteo </th>
+      <td mat-cell *matCellDef="let element" class="th-metradoreplanteo" > {{element.n_metrado_replanteo}} </td>
+    </ng-container>
+    <ng-container matColumnDef="llegadoo">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header class="th-header" > LLegados a obra </th>
+      <td mat-cell *matCellDef="let element"> {{element.n_llegado_obra}} </td>
+    </ng-container>
+    <ng-container matColumnDef="saldollegar">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header class="th-header" > Saldo por llegar </th>
+      <td mat-cell *matCellDef="let element" class="th-llegar" >{{element.saldoLlegar }}</td>
+    </ng-container>
+    <ng-container matColumnDef="cantidadesp">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header class="th-header" > Cantidades de poste izado </th>
+      <td mat-cell *matCellDef="let element"> {{element.n_cantidadesposteizado}} </td>
+    </ng-container>
+    <ng-container matColumnDef="saldoizar">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header class="th-header" > Saldo por Izar </th>
+      <td mat-cell *matCellDef="let element" class="th-izar"> {{ element.saldoIzar}} </td>
+    </ng-container>
+    <ng-container matColumnDef="avanceizado">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header class="th-header" > %Avance del izado de postes </th>
+      <td mat-cell *matCellDef="let element"  > {{ element.avanceIzadoPostes  }}% </td>
+    </ng-container>
+    <ng-container matColumnDef="izadopendiente">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header class="th-header" > %Izado pendiente </th>
+      <td mat-cell *matCellDef="let element" class="th-izadopendiente"> {{element.avancePendiente}}% </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <ng-template let-row matRowDef cdkVirtualFor [matRowDefColumns]="displayedColumns">
+      <tr mat-row></tr>
+    </ng-template>
+  </table>
+  <mat-paginator [pageSizeOptions]="pagin" showFirstLastButtons></mat-paginator>
+    <mat-card class="card-grafico" >
+      <div>
+        <h3>CONTROL DE AVANCE FISICO / IZADO DE POSTES - {{nombreProyecto}}</h3>
+      </div>
+      <canvas id="LineasEstado">{{myChartLineasEstado}}</canvas>
+    </mat-card>
+</mat-card>

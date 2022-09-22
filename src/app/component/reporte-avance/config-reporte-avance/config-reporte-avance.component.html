@@ -1,0 +1,91 @@
+<mat-card >
+   <h1 mat-dialog-title>Edicion de reporte</h1>
+    <form class="example-container" #newForm="ngForm" (ngSubmit)="guardar(newForm)">
+    <div mat-dialog-content class="contenedor">
+        <mat-form-field>
+            <input matInput placeholder="Seccion" name="seccion" #seccion="ngModel" [(ngModel)]="reporte.c_seccion"
+            minlength="1" required />
+        </mat-form-field>
+        <mat-form-field>
+        <input matInput placeholder="Poste" name="tipo" #tipo="ngModel" [(ngModel)]="reporte.c_tipo"
+            minlength="1" required />
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput placeholder="Metrado Contractual" name="metradocont" #metradocont="ngModel" [(ngModel)]="reporte.n_metrado_contractual"
+             required />
+        </mat-form-field>        
+        <mat-form-field>
+            <input matInput placeholder="Metrado Replanteo" name="metradorepl" #metradorepl="ngModel" [(ngModel)]="reporte.n_metrado_replanteo"
+             required />
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput placeholder="Llegados a Obra" name="llegadoobr" #llegadoobr="ngModel" [(ngModel)]="reporte.n_llegado_obra"
+             required />
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput placeholder="Cantidades de poste Izado" name="cantidadposteIzado" #cantidadposteIzado="ngModel" [(ngModel)]="reporte.n_cantidadesposteizado"
+             required />
+        </mat-form-field>
+    </div>
+    <div mat-dialog-actions>
+        <button mat-button type="submit" cdkFocusInitial
+        [disabled]="!newForm.form.valid">
+        <mat-icon>save</mat-icon>
+        <span>Guardar</span>
+        </button>
+        <button mat-icon-button color="error" (click)="limpiar()"  type="reset" [disabled]="permisoEdit">
+            <mat-icon aria-label="Example icon-button with a heart icon">clear</mat-icon>
+        </button>
+    </div>
+    </form>
+</mat-card>   
+<mat-card class="card-generic" >
+    <table mat-table [dataSource]="Reportes" matSort class="mat-elevation-z8">
+      <ng-container matColumnDef="seccion">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header class="th-header" > Seccion </th>
+        <td mat-cell *matCellDef="let element" class="td-seccion">{{element.c_seccion}}</td>
+      </ng-container>
+      <ng-container matColumnDef="poste">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header class="th-header" > Poste </th>
+        <td mat-cell *matCellDef="let element" class="th-poste"> {{element.c_tipo}} </td>
+      </ng-container>
+      <ng-container matColumnDef="metradoc">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header class="th-header" > Metrado Contractual </th>
+        <td mat-cell *matCellDef="let element"> {{element.n_metrado_contractual}} </td>
+      </ng-container>
+      <ng-container matColumnDef="metrador">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header class="th-header" > Metrado Replanteo </th>
+        <td mat-cell *matCellDef="let element" class="th-metradoreplanteo" > {{element.n_metrado_replanteo}} </td>
+      </ng-container>
+      <ng-container matColumnDef="llegadoo">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header class="th-header" > LLegados a obra </th>
+        <td mat-cell *matCellDef="let element"> {{element.n_llegado_obra}} </td>
+      </ng-container>
+      <ng-container matColumnDef="cantidadesp">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header class="th-header" > Cantidades de poste izado </th>
+        <td mat-cell *matCellDef="let element"> {{element.n_cantidadesposteizado}} </td>
+      </ng-container>
+      <ng-container matColumnDef="editar">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header class="th-header" > Editar </th>
+        <td mat-cell *matCellDef="let element" class="td-header">
+            <button mat-icon-button color="error" (click)="editar(element)" [disabled]="permisoEdit">
+                <mat-icon aria-label="Example icon-button with a heart icon">edit</mat-icon>
+            </button>
+        </td>
+    </ng-container> 
+    <ng-container matColumnDef="eliminar">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header class="th-header" > Eliminar </th>
+        <td mat-cell *matCellDef="let element" class="td-header">
+            <button mat-icon-button color="error" (click)="eliminar(element)" [disabled]="permisoEdit">
+                <mat-icon aria-label="Example icon-button with a heart icon">delete</mat-icon>
+            </button>
+        </td>
+    </ng-container> 
+  
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <ng-template let-row matRowDef cdkVirtualFor [matRowDefColumns]="displayedColumns">
+        <tr mat-row></tr>
+      </ng-template>
+    </table>
+</mat-card>
+

@@ -1,0 +1,38 @@
+table {
+    width: 100%;
+    text-align: center;
+  }
+.contenedorBody {
+  margin: 1%;
+}
+.contenedor {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+.th-header{
+  background-color: rgb(11, 7, 77);
+  color: white;
+}
+.td-seccion{
+  background-color: rgb(11, 7, 77);
+  color: white;
+  font-weight: 650;
+  text-align: center;
+}
+.th-metradoreplanteo{
+  background-color: rgb(165, 184, 245);
+}
+.th-poste{
+  background-color: rgb(102, 187, 218);
+}
+.th-llegar{
+  font-weight: 650;
+}
+.card-generic{
+  align-items: center;
+  padding: 2%;
+  height: 800px;
+  overflow-y: scroll;
+}

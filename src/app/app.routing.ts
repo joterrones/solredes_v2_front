@@ -50,6 +50,8 @@ import { DatosMonitoreoComponent } from './component/datos-monitoreo/datos-monit
 import { VersionComponent } from './component/configGeneral/version/version.component';
 import { VersiondetalleComponent } from './component/configGeneral/versiondetalle/versiondetalle.component';
 import { MapaGeneral2Component } from './component/mapa-general2/mapa-general2.component';
+import { ReporteAvanceComponent } from './component/reporte-avance/reporte-avance/reporte-avance.component';
+import { ReporteCabeceroComponent } from './component/reporte-avance/reporte-cabecero/reporte-cabecero.component';
 
 //Array de rutas
 const appRoutes:Routes=[
@@ -100,6 +102,7 @@ const appRoutes:Routes=[
     {path:'version',component:VersionComponent},
     {path:'detalle_version/:n_idv_cabecera/:c_cabecera',component:VersiondetalleComponent}, 
     {path:'mapageneral2',component:MapaGeneral2Component},
+    {path:'reporte', component: ReporteCabeceroComponent},
     {path:'**',component:LoginComponent},    
      
 ]
