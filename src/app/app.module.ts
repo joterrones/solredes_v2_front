@@ -348,7 +348,7 @@ import { ConfigReporteAvanceComponent } from './component/reporte-avance/config-
     SocketIoModule,
     MatBadgeModule,
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyDpcWweoH2IqPSGvBX91N46EsIdY-IfNiY'
+      apiKey: 'AIzaSyD2zo-QSWTbDC6Hax2wAQO5CqvcLWfW_g4'
     })
   ],
   entryComponents: [
