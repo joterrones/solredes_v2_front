@@ -46,6 +46,7 @@ export class ReporteCabeceroEditarComponent extends BaseComponent implements OnI
     super(snackBar, _router);
    }
 
+   permisoEdit = false 
   ngOnInit() {
     this.usuarioLog = this.getUser().data;
     if (this.data.item == null) {

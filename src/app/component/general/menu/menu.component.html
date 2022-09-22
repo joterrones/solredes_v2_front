@@ -11,7 +11,7 @@
                     </label>
                 </button>
             </label></mat-toolbar>
-        <!--último iditem = 28 -->
+        <!--último iditem = 29 -->
         <mat-nav-list>
             <mat-accordion>
                 <mat-expansion-panel [expanded]="idPanel == 1" >
@@ -191,6 +191,10 @@
                         </mat-panel-title>
                     </mat-expansion-panel-header>
                     <a mat-list-item [routerLink]="['/grafico']" *ngIf="re_repor" (click)="panel(8,23)" [ngClass]="{'select':iditem == 23}">
+                        <mat-icon>keyboard_arrow_right</mat-icon>
+                        <span>Estadístico</span>
+                    </a>
+                    <a mat-list-item [routerLink]="['/reporte']" *ngIf="re_repor" (click)="panel(8,29)" [ngClass]="{'select':iditem == 29}">
                         <mat-icon>keyboard_arrow_right</mat-icon>
                         <span>Reporte</span>
                     </a>

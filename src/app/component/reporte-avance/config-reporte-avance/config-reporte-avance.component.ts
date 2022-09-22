@@ -31,6 +31,7 @@ export class ConfigReporteAvanceComponent extends BaseComponent implements OnIni
   ];
 
   id: number;
+  permisoEdit = false
 
   reporte : any ={
     n_idctrl_reporteavance:0,
