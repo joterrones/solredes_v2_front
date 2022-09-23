@@ -42,7 +42,7 @@ table {
   display: flex;
   align-items: center;
   padding: 2%;
-  height: 800px;
+  /* height: 800px; */
   overflow-y: scroll;
 }
 

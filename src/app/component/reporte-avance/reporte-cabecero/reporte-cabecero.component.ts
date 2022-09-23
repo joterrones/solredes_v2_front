@@ -46,7 +46,7 @@ export class ReporteCabeceroComponent extends BaseComponent implements OnInit {
 
   ngOnInit() {
     this.usuarioLog = this.getUser().data;
-    //this.getPantallaRol();
+    this.getPantallaRol();
     this.getCabeceroReporte();
   }
 
@@ -65,7 +65,7 @@ export class ReporteCabeceroComponent extends BaseComponent implements OnInit {
       });
   } 
 
-  /* getPantallaRol() {
+  getPantallaRol() {
     let request = {
       n_idseg_userprofile: this.usuarioLog.n_idseg_userprofile
     }
@@ -75,7 +75,7 @@ export class ReporteCabeceroComponent extends BaseComponent implements OnInit {
         if (resultado.estado) {
           this.pantallaRol = resultado.data;
           this.pantallaRol.forEach(element => {            
-            if(element.c_codigo === 'ma-adtil'){
+            if(element.c_codigo === 're-avanc'){
               console.log(element);
               console.log(element.c_codigo);
               if(element.c_permiso === 'MO'){
@@ -93,7 +93,7 @@ export class ReporteCabeceroComponent extends BaseComponent implements OnInit {
           this.openSnackBar(AppSettings.SERVICE_NO_CONECT_SERVER, 99);
         }
       });
-  } */
+  }
 
   openDialog(item): void {
     const dialogRef = this.dialog.open(ReporteAvanceComponent, {

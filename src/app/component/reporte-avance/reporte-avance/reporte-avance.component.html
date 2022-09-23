@@ -1,7 +1,8 @@
 <button mat-icon-button color="error" (click)="download()" [disabled]="permisoEdit">
   <mat-icon aria-label="Example icon-button with a heart icon">download</mat-icon>
 </button>
-<mat-card class="card-generic" >
+
+<mat-card class="card-generic contenedor" >
   <table mat-table [dataSource]="tablaTipoLinea" matSort class="mat-elevation-z8">
     <ng-container matColumnDef="seccion">
       <th mat-header-cell *matHeaderCellDef mat-sort-header class="th-header" > Seccion </th>
