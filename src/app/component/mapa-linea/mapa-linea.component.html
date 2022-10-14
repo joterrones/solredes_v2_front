@@ -39,7 +39,7 @@
                <agm-marker *ngFor="let marker of markers " [latitude]="marker.lat" [longitude]="marker.lng"
                     [markerDraggable]="false" [opacity]="marker.alpha" [iconUrl]="
               {
-                url:  './assets/mapa/'+marker.data.c_iconomapa+'.png' 
+                url:  marker.url 
             }" (markerClick)="openDialog(marker.data)" [zIndex]="2">
                 </agm-marker>                
                 <ng-container>  

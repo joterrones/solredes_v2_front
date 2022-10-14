@@ -94,15 +94,29 @@ export class MapaLineaComponent extends BaseComponent implements OnInit {
             
             this.markers = [];
             result.data.forEach(element => {
-              let marker = {
-                c_codigoestructura: element.c_codigoestructura,
-                lat : parseFloat(element.c_latitud),
-                lng: parseFloat(element.c_longitud),
-                label: "A",
-                alpha: 1,
-                data: element,
-                url: "./assets/" + element.c_iconomapa
-              };
+              let marker = {};
+              if(element.c_iconomapa ){
+                marker = {
+                  c_codigoestructura: element.c_codigoestructura,
+                  lat : parseFloat(element.c_latitud),
+                  lng: parseFloat(element.c_longitud),
+                  label: "A",
+                  alpha: 1,
+                  data: element,
+                  url: "./assets/mapa/"+element.c_iconomapa+".png"
+                };
+              }else{
+                marker = {
+                  c_codigoestructura: element.c_codigoestructura,
+                  lat : parseFloat(element.c_latitud),
+                  lng: parseFloat(element.c_longitud),
+                  label: "A",
+                  alpha: 1,
+                  data: element,
+                  url: "./assets/mapa/default.png"
+                };
+              }
+              
               this.markers.push(marker);
             });
             console.log(this.markers);
